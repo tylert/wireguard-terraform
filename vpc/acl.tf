@@ -483,3 +483,99 @@ resource "aws_network_acl_rule" "priv_tx_https_ipv6" {
   rule_action     = "allow"
   ipv6_cidr_block = "::/0"
 }
+
+/*
+                                         _
+                                 ___ ___| |__
+                                / __/ __| '_ \
+                                \__ \__ \ | | |
+                                |___/___/_| |_|
+*/
+
+resource "aws_network_acl_rule" "pub_rx_ssh_ipv4" {
+  network_acl_id = aws_network_acl.public
+  rule_number    = "1400"
+  egress         = false
+  protocol       = "tcp"
+  from_port      = "22"
+  to_port        = "22"
+  rule_action    = "allow"
+  cidr_block     = "0.0.0.0/0"
+}
+
+resource "aws_network_acl_rule" "pub_rx_ssh_ipv6" {
+  network_acl_id  = aws_network_acl.public
+  rule_number     = "1401"
+  egress          = false
+  protocol        = "tcp"
+  from_port       = "22"
+  to_port         = "22"
+  rule_action     = "allow"
+  ipv6_cidr_block = "::/0"
+}
+
+resource "aws_network_acl_rule" "pub_tx_ssh_ipv4" {
+  network_acl_id = aws_network_acl.public
+  rule_number    = "2400"
+  egress         = true
+  protocol       = "tcp"
+  from_port      = "22"
+  to_port        = "22"
+  rule_action    = "allow"
+  cidr_block     = "0.0.0.0/0"
+}
+
+resource "aws_network_acl_rule" "pub_tx_ssh_ipv6" {
+  network_acl_id  = aws_network_acl.public
+  rule_number     = "2401"
+  egress          = true
+  protocol        = "tcp"
+  from_port       = "22"
+  to_port         = "22"
+  rule_action     = "allow"
+  ipv6_cidr_block = "::/0"
+}
+
+resource "aws_network_acl_rule" "priv_rx_ssh_ipv4" {
+  network_acl_id  = aws_network_acl.private
+  rule_number     = "3400"
+  egress          = false
+  protocol        = "tcp"
+  from_port       = "22"
+  to_port         = "22"
+  rule_action     = "allow"
+  cidr_block      = "0.0.0.0/0"
+}
+
+resource "aws_network_acl_rule" "priv_rx_ssh_ipv6" {
+  network_acl_id  = aws_network_acl.private
+  rule_number     = "3401"
+  egress          = false
+  protocol        = "tcp"
+  from_port       = "22"
+  to_port         = "22"
+  rule_action     = "allow"
+  ipv6_cidr_block = "::/0"
+}
+
+resource "aws_network_acl_rule" "priv_tx_ssh_ipv4" {
+  network_acl_id  = aws_network_acl.private
+  rule_number     = "4400"
+  egress          = true
+  protocol        = "tcp"
+  from_port       = "22"
+  to_port         = "22"
+  rule_action     = "allow"
+  cidr_block      = "0.0.0.0/0"
+}
+
+resource "aws_network_acl_rule" "priv_tx_ssh_ipv6" {
+  network_acl_id  = aws_network_acl.private
+  rule_number     = "4401"
+  egress          = true
+  protocol        = "tcp"
+  from_port       = "22"
+  to_port         = "22"
+  rule_action     = "allow"
+  ipv6_cidr_block = "::/0"
+}
