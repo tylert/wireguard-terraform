@@ -83,27 +83,6 @@ resource "aws_vpc_dhcp_options_association" "main" {
 
 data "aws_availability_zones" "all" {}
 
-# https://www.terraform.io/docs/providers/aws/r/eip.html
-# https://www.terraform.io/docs/providers/aws/r/nat_gateway.html
-
-# resource "aws_eip" "az" {
-#   count      = "${var.enable_natgws ? var.span_azs : 0}"
-#   vpc        = true
-#   depends_on = ["aws_internet_gateway.public"]
-#
-#   tags = {
-#     Name = "${var.basename}-eip"
-#   }
-# }
-
-
-# resource "aws_nat_gateway" "az" {
-#   count         = "${var.enable_natgws ? var.span_azs : 0}"
-#   allocation_id = "${element(aws_eip.az.*.id, count.index)}"
-#   subnet_id     = "${element(aws_subnet.public_az.*.id, count.index)}"
-#   depends_on    = ["aws_internet_gateway.public"]
-# }
-
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet
 
 /*
@@ -153,6 +132,26 @@ resource "aws_subnet" "private_az" {
     Name = "${var.basename}-sub-priv-az${count.index}"
   }
 }
+
+# https://www.terraform.io/docs/providers/aws/r/eip.html
+# https://www.terraform.io/docs/providers/aws/r/nat_gateway.html
+
+# resource "aws_eip" "az" {
+#   count      = "${var.enable_natgws ? var.span_azs : 0}"
+#   vpc        = true
+#   depends_on = ["aws_internet_gateway.public"]
+#
+#   tags = {
+#     Name = "${var.basename}-eip"
+#   }
+# }
+
+# resource "aws_nat_gateway" "az" {
+#   count         = "${var.enable_natgws ? var.span_azs : 0}"
+#   allocation_id = "${element(aws_eip.az.*.id, count.index)}"
+#   subnet_id     = "${element(aws_subnet.public_az.*.id, count.index)}"
+#   depends_on    = ["aws_internet_gateway.public"]
+# }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/default_route_table
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table
@@ -250,42 +249,4 @@ resource "aws_route" "private_az_ipv6" {
   route_table_id              = "${element(aws_route_table.private_az.*.id, count.index)}"
   destination_ipv6_cidr_block = "::/0"
   egress_only_gateway_id      = aws_egress_only_internet_gateway.eigw.id
-}
-
-/******************************************************************************
-SSH Bastion Hosts
-******************************************************************************/
-
-/*
-data "template_file" "user_data" {
-  template = "${file("user_data.txt")}"
-
-  vars {
-    foo = "${var.foo}"
-  }
-}
-*/
-
-# https://www.terraform.io/docs/providers/aws/r/instance.html
-
-resource "aws_instance" "public_bastion_az" {
-  count                  = "${var.enable_bastions ? var.span_azs : 0}"
-  instance_type          = "t2.micro"
-  ami                    = "${var.bastion_ami}"
-  availability_zone      = "${data.aws_availability_zones.all.names[count.index]}"
-  subnet_id              = "${element(aws_subnet.public_az.*.id, count.index)}"
-  vpc_security_group_ids = ["${aws_security_group.ssh.id}", "${aws_security_group.public.id}"]
-  user_data              = "${file("user_data.txt")}"
-  tenancy                = "default"
-  ipv6_address_count     = "1"
-
-  # user_data            = "${data.template_file.user_data.rendered}"
-  # iam_instance_profile = "XXX FIXME XXX"
-
-  connection {
-    user = "${var.bastion_user}"
-  }
-  tags = {
-    Name = "${var.basename}-bast-az${count.index}-pub"
-  }
 }
