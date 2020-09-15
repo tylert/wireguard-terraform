@@ -12,8 +12,6 @@ variable "basename" {
   type        = "string"
 }
 
-# All regions have at least 2 availability zones present
-
 variable "span_azs" {
   description = "Number of Availability Zones to use in this region"
   type        = "string"

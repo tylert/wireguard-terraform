@@ -36,7 +36,7 @@ __   ___ __   ___
 */
 
 resource "aws_vpc" "main" {
-  cidr_block = "${var.vpc_cidr_block}"
+  cidr_block = var.vpc_cidr_block
 
   assign_generated_ipv6_cidr_block = true
   enable_classiclink               = false
@@ -97,11 +97,11 @@ data "aws_availability_zones" "all" {}
 # VPC netmask size + subnet_mask_offset = new subnet netmask
 
 resource "aws_subnet" "public_az" {
-  count                           = "${var.span_azs}"
+  count                           = var.span_azs
   vpc_id                          = aws_vpc.main.id
-  cidr_block                      = "${cidrsubnet(var.vpc_cidr_block, var.subnet_mask_offset, count.index)}"
-  ipv6_cidr_block                 = "${cidrsubnet(aws_vpc.main.ipv6_cidr_block, var.subnet_mask_offset, count.index)}"
-  availability_zone               = "${data.aws_availability_zones.all.names[count.index]}"
+  cidr_block                      = cidrsubnet(var.vpc_cidr_block, var.subnet_mask_offset, count.index)
+  ipv6_cidr_block                 = cidrsubnet(aws_vpc.main.ipv6_cidr_block, var.subnet_mask_offset, count.index)
+  availability_zone               = data.aws_availability_zones.all.names[count.index]
   map_public_ip_on_launch         = true
   assign_ipv6_address_on_creation = true
 
@@ -120,11 +120,11 @@ resource "aws_subnet" "public_az" {
 */
 
 resource "aws_subnet" "private_az" {
-  count                           = "${var.span_azs}"
+  count                           = var.span_azs
   vpc_id                          = aws_vpc.main.id
-  cidr_block                      = "${cidrsubnet(var.vpc_cidr_block, var.subnet_mask_offset, var.span_azs + var.span_azs + count.index)}"
-  ipv6_cidr_block                 = "${cidrsubnet(aws_vpc.main.ipv6_cidr_block, var.subnet_mask_offset, var.span_azs + var.span_azs + count.index)}"
-  availability_zone               = "${data.aws_availability_zones.all.names[count.index]}"
+  cidr_block                      = cidrsubnet(var.vpc_cidr_block, var.subnet_mask_offset, var.span_azs + var.span_azs + count.index)
+  ipv6_cidr_block                 = cidrsubnet(aws_vpc.main.ipv6_cidr_block, var.subnet_mask_offset, var.span_azs + var.span_azs + count.index)
+  availability_zone               = data.aws_availability_zones.all.names[count.index]
   map_public_ip_on_launch         = false
   assign_ipv6_address_on_creation = true
 
@@ -137,7 +137,7 @@ resource "aws_subnet" "private_az" {
 # https://www.terraform.io/docs/providers/aws/r/nat_gateway.html
 
 # resource "aws_eip" "az" {
-#   count      = "${var.enable_natgws ? var.span_azs : 0}"
+#   count      = var.enable_natgws ? var.span_azs : 0
 #   vpc        = true
 #   depends_on = ["aws_internet_gateway.public"]
 #
@@ -147,9 +147,9 @@ resource "aws_subnet" "private_az" {
 # }
 
 # resource "aws_nat_gateway" "az" {
-#   count         = "${var.enable_natgws ? var.span_azs : 0}"
-#   allocation_id = "${element(aws_eip.az.*.id, count.index)}"
-#   subnet_id     = "${element(aws_subnet.public_az.*.id, count.index)}"
+#   count         = var.enable_natgws ? var.span_azs : 0
+#   allocation_id = element(aws_eip.az.*.id, count.index)
+#   subnet_id     = element(aws_subnet.public_az[*].id, count.index)
 #   depends_on    = ["aws_internet_gateway.public"]
 # }
 
@@ -196,9 +196,9 @@ resource "aws_route_table" "public" {
 }
 
 resource "aws_route_table_association" "public_az" {
-  count          = "${var.span_azs}"
+  count          = var.span_azs
   route_table_id = aws_route_table.public.id
-  subnet_id      = "${element(aws_subnet.public_az.*.id, count.index)}"
+  subnet_id      = element(aws_subnet.public_az[*].id, count.index)
 }
 
 resource "aws_route" "public_ipv4" {
@@ -223,7 +223,7 @@ resource "aws_route" "public_ipv6" {
 */
 
 resource "aws_route_table" "private_az" {
-  count  = "${var.span_azs}"
+  count  = var.span_azs
   vpc_id = aws_vpc.main.id
 
   tags = {
@@ -232,21 +232,21 @@ resource "aws_route_table" "private_az" {
 }
 
 resource "aws_route_table_association" "private_az" {
-  count          = "${var.span_azs}"
-  route_table_id = "${element(aws_route_table.private_az.*.id, count.index)}"
-  subnet_id      = "${element(aws_subnet.private_az.*.id, count.index)}"
+  count          = var.span_azs
+  route_table_id = element(aws_route_table.private_az[*].id, count.index)
+  subnet_id      = element(aws_subnet.private_az[*].id, count.index)
 }
 
 # resource "aws_route" "private_az_ipv4" {
-#   count                  = "${var.span_azs}"
-#   route_table_id         = "${element(aws_route_table.private_az.*.id, count.index)}"
+#   count                  = var.span_azs
+#   route_table_id         = element(aws_route_table.private_az[*].id, count.index)
 #   destination_cidr_block = "0.0.0.0/0"
-#   nat_gateway_id         = "${element(aws_nat_gateway.az.*.id, count.index)}"
+#   nat_gateway_id         = element(aws_nat_gateway.az[*].id, count.index)
 # }
 
 resource "aws_route" "private_az_ipv6" {
-  count                       = "${var.span_azs}"
-  route_table_id              = "${element(aws_route_table.private_az.*.id, count.index)}"
+  count                       = var.span_azs
+  route_table_id              = element(aws_route_table.private_az[*].id, count.index)
   destination_ipv6_cidr_block = "::/0"
   egress_only_gateway_id      = aws_egress_only_internet_gateway.eigw.id
 }
