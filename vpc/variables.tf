@@ -1,7 +1,3 @@
-/******************************************************************************
-Input Variables
-******************************************************************************/
-
 variable "region" {
   description = "AWS region in which to launch all AWS resources"
   type        = "string"
@@ -41,18 +37,4 @@ variable "subnet_mask_offset" {
   description = "How many bits to carve off of the main VPC CIDR block netmask for each subnet"
   type        = "string"
   default     = "6"
-}
-
-# Instances must be:  Linux, amd64, hvm, ebs, ssd, gp2
-
-variable "bastion_ami" {
-  description = ""
-  type        = "string"
-  default     = "ami-b3d965d7" # stock Ubuntu 16.04 LTS
-}
-
-variable "bastion_user" {
-  description = ""
-  type        = "string"
-  default     = "ubuntu"
 }

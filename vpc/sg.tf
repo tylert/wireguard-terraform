@@ -65,7 +65,7 @@ resource "aws_security_group" "public" {
   }
 }
 
-resource "aws_security_group_rule" "ingress_public" {
+resource "aws_security_group_rule" "ingress_public_self" {
   security_group_id = aws_security_group.public.id
   type              = "ingress"
   protocol          = "-1"

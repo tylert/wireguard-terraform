@@ -1,8 +1,5 @@
 # https://aws.amazon.com/blogs/aws/building-three-tier-architectures-with-security-groups/
 
-/*
-*/
-
 terraform {
   required_version = "~> 0.13.2"
 }
