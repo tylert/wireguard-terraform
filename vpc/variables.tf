@@ -1,17 +1,30 @@
-variable "region" {
-  description = "AWS region in which to launch all AWS resources"
-  type        = "string"
-}
-
 variable "basename" {
-  description = "Name tag prefix to use for all AWS resources"
+  description = "Tag prefix to use for all resources"
   type        = "string"
 }
 
-variable "span_azs" {
-  description = "Number of Availability Zones to use in this region"
+variable "region" {
+  description = "AWS region in which to launch all non-global resources"
+  type        = "string"
+}
+
+variable "how_many_azs" {
+  description = "Number of availability zones to use in the desired region"
   type        = "string"
   default     = "2"
+}
+
+variable "vpc_cidr_block" {
+  description = "IPv4 CIDR block to assign to the VPC (with netmask from /16 to /28)"
+  type        = "string"
+}
+
+# /16 + 6 => /22, /56 + 6 => /62
+
+variable "subnet_mask_offset" {
+  description = "How many bits to carve off of the main VPC CIDR block netmask for each subnet"
+  type        = "string"
+  default     = "6"
 }
 
 variable "enable_natgws" {
@@ -24,17 +37,4 @@ variable "enable_bastions" {
   description = "Whether to turn on the spendy SSH bastion hosts"
   type        = "string"
   default     = true
-}
-
-variable "vpc_cidr_block" {
-  description = "IPv4 CIDR block to assign to the VPC (should be /16)"
-  type        = "string"
-}
-
-# /16 + 6 => /22, /56 + 6 => /62
-
-variable "subnet_mask_offset" {
-  description = "How many bits to carve off of the main VPC CIDR block netmask for each subnet"
-  type        = "string"
-  default     = "6"
 }

@@ -6,7 +6,7 @@ terraform {
 
 provider "aws" {
   version = "~> 1.57.0"
-  region  = "${var.region}"
+  region  = var.region
 }
 
 # To build templated user_data.txt files
@@ -17,12 +17,12 @@ provider "template" {
 }
 */
 
-# https://www.terraform.io/docs/providers/aws/r/vpc.html
-# https://www.terraform.io/docs/providers/aws/r/internet_gateway.html
-# https://www.terraform.io/docs/providers/aws/r/egress_only_internet_gateway.html
-# https://www.terraform.io/docs/providers/aws/r/vpc_dhcp_options.html
-# https://www.terraform.io/docs/providers/aws/r/vpc_dhcp_options_association.html
-# https://www.terraform.io/docs/providers/aws/d/availability_zones.html
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/egress_only_internet_gateway
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_dhcp_options
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_dhcp_options_association
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones
 
 /*
 __   ___ __   ___
@@ -40,7 +40,7 @@ resource "aws_vpc" "main" {
 # enable_classiclink_dns_support   = false      # ???
   enable_dns_hostnames             = true
   enable_dns_support               = true
-  instance_tenancy                 = "default"  # least spendy
+  instance_tenancy                 = "default"  # least spendy;  "dedicated"|"host"
 
   tags = {
     Name = "${var.basename}-vpc"
@@ -78,7 +78,9 @@ resource "aws_vpc_dhcp_options_association" "main" {
   dhcp_options_id = aws_vpc_dhcp_options.domain_name.id
 }
 
-data "aws_availability_zones" "all" {}
+data "aws_availability_zones" "available" {
+  state = "available"
+}
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet
 
@@ -94,11 +96,11 @@ data "aws_availability_zones" "all" {}
 # VPC netmask size + subnet_mask_offset = new subnet netmask
 
 resource "aws_subnet" "public_az" {
-  count                           = var.span_azs
+  count                           = var.how_many_azs
   vpc_id                          = aws_vpc.main.id
   cidr_block                      = cidrsubnet(var.vpc_cidr_block, var.subnet_mask_offset, count.index)
   ipv6_cidr_block                 = cidrsubnet(aws_vpc.main.ipv6_cidr_block, var.subnet_mask_offset, count.index)
-  availability_zone               = data.aws_availability_zones.all.names[count.index]
+  availability_zone               = data.aws_availability_zones.available.names[count.index]
   map_public_ip_on_launch         = true
   assign_ipv6_address_on_creation = true
 
@@ -117,11 +119,11 @@ resource "aws_subnet" "public_az" {
 */
 
 resource "aws_subnet" "private_az" {
-  count                           = var.span_azs
+  count                           = var.how_many_azs
   vpc_id                          = aws_vpc.main.id
-  cidr_block                      = cidrsubnet(var.vpc_cidr_block, var.subnet_mask_offset, var.span_azs + var.span_azs + count.index)
-  ipv6_cidr_block                 = cidrsubnet(aws_vpc.main.ipv6_cidr_block, var.subnet_mask_offset, var.span_azs + var.span_azs + count.index)
-  availability_zone               = data.aws_availability_zones.all.names[count.index]
+  cidr_block                      = cidrsubnet(var.vpc_cidr_block, var.subnet_mask_offset, var.how_many_azs + var.how_many_azs + count.index)
+  ipv6_cidr_block                 = cidrsubnet(aws_vpc.main.ipv6_cidr_block, var.subnet_mask_offset, var.how_many_azs + var.how_many_azs + count.index)
+  availability_zone               = data.aws_availability_zones.available.names[count.index]
   map_public_ip_on_launch         = false
   assign_ipv6_address_on_creation = true
 
@@ -130,11 +132,11 @@ resource "aws_subnet" "private_az" {
   }
 }
 
-# https://www.terraform.io/docs/providers/aws/r/eip.html
-# https://www.terraform.io/docs/providers/aws/r/nat_gateway.html
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_gateway
 
 # resource "aws_eip" "az" {
-#   count      = var.enable_natgws ? var.span_azs : 0
+#   count      = var.enable_natgws ? var.how_many_azs : 0
 #   vpc        = true
 #   depends_on = ["aws_internet_gateway.public"]
 #
@@ -144,7 +146,7 @@ resource "aws_subnet" "private_az" {
 # }
 
 # resource "aws_nat_gateway" "az" {
-#   count         = var.enable_natgws ? var.span_azs : 0
+#   count         = var.enable_natgws ? var.how_many_azs : 0
 #   allocation_id = element(aws_eip.az.*.id, count.index)
 #   subnet_id     = element(aws_subnet.public_az[*].id, count.index)
 #   depends_on    = ["aws_internet_gateway.public"]
@@ -193,7 +195,7 @@ resource "aws_route_table" "public" {
 }
 
 resource "aws_route_table_association" "public_az" {
-  count          = var.span_azs
+  count          = var.how_many_azs
   route_table_id = aws_route_table.public.id
   subnet_id      = element(aws_subnet.public_az[*].id, count.index)
 }
@@ -220,7 +222,7 @@ resource "aws_route" "public_ipv6" {
 */
 
 resource "aws_route_table" "private_az" {
-  count  = var.span_azs
+  count  = var.how_many_azs
   vpc_id = aws_vpc.main.id
 
   tags = {
@@ -229,20 +231,20 @@ resource "aws_route_table" "private_az" {
 }
 
 resource "aws_route_table_association" "private_az" {
-  count          = var.span_azs
+  count          = var.how_many_azs
   route_table_id = element(aws_route_table.private_az[*].id, count.index)
   subnet_id      = element(aws_subnet.private_az[*].id, count.index)
 }
 
 # resource "aws_route" "private_az_ipv4" {
-#   count                  = var.span_azs
+#   count                  = var.enable_natgws ? var.how_many_azs : 0
 #   route_table_id         = element(aws_route_table.private_az[*].id, count.index)
 #   destination_cidr_block = "0.0.0.0/0"
 #   nat_gateway_id         = element(aws_nat_gateway.az[*].id, count.index)
 # }
 
 resource "aws_route" "private_az_ipv6" {
-  count                       = var.span_azs
+  count                       = var.how_many_azs
   route_table_id              = element(aws_route_table.private_az[*].id, count.index)
   destination_ipv6_cidr_block = "::/0"
   egress_only_gateway_id      = aws_egress_only_internet_gateway.eigw.id
