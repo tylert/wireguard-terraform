@@ -101,17 +101,21 @@ resource "aws_network_acl" "private" {
 
 # NACL Rule Numbers
 
-# 5xxx:  public ingress
-# 6xxx:  public egress
-# 7xxx:  private ingress
-# 8xxx:  private egress
+# 1xxx:  RFU public ingress
+# 2xxx:  RFU public egress
+# 3xxx:  RFU private ingress
+# 4xxx:  RFU private egress
 
-# x0xx:  ICMP
-# x1xx:  traffic within our VPC
-# x2xx:  ephemeral TCP
-# x3xx:  ephemeral UDP
-# x4xx:  https
-# x5xx:  ssh
+# 5xxx:  general public ingress
+# 6xxx:  general public egress
+# 7xxx:  general private ingress
+# 8xxx:  general private egress
+
+# x0Nx:  ICMP
+# x1Nx:  traffic within our VPC
+# x2Nx:  ephemeral (TCP, UDP)
+# x3Nx:  application services (HTTPS, HTTP, etc.)
+# x4Nx:  management services (SSH, VNC, RDP, etc.)
 
 # xxx0:  IPv4
 # xxx1:  IPv6
@@ -418,7 +422,7 @@ resource "aws_network_acl_rule" "priv_tx_ephem_tcp_ipv6" {
 
 resource "aws_network_acl_rule" "pub_rx_ephem_udp_ipv4" {
   network_acl_id = aws_network_acl.public
-  rule_number    = "5300"
+  rule_number    = "5210"
   egress         = false
   rule_action    = "allow"
   protocol       = "udp"  # 17
@@ -429,7 +433,7 @@ resource "aws_network_acl_rule" "pub_rx_ephem_udp_ipv4" {
 
 resource "aws_network_acl_rule" "pub_rx_ephem_udp_ipv6" {
   network_acl_id  = aws_network_acl.public
-  rule_number     = "5301"
+  rule_number     = "5211"
   egress          = false
   rule_action     = "allow"
   protocol        = "udp"  # 17
@@ -440,7 +444,7 @@ resource "aws_network_acl_rule" "pub_rx_ephem_udp_ipv6" {
 
 resource "aws_network_acl_rule" "pub_tx_ephem_udp_ipv4" {
   network_acl_id = aws_network_acl.public
-  rule_number    = "6300"
+  rule_number    = "6210"
   egress         = true
   rule_action    = "allow"
   protocol       = "udp"  # 17
@@ -451,7 +455,7 @@ resource "aws_network_acl_rule" "pub_tx_ephem_udp_ipv4" {
 
 resource "aws_network_acl_rule" "pub_tx_ephem_udp_ipv6" {
   network_acl_id  = aws_network_acl.public
-  rule_number     = "6301"
+  rule_number     = "6211"
   egress          = true
   rule_action     = "allow"
   protocol        = "udp"  # 17
@@ -462,7 +466,7 @@ resource "aws_network_acl_rule" "pub_tx_ephem_udp_ipv6" {
 
 resource "aws_network_acl_rule" "priv_rx_ephem_udp_ipv4" {
   network_acl_id = aws_network_acl.private
-  rule_number    = "7300"
+  rule_number    = "7210"
   egress         = false
   rule_action    = "allow"
   protocol       = "udp"  # 17
@@ -473,7 +477,7 @@ resource "aws_network_acl_rule" "priv_rx_ephem_udp_ipv4" {
 
 resource "aws_network_acl_rule" "priv_rx_ephem_udp_ipv6" {
   network_acl_id  = aws_network_acl.private
-  rule_number     = "7301"
+  rule_number     = "7211"
   egress          = false
   rule_action     = "allow"
   protocol        = "udp"  # 17
@@ -484,7 +488,7 @@ resource "aws_network_acl_rule" "priv_rx_ephem_udp_ipv6" {
 
 resource "aws_network_acl_rule" "priv_tx_ephem_udp_ipv4" {
   network_acl_id = aws_network_acl.private
-  rule_number    = "8300"
+  rule_number    = "8210"
   egress         = true
   rule_action    = "allow"
   protocol       = "udp"  # 17
@@ -495,7 +499,7 @@ resource "aws_network_acl_rule" "priv_tx_ephem_udp_ipv4" {
 
 resource "aws_network_acl_rule" "priv_tx_ephem_udp_ipv6" {
   network_acl_id  = aws_network_acl.private
-  rule_number     = "8301"
+  rule_number     = "8211"
   egress          = true
   rule_action     = "allow"
   protocol        = "udp"  # 17
@@ -515,7 +519,7 @@ resource "aws_network_acl_rule" "priv_tx_ephem_udp_ipv6" {
 
 resource "aws_network_acl_rule" "pub_rx_https_ipv4" {
   network_acl_id = aws_network_acl.public
-  rule_number    = "5400"
+  rule_number    = "5300"
   egress         = false
   rule_action    = "allow"
   protocol       = "tcp"  # 6
@@ -526,7 +530,7 @@ resource "aws_network_acl_rule" "pub_rx_https_ipv4" {
 
 resource "aws_network_acl_rule" "pub_rx_https_ipv6" {
   network_acl_id  = aws_network_acl.public
-  rule_number     = "5401"
+  rule_number     = "5301"
   egress          = false
   rule_action     = "allow"
   protocol        = "tcp"  # 6
@@ -537,7 +541,7 @@ resource "aws_network_acl_rule" "pub_rx_https_ipv6" {
 
 resource "aws_network_acl_rule" "pub_tx_https_ipv4" {
   network_acl_id = aws_network_acl.public
-  rule_number    = "6400"
+  rule_number    = "6300"
   egress         = true
   rule_action    = "allow"
   protocol       = "tcp"  # 6
@@ -548,7 +552,7 @@ resource "aws_network_acl_rule" "pub_tx_https_ipv4" {
 
 resource "aws_network_acl_rule" "pub_tx_https_ipv6" {
   network_acl_id  = aws_network_acl.public
-  rule_number     = "6401"
+  rule_number     = "6301"
   egress          = true
   rule_action     = "allow"
   protocol        = "tcp"  # 6
@@ -559,7 +563,7 @@ resource "aws_network_acl_rule" "pub_tx_https_ipv6" {
 
 resource "aws_network_acl_rule" "priv_rx_https_ipv4" {
   network_acl_id  = aws_network_acl.private
-  rule_number     = "7400"
+  rule_number     = "7300"
   egress          = false
   rule_action     = "allow"
   protocol        = "tcp"  # 6
@@ -570,7 +574,7 @@ resource "aws_network_acl_rule" "priv_rx_https_ipv4" {
 
 resource "aws_network_acl_rule" "priv_rx_https_ipv6" {
   network_acl_id  = aws_network_acl.private
-  rule_number     = "7401"
+  rule_number     = "7301"
   egress          = false
   rule_action     = "allow"
   protocol        = "tcp"  # 6
@@ -581,7 +585,7 @@ resource "aws_network_acl_rule" "priv_rx_https_ipv6" {
 
 resource "aws_network_acl_rule" "priv_tx_https_ipv4" {
   network_acl_id  = aws_network_acl.private
-  rule_number     = "8400"
+  rule_number     = "8300"
   egress          = true
   rule_action     = "allow"
   protocol        = "tcp"  # 6
@@ -592,7 +596,7 @@ resource "aws_network_acl_rule" "priv_tx_https_ipv4" {
 
 resource "aws_network_acl_rule" "priv_tx_https_ipv6" {
   network_acl_id  = aws_network_acl.private
-  rule_number     = "8401"
+  rule_number     = "8301"
   egress          = true
   rule_action     = "allow"
   protocol        = "tcp"  # 6
@@ -611,7 +615,7 @@ resource "aws_network_acl_rule" "priv_tx_https_ipv6" {
 
 resource "aws_network_acl_rule" "pub_rx_ssh_ipv4" {
   network_acl_id = aws_network_acl.public
-  rule_number    = "5500"
+  rule_number    = "5400"
   egress         = false
   rule_action    = "allow"
   protocol       = "tcp"  # 6
@@ -622,7 +626,7 @@ resource "aws_network_acl_rule" "pub_rx_ssh_ipv4" {
 
 resource "aws_network_acl_rule" "pub_rx_ssh_ipv6" {
   network_acl_id  = aws_network_acl.public
-  rule_number     = "5501"
+  rule_number     = "5401"
   egress          = false
   rule_action     = "allow"
   protocol        = "tcp"  # 6
@@ -633,7 +637,7 @@ resource "aws_network_acl_rule" "pub_rx_ssh_ipv6" {
 
 resource "aws_network_acl_rule" "pub_tx_ssh_ipv4" {
   network_acl_id = aws_network_acl.public
-  rule_number    = "6500"
+  rule_number    = "6400"
   egress         = true
   rule_action    = "allow"
   protocol       = "tcp"  # 6
@@ -644,7 +648,7 @@ resource "aws_network_acl_rule" "pub_tx_ssh_ipv4" {
 
 resource "aws_network_acl_rule" "pub_tx_ssh_ipv6" {
   network_acl_id  = aws_network_acl.public
-  rule_number     = "6501"
+  rule_number     = "6401"
   egress          = true
   rule_action     = "allow"
   protocol        = "tcp"  # 6
@@ -655,7 +659,7 @@ resource "aws_network_acl_rule" "pub_tx_ssh_ipv6" {
 
 resource "aws_network_acl_rule" "priv_rx_ssh_ipv4" {
   network_acl_id  = aws_network_acl.private
-  rule_number     = "7500"
+  rule_number     = "7400"
   egress          = false
   rule_action     = "allow"
   protocol        = "tcp"  # 6
@@ -666,7 +670,7 @@ resource "aws_network_acl_rule" "priv_rx_ssh_ipv4" {
 
 resource "aws_network_acl_rule" "priv_rx_ssh_ipv6" {
   network_acl_id  = aws_network_acl.private
-  rule_number     = "7501"
+  rule_number     = "7401"
   egress          = false
   rule_action     = "allow"
   protocol        = "tcp"  # 6
@@ -677,7 +681,7 @@ resource "aws_network_acl_rule" "priv_rx_ssh_ipv6" {
 
 resource "aws_network_acl_rule" "priv_tx_ssh_ipv4" {
   network_acl_id  = aws_network_acl.private
-  rule_number     = "8500"
+  rule_number     = "8400"
   egress          = true
   rule_action     = "allow"
   protocol        = "tcp"  # 6
@@ -688,7 +692,7 @@ resource "aws_network_acl_rule" "priv_tx_ssh_ipv4" {
 
 resource "aws_network_acl_rule" "priv_tx_ssh_ipv6" {
   network_acl_id  = aws_network_acl.private
-  rule_number     = "8501"
+  rule_number     = "8401"
   egress          = true
   rule_action     = "allow"
   protocol        = "tcp"  # 6
