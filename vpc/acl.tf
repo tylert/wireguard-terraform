@@ -145,7 +145,7 @@ resource "aws_network_acl_rule" "pub_rx_icmpv6" {
   rule_number     = "5001"
   egress          = false
   rule_action     = "allow"
-  protocol        = "icmpv6"  $ 58
+  protocol        = "icmpv6"  # 58
   icmp_type       = "-1"  # all
   icmp_code       = "-1"  # all
   ipv6_cidr_block = "::/0"
@@ -167,7 +167,7 @@ resource "aws_network_acl_rule" "pub_tx_icmpv6" {
   rule_number     = "6001"
   egress          = true
   rule_action     = "allow"
-  protocol        = "icmpv6"  $ 58
+  protocol        = "icmpv6"  # 58
   icmp_type       = "-1"  # all
   icmp_code       = "-1"  # all
   ipv6_cidr_block = "::/0"
@@ -189,7 +189,7 @@ resource "aws_network_acl_rule" "priv_rx_icmpv6" {
   rule_number     = "7001"
   egress          = false
   rule_action     = "allow"
-  protocol        = "icmpv6"  $ 58
+  protocol        = "icmpv6"  # 58
   icmp_type       = "-1"  # all
   icmp_code       = "-1"  # all
   ipv6_cidr_block = "::/0"
@@ -211,7 +211,7 @@ resource "aws_network_acl_rule" "priv_tx_icmpv6" {
   rule_number     = "8001"
   egress          = true
   rule_action     = "allow"
-  protocol        = "icmpv6"  $ 58
+  protocol        = "icmpv6"  # 58
   icmp_type       = "-1"  # all
   icmp_code       = "-1"  # all
   ipv6_cidr_block = "::/0"
@@ -232,8 +232,8 @@ resource "aws_network_acl_rule" "pub_rx_vpc_ipv4" {
   egress         = false
   rule_action    = "allow"
   protocol       = "all"  # -1
-  from_port      = "0"
-  to_port        = "0"
+  from_port      = "0"  # ignored
+  to_port        = "0"  # ignored
   cidr_block     = aws_vpc.main.cidr_block
 }
 
@@ -243,8 +243,8 @@ resource "aws_network_acl_rule" "pub_rx_vpc_ipv6" {
   egress          = false
   rule_action     = "allow"
   protocol        = "all"  # -1
-  from_port       = "0"
-  to_port         = "0"
+  from_port       = "0"  # ignored
+  to_port         = "0"  # ignored
   ipv6_cidr_block = aws_vpc.main.ipv6_cidr_block
 }
 
@@ -254,8 +254,8 @@ resource "aws_network_acl_rule" "pub_tx_vpc_ipv4" {
   egress         = true
   rule_action    = "allow"
   protocol       = "all"  # -1
-  from_port      = "0"
-  to_port        = "0"
+  from_port      = "0"  # ignored
+  to_port        = "0"  # ignored
   cidr_block     = aws_vpc.main.cidr_block
 }
 
@@ -265,8 +265,8 @@ resource "aws_network_acl_rule" "pub_tx_vpc_ipv6" {
   egress          = true
   rule_action     = "allow"
   protocol        = "all"  # -1
-  from_port       = "0"
-  to_port         = "0"
+  from_port       = "0"  # ignored
+  to_port         = "0"  # ignored
   ipv6_cidr_block = aws_vpc.main.ipv6_cidr_block
 }
 
@@ -276,8 +276,8 @@ resource "aws_network_acl_rule" "priv_rx_vpc_ipv4" {
   egress         = false
   rule_action    = "allow"
   protocol       = "all"  # -1
-  from_port      = "0"
-  to_port        = "0"
+  from_port      = "0"  # ignored
+  to_port        = "0"  # ignored
   cidr_block     = aws_vpc.main.cidr_block
 }
 
@@ -287,8 +287,8 @@ resource "aws_network_acl_rule" "priv_rx_vpc_ipv6" {
   egress          = false
   rule_action     = "allow"
   protocol        = "all"  # -1
-  from_port       = "0"
-  to_port         = "0"
+  from_port       = "0"  # ignored
+  to_port         = "0"  # ignored
   ipv6_cidr_block = aws_vpc.main.ipv6_cidr_block
 }
 
@@ -298,8 +298,8 @@ resource "aws_network_acl_rule" "priv_tx_vpc_ipv4" {
   egress         = true
   rule_action    = "allow"
   protocol       = "all"  # -1
-  from_port      = "0"
-  to_port        = "0"
+  from_port      = "0"  # ignored
+  to_port        = "0"  # ignored
   cidr_block     = aws_vpc.main.cidr_block
 }
 
@@ -309,8 +309,8 @@ resource "aws_network_acl_rule" "priv_tx_vpc_ipv6" {
   egress          = true
   rule_action     = "allow"
   protocol        = "all"  # -1
-  from_port       = "0"
-  to_port         = "0"
+  from_port       = "0"  # ignored
+  to_port         = "0"  # ignored
   ipv6_cidr_block = aws_vpc.main.ipv6_cidr_block
 }
 
