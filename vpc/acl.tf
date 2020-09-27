@@ -114,8 +114,8 @@ resource "aws_network_acl" "private" {
 # x0Nx:  ICMP
 # x1Nx:  traffic within our VPC
 # x2Nx:  ephemeral (TCP, UDP)
-# x3Nx:  application services (HTTPS, HTTP, etc.)
-# x4Nx:  management services (SSH, VNC, RDP, etc.)
+# x3Nx:  management services (SSH, VNC, RDP, etc.)
+# x4Nx:  application services (HTTPS, HTTP, etc.)
 
 # xxx0:  IPv4
 # xxx1:  IPv6
@@ -509,103 +509,6 @@ resource "aws_network_acl_rule" "priv_tx_ephem_udp_ipv6" {
 }
 
 /*
-                            _     _   _
-                           | |__ | |_| |_ _ __  ___
-                           | '_ \| __| __| '_ \/ __|
-                           | | | | |_| |_| |_) \__ \
-                           |_| |_|\__|\__| .__/|___/
-                                         |_|
-*/
-
-resource "aws_network_acl_rule" "pub_rx_https_ipv4" {
-  network_acl_id = aws_network_acl.public
-  rule_number    = "5300"
-  egress         = false
-  rule_action    = "allow"
-  protocol       = "tcp"  # 6
-  from_port      = "443"
-  to_port        = "443"
-  cidr_block     = "0.0.0.0/0"
-}
-
-resource "aws_network_acl_rule" "pub_rx_https_ipv6" {
-  network_acl_id  = aws_network_acl.public
-  rule_number     = "5301"
-  egress          = false
-  rule_action     = "allow"
-  protocol        = "tcp"  # 6
-  from_port       = "443"
-  to_port         = "443"
-  ipv6_cidr_block = "::/0"
-}
-
-resource "aws_network_acl_rule" "pub_tx_https_ipv4" {
-  network_acl_id = aws_network_acl.public
-  rule_number    = "6300"
-  egress         = true
-  rule_action    = "allow"
-  protocol       = "tcp"  # 6
-  from_port      = "443"
-  to_port        = "443"
-  cidr_block     = "0.0.0.0/0"
-}
-
-resource "aws_network_acl_rule" "pub_tx_https_ipv6" {
-  network_acl_id  = aws_network_acl.public
-  rule_number     = "6301"
-  egress          = true
-  rule_action     = "allow"
-  protocol        = "tcp"  # 6
-  from_port       = "443"
-  to_port         = "443"
-  ipv6_cidr_block = "::/0"
-}
-
-resource "aws_network_acl_rule" "priv_rx_https_ipv4" {
-  network_acl_id  = aws_network_acl.private
-  rule_number     = "7300"
-  egress          = false
-  rule_action     = "allow"
-  protocol        = "tcp"  # 6
-  from_port       = "443"
-  to_port         = "443"
-  cidr_block      = "0.0.0.0/0"
-}
-
-resource "aws_network_acl_rule" "priv_rx_https_ipv6" {
-  network_acl_id  = aws_network_acl.private
-  rule_number     = "7301"
-  egress          = false
-  rule_action     = "allow"
-  protocol        = "tcp"  # 6
-  from_port       = "443"
-  to_port         = "443"
-  ipv6_cidr_block = "::/0"
-}
-
-resource "aws_network_acl_rule" "priv_tx_https_ipv4" {
-  network_acl_id  = aws_network_acl.private
-  rule_number     = "8300"
-  egress          = true
-  rule_action     = "allow"
-  protocol        = "tcp"  # 6
-  from_port       = "443"
-  to_port         = "443"
-  cidr_block      = "0.0.0.0/0"
-}
-
-resource "aws_network_acl_rule" "priv_tx_https_ipv6" {
-  network_acl_id  = aws_network_acl.private
-  rule_number     = "8301"
-  egress          = true
-  rule_action     = "allow"
-  protocol        = "tcp"  # 6
-  from_port       = "443"
-  to_port         = "443"
-  ipv6_cidr_block = "::/0"
-}
-
-/*
                                          _
                                  ___ ___| |__
                                 / __/ __| '_ \
@@ -615,7 +518,7 @@ resource "aws_network_acl_rule" "priv_tx_https_ipv6" {
 
 resource "aws_network_acl_rule" "pub_rx_ssh_ipv4" {
   network_acl_id = aws_network_acl.public
-  rule_number    = "5400"
+  rule_number    = "5300"
   egress         = false
   rule_action    = "allow"
   protocol       = "tcp"  # 6
@@ -626,7 +529,7 @@ resource "aws_network_acl_rule" "pub_rx_ssh_ipv4" {
 
 resource "aws_network_acl_rule" "pub_rx_ssh_ipv6" {
   network_acl_id  = aws_network_acl.public
-  rule_number     = "5401"
+  rule_number     = "5301"
   egress          = false
   rule_action     = "allow"
   protocol        = "tcp"  # 6
@@ -637,7 +540,7 @@ resource "aws_network_acl_rule" "pub_rx_ssh_ipv6" {
 
 resource "aws_network_acl_rule" "pub_tx_ssh_ipv4" {
   network_acl_id = aws_network_acl.public
-  rule_number    = "6400"
+  rule_number    = "6300"
   egress         = true
   rule_action    = "allow"
   protocol       = "tcp"  # 6
@@ -648,7 +551,7 @@ resource "aws_network_acl_rule" "pub_tx_ssh_ipv4" {
 
 resource "aws_network_acl_rule" "pub_tx_ssh_ipv6" {
   network_acl_id  = aws_network_acl.public
-  rule_number     = "6401"
+  rule_number     = "6301"
   egress          = true
   rule_action     = "allow"
   protocol        = "tcp"  # 6
@@ -658,19 +561,19 @@ resource "aws_network_acl_rule" "pub_tx_ssh_ipv6" {
 }
 
 resource "aws_network_acl_rule" "priv_rx_ssh_ipv4" {
-  network_acl_id  = aws_network_acl.private
-  rule_number     = "7400"
-  egress          = false
-  rule_action     = "allow"
-  protocol        = "tcp"  # 6
-  from_port       = "22"
-  to_port         = "22"
-  cidr_block      = "0.0.0.0/0"
+  network_acl_id = aws_network_acl.private
+  rule_number    = "7300"
+  egress         = false
+  rule_action    = "allow"
+  protocol       = "tcp"  # 6
+  from_port      = "22"
+  to_port        = "22"
+  cidr_block     = "0.0.0.0/0"
 }
 
 resource "aws_network_acl_rule" "priv_rx_ssh_ipv6" {
   network_acl_id  = aws_network_acl.private
-  rule_number     = "7401"
+  rule_number     = "7301"
   egress          = false
   rule_action     = "allow"
   protocol        = "tcp"  # 6
@@ -680,23 +583,120 @@ resource "aws_network_acl_rule" "priv_rx_ssh_ipv6" {
 }
 
 resource "aws_network_acl_rule" "priv_tx_ssh_ipv4" {
+  network_acl_id = aws_network_acl.private
+  rule_number    = "8300"
+  egress         = true
+  rule_action    = "allow"
+  protocol       = "tcp"  # 6
+  from_port      = "22"
+  to_port        = "22"
+  cidr_block     = "0.0.0.0/0"
+}
+
+resource "aws_network_acl_rule" "priv_tx_ssh_ipv6" {
   network_acl_id  = aws_network_acl.private
-  rule_number     = "8400"
+  rule_number     = "8301"
   egress          = true
   rule_action     = "allow"
   protocol        = "tcp"  # 6
   from_port       = "22"
   to_port         = "22"
-  cidr_block      = "0.0.0.0/0"
+  ipv6_cidr_block = "::/0"
 }
 
-resource "aws_network_acl_rule" "priv_tx_ssh_ipv6" {
+/*
+                            _     _   _
+                           | |__ | |_| |_ _ __  ___
+                           | '_ \| __| __| '_ \/ __|
+                           | | | | |_| |_| |_) \__ \
+                           |_| |_|\__|\__| .__/|___/
+                                         |_|
+*/
+
+resource "aws_network_acl_rule" "pub_rx_https_ipv4" {
+  network_acl_id = aws_network_acl.public
+  rule_number    = "5400"
+  egress         = false
+  rule_action    = "allow"
+  protocol       = "tcp"  # 6
+  from_port      = "443"
+  to_port        = "443"
+  cidr_block     = "0.0.0.0/0"
+}
+
+resource "aws_network_acl_rule" "pub_rx_https_ipv6" {
+  network_acl_id  = aws_network_acl.public
+  rule_number     = "5401"
+  egress          = false
+  rule_action     = "allow"
+  protocol        = "tcp"  # 6
+  from_port       = "443"
+  to_port         = "443"
+  ipv6_cidr_block = "::/0"
+}
+
+resource "aws_network_acl_rule" "pub_tx_https_ipv4" {
+  network_acl_id = aws_network_acl.public
+  rule_number    = "6400"
+  egress         = true
+  rule_action    = "allow"
+  protocol       = "tcp"  # 6
+  from_port      = "443"
+  to_port        = "443"
+  cidr_block     = "0.0.0.0/0"
+}
+
+resource "aws_network_acl_rule" "pub_tx_https_ipv6" {
+  network_acl_id  = aws_network_acl.public
+  rule_number     = "6401"
+  egress          = true
+  rule_action     = "allow"
+  protocol        = "tcp"  # 6
+  from_port       = "443"
+  to_port         = "443"
+  ipv6_cidr_block = "::/0"
+}
+
+resource "aws_network_acl_rule" "priv_rx_https_ipv4" {
+  network_acl_id = aws_network_acl.private
+  rule_number    = "7400"
+  egress         = false
+  rule_action    = "allow"
+  protocol       = "tcp"  # 6
+  from_port      = "443"
+  to_port        = "443"
+  cidr_block     = "0.0.0.0/0"
+}
+
+resource "aws_network_acl_rule" "priv_rx_https_ipv6" {
+  network_acl_id  = aws_network_acl.private
+  rule_number     = "7401"
+  egress          = false
+  rule_action     = "allow"
+  protocol        = "tcp"  # 6
+  from_port       = "443"
+  to_port         = "443"
+  ipv6_cidr_block = "::/0"
+}
+
+resource "aws_network_acl_rule" "priv_tx_https_ipv4" {
+  network_acl_id = aws_network_acl.private
+  rule_number    = "8400"
+  egress         = true
+  rule_action    = "allow"
+  protocol       = "tcp"  # 6
+  from_port      = "443"
+  to_port        = "443"
+  cidr_block     = "0.0.0.0/0"
+}
+
+resource "aws_network_acl_rule" "priv_tx_https_ipv6" {
   network_acl_id  = aws_network_acl.private
   rule_number     = "8401"
   egress          = true
   rule_action     = "allow"
   protocol        = "tcp"  # 6
-  from_port       = "22"
-  to_port         = "22"
+  from_port       = "443"
+  to_port         = "443"
   ipv6_cidr_block = "::/0"
 }
