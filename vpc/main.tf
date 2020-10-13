@@ -228,12 +228,14 @@ resource "aws_route_table" "private_az" {
   tags = {
     Name = "${var.basename}-rtb-priv-az${count.index}"
   }
+# propagating_vgws
 }
 
 resource "aws_route_table_association" "private_az" {
   count          = var.how_many_azs
   route_table_id = element(aws_route_table.private_az[*].id, count.index)
   subnet_id      = element(aws_subnet.private_az[*].id, count.index)
+# gateway_id or subnet-id, not both
 }
 
 # resource "aws_route" "private_az_ipv4" {
