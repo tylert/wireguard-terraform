@@ -57,7 +57,7 @@ resource "aws_default_security_group" "default" {
 
 resource "aws_security_group" "public" {
   vpc_id      = aws_vpc.main.id
-  name        = "${var.basename}-sg-pub" # Group Name / supports name_prefix
+  name        = "${var.basename}-sg-pub"  # Group Name / supports name_prefix
   description = "${var.basename}-sg-pub"
 
   tags = {
@@ -103,7 +103,7 @@ resource "aws_security_group_rule" "egress_public_ipv6" {
 
 resource "aws_security_group" "private" {
   vpc_id      = aws_vpc.main.id
-  name        = "${var.basename}-sg-priv" # Group Name / supports name_prefix
+  name        = "${var.basename}-sg-priv"  # Group Name / supports name_prefix
   description = "${var.basename}-sg-priv"
 
   tags = {
@@ -149,7 +149,7 @@ resource "aws_security_group_rule" "egress_private_ipv6" {
 
 resource "aws_security_group" "ssh" {
   vpc_id      = aws_vpc.main.id
-  name        = "${var.basename}-sg-ssh" # Group Name / supports name_prefix
+  name        = "${var.basename}-sg-ssh"  # Group Name / supports name_prefix
   description = "${var.basename}-sg-ssh"
 
   tags = {

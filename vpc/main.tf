@@ -1,21 +1,13 @@
 # https://aws.amazon.com/blogs/aws/building-three-tier-architectures-with-security-groups/
 
 terraform {
-  required_version = "~> 0.13.2"
+  required_version = "~> 0.13.4"
 }
 
 provider "aws" {
-  version = "~> 1.57.0"
+  version = "~> 3.11.0"
   region  = var.region
 }
-
-# To build templated user_data.txt files
-
-/*
-provider "template" {
-  version = "~> 2.0.0"
-}
-*/
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway
@@ -135,6 +127,8 @@ resource "aws_subnet" "private_az" {
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_gateway
 
+# XXX FIXME TODO
+
 # resource "aws_eip" "az" {
 #   count      = var.enable_natgws ? var.how_many_azs : 0
 #   vpc        = true
@@ -230,6 +224,8 @@ resource "aws_route_table" "private_az" {
   }
 # propagating_vgws
 }
+
+# XXX FIXME TODO
 
 resource "aws_route_table_association" "private_az" {
   count          = var.how_many_azs
