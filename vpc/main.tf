@@ -113,8 +113,8 @@ resource "aws_subnet" "public_az" {
 resource "aws_subnet" "private_az" {
   count                           = var.how_many_azs
   vpc_id                          = aws_vpc.main.id
-  cidr_block                      = cidrsubnet(var.vpc_cidr_block, var.subnet_mask_offset, var.how_many_azs + var.how_many_azs + count.index)
-  ipv6_cidr_block                 = cidrsubnet(aws_vpc.main.ipv6_cidr_block, var.subnet_mask_offset, var.how_many_azs + var.how_many_azs + count.index)
+  cidr_block                      = cidrsubnet(var.vpc_cidr_block, var.subnet_mask_offset, count.index + var.how_many_azs)
+  ipv6_cidr_block                 = cidrsubnet(aws_vpc.main.ipv6_cidr_block, var.subnet_mask_offset, count.index + var.how_many_azs)
   availability_zone               = data.aws_availability_zones.available.names[count.index]
   map_public_ip_on_launch         = false
   assign_ipv6_address_on_creation = true
@@ -124,10 +124,33 @@ resource "aws_subnet" "private_az" {
   }
 }
 
+/*
+           _                           _
+ ___ _   _| |__        _ __  _ __ ___ | |_
+/ __| | | | '_ \ _____| '_ \| '__/ _ \| __|
+\__ \ |_| | |_) |_____| |_) | | | (_) | |_
+|___/\__,_|_.__/      | .__/|_|  \___/ \__|
+                      |_|
+*/
+
+resource "aws_subnet" "protected_az" {
+  count                           = var.how_many_azs
+  vpc_id                          = aws_vpc.main.id
+  cidr_block                      = cidrsubnet(var.vpc_cidr_block, var.subnet_mask_offset, count.index + var.how_many_azs + var.how_many_azs)
+  ipv6_cidr_block                 = cidrsubnet(aws_vpc.main.ipv6_cidr_block, var.subnet_mask_offset, count.index + var.how_many_azs + var.how_many_azs)
+  availability_zone               = data.aws_availability_zones.available.names[count.index]
+  map_public_ip_on_launch         = false
+  assign_ipv6_address_on_creation = true
+
+  tags = {
+    Name = "${var.basename}-sub-prot-az${count.index}"
+  }
+}
+
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_gateway
 
-# XXX FIXME TODO
+# XXX FIXME TODO  Turn these on with a variable
 
 # resource "aws_eip" "az" {
 #   count      = var.enable_natgws ? var.how_many_azs : 0
@@ -222,17 +245,15 @@ resource "aws_route_table" "private_az" {
   tags = {
     Name = "${var.basename}-rtb-priv-az${count.index}"
   }
-# propagating_vgws
 }
-
-# XXX FIXME TODO
 
 resource "aws_route_table_association" "private_az" {
   count          = var.how_many_azs
   route_table_id = element(aws_route_table.private_az[*].id, count.index)
   subnet_id      = element(aws_subnet.private_az[*].id, count.index)
-# gateway_id or subnet-id, not both
 }
+
+# XXX FIXME TODO  Turn these on with a variable
 
 # resource "aws_route" "private_az_ipv4" {
 #   count                  = var.enable_natgws ? var.how_many_azs : 0
@@ -246,4 +267,28 @@ resource "aws_route" "private_az_ipv6" {
   route_table_id              = element(aws_route_table.private_az[*].id, count.index)
   destination_ipv6_cidr_block = "::/0"
   egress_only_gateway_id      = aws_egress_only_internet_gateway.eigw.id
+}
+
+/*
+      _   _                           _
+ _ __| |_| |__        _ __  _ __ ___ | |_
+| '__| __| '_ \ _____| '_ \| '__/ _ \| __|
+| |  | |_| |_) |_____| |_) | | | (_) | |_
+|_|   \__|_.__/      | .__/|_|  \___/ \__|
+                     |_|
+*/
+
+resource "aws_route_table" "protected_az" {
+  count  = var.how_many_azs
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Name = "${var.basename}-rtb-prot-az${count.index}"
+  }
+}
+
+resource "aws_route_table_association" "protected_az" {
+  count          = var.how_many_azs
+  route_table_id = element(aws_route_table.protected_az[*].id, count.index)
+  subnet_id      = element(aws_subnet.protected_az[*].id, count.index)
 }

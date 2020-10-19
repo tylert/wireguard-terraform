@@ -32,9 +32,3 @@ variable "enable_natgws" {
   type        = "string"
   default     = true
 }
-
-variable "enable_bastions" {
-  description = "Whether to turn on the spendy SSH bastion hosts"
-  type        = "string"
-  default     = true
-}
