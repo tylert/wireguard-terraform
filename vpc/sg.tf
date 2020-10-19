@@ -139,6 +139,52 @@ resource "aws_security_group_rule" "egress_private_ipv6" {
 }
 
 /*
+                                 _
+ ___  __ _       _ __  _ __ ___ | |_
+/ __|/ _` |_____| '_ \| '__/ _ \| __|
+\__ \ (_| |_____| |_) | | | (_) | |_
+|___/\__, |     | .__/|_|  \___/ \__|
+     |___/      |_|
+*/
+
+resource "aws_security_group" "protected" {
+  vpc_id      = aws_vpc.main.id
+  name        = "${var.basename}-sg-prot"  # Group Name / supports name_prefix
+  description = "${var.basename}-sg-prot"
+
+  tags = {
+    Name = "${var.basename}-sg-prot"
+  }
+}
+
+resource "aws_security_group_rule" "ingress_protected" {
+  security_group_id        = aws_security_group.protected.id
+  type                     = "ingress"
+  protocol                 = "-1"
+  from_port                = "0"
+  to_port                  = "0"
+  source_security_group_id = aws_security_group.private.id
+}
+
+resource "aws_security_group_rule" "egress_private_ipv4" {
+  security_group_id = aws_security_group.protected.id
+  type              = "egress"
+  protocol          = "-1"
+  from_port         = "0"
+  to_port           = "0"
+  cidr_blocks       = ["0.0.0.0/0"]
+}
+
+resource "aws_security_group_rule" "egress_private_ipv6" {
+  security_group_id = aws_security_group.protected.id
+  type              = "egress"
+  protocol          = "-1"
+  from_port         = "0"
+  to_port           = "0"
+  ipv6_cidr_blocks  = ["::/0"]
+}
+
+/*
                          _
  ___  __ _       ___ ___| |__
 / __|/ _` |_____/ __/ __| '_ \
