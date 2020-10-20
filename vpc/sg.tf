@@ -21,21 +21,21 @@ resource "aws_default_security_group" "default" {
   vpc_id = aws_vpc.main.id
 
   ingress {
-    protocol  = "-1"
+    protocol  = "-1"  # all
     from_port = "0"
     to_port   = "0"
     self      = true
   }
 
   egress {
-    protocol    = "-1"
+    protocol    = "-1"  # all
     from_port   = "0"
     to_port     = "0"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
-    protocol         = "-1"
+    protocol         = "-1"  # all
     from_port        = "0"
     to_port          = "0"
     ipv6_cidr_blocks = ["::/0"]
@@ -68,7 +68,7 @@ resource "aws_security_group" "public" {
 resource "aws_security_group_rule" "pub_rx_self" {
   security_group_id = aws_security_group.public.id
   type              = "ingress"
-  protocol          = "-1"
+  protocol          = "-1"  # all
   from_port         = "0"
   to_port           = "0"
   self              = true
@@ -96,7 +96,7 @@ resource "aws_security_group" "private" {
 resource "aws_security_group_rule" "priv_rx_self" {
   security_group_id = aws_security_group.private.id
   type              = "ingress"
-  protocol          = "-1"
+  protocol          = "-1"  # all
   from_port         = "0"
   to_port           = "0"
   self              = true
@@ -123,7 +123,7 @@ resource "aws_security_group" "secure" {
 resource "aws_security_group_rule" "sec_rx_self" {
   security_group_id = aws_security_group.secure.id
   type              = "ingress"
-  protocol          = "-1"
+  protocol          = "-1"  # all
   from_port         = "0"
   to_port           = "0"
   self              = true
@@ -140,7 +140,7 @@ resource "aws_security_group_rule" "sec_rx_self" {
 resource "aws_security_group_rule" "pub_rx_priv" {
   security_group_id        = aws_security_group.public.id
   type                     = "ingress"
-  protocol                 = "-1"
+  protocol                 = "-1"  # all
   from_port                = "0"
   to_port                  = "0"
   source_security_group_id = aws_security_group.private.id
@@ -149,7 +149,7 @@ resource "aws_security_group_rule" "pub_rx_priv" {
 resource "aws_security_group_rule" "priv_rx_pub" {
   security_group_id        = aws_security_group.private.id
   type                     = "ingress"
-  protocol                 = "-1"
+  protocol                 = "-1"  # all
   from_port                = "0"
   to_port                  = "0"
   source_security_group_id = aws_security_group.public.id
@@ -158,7 +158,7 @@ resource "aws_security_group_rule" "priv_rx_pub" {
 resource "aws_security_group_rule" "priv_rx_sec" {
   security_group_id        = aws_security_group.private.id
   type                     = "ingress"
-  protocol                 = "-1"
+  protocol                 = "-1"  # all
   from_port                = "0"
   to_port                  = "0"
   source_security_group_id = aws_security_group.secure.id
@@ -167,7 +167,7 @@ resource "aws_security_group_rule" "priv_rx_sec" {
 resource "aws_security_group_rule" "sec_rx_priv" {
   security_group_id        = aws_security_group.secure.id
   type                     = "ingress"
-  protocol                 = "-1"
+  protocol                 = "-1"  # all
   from_port                = "0"
   to_port                  = "0"
   source_security_group_id = aws_security_group.private.id
@@ -176,7 +176,7 @@ resource "aws_security_group_rule" "sec_rx_priv" {
 resource "aws_security_group_rule" "pub_tx_ipv4" {
   security_group_id = aws_security_group.public.id
   type              = "egress"
-  protocol          = "-1"
+  protocol          = "-1"  # all
   from_port         = "0"
   to_port           = "0"
   cidr_blocks       = ["0.0.0.0/0"]
@@ -185,7 +185,7 @@ resource "aws_security_group_rule" "pub_tx_ipv4" {
 resource "aws_security_group_rule" "pub_tx_ipv6" {
   security_group_id = aws_security_group.public.id
   type              = "egress"
-  protocol          = "-1"
+  protocol          = "-1"  # all
   from_port         = "0"
   to_port           = "0"
   ipv6_cidr_blocks  = ["::/0"]
@@ -194,7 +194,7 @@ resource "aws_security_group_rule" "pub_tx_ipv6" {
 resource "aws_security_group_rule" "priv_tx_ipv4" {
   security_group_id = aws_security_group.private.id
   type              = "egress"
-  protocol          = "-1"
+  protocol          = "-1"  # all
   from_port         = "0"
   to_port           = "0"
   cidr_blocks       = ["0.0.0.0/0"]
@@ -203,7 +203,7 @@ resource "aws_security_group_rule" "priv_tx_ipv4" {
 resource "aws_security_group_rule" "priv_tx_ipv6" {
   security_group_id = aws_security_group.private.id
   type              = "egress"
-  protocol          = "-1"
+  protocol          = "-1"  # all
   from_port         = "0"
   to_port           = "0"
   ipv6_cidr_blocks  = ["::/0"]
@@ -212,7 +212,7 @@ resource "aws_security_group_rule" "priv_tx_ipv6" {
 resource "aws_security_group_rule" "sec_tx_ipv4" {
   security_group_id = aws_security_group.secure.id
   type              = "egress"
-  protocol          = "-1"
+  protocol          = "-1"  # all
   from_port         = "0"
   to_port           = "0"
   cidr_blocks       = ["0.0.0.0/0"]
@@ -221,7 +221,7 @@ resource "aws_security_group_rule" "sec_tx_ipv4" {
 resource "aws_security_group_rule" "sec_tx_ipv6" {
   security_group_id = aws_security_group.secure.id
   type              = "egress"
-  protocol          = "-1"
+  protocol          = "-1"  # all
   from_port         = "0"
   to_port           = "0"
   ipv6_cidr_blocks  = ["::/0"]
@@ -267,7 +267,7 @@ resource "aws_security_group_rule" "mgmt_rx_ssh_ipv6" {
 resource "aws_security_group_rule" "mgmt_tx_ipv4" {
   security_group_id = aws_security_group.management.id
   type              = "egress"
-  protocol          = "-1"
+  protocol          = "-1"  # all
   from_port         = "0"
   to_port           = "0"
   cidr_blocks       = ["0.0.0.0/0"]
@@ -276,7 +276,7 @@ resource "aws_security_group_rule" "mgmt_tx_ipv4" {
 resource "aws_security_group_rule" "mgmt_tx_ipv6" {
   security_group_id = aws_security_group.management.id
   type              = "egress"
-  protocol          = "-1"
+  protocol          = "-1"  # all
   from_port         = "0"
   to_port           = "0"
   ipv6_cidr_blocks  = ["::/0"]
@@ -321,7 +321,7 @@ resource "aws_security_group_rule" "app_rx_https_ipv6" {
 resource "aws_security_group_rule" "app_tx_ipv4" {
   security_group_id = aws_security_group.application.id
   type              = "egress"
-  protocol          = "-1"
+  protocol          = "-1"  # all
   from_port         = "0"
   to_port           = "0"
   cidr_blocks       = ["0.0.0.0/0"]
@@ -330,7 +330,7 @@ resource "aws_security_group_rule" "app_tx_ipv4" {
 resource "aws_security_group_rule" "app_tx_ipv6" {
   security_group_id = aws_security_group.application.id
   type              = "egress"
-  protocol          = "-1"
+  protocol          = "-1"  # all
   from_port         = "0"
   to_port           = "0"
   ipv6_cidr_blocks  = ["::/0"]
