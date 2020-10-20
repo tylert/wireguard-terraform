@@ -125,15 +125,14 @@ resource "aws_subnet" "private_az" {
 }
 
 /*
-           _                           _
- ___ _   _| |__        _ __  _ __ ___ | |_
-/ __| | | | '_ \ _____| '_ \| '__/ _ \| __|
-\__ \ |_| | |_) |_____| |_) | | | (_) | |_
-|___/\__,_|_.__/      | .__/|_|  \___/ \__|
-                      |_|
+           _
+ ___ _   _| |__        ___  ___  ___
+/ __| | | | '_ \ _____/ __|/ _ \/ __|
+\__ \ |_| | |_) |_____\__ \  __/ (__
+|___/\__,_|_.__/      |___/\___|\___|
 */
 
-resource "aws_subnet" "protected_az" {
+resource "aws_subnet" "secure_az" {
   count                           = var.how_many_azs
   vpc_id                          = aws_vpc.main.id
   cidr_block                      = cidrsubnet(var.vpc_cidr_block, var.subnet_mask_offset, count.index + var.how_many_azs + var.how_many_azs)
@@ -143,7 +142,7 @@ resource "aws_subnet" "protected_az" {
   assign_ipv6_address_on_creation = true
 
   tags = {
-    Name = "${var.basename}-sub-prot-az${count.index}"
+    Name = "${var.basename}-sub-sec-az${count.index}"
   }
 }
 
@@ -270,25 +269,24 @@ resource "aws_route" "private_az_ipv6" {
 }
 
 /*
-      _   _                           _
- _ __| |_| |__        _ __  _ __ ___ | |_
-| '__| __| '_ \ _____| '_ \| '__/ _ \| __|
-| |  | |_| |_) |_____| |_) | | | (_) | |_
-|_|   \__|_.__/      | .__/|_|  \___/ \__|
-                     |_|
+      _   _
+ _ __| |_| |__        ___  ___  ___
+| '__| __| '_ \ _____/ __|/ _ \/ __|
+| |  | |_| |_) |_____\__ \  __/ (__
+|_|   \__|_.__/      |___/\___|\___|
 */
 
-resource "aws_route_table" "protected_az" {
+resource "aws_route_table" "secure_az" {
   count  = var.how_many_azs
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name = "${var.basename}-rtb-prot-az${count.index}"
+    Name = "${var.basename}-rtb-sec-az${count.index}"
   }
 }
 
-resource "aws_route_table_association" "protected_az" {
+resource "aws_route_table_association" "secure_az" {
   count          = var.how_many_azs
-  route_table_id = element(aws_route_table.protected_az[*].id, count.index)
-  subnet_id      = element(aws_subnet.protected_az[*].id, count.index)
+  route_table_id = element(aws_route_table.secure[*].id, count.index)
+  subnet_id      = element(aws_subnet.secure_az[*].id, count.index)
 }
