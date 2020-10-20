@@ -287,6 +287,6 @@ resource "aws_route_table" "secure_az" {
 
 resource "aws_route_table_association" "secure_az" {
   count          = var.how_many_azs
-  route_table_id = element(aws_route_table.secure[*].id, count.index)
+  route_table_id = element(aws_route_table.secure_az[*].id, count.index)
   subnet_id      = element(aws_subnet.secure_az[*].id, count.index)
 }
