@@ -17,10 +17,10 @@ provider "aws" {
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones
 
 /*
-__   ___ __   ___
-\ \ / / '_ \ / __|
- \ V /| |_) | (__
-  \_/ | .__/ \___|
+__   ___ __   ___       ___ ___  _ __ ___
+\ \ / / '_ \ / __|____ / __/ _ \| '__/ _ \
+ \ V /| |_) | (_|_____| (_| (_) | | |  __/
+  \_/ | .__/ \___|     \___\___/|_|  \___|
       |_|
 */
 
@@ -76,6 +76,14 @@ data "aws_availability_zones" "available" {
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet
 
+# VPCs are currently limited to a maximum of /16 and a minimum of /28 for IPv4
+# Assigned IPv6 ranges are currently fixed at /56 for VPCs and /64 for subnets
+# We currently hard-code carving off 2^6 for each IPv4 subnet and 2^8 for each IPv6 subnet
+# /16 + 6 => /22 for IPv4, /56 + 8 => /64 for IPv6
+# Subnet mask /16 => 2^(32-16) = 2^16 = 65536 hosts
+# Subnet mask /22 => 2^(32-22) = 2^10 = 1024 hosts
+# Subnet mask /28 => 2^(32-28) = 2^4  = 16 hosts
+
 /*
            _                       _
  ___ _   _| |__        _ __  _   _| |__
@@ -84,8 +92,6 @@ data "aws_availability_zones" "available" {
 |___/\__,_|_.__/      | .__/ \__,_|_.__/
                       |_|
 */
-
-# /16 + 6 => /22, /56 + 8 => /64
 
 resource "aws_subnet" "public_az" {
   count                           = var.how_many_azs
