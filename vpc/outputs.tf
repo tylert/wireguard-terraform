@@ -3,7 +3,7 @@ output "vpc_id" {
 }
 
 output "availability_zones" {
-  value = data.aws_availability_zones.all.names
+  value = data.aws_availability_zones.available.names
 }
 
 output "public_subnet_ids" {
@@ -30,9 +30,9 @@ output "private_subnet_ipv6_cidrs" {
   value = aws_subnet.private_az[*].ipv6_cidr_block
 }
 
-output "nat_gateways" {
-  value = aws_nat_gateway.az[*].public_ip
-}
+# output "nat_gateways" {
+#   value = aws_nat_gateway.az[*].public_ip
+# }
 
 output "public_security_group_ids" {
   value = aws_security_group.public.id
@@ -40,8 +40,4 @@ output "public_security_group_ids" {
 
 output "private_security_group" {
   value = aws_security_group.private.id
-}
-
-output "public_bastion_ips" {
-  value = aws_instance.public_bastion_az[*].public_ip
 }

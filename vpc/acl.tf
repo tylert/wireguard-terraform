@@ -109,7 +109,7 @@ resource "aws_network_acl" "private" {
 
 resource "aws_network_acl" "secure" {
   vpc_id     = aws_vpc.main.id
-  subnet_ids = aws_subnet.secure[*].id
+  subnet_ids = aws_subnet.secure_az[*].id
 
   tags = {
     Name = "${var.basename}-acl-sec"

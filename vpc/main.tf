@@ -67,7 +67,7 @@ resource "aws_vpc_dhcp_options" "main" {
 
 resource "aws_vpc_dhcp_options_association" "main" {
   vpc_id          = aws_vpc.main.id
-  dhcp_options_id = aws_vpc_dhcp_options.domain_name.id
+  dhcp_options_id = aws_vpc_dhcp_options.main.id
 }
 
 data "aws_availability_zones" "available" {
@@ -265,7 +265,7 @@ resource "aws_route" "private_az_ipv6" {
   count                       = var.how_many_azs
   route_table_id              = element(aws_route_table.private_az[*].id, count.index)
   destination_ipv6_cidr_block = "::/0"
-  egress_only_gateway_id      = aws_egress_only_internet_gateway.eigw.id
+  egress_only_gateway_id      = aws_egress_only_internet_gateway.private.id
 }
 
 /*
