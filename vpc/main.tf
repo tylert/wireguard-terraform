@@ -85,13 +85,13 @@ data "aws_availability_zones" "available" {
                       |_|
 */
 
-# VPC netmask size + subnet_mask_offset = new subnet netmask
+# /16 + 6 => /22, /56 + 8 => /64
 
 resource "aws_subnet" "public_az" {
   count                           = var.how_many_azs
   vpc_id                          = aws_vpc.main.id
-  cidr_block                      = cidrsubnet(var.vpc_cidr_block, var.subnet_mask_offset, count.index)
-  ipv6_cidr_block                 = cidrsubnet(aws_vpc.main.ipv6_cidr_block, var.subnet_mask_offset, count.index)
+  cidr_block                      = cidrsubnet(var.vpc_cidr_block, 6, count.index)
+  ipv6_cidr_block                 = cidrsubnet(aws_vpc.main.ipv6_cidr_block, 8, count.index)
   availability_zone               = data.aws_availability_zones.available.names[count.index]
   map_public_ip_on_launch         = true
   assign_ipv6_address_on_creation = true
@@ -113,8 +113,8 @@ resource "aws_subnet" "public_az" {
 resource "aws_subnet" "private_az" {
   count                           = var.how_many_azs
   vpc_id                          = aws_vpc.main.id
-  cidr_block                      = cidrsubnet(var.vpc_cidr_block, var.subnet_mask_offset, count.index + var.how_many_azs)
-  ipv6_cidr_block                 = cidrsubnet(aws_vpc.main.ipv6_cidr_block, var.subnet_mask_offset, count.index + var.how_many_azs)
+  cidr_block                      = cidrsubnet(var.vpc_cidr_block, 6, count.index + var.how_many_azs)
+  ipv6_cidr_block                 = cidrsubnet(aws_vpc.main.ipv6_cidr_block, 8, count.index + var.how_many_azs)
   availability_zone               = data.aws_availability_zones.available.names[count.index]
   map_public_ip_on_launch         = false
   assign_ipv6_address_on_creation = true
@@ -135,8 +135,8 @@ resource "aws_subnet" "private_az" {
 resource "aws_subnet" "secure_az" {
   count                           = var.how_many_azs
   vpc_id                          = aws_vpc.main.id
-  cidr_block                      = cidrsubnet(var.vpc_cidr_block, var.subnet_mask_offset, count.index + var.how_many_azs + var.how_many_azs)
-  ipv6_cidr_block                 = cidrsubnet(aws_vpc.main.ipv6_cidr_block, var.subnet_mask_offset, count.index + var.how_many_azs + var.how_many_azs)
+  cidr_block                      = cidrsubnet(var.vpc_cidr_block, 6, count.index + var.how_many_azs + var.how_many_azs)
+  ipv6_cidr_block                 = cidrsubnet(aws_vpc.main.ipv6_cidr_block, 8, count.index + var.how_many_azs + var.how_many_azs)
   availability_zone               = data.aws_availability_zones.available.names[count.index]
   map_public_ip_on_launch         = false
   assign_ipv6_address_on_creation = true

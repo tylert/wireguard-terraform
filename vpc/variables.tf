@@ -19,14 +19,6 @@ variable "vpc_cidr_block" {
   type        = string
 }
 
-# /16 + 6 => /22, /56 + 6 => /62
-
-variable "subnet_mask_offset" {
-  description = "How many bits to carve off of the main VPC CIDR block netmask for each subnet"
-  type        = string
-  default     = 6
-}
-
 variable "enable_natgws" {
   description = "Whether to turn on the spendy IPv4 NAT gateways"
   type        = string
