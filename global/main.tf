@@ -1,15 +1,7 @@
-/******************************************************************************
-Providers
-******************************************************************************/
-
 provider "aws" {
   # required version set by module
   region = "${var.region}"
 }
-
-/******************************************************************************
-Terraform Remote State and Locking
-******************************************************************************/
 
 terraform {
   # required version set by module
@@ -23,17 +15,9 @@ terraform {
   }
 }
 
-/******************************************************************************
-IAM Account Alias
-******************************************************************************/
-
 resource "aws_iam_account_alias" "alias" {
   account_alias = "marcs-aws-playground"
 }
-
-/******************************************************************************
-DynamoDB Table for Terraform Locking
-******************************************************************************/
 
 resource "aws_dynamodb_table" "tf_lock" {
   name           = "${var.lock_table_name}"
@@ -50,10 +34,6 @@ resource "aws_dynamodb_table" "tf_lock" {
     Name = "dynamodb-tf-lock"
   }
 }
-
-/******************************************************************************
-S3 Bucket for Terraform State Storage
-******************************************************************************/
 
 resource "aws_s3_bucket" "tf_state" {
   bucket        = "${var.state_bucket_name}" # supports bucket_prefix
@@ -113,10 +93,6 @@ resource "aws_s3_bucket_policy" "tf_state" {
 }
 POLICYEOF
 }
-
-/******************************************************************************
-IAM Groups
-******************************************************************************/
 
 resource "aws_iam_group" "administrators" {
   name = "Administrators"
