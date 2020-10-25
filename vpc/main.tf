@@ -152,28 +152,6 @@ resource "aws_subnet" "secure_az" {
   }
 }
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_gateway
-
-# XXX FIXME TODO  Turn these on with a variable
-
-# resource "aws_eip" "az" {
-#   count      = var.enable_natgws ? var.how_many_azs : 0
-#   vpc        = true
-#   depends_on = ["aws_internet_gateway.public"]
-#
-#   tags = {
-#     Name = "${var.basename}-eip"
-#   }
-# }
-
-# resource "aws_nat_gateway" "az" {
-#   count         = var.enable_natgws ? var.how_many_azs : 0
-#   allocation_id = element(aws_eip.az.*.id, count.index)
-#   subnet_id     = element(aws_subnet.public_az[*].id, count.index)
-#   depends_on    = ["aws_internet_gateway.public"]
-# }
-
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/default_route_table
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table_association
@@ -259,6 +237,26 @@ resource "aws_route_table_association" "private_az" {
 }
 
 # XXX FIXME TODO  Turn these on with a variable
+
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_gateway
+
+# resource "aws_eip" "az" {
+#   count      = var.enable_natgws ? var.how_many_azs : 0
+#   vpc        = true
+#   depends_on = ["aws_internet_gateway.public"]
+#
+#   tags = {
+#     Name = "${var.basename}-eip"
+#   }
+# }
+
+# resource "aws_nat_gateway" "az" {
+#   count         = var.enable_natgws ? var.how_many_azs : 0
+#   allocation_id = element(aws_eip.az.*.id, count.index)
+#   subnet_id     = element(aws_subnet.public_az[*].id, count.index)
+#   depends_on    = ["aws_internet_gateway.public"]
+# }
 
 # resource "aws_route" "private_az_ipv4" {
 #   count                  = var.enable_natgws ? var.how_many_azs : 0
