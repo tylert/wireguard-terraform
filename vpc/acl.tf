@@ -132,155 +132,14 @@ resource "aws_network_acl" "secure" {
 # 10xxx:  general secure ingress
 # 11xxx:  general secure egress
 
-# xx0Nx:  ICMP
-# xx1Nx:  traffic within our VPC
+# xx0Nx:  traffic within our VPC
+# xx1Nx:  ICMP
 # xx2Nx:  ephemeral (TCP, UDP)
 # xx3Nx:  management services (SSH, VNC, RDP, etc.)
 # xx4Nx:  application services (HTTPS, HTTP, etc.)
 
 # xxxx0:  IPv4
 # xxxx1:  IPv6
-
-/*
-                             _
-                            (_) ___ _ __ ___  _ __
-                            | |/ __| '_ ` _ \| '_ \
-                            | | (__| | | | | | |_) |
-                            |_|\___|_| |_| |_| .__/
-                                             |_|
-*/
-
-resource "aws_network_acl_rule" "pub_rx_icmpv4" {
-  network_acl_id = aws_network_acl.public.id
-  rule_number    = 6000
-  egress         = false
-  rule_action    = "allow"
-  protocol       = "icmp"  # 1
-  icmp_type      = -1      # all
-  icmp_code      = -1      # all
-  cidr_block     = "0.0.0.0/0"
-}
-
-resource "aws_network_acl_rule" "pub_rx_icmpv6" {
-  network_acl_id  = aws_network_acl.public.id
-  rule_number     = 6001
-  egress          = false
-  rule_action     = "allow"
-  protocol        = 58  # icmpv6
-  icmp_type       = -1  # all
-  icmp_code       = -1  # all
-  ipv6_cidr_block = "::/0"
-}
-
-resource "aws_network_acl_rule" "pub_tx_icmpv4" {
-  network_acl_id = aws_network_acl.public.id
-  rule_number    = 7000
-  egress         = true
-  rule_action    = "allow"
-  protocol       = "icmp"  # 1
-  icmp_type      = -1      # all
-  icmp_code      = -1      # all
-  cidr_block     = "0.0.0.0/0"
-}
-
-resource "aws_network_acl_rule" "pub_tx_icmpv6" {
-  network_acl_id  = aws_network_acl.public.id
-  rule_number     = 7001
-  egress          = true
-  rule_action     = "allow"
-  protocol        = 58  # icmpv6
-  icmp_type       = -1  # all
-  icmp_code       = -1  # all
-  ipv6_cidr_block = "::/0"
-}
-
-resource "aws_network_acl_rule" "priv_rx_icmpv4" {
-  network_acl_id  = aws_network_acl.private.id
-  rule_number     = 8000
-  egress          = false
-  rule_action     = "allow"
-  protocol        = "icmp"  # 1
-  icmp_type       = -1      # all
-  icmp_code       = -1      # all
-  cidr_block      = "0.0.0.0/0"
-}
-
-resource "aws_network_acl_rule" "priv_rx_icmpv6" {
-  network_acl_id  = aws_network_acl.private.id
-  rule_number     = 8001
-  egress          = false
-  rule_action     = "allow"
-  protocol        = 58  # icmpv6
-  icmp_type       = -1  # all
-  icmp_code       = -1  # all
-  ipv6_cidr_block = "::/0"
-}
-
-resource "aws_network_acl_rule" "priv_tx_icmpv4" {
-  network_acl_id  = aws_network_acl.private.id
-  rule_number     = 9000
-  egress          = true
-  rule_action     = "allow"
-  protocol        = "icmp"  # 1
-  icmp_type       = -1      # all
-  icmp_code       = -1      # all
-  cidr_block      = "0.0.0.0/0"
-}
-
-resource "aws_network_acl_rule" "priv_tx_icmpv6" {
-  network_acl_id  = aws_network_acl.private.id
-  rule_number     = 9001
-  egress          = true
-  rule_action     = "allow"
-  protocol        = 58  # icmpv6
-  icmp_type       = -1  # all
-  icmp_code       = -1  # all
-  ipv6_cidr_block = "::/0"
-}
-
-resource "aws_network_acl_rule" "sec_rx_icmpv4" {
-  network_acl_id  = aws_network_acl.secure.id
-  rule_number     = 10000
-  egress          = false
-  rule_action     = "allow"
-  protocol        = "icmp"  # 1
-  icmp_type       = -1      # all
-  icmp_code       = -1      # all
-  cidr_block      = "0.0.0.0/0"
-}
-
-resource "aws_network_acl_rule" "sec_rx_icmpv6" {
-  network_acl_id  = aws_network_acl.secure.id
-  rule_number     = 10001
-  egress          = false
-  rule_action     = "allow"
-  protocol        = 58  # icmpv6
-  icmp_type       = -1  # all
-  icmp_code       = -1  # all
-  ipv6_cidr_block = "::/0"
-}
-
-resource "aws_network_acl_rule" "sec_tx_icmpv4" {
-  network_acl_id  = aws_network_acl.secure.id
-  rule_number     = 11000
-  egress          = true
-  rule_action     = "allow"
-  protocol        = "icmp"  # 1
-  icmp_type       = -1      # all
-  icmp_code       = -1      # all
-  cidr_block      = "0.0.0.0/0"
-}
-
-resource "aws_network_acl_rule" "sec_tx_icmpv6" {
-  network_acl_id  = aws_network_acl.secure.id
-  rule_number     = 11001
-  egress          = true
-  rule_action     = "allow"
-  protocol        = 58  # icmpv6
-  icmp_type       = -1  # all
-  icmp_code       = -1  # all
-  ipv6_cidr_block = "::/0"
-}
 
 /*
                   _       _
@@ -293,7 +152,7 @@ resource "aws_network_acl_rule" "sec_tx_icmpv6" {
 
 resource "aws_network_acl_rule" "pub_rx_vpc_ipv4" {
   network_acl_id = aws_network_acl.public.id
-  rule_number    = 6100
+  rule_number    = 6000
   egress         = false
   rule_action    = "allow"
   protocol       = "all"  # -1
@@ -304,7 +163,7 @@ resource "aws_network_acl_rule" "pub_rx_vpc_ipv4" {
 
 resource "aws_network_acl_rule" "pub_rx_vpc_ipv6" {
   network_acl_id  = aws_network_acl.public.id
-  rule_number     = 6101
+  rule_number     = 6001
   egress          = false
   rule_action     = "allow"
   protocol        = "all"  # -1
@@ -315,7 +174,7 @@ resource "aws_network_acl_rule" "pub_rx_vpc_ipv6" {
 
 resource "aws_network_acl_rule" "pub_tx_vpc_ipv4" {
   network_acl_id = aws_network_acl.public.id
-  rule_number    = 7100
+  rule_number    = 7000
   egress         = true
   rule_action    = "allow"
   protocol       = "all"  # -1
@@ -326,7 +185,7 @@ resource "aws_network_acl_rule" "pub_tx_vpc_ipv4" {
 
 resource "aws_network_acl_rule" "pub_tx_vpc_ipv6" {
   network_acl_id  = aws_network_acl.public.id
-  rule_number     = 7101
+  rule_number     = 7001
   egress          = true
   rule_action     = "allow"
   protocol        = "all"  # -1
@@ -337,7 +196,7 @@ resource "aws_network_acl_rule" "pub_tx_vpc_ipv6" {
 
 resource "aws_network_acl_rule" "priv_rx_vpc_ipv4" {
   network_acl_id = aws_network_acl.private.id
-  rule_number    = 8100
+  rule_number    = 8000
   egress         = false
   rule_action    = "allow"
   protocol       = "all"  # -1
@@ -348,7 +207,7 @@ resource "aws_network_acl_rule" "priv_rx_vpc_ipv4" {
 
 resource "aws_network_acl_rule" "priv_rx_vpc_ipv6" {
   network_acl_id  = aws_network_acl.private.id
-  rule_number     = 8101
+  rule_number     = 8001
   egress          = false
   rule_action     = "allow"
   protocol        = "all"  # -1
@@ -359,7 +218,7 @@ resource "aws_network_acl_rule" "priv_rx_vpc_ipv6" {
 
 resource "aws_network_acl_rule" "priv_tx_vpc_ipv4" {
   network_acl_id = aws_network_acl.private.id
-  rule_number    = 9100
+  rule_number    = 9000
   egress         = true
   rule_action    = "allow"
   protocol       = "all"  # -1
@@ -370,7 +229,7 @@ resource "aws_network_acl_rule" "priv_tx_vpc_ipv4" {
 
 resource "aws_network_acl_rule" "priv_tx_vpc_ipv6" {
   network_acl_id  = aws_network_acl.private.id
-  rule_number     = 9101
+  rule_number     = 9001
   egress          = true
   rule_action     = "allow"
   protocol        = "all"  # -1
@@ -381,7 +240,7 @@ resource "aws_network_acl_rule" "priv_tx_vpc_ipv6" {
 
 resource "aws_network_acl_rule" "sec_rx_vpc_ipv4" {
   network_acl_id = aws_network_acl.secure.id
-  rule_number    = 10100
+  rule_number    = 10000
   egress         = false
   rule_action    = "allow"
   protocol       = "all"  # -1
@@ -392,7 +251,7 @@ resource "aws_network_acl_rule" "sec_rx_vpc_ipv4" {
 
 resource "aws_network_acl_rule" "sec_rx_vpc_ipv6" {
   network_acl_id  = aws_network_acl.secure.id
-  rule_number     = 10101
+  rule_number     = 10001
   egress          = false
   rule_action     = "allow"
   protocol        = "all"  # -1
@@ -403,7 +262,7 @@ resource "aws_network_acl_rule" "sec_rx_vpc_ipv6" {
 
 resource "aws_network_acl_rule" "sec_tx_vpc_ipv4" {
   network_acl_id = aws_network_acl.secure.id
-  rule_number    = 11100
+  rule_number    = 11000
   egress         = true
   rule_action    = "allow"
   protocol       = "all"  # -1
@@ -414,13 +273,154 @@ resource "aws_network_acl_rule" "sec_tx_vpc_ipv4" {
 
 resource "aws_network_acl_rule" "sec_tx_vpc_ipv6" {
   network_acl_id  = aws_network_acl.secure.id
-  rule_number     = 11101
+  rule_number     = 11001
   egress          = true
   rule_action     = "allow"
   protocol        = "all"  # -1
   from_port       = 0      # ignored
   to_port         = 0      # ignored
   ipv6_cidr_block = aws_vpc.main.ipv6_cidr_block
+}
+
+/*
+                             _
+                            (_) ___ _ __ ___  _ __
+                            | |/ __| '_ ` _ \| '_ \
+                            | | (__| | | | | | |_) |
+                            |_|\___|_| |_| |_| .__/
+                                             |_|
+*/
+
+resource "aws_network_acl_rule" "pub_rx_icmpv4" {
+  network_acl_id = aws_network_acl.public.id
+  rule_number    = 6100
+  egress         = false
+  rule_action    = "allow"
+  protocol       = "icmp"  # 1
+  icmp_type      = -1      # all
+  icmp_code      = -1      # all
+  cidr_block     = "0.0.0.0/0"
+}
+
+resource "aws_network_acl_rule" "pub_rx_icmpv6" {
+  network_acl_id  = aws_network_acl.public.id
+  rule_number     = 6101
+  egress          = false
+  rule_action     = "allow"
+  protocol        = 58  # icmpv6
+  icmp_type       = -1  # all
+  icmp_code       = -1  # all
+  ipv6_cidr_block = "::/0"
+}
+
+resource "aws_network_acl_rule" "pub_tx_icmpv4" {
+  network_acl_id = aws_network_acl.public.id
+  rule_number    = 7100
+  egress         = true
+  rule_action    = "allow"
+  protocol       = "icmp"  # 1
+  icmp_type      = -1      # all
+  icmp_code      = -1      # all
+  cidr_block     = "0.0.0.0/0"
+}
+
+resource "aws_network_acl_rule" "pub_tx_icmpv6" {
+  network_acl_id  = aws_network_acl.public.id
+  rule_number     = 7101
+  egress          = true
+  rule_action     = "allow"
+  protocol        = 58  # icmpv6
+  icmp_type       = -1  # all
+  icmp_code       = -1  # all
+  ipv6_cidr_block = "::/0"
+}
+
+resource "aws_network_acl_rule" "priv_rx_icmpv4" {
+  network_acl_id = aws_network_acl.private.id
+  rule_number    = 8100
+  egress         = false
+  rule_action    = "allow"
+  protocol       = "icmp"  # 1
+  icmp_type      = -1      # all
+  icmp_code      = -1      # all
+  cidr_block     = "0.0.0.0/0"
+}
+
+resource "aws_network_acl_rule" "priv_rx_icmpv6" {
+  network_acl_id  = aws_network_acl.private.id
+  rule_number     = 8101
+  egress          = false
+  rule_action     = "allow"
+  protocol        = 58  # icmpv6
+  icmp_type       = -1  # all
+  icmp_code       = -1  # all
+  ipv6_cidr_block = "::/0"
+}
+
+resource "aws_network_acl_rule" "priv_tx_icmpv4" {
+  network_acl_id = aws_network_acl.private.id
+  rule_number    = 9100
+  egress         = true
+  rule_action    = "allow"
+  protocol       = "icmp"  # 1
+  icmp_type      = -1      # all
+  icmp_code      = -1      # all
+  cidr_block     = "0.0.0.0/0"
+}
+
+resource "aws_network_acl_rule" "priv_tx_icmpv6" {
+  network_acl_id  = aws_network_acl.private.id
+  rule_number     = 9101
+  egress          = true
+  rule_action     = "allow"
+  protocol        = 58  # icmpv6
+  icmp_type       = -1  # all
+  icmp_code       = -1  # all
+  ipv6_cidr_block = "::/0"
+}
+
+resource "aws_network_acl_rule" "sec_rx_icmpv4" {
+  network_acl_id = aws_network_acl.secure.id
+  rule_number    = 10100
+  egress         = false
+  rule_action    = "allow"
+  protocol       = "icmp"  # 1
+  icmp_type      = -1      # all
+  icmp_code      = -1      # all
+  cidr_block     = "0.0.0.0/0"
+}
+
+resource "aws_network_acl_rule" "sec_rx_icmpv6" {
+  network_acl_id  = aws_network_acl.secure.id
+  rule_number     = 10101
+  egress          = false
+  rule_action     = "allow"
+  protocol        = 58  # icmpv6
+  icmp_type       = -1  # all
+  icmp_code       = -1  # all
+  ipv6_cidr_block = "::/0"
+}
+
+resource "aws_network_acl_rule" "sec_tx_icmpv4" {
+  network_acl_id = aws_network_acl.secure.id
+  rule_number    = 11100
+  egress         = true
+  rule_action    = "allow"
+  protocol       = "icmp"  # 1
+  icmp_type      = -1      # all
+  icmp_code      = -1      # all
+  cidr_block     = "0.0.0.0/0"
+}
+
+resource "aws_network_acl_rule" "sec_tx_icmpv6" {
+  network_acl_id  = aws_network_acl.secure.id
+  rule_number     = 11101
+  egress          = true
+  rule_action     = "allow"
+  protocol        = 58  # icmpv6
+  icmp_type       = -1  # all
+  icmp_code       = -1  # all
+  ipv6_cidr_block = "::/0"
 }
 
 /*

@@ -65,15 +65,6 @@ resource "aws_security_group" "public" {
   }
 }
 
-resource "aws_security_group_rule" "pub_rx_self" {
-  security_group_id = aws_security_group.public.id
-  type              = "ingress"
-  protocol          = -1  # all
-  from_port         = 0   # ignored
-  to_port           = 0   # ignored
-  self              = true
-}
-
 /*
                             _
  ___  __ _       _ __  _ __(_)_   __
@@ -93,15 +84,6 @@ resource "aws_security_group" "private" {
   }
 }
 
-resource "aws_security_group_rule" "priv_rx_self" {
-  security_group_id = aws_security_group.private.id
-  type              = "ingress"
-  protocol          = -1  # all
-  from_port         = 0   # ignored
-  to_port           = 0   # ignored
-  self              = true
-}
-
 /*
  ___  __ _       ___  ___  ___
 / __|/ _` |_____/ __|/ _ \/ __|
@@ -118,6 +100,32 @@ resource "aws_security_group" "secure" {
   tags = {
     Name = "${var.basename}-sg-sec"
   }
+}
+
+/*
+                  _       _                             _
+                 (_)_ __ | |_ _ __ __ _       ___ _   _| |__
+                 | | '_ \| __| '__/ _` |_____/ __| | | | '_ \
+                 | | | | | |_| | | (_| |_____\__ \ |_| | |_) |
+                 |_|_| |_|\__|_|  \__,_|     |___/\__,_|_.__/
+*/
+
+resource "aws_security_group_rule" "pub_rx_self" {
+  security_group_id = aws_security_group.public.id
+  type              = "ingress"
+  protocol          = -1  # all
+  from_port         = 0   # ignored
+  to_port           = 0   # ignored
+  self              = true
+}
+
+resource "aws_security_group_rule" "priv_rx_self" {
+  security_group_id = aws_security_group.private.id
+  type              = "ingress"
+  protocol          = -1  # all
+  from_port         = 0   # ignored
+  to_port           = 0   # ignored
+  self              = true
 }
 
 resource "aws_security_group_rule" "sec_rx_self" {
