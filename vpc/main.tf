@@ -1,20 +1,13 @@
 # https://aws.amazon.com/blogs/aws/building-three-tier-architectures-with-security-groups/
 
 terraform {
-  required_version = "~> 0.13.4"
+  required_version = "~> 0.13.5"
 }
 
 provider "aws" {
-  version = "~> 3.11.0"
+  version = "~> 3.13.0"
   region  = var.region
 }
-
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/egress_only_internet_gateway
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_dhcp_options
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_dhcp_options_association
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones
 
 /*
 __   ___ __   ___       ___ ___  _ __ ___
@@ -23,6 +16,11 @@ __   ___ __   ___       ___ ___  _ __ ___
   \_/ | .__/ \___|     \___\___/|_|  \___|
       |_|
 */
+
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_dhcp_options
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_dhcp_options_association
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones
 
 resource "aws_vpc" "main" {
   cidr_block = var.vpc_cidr_block
@@ -36,22 +34,6 @@ resource "aws_vpc" "main" {
 
   tags = {
     Name = "${var.basename}-vpc"
-  }
-}
-
-resource "aws_internet_gateway" "public" {
-  vpc_id = aws_vpc.main.id
-
-  tags = {
-    Name = "${var.basename}-igw"
-  }
-}
-
-resource "aws_egress_only_internet_gateway" "private" {
-  vpc_id = aws_vpc.main.id
-
-  tags = {
-    Name = "${var.basename}-eigw"
   }
 }
 
@@ -74,6 +56,15 @@ data "aws_availability_zones" "available" {
   state = "available"
 }
 
+/*
+           _                       _
+ ___ _   _| |__        _ __  _   _| |__
+/ __| | | | '_ \ _____| '_ \| | | | '_ \
+\__ \ |_| | |_) |_____| |_) | |_| | |_) |
+|___/\__,_|_.__/      | .__/ \__,_|_.__/
+                      |_|
+*/
+
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet
 
 # VPCs are currently limited to a maximum of /16 and a minimum of /28 for IPv4
@@ -83,15 +74,6 @@ data "aws_availability_zones" "available" {
 # Subnet mask /16 => 2^(32-16) = 2^16 = 65536 hosts
 # Subnet mask /22 => 2^(32-22) = 2^10 = 1024 hosts
 # Subnet mask /28 => 2^(32-28) = 2^4  = 16 hosts
-
-/*
-           _                       _
- ___ _   _| |__        _ __  _   _| |__
-/ __| | | | '_ \ _____| '_ \| | | | '_ \
-\__ \ |_| | |_) |_____| |_) | |_| | |_) |
-|___/\__,_|_.__/      | .__/ \__,_|_.__/
-                      |_|
-*/
 
 resource "aws_subnet" "public_az" {
   count                           = var.how_many_azs
@@ -152,11 +134,6 @@ resource "aws_subnet" "secure_az" {
   }
 }
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/default_route_table
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table_association
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route
-
 /*
       _   _               _       __
  _ __| |_| |__         __| | ___ / _|
@@ -164,6 +141,8 @@ resource "aws_subnet" "secure_az" {
 | |  | |_| |_) |_____| (_| |  __/  _|
 |_|   \__|_.__/       \__,_|\___|_|
 */
+
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/default_route_table
 
 # Creating a new VPC forces the creation of a new default route table.
 # We want to tag it with something that indicates which VPC it belongs to.
@@ -186,6 +165,9 @@ resource "aws_default_route_table" "default" {
                      |_|
 */
 
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table_association
+
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.main.id
 
@@ -198,18 +180,6 @@ resource "aws_route_table_association" "public_az" {
   count          = var.how_many_azs
   route_table_id = aws_route_table.public.id
   subnet_id      = element(aws_subnet.public_az[*].id, count.index)
-}
-
-resource "aws_route" "public_ipv4" {
-  route_table_id         = aws_route_table.public.id
-  destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = aws_internet_gateway.public.id
-}
-
-resource "aws_route" "public_ipv6" {
-  route_table_id              = aws_route_table.public.id
-  destination_ipv6_cidr_block = "::/0"
-  gateway_id                  = aws_internet_gateway.public.id
 }
 
 /*
@@ -236,42 +206,6 @@ resource "aws_route_table_association" "private_az" {
   subnet_id      = element(aws_subnet.private_az[*].id, count.index)
 }
 
-# XXX FIXME TODO  Turn these on with a variable
-
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_gateway
-
-# resource "aws_eip" "az" {
-#   count      = var.enable_natgws ? var.how_many_azs : 0
-#   vpc        = true
-#   depends_on = ["aws_internet_gateway.public"]
-#
-#   tags = {
-#     Name = "${var.basename}-eip"
-#   }
-# }
-
-# resource "aws_nat_gateway" "az" {
-#   count         = var.enable_natgws ? var.how_many_azs : 0
-#   allocation_id = element(aws_eip.az.*.id, count.index)
-#   subnet_id     = element(aws_subnet.public_az[*].id, count.index)
-#   depends_on    = ["aws_internet_gateway.public"]
-# }
-
-# resource "aws_route" "private_az_ipv4" {
-#   count                  = var.enable_natgws ? var.how_many_azs : 0
-#   route_table_id         = element(aws_route_table.private_az[*].id, count.index)
-#   destination_cidr_block = "0.0.0.0/0"
-#   nat_gateway_id         = element(aws_nat_gateway.az[*].id, count.index)
-# }
-
-resource "aws_route" "private_az_ipv6" {
-  count                       = var.how_many_azs
-  route_table_id              = element(aws_route_table.private_az[*].id, count.index)
-  destination_ipv6_cidr_block = "::/0"
-  egress_only_gateway_id      = aws_egress_only_internet_gateway.private.id
-}
-
 /*
       _   _
  _ __| |_| |__        ___  ___  ___
@@ -293,4 +227,92 @@ resource "aws_route_table_association" "secure_az" {
   count          = var.how_many_azs
   route_table_id = element(aws_route_table.secure_az[*].id, count.index)
   subnet_id      = element(aws_subnet.secure_az[*].id, count.index)
+}
+
+/*
+ _            _
+(_)_ __   ___| |_       __ ___      _____
+| | '_ \ / _ \ __|____ / _` \ \ /\ / / __|
+| | | | |  __/ ||_____| (_| |\ V  V /\__ \
+|_|_| |_|\___|\__|     \__, | \_/\_/ |___/
+                       |___/
+*/
+
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route
+
+resource "aws_internet_gateway" "public" {
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Name = "${var.basename}-igw"
+  }
+}
+
+resource "aws_route" "public_ipv4" {
+  route_table_id         = aws_route_table.public.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_internet_gateway.public.id
+}
+
+resource "aws_route" "public_ipv6" {
+  route_table_id              = aws_route_table.public.id
+  destination_ipv6_cidr_block = "::/0"
+  gateway_id                  = aws_internet_gateway.public.id
+}
+
+/*
+             _
+ _ __   __ _| |_       __ ___      _____
+| '_ \ / _` | __|____ / _` \ \ /\ / / __|
+| | | | (_| | ||_____| (_| |\ V  V /\__ \
+|_| |_|\__,_|\__|     \__, | \_/\_/ |___/
+                      |___/
+*/
+
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_gateway
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/egress_only_internet_gateway
+
+resource "aws_eip" "az" {
+  count      = var.how_many_natgws
+  vpc        = true
+  depends_on = [aws_internet_gateway.public]
+
+  tags = {
+    Name = "${var.basename}-eip"
+  }
+}
+
+resource "aws_nat_gateway" "az" {
+  count         = var.how_many_natgws
+  allocation_id = element(aws_eip.az.*.id, count.index)
+  subnet_id     = element(aws_subnet.public_az[*].id, count.index)
+  depends_on    = [aws_internet_gateway.public]
+
+  tags = {
+    Name = "${var.basename}-nat"
+  }
+}
+
+resource "aws_route" "private_az_ipv4" {
+  count                  = var.how_many_natgws
+  route_table_id         = element(aws_route_table.private_az[*].id, count.index)
+  destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id         = element(aws_nat_gateway.az[*].id, count.index)
+}
+
+resource "aws_egress_only_internet_gateway" "private" {
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Name = "${var.basename}-eigw"
+  }
+}
+
+resource "aws_route" "private_az_ipv6" {
+  count                       = var.how_many_azs
+  route_table_id              = element(aws_route_table.private_az[*].id, count.index)
+  destination_ipv6_cidr_block = "::/0"
+  egress_only_gateway_id      = aws_egress_only_internet_gateway.private.id
 }

@@ -1,7 +1,3 @@
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/default_security_group
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
-
 /*
                      _       __
  ___  __ _        __| | ___ / _|
@@ -10,6 +6,8 @@
 |___/\__, |      \__,_|\___|_|
      |___/
 */
+
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/default_security_group
 
 # Creating a new VPC forces the creation of a new default SG.
 # We want to tag it with something that indicates which VPC it belongs to.
@@ -54,6 +52,8 @@ resource "aws_default_security_group" "default" {
 |___/\__, |     | .__/ \__,_|_.__/
      |___/      |_|
 */
+
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
 
 resource "aws_security_group" "public" {
   vpc_id      = aws_vpc.main.id
@@ -101,6 +101,22 @@ resource "aws_security_group" "secure" {
     Name = "${var.basename}-sg-sec"
   }
 }
+
+/*
+                            _
+ ___  __ _       _ __ _   _| | ___  ___
+/ __|/ _` |_____| '__| | | | |/ _ \/ __|
+\__ \ (_| |_____| |  | |_| | |  __/\__ \
+|___/\__, |     |_|   \__,_|_|\___||___/
+     |___/
+*/
+
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
+
+# Allow all outbound traffic to go anywhere from any subnets
+# Allow all inbound traffic to freely-enter the "same-tier" subnets
+# Allow all inbound traffic to freely-enter the "different-tier" subnets
+# Allow all inbound ICMP, HTTPS, SSH traffic to freely-enter all subnets
 
 /*
 

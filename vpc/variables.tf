@@ -1,26 +1,29 @@
 variable "basename" {
+  type        = string
   description = "Tag prefix to use for all resources"
-  type        = string
-}
-
-variable "region" {
-  description = "AWS region in which to launch all non-global resources"
-  type        = string
+  default     = "test"
 }
 
 variable "how_many_azs" {
+  type        = number
   description = "Number of availability zones to use in the desired region"
+  default     = 3
+}
+
+variable "how_many_natgws" {
+  type        = number
+  description = "Number of NAT gateways to create across the available AZs"
+  default     = 0
+}
+
+variable "region" {
   type        = string
-  default     = 2
+  description = "AWS region in which to launch all non-global resources"
+  default     = "ca-central-1"
 }
 
 variable "vpc_cidr_block" {
+  type        = string
   description = "IPv4 CIDR block to assign to the VPC (with netmask from /16 to /28)"
-  type        = string
-}
-
-variable "enable_natgws" {
-  description = "Whether to turn on the spendy IPv4 NAT gateways"
-  type        = string
-  default     = false
+  default     = "10.0.0.0/16"
 }
