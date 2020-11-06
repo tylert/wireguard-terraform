@@ -2,11 +2,17 @@
 
 terraform {
   required_version = "~> 0.13.5"
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 3.13.0"
+    }
+  }
 }
 
 provider "aws" {
-  version = "~> 3.13.0"
-  region  = var.region
+  region = var.region
 }
 
 /*
@@ -272,7 +278,6 @@ resource "aws_route" "public_ipv6" {
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_gateway
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/egress_only_internet_gateway
 
 resource "aws_eip" "az" {
   count      = var.how_many_natgws
@@ -280,7 +285,7 @@ resource "aws_eip" "az" {
   depends_on = [aws_internet_gateway.public]
 
   tags = {
-    Name = "${var.basename}-eip"
+    Name = "${var.basename}-eip-nat-az${count.index}"
   }
 }
 
@@ -291,7 +296,7 @@ resource "aws_nat_gateway" "az" {
   depends_on    = [aws_internet_gateway.public]
 
   tags = {
-    Name = "${var.basename}-nat"
+    Name = "${var.basename}-nat-az${count.index}"
   }
 }
 
@@ -301,6 +306,17 @@ resource "aws_route" "private_az_ipv4" {
   destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id         = element(aws_nat_gateway.az[*].id, count.index)
 }
+
+/*
+      _
+  ___(_) __ ___      __
+ / _ \ |/ _` \ \ /\ / /
+|  __/ | (_| |\ V  V /
+ \___|_|\__, | \_/\_/
+        |___/
+*/
+
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/egress_only_internet_gateway
 
 resource "aws_egress_only_internet_gateway" "private" {
   vpc_id = aws_vpc.main.id
