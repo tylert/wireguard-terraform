@@ -1,7 +1,7 @@
 variable "basename" {
   type        = string
   description = "Tag prefix to use for all resources"
-  default     = "test"
+# default     = "test"
 }
 
 variable "how_many_azs" {
@@ -25,5 +25,5 @@ variable "region" {
 variable "vpc_cidr_block" {
   type        = string
   description = "IPv4 CIDR block to assign to the VPC (with netmask from /16 to /28)"
-  default     = "10.0.0.0/16"
+# default     = "10.0.0.0/16"
 }
