@@ -29,5 +29,5 @@ resource "aws_route53_record" "home" {
   name    = "${var.record_name}.${var.hosted_zone_name}"
   type    = "A"
   ttl     = var.ttl
-  records = ["${chomp(data.http.myip.body)}"]
+  records = [chomp(data.http.myip.body)]
 }
