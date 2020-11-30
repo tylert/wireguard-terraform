@@ -1,3 +1,12 @@
+/*
+             _               _
+  ___  _   _| |_ _ __  _   _| |_ ___
+ / _ \| | | | __| '_ \| | | | __/ __|
+| (_) | |_| | |_| |_) | |_| | |_\__ \
+ \___/ \__,_|\__| .__/ \__,_|\__|___/
+                |_|
+*/
+
 output "vpc_id" {
   value = aws_vpc.main.id
 }
@@ -5,8 +14,6 @@ output "vpc_id" {
 output "availability_zones" {
   value = data.aws_availability_zones.available.names
 }
-
-# Subnets
 
 output "public_subnet_ids" {
   value = aws_subnet.public_az[*].id
@@ -20,8 +27,6 @@ output "secure_subnet_ids" {
   value = aws_subnet.secure_az[*].id
 }
 
-# Subnet IPv4 ranges
-
 output "public_subnet_ipv4_cidrs" {
   value = aws_subnet.public_az[*].cidr_block
 }
@@ -33,8 +38,6 @@ output "private_subnet_ipv4_cidrs" {
 output "secure_subnet_ipv4_cidrs" {
   value = aws_subnet.secure_az[*].cidr_block
 }
-
-# Subnet IPv6 ranges
 
 output "public_subnet_ipv6_cidrs" {
   value = aws_subnet.public_az[*].ipv6_cidr_block

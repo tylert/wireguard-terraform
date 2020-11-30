@@ -1,13 +1,23 @@
 /*
-                     _       __
- ___  __ _        __| | ___ / _|
-/ __|/ _` |_____ / _` |/ _ \ |_
-\__ \ (_| |_____| (_| |  __/  _|
-|___/\__, |      \__,_|\___|_|
-     |___/
+                          _ _
+ ___  ___  ___ _   _ _ __(_) |_ _   _    __ _ _ __ ___  _   _ _ __  ___
+/ __|/ _ \/ __| | | | '__| | __| | | |  / _` | '__/ _ \| | | | '_ \/ __|
+\__ \  __/ (__| |_| | |  | | |_| |_| | | (_| | | | (_) | |_| | |_) \__ \
+|___/\___|\___|\__,_|_|  |_|\__|\__, |  \__, |_|  \___/ \__,_| .__/|___/
+                                |___/   |___/                |_|
 */
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/default_security_group
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
+
+/*
+                                             _       __
+                         ___  __ _        __| | ___ / _|
+                        / __|/ _` |_____ / _` |/ _ \ |_
+                        \__ \ (_| |_____| (_| |  __/  _|
+                        |___/\__, |      \__,_|\___|_|
+                             |___/
+*/
 
 # Creating a new VPC forces the creation of a new default SG.
 # We want to tag it with something that indicates which VPC it belongs to.
@@ -15,7 +25,7 @@
 # Just put back the rules that got flushed so we're left with a stock one.
 # We will simply ignore this resource as it is not required for our use case.
 
-resource "aws_default_security_group" "default" {
+resource "aws_default_security_group" "main" {
   vpc_id = aws_vpc.main.id
 
   ingress {
@@ -45,15 +55,13 @@ resource "aws_default_security_group" "default" {
 }
 
 /*
-                             _
- ___  __ _       _ __  _   _| |__
-/ __|/ _` |_____| '_ \| | | | '_ \
-\__ \ (_| |_____| |_) | |_| | |_) |
-|___/\__, |     | .__/ \__,_|_.__/
-     |___/      |_|
+                                                   _
+                       ___  __ _       _ __  _   _| |__
+                      / __|/ _` |_____| '_ \| | | | '_ \
+                      \__ \ (_| |_____| |_) | |_| | |_) |
+                      |___/\__, |     | .__/ \__,_|_.__/
+                           |___/      |_|
 */
-
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
 
 resource "aws_security_group" "public" {
   vpc_id      = aws_vpc.main.id
@@ -66,12 +74,12 @@ resource "aws_security_group" "public" {
 }
 
 /*
-                            _
- ___  __ _       _ __  _ __(_)_   __
-/ __|/ _` |_____| '_ \| '__| \ \ / /
-\__ \ (_| |_____| |_) | |  | |\ V /
-|___/\__, |     | .__/|_|  |_| \_/
-     |___/      |_|
+                                                  _
+                       ___  __ _       _ __  _ __(_)_   __
+                      / __|/ _` |_____| '_ \| '__| \ \ / /
+                      \__ \ (_| |_____| |_) | |  | |\ V /
+                      |___/\__, |     | .__/|_|  |_| \_/
+                           |___/      |_|
 */
 
 resource "aws_security_group" "private" {
@@ -85,11 +93,11 @@ resource "aws_security_group" "private" {
 }
 
 /*
- ___  __ _       ___  ___  ___
-/ __|/ _` |_____/ __|/ _ \/ __|
-\__ \ (_| |_____\__ \  __/ (__
-|___/\__, |     |___/\___|\___|
-     |___/
+                         ___  __ _       ___  ___  ___
+                        / __|/ _` |_____/ __|/ _ \/ __|
+                        \__ \ (_| |_____\__ \  __/ (__
+                        |___/\__, |     |___/\___|\___|
+                             |___/
 */
 
 resource "aws_security_group" "secure" {
@@ -103,12 +111,11 @@ resource "aws_security_group" "secure" {
 }
 
 /*
-                            _
- ___  __ _       _ __ _   _| | ___  ___
-/ __|/ _` |_____| '__| | | | |/ _ \/ __|
-\__ \ (_| |_____| |  | |_| | |  __/\__ \
-|___/\__, |     |_|   \__,_|_|\___||___/
-     |___/
+ ____   ____              _
+/ ___| / ___|  _ __ _   _| | ___  ___
+\___ \| |  _  | '__| | | | |/ _ \/ __|
+ ___) | |_| | | |  | |_| | |  __/\__ \
+|____/ \____| |_|   \__,_|_|\___||___/
 */
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
@@ -119,7 +126,6 @@ resource "aws_security_group" "secure" {
 # Allow all inbound ICMP, HTTPS, SSH traffic to freely-enter all subnets
 
 /*
-
                            ___  __ _ _ __ ___  ___ ___
                           / _ \/ _` | '__/ _ \/ __/ __|
                          |  __/ (_| | | |  __/\__ \__ \
