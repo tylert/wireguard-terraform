@@ -83,7 +83,7 @@ resource "aws_route" "priv_az_ipv6" {
 # resources to allow AWS to manage the association, otherwise you will see
 # AuthFailure errors.
 
-resource "aws_eip" "natgw" {
+resource "aws_eip" "natgw_az" {
   count      = var.how_many_natgws
   vpc        = true
   depends_on = [aws_internet_gateway.public]
@@ -95,7 +95,7 @@ resource "aws_eip" "natgw" {
 
 resource "aws_nat_gateway" "az" {
   count         = var.how_many_natgws
-  allocation_id = element(aws_eip.az.*.id, count.index)
+  allocation_id = element(aws_eip.natgw_az[*].id, count.index)
   subnet_id     = element(aws_subnet.public_az[*].id, count.index)
   depends_on    = [aws_internet_gateway.public]
 
