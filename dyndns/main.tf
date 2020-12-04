@@ -1,12 +1,12 @@
 # https://medium.com/@matzhouse/dynamic-dns-with-terraform-and-route53-3fafe7c68970
 
 terraform {
-  required_version = "~> 0.13.5"
+  required_version = "~> 0.14.0"
 
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 3.18.0"
+      version = "~> 3.20.0"
     }
   }
 }
