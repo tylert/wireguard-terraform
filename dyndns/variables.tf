@@ -1,9 +1,3 @@
-variable "basename" {
-  type        = string
-  description = "Tag prefix to use for all resources"
-# default     = "test"
-}
-
 variable "region" {
   type        = string
   description = "AWS region in which to launch all non-global resources"
