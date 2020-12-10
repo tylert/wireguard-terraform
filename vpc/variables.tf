@@ -27,7 +27,7 @@ variable "how_many_natgws" {
 variable "region" {
   type        = string
   description = "AWS region in which to launch all non-global resources"
-  default     = "ca-central-1"
+# default     = "ca-central-1"
 }
 
 variable "vpc_cidr_block" {

@@ -9,7 +9,7 @@ __   ____ _ _ __(_) __ _| |__ | | ___  ___
 variable "region" {
   type        = string
   description = "AWS region in which to launch all non-global resources"
-  default     = "ca-central-1"
+# default     = "ca-central-1"
 }
 
 variable "ttl" {
