@@ -23,8 +23,8 @@ output "subnet_ids_secure" {
   value = aws_subnet.secure_az[*].id
 }
 
-output "route_table_id_public" {
-  value = aws_route_table.public.id
+output "route_table_ids_public" {
+  value = aws_route_table.public_az[*].id
 }
 
 output "route_table_ids_private" {

@@ -30,14 +30,16 @@ resource "aws_internet_gateway" "public" {
   }
 }
 
-resource "aws_route" "pub_ipv4" {
-  route_table_id         = aws_route_table.public.id
+resource "aws_route" "pub_az_ipv4" {
+  count                  = var.how_many_azs
+  route_table_id         = element(aws_route_table.public_az[*].id, count.index)
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = aws_internet_gateway.public.id
 }
 
-resource "aws_route" "pub_ipv6" {
-  route_table_id              = aws_route_table.public.id
+resource "aws_route" "pub_az_ipv6" {
+  count                       = var.how_many_azs
+  route_table_id              = element(aws_route_table.public_az[*].id, count.index)
   destination_ipv6_cidr_block = "::/0"
   gateway_id                  = aws_internet_gateway.public.id
 }
@@ -50,6 +52,9 @@ resource "aws_route" "pub_ipv6" {
                              \___|_|\__, | \_/\_/
                                     |___/
 */
+
+# Egress-only internet gateways are only for IPv6 traffic so don't bother with
+# IPv4 stuff here.
 
 resource "aws_egress_only_internet_gateway" "private" {
   vpc_id = aws_vpc.main.id

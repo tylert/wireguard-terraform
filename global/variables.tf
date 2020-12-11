@@ -7,19 +7,19 @@ __   ____ _ _ __(_) __ _| |__ | | ___  ___
 */
 
 variable "region" {
-  description = "AWS region in which to launch all AWS resources"
   type        = string
-  default     = "ca-central-1"
+  description = "AWS region in which to launch all non-global resources"
+# default     = "ca-central-1"
 }
 
 variable "lock_table_name" {
-  description = "Name of Terraform lock table"
   type        = string
+  description = "Name of Terraform lock table"
   default     = "terraform_lock"
 }
 
 variable "state_bucket_name" {
-  description = "Name of Terraform state bucket"
   type        = string
+  description = "Name of Terraform state bucket"
   default     = "cace1-tf-marc-orthos"
 }

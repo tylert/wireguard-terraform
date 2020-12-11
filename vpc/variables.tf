@@ -6,6 +6,12 @@ __   ____ _ _ __(_) __ _| |__ | | ___  ___
   \_/ \__,_|_|  |_|\__,_|_.__/|_|\___||___/
 */
 
+variable "region" {
+  type        = string
+  description = "AWS region in which to launch all non-global resources"
+# default     = "ca-central-1"
+}
+
 variable "basename" {
   type        = string
   description = "Tag prefix to use for all resources"
@@ -22,12 +28,6 @@ variable "how_many_natgws" {
   type        = number
   description = "Number of NAT gateways to create across the available AZs"
   default     = 0
-}
-
-variable "region" {
-  type        = string
-  description = "AWS region in which to launch all non-global resources"
-# default     = "ca-central-1"
 }
 
 variable "vpc_cidr_block" {

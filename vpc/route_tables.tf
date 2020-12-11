@@ -39,20 +39,23 @@ resource "aws_default_route_table" "default" {
                                          |_|
 */
 
-# We only need a single public route table since internet gateways are not
-# bound to a single AZ so all the public subnets can share the same IGW.
+# We only really need a single public route table since internet gateways are
+# not bound to a single AZ so all the public subnets can share the same IGW.
+# However, there might be other use-cases that would benefit from having one
+# route table per subnet.
 
-resource "aws_route_table" "public" {
+resource "aws_route_table" "public_az" {
+  count  = var.how_many_azs
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name = "${var.basename}-rtb-pub"
+    Name = "${var.basename}-rtb-pub-az${count.index}"
   }
 }
 
 resource "aws_route_table_association" "public_az" {
   count          = var.how_many_azs
-  route_table_id = aws_route_table.public.id
+  route_table_id = element(aws_route_table.public[*].id, count.index)
   subnet_id      = element(aws_subnet.public_az[*].id, count.index)
 }
 
