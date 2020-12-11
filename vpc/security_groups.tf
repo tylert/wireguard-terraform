@@ -50,7 +50,7 @@ resource "aws_default_security_group" "main" {
   }
 
   tags = {
-    Name = "${var.basename}-sg-def"
+    Name = "sg-${var.basename}-default"
   }
 }
 
@@ -69,7 +69,7 @@ resource "aws_security_group" "public" {
   description = "${var.basename}-sg-pub"
 
   tags = {
-    Name = "${var.basename}-sg-pub"
+    Name = "sg-${var.basename}-public"
   }
 }
 
@@ -88,7 +88,7 @@ resource "aws_security_group" "private" {
   description = "${var.basename}-sg-priv"
 
   tags = {
-    Name = "${var.basename}-sg-priv"
+    Name = "sg-${var.basename}-private"
   }
 }
 
@@ -106,7 +106,7 @@ resource "aws_security_group" "secure" {
   description = "${var.basename}-sg-sec"
 
   tags = {
-    Name = "${var.basename}-sg-sec"
+    Name = "sg-${var.basename}-secure"
   }
 }
 

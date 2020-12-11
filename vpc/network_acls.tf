@@ -63,7 +63,7 @@ resource "aws_default_network_acl" "main" {
   }
 
   tags = {
-    Name = "${var.basename}-acl-def"
+    Name = "acl-${var.basename}-default"
   }
 }
 
@@ -81,7 +81,7 @@ resource "aws_network_acl" "public" {
   subnet_ids = aws_subnet.public_az[*].id
 
   tags = {
-    Name = "${var.basename}-acl-pub"
+    Name = "acl-${var.basename}-public"
   }
 }
 
@@ -99,7 +99,7 @@ resource "aws_network_acl" "private" {
   subnet_ids = aws_subnet.private_az[*].id
 
   tags = {
-    Name = "${var.basename}-acl-priv"
+    Name = "acl-${var.basename}-private"
   }
 }
 
@@ -116,7 +116,7 @@ resource "aws_network_acl" "secure" {
   subnet_ids = aws_subnet.secure_az[*].id
 
   tags = {
-    Name = "${var.basename}-acl-sec"
+    Name = "acl-${var.basename}-secure"
   }
 }
 

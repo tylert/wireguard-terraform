@@ -24,7 +24,7 @@ resource "aws_vpc" "main" {
   instance_tenancy                 = "default"  # least spendy;  "dedicated"|"host"
 
   tags = {
-    Name = "${var.basename}-vpc"
+    Name = "vpc-${var.basename}"
   }
 }
 
@@ -34,7 +34,7 @@ resource "aws_vpc_dhcp_options" "main" {
 # ntp_servers         = []
 
   tags = {
-    Name = "${var.basename}-dopt"
+    Name = "dopt-${var.basename}"
   }
 }
 

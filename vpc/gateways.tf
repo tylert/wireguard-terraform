@@ -26,7 +26,7 @@ resource "aws_internet_gateway" "public" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name = "${var.basename}-igw"
+    Name = "igw-${var.basename}"
   }
 }
 
@@ -60,7 +60,7 @@ resource "aws_egress_only_internet_gateway" "private" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name = "${var.basename}-eigw"
+    Name = "eigw-${var.basename}"
   }
 }
 
@@ -94,7 +94,7 @@ resource "aws_eip" "natgw_az" {
   depends_on = [aws_internet_gateway.public]
 
   tags = {
-    Name = "${var.basename}-eip-natgw-az${count.index}"
+    Name = "eipalloc-${var.basename}-natgw-az${count.index}"
   }
 }
 
@@ -105,7 +105,7 @@ resource "aws_nat_gateway" "az" {
   depends_on    = [aws_internet_gateway.public]
 
   tags = {
-    Name = "${var.basename}-natgw-az${count.index}"
+    Name = "nat-${var.basename}-az${count.index}"
   }
 }
 
@@ -130,7 +130,7 @@ resource "aws_route" "priv_az_ipv4" {
 #   depends_on = [aws_internet_gateway.public]
 
 #   tags = {
-#     Name = "${var.basename}-eip-natinst-az${count.index}"
+#     Name = "eipalloc-${var.basename}-natinst-az${count.index}"
 #   }
 # }
 
