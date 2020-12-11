@@ -13,7 +13,7 @@
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/flow_log
 
 resource "aws_iam_role" "main" {
-  name = "main"  # name_prefix
+  name = "${var.basename}-role"  # name_prefix
 
   tags = {
     Name = "${var.basename}-role"
@@ -37,7 +37,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "main" {
-  name = "main"  # name_prefix
+  name = "${var.basename}-policy"  # name_prefix
   role = aws_iam_role.main.id
 
   policy = <<EOF
@@ -61,7 +61,7 @@ EOF
 }
 
 resource "aws_cloudwatch_log_group" "main" {
-  name              = "main"  # name_prefix
+  name              = "${var.basename}-loggroup"  # name_prefix
   retention_in_days = 7       # default???
 
   tags = {
