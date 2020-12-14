@@ -1,16 +1,49 @@
 /*
- ____   ____              _
-/ ___| / ___|  _ __ _   _| | ___  ___
-\___ \| |  _  | '__| | | | |/ _ \/ __|
- ___) | |_| | | |  | |_| | |  __/\__ \
-|____/ \____| |_|   \__,_|_|\___||___/
+                          _ _
+ ___  ___  ___ _   _ _ __(_) |_ _   _    __ _ _ __ ___  _   _ _ __  ___
+/ __|/ _ \/ __| | | | '__| | __| | | |  / _` | '__/ _ \| | | | '_ \/ __|
+\__ \  __/ (__| |_| | |  | | |_| |_| | | (_| | | | (_) | |_| | |_) \__ \
+|___/\___|\___|\__,_|_|  |_|\__|\__, |  \__, |_|  \___/ \__,_| .__/|___/
+                                |___/   |___/                |_|
 */
 
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/security_group
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
 
+data "aws_vpc" "main" {
+  tags = {
+    Name = "vpc-${var.basename}"
+  }
+}
+
+data "aws_security_group" "public" {
+  vpc_id = data.aws_vpc.main.id
+
+  tags = {
+    Name = "sg-${var.basename}-public"
+  }
+}
+
+data "aws_security_group" "private" {
+  vpc_id = data.aws_vpc.main.id
+
+  tags = {
+    Name = "sg-${var.basename}-private"
+  }
+}
+
+data "aws_security_group" "secure" {
+  vpc_id = data.aws_vpc.main.id
+
+  tags = {
+    Name = "sg-${var.basename}-secure"
+  }
+}
+
 # Allow all outbound traffic to go anywhere from any subnets
-# Allow all inbound traffic to freely-enter the "same-tier" subnets
-# Allow all inbound traffic to freely-enter the "different-tier" subnets
+# Allow all inbound traffic to freely pass between the "same-tier" subnets
+# Allow all inbound traffic to freely pass between the "different-tier" subnets
 # Allow all inbound ICMP, HTTPS, SSH traffic to freely-enter all subnets
 
 /*
@@ -22,7 +55,7 @@
 */
 
 resource "aws_security_group_rule" "pub_tx_ipv4" {
-  security_group_id = aws_security_group.public.id
+  security_group_id = data.aws_security_group.public.id
   type              = "egress"
   protocol          = -1  # all
   from_port         = 0   # ignored
@@ -31,7 +64,7 @@ resource "aws_security_group_rule" "pub_tx_ipv4" {
 }
 
 resource "aws_security_group_rule" "pub_tx_ipv6" {
-  security_group_id = aws_security_group.public.id
+  security_group_id = data.aws_security_group.public.id
   type              = "egress"
   protocol          = -1  # all
   from_port         = 0   # ignored
@@ -40,7 +73,7 @@ resource "aws_security_group_rule" "pub_tx_ipv6" {
 }
 
 resource "aws_security_group_rule" "priv_tx_ipv4" {
-  security_group_id = aws_security_group.private.id
+  security_group_id = data.aws_security_group.private.id
   type              = "egress"
   protocol          = -1  # all
   from_port         = 0   # ignored
@@ -49,7 +82,7 @@ resource "aws_security_group_rule" "priv_tx_ipv4" {
 }
 
 resource "aws_security_group_rule" "priv_tx_ipv6" {
-  security_group_id = aws_security_group.private.id
+  security_group_id = data.aws_security_group.private.id
   type              = "egress"
   protocol          = -1  # all
   from_port         = 0   # ignored
@@ -58,7 +91,7 @@ resource "aws_security_group_rule" "priv_tx_ipv6" {
 }
 
 resource "aws_security_group_rule" "sec_tx_ipv4" {
-  security_group_id = aws_security_group.secure.id
+  security_group_id = data.aws_security_group.secure.id
   type              = "egress"
   protocol          = -1  # all
   from_port         = 0   # ignored
@@ -67,7 +100,7 @@ resource "aws_security_group_rule" "sec_tx_ipv4" {
 }
 
 resource "aws_security_group_rule" "sec_tx_ipv6" {
-  security_group_id = aws_security_group.secure.id
+  security_group_id = data.aws_security_group.secure.id
   type              = "egress"
   protocol          = -1  # all
   from_port         = 0   # ignored
@@ -84,7 +117,7 @@ resource "aws_security_group_rule" "sec_tx_ipv6" {
 */
 
 resource "aws_security_group_rule" "pub_rx_self" {
-  security_group_id = aws_security_group.public.id
+  security_group_id = data.aws_security_group.public.id
   type              = "ingress"
   protocol          = -1  # all
   from_port         = 0   # ignored
@@ -93,7 +126,7 @@ resource "aws_security_group_rule" "pub_rx_self" {
 }
 
 resource "aws_security_group_rule" "priv_rx_self" {
-  security_group_id = aws_security_group.private.id
+  security_group_id = data.aws_security_group.private.id
   type              = "ingress"
   protocol          = -1  # all
   from_port         = 0   # ignored
@@ -102,7 +135,7 @@ resource "aws_security_group_rule" "priv_rx_self" {
 }
 
 resource "aws_security_group_rule" "sec_rx_self" {
-  security_group_id = aws_security_group.secure.id
+  security_group_id = data.aws_security_group.secure.id
   type              = "ingress"
   protocol          = -1  # all
   from_port         = 0   # ignored
@@ -119,39 +152,39 @@ resource "aws_security_group_rule" "sec_rx_self" {
 */
 
 resource "aws_security_group_rule" "pub_rx_priv" {
-  security_group_id        = aws_security_group.public.id
+  security_group_id        = data.aws_security_group.public.id
   type                     = "ingress"
   protocol                 = -1  # all
   from_port                = 0   # ignored
   to_port                  = 0   # ignored
-  source_security_group_id = aws_security_group.private.id
+  source_security_group_id = data.aws_security_group.private.id
 }
 
 resource "aws_security_group_rule" "priv_rx_pub" {
-  security_group_id        = aws_security_group.private.id
+  security_group_id        = data.aws_security_group.private.id
   type                     = "ingress"
   protocol                 = -1  # all
   from_port                = 0   # ignored
   to_port                  = 0   # ignored
-  source_security_group_id = aws_security_group.public.id
+  source_security_group_id = data.aws_security_group.public.id
 }
 
 resource "aws_security_group_rule" "priv_rx_sec" {
-  security_group_id        = aws_security_group.private.id
+  security_group_id        = data.aws_security_group.private.id
   type                     = "ingress"
   protocol                 = -1  # all
   from_port                = 0   # ignored
   to_port                  = 0   # ignored
-  source_security_group_id = aws_security_group.secure.id
+  source_security_group_id = data.aws_security_group.secure.id
 }
 
 resource "aws_security_group_rule" "sec_rx_priv" {
-  security_group_id        = aws_security_group.secure.id
+  security_group_id        = data.aws_security_group.secure.id
   type                     = "ingress"
   protocol                 = -1  # all
   from_port                = 0   # ignored
   to_port                  = 0   # ignored
-  source_security_group_id = aws_security_group.private.id
+  source_security_group_id = data.aws_security_group.private.id
 }
 
 /*
@@ -164,7 +197,7 @@ resource "aws_security_group_rule" "sec_rx_priv" {
 */
 
 resource "aws_security_group_rule" "pub_rx_icmpv4" {
-  security_group_id = aws_security_group.public.id
+  security_group_id = data.aws_security_group.public.id
   type              = "ingress"
   protocol          = "icmp"  # 1
   from_port         = -1      # all
@@ -173,7 +206,7 @@ resource "aws_security_group_rule" "pub_rx_icmpv4" {
 }
 
 resource "aws_security_group_rule" "pub_rx_icmpv6" {
-  security_group_id = aws_security_group.public.id
+  security_group_id = data.aws_security_group.public.id
   type              = "ingress"
   protocol          = 58  # icmpv6
   from_port         = -1  # all
@@ -182,7 +215,7 @@ resource "aws_security_group_rule" "pub_rx_icmpv6" {
 }
 
 resource "aws_security_group_rule" "priv_rx_icmpv4" {
-  security_group_id = aws_security_group.private.id
+  security_group_id = data.aws_security_group.private.id
   type              = "ingress"
   protocol          = "icmp"  # 1
   from_port         = -1      # all
@@ -191,7 +224,7 @@ resource "aws_security_group_rule" "priv_rx_icmpv4" {
 }
 
 resource "aws_security_group_rule" "priv_rx_icmpv6" {
-  security_group_id = aws_security_group.private.id
+  security_group_id = data.aws_security_group.private.id
   type              = "ingress"
   protocol          = 58  # icmpv6
   from_port         = -1  # all
@@ -200,7 +233,7 @@ resource "aws_security_group_rule" "priv_rx_icmpv6" {
 }
 
 resource "aws_security_group_rule" "sec_rx_icmpv4" {
-  security_group_id = aws_security_group.secure.id
+  security_group_id = data.aws_security_group.secure.id
   type              = "ingress"
   protocol          = "icmp"  # 1
   from_port         = -1      # all
@@ -209,7 +242,7 @@ resource "aws_security_group_rule" "sec_rx_icmpv4" {
 }
 
 resource "aws_security_group_rule" "sec_rx_icmpv6" {
-  security_group_id = aws_security_group.secure.id
+  security_group_id = data.aws_security_group.secure.id
   type              = "ingress"
   protocol          = 58  # icmpv6
   from_port         = -1  # all
@@ -227,7 +260,7 @@ resource "aws_security_group_rule" "sec_rx_icmpv6" {
 */
 
 resource "aws_security_group_rule" "pub_rx_https_ipv4" {
-  security_group_id = aws_security_group.public.id
+  security_group_id = data.aws_security_group.public.id
   type              = "ingress"
   protocol          = "tcp"  # 6
   from_port         = 443    # https
@@ -236,7 +269,7 @@ resource "aws_security_group_rule" "pub_rx_https_ipv4" {
 }
 
 resource "aws_security_group_rule" "pub_rx_https_ipv6" {
-  security_group_id = aws_security_group.public.id
+  security_group_id = data.aws_security_group.public.id
   type              = "ingress"
   protocol          = "tcp"  # 6
   from_port         = 443    # https
@@ -245,7 +278,7 @@ resource "aws_security_group_rule" "pub_rx_https_ipv6" {
 }
 
 resource "aws_security_group_rule" "priv_rx_https_ipv4" {
-  security_group_id = aws_security_group.private.id
+  security_group_id = data.aws_security_group.private.id
   type              = "ingress"
   protocol          = "tcp"  # 6
   from_port         = 443    # https
@@ -254,7 +287,7 @@ resource "aws_security_group_rule" "priv_rx_https_ipv4" {
 }
 
 resource "aws_security_group_rule" "priv_rx_https_ipv6" {
-  security_group_id = aws_security_group.private.id
+  security_group_id = data.aws_security_group.private.id
   type              = "ingress"
   protocol          = "tcp"  # 6
   from_port         = 443    # https
@@ -263,7 +296,7 @@ resource "aws_security_group_rule" "priv_rx_https_ipv6" {
 }
 
 resource "aws_security_group_rule" "sec_rx_https_ipv4" {
-  security_group_id = aws_security_group.secure.id
+  security_group_id = data.aws_security_group.secure.id
   type              = "ingress"
   protocol          = "tcp"  # 6
   from_port         = 443    # https
@@ -272,7 +305,7 @@ resource "aws_security_group_rule" "sec_rx_https_ipv4" {
 }
 
 resource "aws_security_group_rule" "sec_rx_https_ipv6" {
-  security_group_id = aws_security_group.secure.id
+  security_group_id = data.aws_security_group.secure.id
   type              = "ingress"
   protocol          = "tcp"  # 6
   from_port         = 443    # https
@@ -289,7 +322,7 @@ resource "aws_security_group_rule" "sec_rx_https_ipv6" {
 */
 
 resource "aws_security_group_rule" "pub_rx_ssh_ipv4" {
-  security_group_id = aws_security_group.public.id
+  security_group_id = data.aws_security_group.public.id
   type              = "ingress"
   protocol          = "tcp"  # 6
   from_port         = 22     # ssh
@@ -298,7 +331,7 @@ resource "aws_security_group_rule" "pub_rx_ssh_ipv4" {
 }
 
 resource "aws_security_group_rule" "pub_rx_ssh_ipv6" {
-  security_group_id = aws_security_group.public.id
+  security_group_id = data.aws_security_group.public.id
   type              = "ingress"
   protocol          = "tcp"  # 6
   from_port         = 22     # ssh
@@ -307,7 +340,7 @@ resource "aws_security_group_rule" "pub_rx_ssh_ipv6" {
 }
 
 resource "aws_security_group_rule" "priv_rx_ssh_ipv4" {
-  security_group_id = aws_security_group.private.id
+  security_group_id = data.aws_security_group.private.id
   type              = "ingress"
   protocol          = "tcp"  # 6
   from_port         = 22     # ssh
@@ -316,7 +349,7 @@ resource "aws_security_group_rule" "priv_rx_ssh_ipv4" {
 }
 
 resource "aws_security_group_rule" "priv_rx_ssh_ipv6" {
-  security_group_id = aws_security_group.private.id
+  security_group_id = data.aws_security_group.private.id
   type              = "ingress"
   protocol          = "tcp"  # 6
   from_port         = 22     # ssh
@@ -325,7 +358,7 @@ resource "aws_security_group_rule" "priv_rx_ssh_ipv6" {
 }
 
 resource "aws_security_group_rule" "sec_rx_ssh_ipv4" {
-  security_group_id = aws_security_group.secure.id
+  security_group_id = data.aws_security_group.secure.id
   type              = "ingress"
   protocol          = "tcp"  # 6
   from_port         = 22     # ssh
@@ -334,7 +367,7 @@ resource "aws_security_group_rule" "sec_rx_ssh_ipv4" {
 }
 
 resource "aws_security_group_rule" "sec_rx_ssh_ipv6" {
-  security_group_id = aws_security_group.secure.id
+  security_group_id = data.aws_security_group.secure.id
   type              = "ingress"
   protocol          = "tcp"  # 6
   from_port         = 22     # ssh

@@ -11,3 +11,9 @@ variable "region" {
   description = "AWS region in which to launch all non-global resources"
 # default     = "ca-central-1"
 }
+
+variable "basename" {
+  type        = string
+  description = "Tag prefix to use for all resources"
+# default     = "test"
+}
