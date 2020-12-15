@@ -12,7 +12,7 @@
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_acl_rule
 
 resource "aws_network_acl_rule" "pub_rx_ephem_udp_ipv4" {
-  network_acl_id = data.aws_network_acls.public.ids
+  network_acl_id = join("", data.aws_network_acls.public.ids)
   rule_number    = 6211
   egress         = false
   rule_action    = "allow"
@@ -23,7 +23,7 @@ resource "aws_network_acl_rule" "pub_rx_ephem_udp_ipv4" {
 }
 
 resource "aws_network_acl_rule" "pub_rx_ephem_udp_ipv6" {
-  network_acl_id  = data.aws_network_acls.public.ids
+  network_acl_id  = join("", data.aws_network_acls.public.ids)
   rule_number     = 6212
   egress          = false
   rule_action     = "allow"
@@ -34,7 +34,7 @@ resource "aws_network_acl_rule" "pub_rx_ephem_udp_ipv6" {
 }
 
 resource "aws_network_acl_rule" "pub_tx_ephem_udp_ipv4" {
-  network_acl_id = data.aws_network_acls.public.ids
+  network_acl_id = join("", data.aws_network_acls.public.ids)
   rule_number    = 7211
   egress         = true
   rule_action    = "allow"
@@ -45,7 +45,7 @@ resource "aws_network_acl_rule" "pub_tx_ephem_udp_ipv4" {
 }
 
 resource "aws_network_acl_rule" "pub_tx_ephem_udp_ipv6" {
-  network_acl_id  = data.aws_network_acls.public.ids
+  network_acl_id  = join("", data.aws_network_acls.public.ids)
   rule_number     = 7212
   egress          = true
   rule_action     = "allow"
@@ -56,7 +56,7 @@ resource "aws_network_acl_rule" "pub_tx_ephem_udp_ipv6" {
 }
 
 resource "aws_network_acl_rule" "priv_rx_ephem_udp_ipv4" {
-  network_acl_id = data.aws_network_acls.private.ids
+  network_acl_id = join("", data.aws_network_acls.private.ids)
   rule_number    = 8211
   egress         = false
   rule_action    = "allow"
@@ -67,7 +67,7 @@ resource "aws_network_acl_rule" "priv_rx_ephem_udp_ipv4" {
 }
 
 resource "aws_network_acl_rule" "priv_rx_ephem_udp_ipv6" {
-  network_acl_id  = data.aws_network_acls.private.ids
+  network_acl_id  = join("", data.aws_network_acls.private.ids)
   rule_number     = 8212
   egress          = false
   rule_action     = "allow"
@@ -78,7 +78,7 @@ resource "aws_network_acl_rule" "priv_rx_ephem_udp_ipv6" {
 }
 
 resource "aws_network_acl_rule" "priv_tx_ephem_udp_ipv4" {
-  network_acl_id = data.aws_network_acls.private.ids
+  network_acl_id = join("", data.aws_network_acls.private.ids)
   rule_number    = 9211
   egress         = true
   rule_action    = "allow"
@@ -89,7 +89,7 @@ resource "aws_network_acl_rule" "priv_tx_ephem_udp_ipv4" {
 }
 
 resource "aws_network_acl_rule" "priv_tx_ephem_udp_ipv6" {
-  network_acl_id  = data.aws_network_acls.private.ids
+  network_acl_id  = join("", data.aws_network_acls.private.ids)
   rule_number     = 9212
   egress          = true
   rule_action     = "allow"
@@ -100,7 +100,7 @@ resource "aws_network_acl_rule" "priv_tx_ephem_udp_ipv6" {
 }
 
 resource "aws_network_acl_rule" "sec_rx_ephem_udp_ipv4" {
-  network_acl_id = data.aws_network_acls.secure.ids
+  network_acl_id = join("", data.aws_network_acls.secure.ids)
   rule_number    = 10211
   egress         = false
   rule_action    = "allow"
@@ -111,7 +111,7 @@ resource "aws_network_acl_rule" "sec_rx_ephem_udp_ipv4" {
 }
 
 resource "aws_network_acl_rule" "sec_rx_ephem_udp_ipv6" {
-  network_acl_id  = data.aws_network_acls.secure.ids
+  network_acl_id  = join("", data.aws_network_acls.secure.ids)
   rule_number     = 10212
   egress          = false
   rule_action     = "allow"
@@ -122,7 +122,7 @@ resource "aws_network_acl_rule" "sec_rx_ephem_udp_ipv6" {
 }
 
 resource "aws_network_acl_rule" "sec_tx_ephem_udp_ipv4" {
-  network_acl_id = data.aws_network_acls.secure.ids
+  network_acl_id = join("", data.aws_network_acls.secure.ids)
   rule_number    = 11211
   egress         = true
   rule_action    = "allow"
@@ -133,7 +133,7 @@ resource "aws_network_acl_rule" "sec_tx_ephem_udp_ipv4" {
 }
 
 resource "aws_network_acl_rule" "sec_tx_ephem_udp_ipv6" {
-  network_acl_id  = data.aws_network_acls.secure.ids
+  network_acl_id  = join("", data.aws_network_acls.secure.ids)
   rule_number     = 11212
   egress          = true
   rule_action     = "allow"
