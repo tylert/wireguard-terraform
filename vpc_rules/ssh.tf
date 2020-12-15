@@ -10,7 +10,7 @@
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
 
 resource "aws_network_acl_rule" "pub_rx_ssh_ipv4" {
-  network_acl_id = data.aws_network_acls.public.id
+  network_acl_id = data.aws_network_acls.public.ids
   rule_number    = 6401
   egress         = false
   rule_action    = "allow"
@@ -21,7 +21,7 @@ resource "aws_network_acl_rule" "pub_rx_ssh_ipv4" {
 }
 
 resource "aws_network_acl_rule" "pub_rx_ssh_ipv6" {
-  network_acl_id  = data.aws_network_acls.public.id
+  network_acl_id  = data.aws_network_acls.public.ids
   rule_number     = 6402
   egress          = false
   rule_action     = "allow"
@@ -32,7 +32,7 @@ resource "aws_network_acl_rule" "pub_rx_ssh_ipv6" {
 }
 
 resource "aws_network_acl_rule" "pub_tx_ssh_ipv4" {
-  network_acl_id = data.aws_network_acls.public.id
+  network_acl_id = data.aws_network_acls.public.ids
   rule_number    = 7401
   egress         = true
   rule_action    = "allow"
@@ -43,7 +43,7 @@ resource "aws_network_acl_rule" "pub_tx_ssh_ipv4" {
 }
 
 resource "aws_network_acl_rule" "pub_tx_ssh_ipv6" {
-  network_acl_id  = data.aws_network_acls.public.id
+  network_acl_id  = data.aws_network_acls.public.ids
   rule_number     = 7402
   egress          = true
   rule_action     = "allow"
@@ -54,7 +54,7 @@ resource "aws_network_acl_rule" "pub_tx_ssh_ipv6" {
 }
 
 resource "aws_network_acl_rule" "priv_rx_ssh_ipv4" {
-  network_acl_id = data.aws_network_acls.private.id
+  network_acl_id = data.aws_network_acls.private.ids
   rule_number    = 8401
   egress         = false
   rule_action    = "allow"
@@ -65,7 +65,7 @@ resource "aws_network_acl_rule" "priv_rx_ssh_ipv4" {
 }
 
 resource "aws_network_acl_rule" "priv_rx_ssh_ipv6" {
-  network_acl_id  = data.aws_network_acls.private.id
+  network_acl_id  = data.aws_network_acls.private.ids
   rule_number     = 8402
   egress          = false
   rule_action     = "allow"
@@ -76,7 +76,7 @@ resource "aws_network_acl_rule" "priv_rx_ssh_ipv6" {
 }
 
 resource "aws_network_acl_rule" "priv_tx_ssh_ipv4" {
-  network_acl_id = data.aws_network_acls.private.id
+  network_acl_id = data.aws_network_acls.private.ids
   rule_number    = 9401
   egress         = true
   rule_action    = "allow"
@@ -87,7 +87,7 @@ resource "aws_network_acl_rule" "priv_tx_ssh_ipv4" {
 }
 
 resource "aws_network_acl_rule" "priv_tx_ssh_ipv6" {
-  network_acl_id  = data.aws_network_acls.private.id
+  network_acl_id  = data.aws_network_acls.private.ids
   rule_number     = 9402
   egress          = true
   rule_action     = "allow"
@@ -98,7 +98,7 @@ resource "aws_network_acl_rule" "priv_tx_ssh_ipv6" {
 }
 
 resource "aws_network_acl_rule" "sec_rx_ssh_ipv4" {
-  network_acl_id = data.aws_network_acls.secure.id
+  network_acl_id = data.aws_network_acls.secure.ids
   rule_number    = 10401
   egress         = false
   rule_action    = "allow"
@@ -109,7 +109,7 @@ resource "aws_network_acl_rule" "sec_rx_ssh_ipv4" {
 }
 
 resource "aws_network_acl_rule" "sec_rx_ssh_ipv6" {
-  network_acl_id  = data.aws_network_acls.secure.id
+  network_acl_id  = data.aws_network_acls.secure.ids
   rule_number     = 10402
   egress          = false
   rule_action     = "allow"
@@ -120,7 +120,7 @@ resource "aws_network_acl_rule" "sec_rx_ssh_ipv6" {
 }
 
 resource "aws_network_acl_rule" "sec_tx_ssh_ipv4" {
-  network_acl_id = data.aws_network_acls.secure.id
+  network_acl_id = data.aws_network_acls.secure.ids
   rule_number    = 11401
   egress         = true
   rule_action    = "allow"
@@ -131,7 +131,7 @@ resource "aws_network_acl_rule" "sec_tx_ssh_ipv4" {
 }
 
 resource "aws_network_acl_rule" "sec_tx_ssh_ipv6" {
-  network_acl_id  = data.aws_network_acls.secure.id
+  network_acl_id  = data.aws_network_acls.secure.ids
   rule_number     = 11402
   egress          = true
   rule_action     = "allow"

@@ -64,7 +64,7 @@ resource "aws_default_security_group" "main" {
 
 resource "aws_security_group" "public" {
   vpc_id      = aws_vpc.main.id
-  name        = "public ${var.basename}"  # Group Name / supports name_prefix
+  name        = "${var.basename} public"  # Group Name / supports name_prefix
   description = "public vpc-${var.basename} security group"
 
   tags = {
@@ -83,7 +83,7 @@ resource "aws_security_group" "public" {
 
 resource "aws_security_group" "private" {
   vpc_id      = aws_vpc.main.id
-  name        = "private ${var.basename}"  # Group Name / supports name_prefix
+  name        = "${var.basename} private"  # Group Name / supports name_prefix
   description = "private vpc-${var.basename} security group"
 
   tags = {
@@ -100,7 +100,7 @@ resource "aws_security_group" "private" {
 
 resource "aws_security_group" "secure" {
   vpc_id      = aws_vpc.main.id
-  name        = "secure ${var.basename}"  # Group Name / supports name_prefix
+  name        = "${var.basename} secure"  # Group Name / supports name_prefix
   description = "secure vpc-${var.basename} security group"
 
   tags = {
