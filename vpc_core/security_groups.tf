@@ -11,12 +11,11 @@
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
 
 /*
-                                             _       __
-                         ___  __ _        __| | ___ / _|
-                        / __|/ _` |_____ / _` |/ _ \ |_
-                        \__ \ (_| |_____| (_| |  __/  _|
-                        |___/\__, |      \__,_|\___|_|
-                             |___/
+                            _       __             _ _
+                         __| | ___ / _| __ _ _   _| | |_
+                        / _` |/ _ \ |_ / _` | | | | | __|
+                       | (_| |  __/  _| (_| | |_| | | |_
+                        \__,_|\___|_|  \__,_|\__,_|_|\__|
 */
 
 # Creating a new VPC forces the creation of a new default SG.
@@ -55,18 +54,18 @@ resource "aws_default_security_group" "main" {
 }
 
 /*
-                                                   _
-                       ___  __ _       _ __  _   _| |__
-                      / __|/ _` |_____| '_ \| | | | '_ \
-                      \__ \ (_| |_____| |_) | |_| | |_) |
-                      |___/\__, |     | .__/ \__,_|_.__/
-                           |___/      |_|
+                                       _     _ _
+                           _ __  _   _| |__ | (_) ___
+                          | '_ \| | | | '_ \| | |/ __|
+                          | |_) | |_| | |_) | | | (__
+                          | .__/ \__,_|_.__/|_|_|\___|
+                          |_|
 */
 
 resource "aws_security_group" "public" {
   vpc_id      = aws_vpc.main.id
-  name        = "sg-${var.basename}-public"  # Group Name / supports name_prefix
-  description = "sg-${var.basename}-public"
+  name        = "public ${var.basename}"  # Group Name / supports name_prefix
+  description = "public vpc-${var.basename} security group"
 
   tags = {
     Name = "sg-${var.basename}-public"
@@ -74,18 +73,18 @@ resource "aws_security_group" "public" {
 }
 
 /*
-                                                  _
-                       ___  __ _       _ __  _ __(_)_   __
-                      / __|/ _` |_____| '_ \| '__| \ \ / /
-                      \__ \ (_| |_____| |_) | |  | |\ V /
-                      |___/\__, |     | .__/|_|  |_| \_/
-                           |___/      |_|
+                                   _            _
+                        _ __  _ __(_)_   ____ _| |_ ___
+                       | '_ \| '__| \ \ / / _` | __/ _ \
+                       | |_) | |  | |\ V / (_| | ||  __/
+                       | .__/|_|  |_| \_/ \__,_|\__\___|
+                       |_|
 */
 
 resource "aws_security_group" "private" {
   vpc_id      = aws_vpc.main.id
-  name        = "sg-${var.basename}-private"  # Group Name / supports name_prefix
-  description = "sg-${var.basename}-private"
+  name        = "private ${var.basename}"  # Group Name / supports name_prefix
+  description = "private vpc-${var.basename} security group"
 
   tags = {
     Name = "sg-${var.basename}-private"
@@ -93,17 +92,16 @@ resource "aws_security_group" "private" {
 }
 
 /*
-                         ___  __ _       ___  ___  ___
-                        / __|/ _` |_____/ __|/ _ \/ __|
-                        \__ \ (_| |_____\__ \  __/ (__
-                        |___/\__, |     |___/\___|\___|
-                             |___/
+                          ___  ___  ___ _   _ _ __ ___
+                         / __|/ _ \/ __| | | | '__/ _ \
+                         \__ \  __/ (__| |_| | | |  __/
+                         |___/\___|\___|\__,_|_|  \___|
 */
 
 resource "aws_security_group" "secure" {
   vpc_id      = aws_vpc.main.id
-  name        = "sg-${var.basename}-secure"  # Group Name / supports name_prefix
-  description = "sg-${var.basename}-secure"
+  name        = "secure ${var.basename}"  # Group Name / supports name_prefix
+  description = "secure vpc-${var.basename} security group"
 
   tags = {
     Name = "sg-${var.basename}-secure"

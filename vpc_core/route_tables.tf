@@ -11,11 +11,11 @@
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table_association
 
 /*
-                           _   _               _       __
-                      _ __| |_| |__         __| | ___ / _|
-                     | '__| __| '_ \ _____ / _` |/ _ \ |_
-                     | |  | |_| |_) |_____| (_| |  __/  _|
-                     |_|   \__|_.__/       \__,_|\___|_|
+                            _       __             _ _
+                         __| | ___ / _| __ _ _   _| | |_
+                        / _` |/ _ \ |_ / _` | | | | | __|
+                       | (_| |  __/  _| (_| | |_| | | |_
+                        \__,_|\___|_|  \__,_|\__,_|_|\__|
 */
 
 # Creating a new VPC forces the creation of a new default route table.
@@ -31,12 +31,12 @@ resource "aws_default_route_table" "default" {
 }
 
 /*
-                          _   _                       _
-                     _ __| |_| |__        _ __  _   _| |__
-                    | '__| __| '_ \ _____| '_ \| | | | '_ \
-                    | |  | |_| |_) |_____| |_) | |_| | |_) |
-                    |_|   \__|_.__/      | .__/ \__,_|_.__/
-                                         |_|
+                                       _     _ _
+                           _ __  _   _| |__ | (_) ___
+                          | '_ \| | | | '_ \| | |/ __|
+                          | |_) | |_| | |_) | | | (__
+                          | .__/ \__,_|_.__/|_|_|\___|
+                          |_|
 */
 
 # We only really need a single public route table since internet gateways are
@@ -60,12 +60,12 @@ resource "aws_route_table_association" "public_az" {
 }
 
 /*
-                         _   _                      _
-                    _ __| |_| |__        _ __  _ __(_)_   __
-                   | '__| __| '_ \ _____| '_ \| '__| \ \ / /
-                   | |  | |_| |_) |_____| |_) | |  | |\ V /
-                   |_|   \__|_.__/      | .__/|_|  |_| \_/
-                                        |_|
+                                   _            _
+                        _ __  _ __(_)_   ____ _| |_ ___
+                       | '_ \| '__| \ \ / / _` | __/ _ \
+                       | |_) | |  | |\ V / (_| | ||  __/
+                       | .__/|_|  |_| \_/ \__,_|\__\___|
+                       |_|
 */
 
 # We need to create a private route table for each private subnet since each
@@ -88,11 +88,10 @@ resource "aws_route_table_association" "private_az" {
 }
 
 /*
-                            _   _
-                       _ __| |_| |__        ___  ___  ___
-                      | '__| __| '_ \ _____/ __|/ _ \/ __|
-                      | |  | |_| |_) |_____\__ \  __/ (__
-                      |_|   \__|_.__/      |___/\___|\___|
+                          ___  ___  ___ _   _ _ __ ___
+                         / __|/ _ \/ __| | | | '__/ _ \
+                         \__ \  __/ (__| |_| | | |  __/
+                         |___/\___|\___|\__,_|_|  \___|
 */
 
 resource "aws_route_table" "secure_az" {
