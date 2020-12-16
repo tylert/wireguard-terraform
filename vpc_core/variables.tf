@@ -20,14 +20,20 @@ variable "basename" {
 
 variable "how_many_azs" {
   type        = number
-  description = "Number of availability zones to use in the desired region"
+  description = "How many availability zones to use in the desired region"
   default     = 3
 }
 
 variable "how_many_natgws" {
   type        = number
-  description = "Number of NAT gateways to create across the available AZs"
+  description = "How many NAT gateways to create across the available AZs"
   default     = 0
+}
+
+variable "subnet_bits" {
+  type        = number
+  description = "Bits to carve off for each IPv4 subnet range from the main VPC CIDR block"
+  default     = 6
 }
 
 variable "vpc_cidr_block" {
