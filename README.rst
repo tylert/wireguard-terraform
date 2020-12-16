@@ -1,12 +1,48 @@
 ::
 
-    pushd ${NAME_OF_MODULE}
-    terraform init
-    terraform plan -var-file=../test.tfvars -out=foop
-    terraform apply foop
-    # ...
-    terraform destroy -var-file=../test.tfvars
+    # Create everything
+    pushd vpc_core
+    terraform init \
+        -input=false
+    terraform plan \
+        -input=false \
+        -out=myplan-myenv1 \
+        -var=basename=myenv1 \
+        -var=region=ca-central-1 \
+        -var=vpc_cidr_block=10.0.0.0/16
+    terraform apply \
+        -input=false \
+        myplan-myenv1
     popd
+    pushd vpc_rules
+    terraform init \
+        -input=false
+    terraform plan \
+        -input=false \
+        -out=myplan-myenv1 \
+        -var=basename=myenv1 \
+        -var=region=ca-central-1
+    terraform apply \
+        -input=false \
+        myplan-myenv1
+    popd
+
+    # Destroy everything
+    pushd vpc_rules
+    terraform destroy \
+        -input=false \
+        -var=basename=myenv1 \
+        -var=region=ca-central-1
+    popd
+    pushd vpc_core
+    terraform destroy \
+        -input=false \
+        -var=basename=myenv1 \
+        -var=region=ca-central-1 \
+        -var=vpc_cidr_block=10.0.0.0/16
+    popd
+
+* https://learn.hashicorp.com/tutorials/terraform/automate-terraform?in=terraform/automation
 
 
 Rule Numbers (1 to 32766)
