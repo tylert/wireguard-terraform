@@ -8,8 +8,8 @@
 
 # VPCs are currently limited to a maximum of /16 and a minimum of /28 for IPv4.
 # Assigned IPv6 ranges are currently fixed at /56 for VPCs and /64 for subnets.
-# We currently hard-code carving off 2^6 for each IPv4 subnet and 2^8 for each IPv6 subnet.
-# /16 + 6 => /22 for IPv4, /56 + 8 => /64 for IPv6
+# The default sizes are /16 + 6 => /22 for IPv4 and /56 + 8 => /64 for IPv6.
+
 # Subnet mask /16 => 2^(32-16) = 2^16 = 65536 hosts
 # Subnet mask /22 => 2^(32-22) = 2^10 = 1024 hosts
 # Subnet mask /28 => 2^(32-28) = 2^4  = 16 hosts

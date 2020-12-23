@@ -18,8 +18,8 @@
                         \__,_|\___|_|  \__,_|\__,_|_|\__|
 */
 
-# Creating a new VPC forces the creation of a new default route table.
-# We want to tag it with something that indicates which VPC it belongs to.
+# Creating a new VPC forces the creation of a new default RTB.
+# We want to tag it with something that indicates which VPC it belongs with.
 # We will simply ignore this resource as it is not required for our use case.
 
 resource "aws_default_route_table" "default" {

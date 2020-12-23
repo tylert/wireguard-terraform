@@ -30,7 +30,7 @@ resource "aws_s3_bucket" "tf_state" {
   bucket        = var.state_bucket_name  # supports bucket_prefix
   acl           = "private"
   force_destroy = false
-  region        = var.region
+  region        = var.aws_region
 
   versioning {
     enabled = true

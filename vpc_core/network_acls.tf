@@ -18,7 +18,7 @@
 */
 
 # Creating a new VPC forces the creation of a new default NACL.
-# We want to tag it with something that indicates which VPC it belongs to.
+# We want to tag it with something that indicates which VPC it belongs with.
 # However, when you try to tag it with Terraform, the rules get flushed.
 # Just put back the rules that got flushed so we're left with a stock one.
 # We will simply ignore this resource as it is not required for our use case.
@@ -68,7 +68,11 @@ resource "aws_default_network_acl" "main" {
   }
 }
 
-resource "aws_default_network_acl" "main_empty" {
+# This resource can be selected if you are working under a restriction to not
+# have any rules in your default NACL even if you aren't using it but still
+# want to tag the resource to denote which VPC it belongs with.
+
+resource "aws_default_network_acl" "main_tainted" {
   count                  = false == var.preserve_default_rules ? 1 : 0
   default_network_acl_id = aws_vpc.main.default_network_acl_id
 
