@@ -30,6 +30,12 @@ variable "how_many_natgws" {
   default     = 0
 }
 
+variable "preserve_default_rules" {
+  type        = bool
+  description = "Preserve the default NACL and SG rules when these resources get tagged"
+  default     = true
+}
+
 variable "subnet_bits" {
   type        = number
   description = "Bits to carve off for each IPv4 subnet range from the main VPC CIDR block"

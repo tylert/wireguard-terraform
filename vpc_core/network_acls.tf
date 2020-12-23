@@ -24,6 +24,7 @@
 # We will simply ignore this resource as it is not required for our use case.
 
 resource "aws_default_network_acl" "main" {
+  count                  = true == var.preserve_default_rules ? 1 : 0
   default_network_acl_id = aws_vpc.main.default_network_acl_id
 
   ingress {
@@ -61,6 +62,15 @@ resource "aws_default_network_acl" "main" {
     to_port         = 0   # ignored
     ipv6_cidr_block = "::/0"
   }
+
+  tags = {
+    Name = "acl-${var.basename}-default"
+  }
+}
+
+resource "aws_default_network_acl" "main_empty" {
+  count                  = false == var.preserve_default_rules ? 1 : 0
+  default_network_acl_id = aws_vpc.main.default_network_acl_id
 
   tags = {
     Name = "acl-${var.basename}-default"

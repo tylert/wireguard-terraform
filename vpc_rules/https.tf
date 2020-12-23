@@ -1,9 +1,9 @@
 /*
- _     _   _
-| |__ | |_| |_ _ __  ___
-| '_ \| __| __| '_ \/ __|
-| | | | |_| |_| |_) \__ \
-|_| |_|\__|\__| .__/|___/
+ _     _   _               _              __  __ _
+| |__ | |_| |_ _ __  ___  | |_ _ __ __ _ / _|/ _(_) ___
+| '_ \| __| __| '_ \/ __| | __| '__/ _` | |_| |_| |/ __|
+| | | | |_| |_| |_) \__ \ | |_| | | (_| |  _|  _| | (__
+|_| |_|\__|\__| .__/|___/  \__|_|  \__,_|_| |_| |_|\___|
               |_|
 */
 
@@ -20,7 +20,7 @@
 
 resource "aws_network_acl_rule" "pub_rx_https_ipv4" {
   network_acl_id = join("", data.aws_network_acls.public.ids)
-  rule_number    = 6301
+  rule_number    = 17301
   egress         = false
   rule_action    = "allow"
   protocol       = "tcp"  # 6
@@ -31,7 +31,7 @@ resource "aws_network_acl_rule" "pub_rx_https_ipv4" {
 
 resource "aws_network_acl_rule" "pub_rx_https_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.public.ids)
-  rule_number     = 6302
+  rule_number     = 17302
   egress          = false
   rule_action     = "allow"
   protocol        = "tcp"  # 6
@@ -42,7 +42,7 @@ resource "aws_network_acl_rule" "pub_rx_https_ipv6" {
 
 resource "aws_network_acl_rule" "pub_tx_https_ipv4" {
   network_acl_id = join("", data.aws_network_acls.public.ids)
-  rule_number    = 7301
+  rule_number    = 18301
   egress         = true
   rule_action    = "allow"
   protocol       = "tcp"  # 6
@@ -53,7 +53,7 @@ resource "aws_network_acl_rule" "pub_tx_https_ipv4" {
 
 resource "aws_network_acl_rule" "pub_tx_https_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.public.ids)
-  rule_number     = 7302
+  rule_number     = 18302
   egress          = true
   rule_action     = "allow"
   protocol        = "tcp"  # 6
@@ -64,7 +64,7 @@ resource "aws_network_acl_rule" "pub_tx_https_ipv6" {
 
 resource "aws_network_acl_rule" "priv_rx_https_ipv4" {
   network_acl_id = join("", data.aws_network_acls.private.ids)
-  rule_number    = 8301
+  rule_number    = 19301
   egress         = false
   rule_action    = "allow"
   protocol       = "tcp"  # 6
@@ -75,7 +75,7 @@ resource "aws_network_acl_rule" "priv_rx_https_ipv4" {
 
 resource "aws_network_acl_rule" "priv_rx_https_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.private.ids)
-  rule_number     = 8302
+  rule_number     = 19302
   egress          = false
   rule_action     = "allow"
   protocol        = "tcp"  # 6
@@ -86,7 +86,7 @@ resource "aws_network_acl_rule" "priv_rx_https_ipv6" {
 
 resource "aws_network_acl_rule" "priv_tx_https_ipv4" {
   network_acl_id = join("", data.aws_network_acls.private.ids)
-  rule_number    = 9301
+  rule_number    = 20301
   egress         = true
   rule_action    = "allow"
   protocol       = "tcp"  # 6
@@ -97,7 +97,7 @@ resource "aws_network_acl_rule" "priv_tx_https_ipv4" {
 
 resource "aws_network_acl_rule" "priv_tx_https_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.private.ids)
-  rule_number     = 9302
+  rule_number     = 20302
   egress          = true
   rule_action     = "allow"
   protocol        = "tcp"  # 6
@@ -108,7 +108,7 @@ resource "aws_network_acl_rule" "priv_tx_https_ipv6" {
 
 resource "aws_network_acl_rule" "sec_rx_https_ipv4" {
   network_acl_id = join("", data.aws_network_acls.secure.ids)
-  rule_number    = 10301
+  rule_number    = 21301
   egress         = false
   rule_action    = "allow"
   protocol       = "tcp"  # 6
@@ -119,7 +119,7 @@ resource "aws_network_acl_rule" "sec_rx_https_ipv4" {
 
 resource "aws_network_acl_rule" "sec_rx_https_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.secure.ids)
-  rule_number     = 10302
+  rule_number     = 21302
   egress          = false
   rule_action     = "allow"
   protocol        = "tcp"  # 6
@@ -130,7 +130,7 @@ resource "aws_network_acl_rule" "sec_rx_https_ipv6" {
 
 resource "aws_network_acl_rule" "sec_tx_https_ipv4" {
   network_acl_id = join("", data.aws_network_acls.secure.ids)
-  rule_number    = 11301
+  rule_number    = 22301
   egress         = true
   rule_action    = "allow"
   protocol       = "tcp"  # 6
@@ -141,7 +141,7 @@ resource "aws_network_acl_rule" "sec_tx_https_ipv4" {
 
 resource "aws_network_acl_rule" "sec_tx_https_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.secure.ids)
-  rule_number     = 11302
+  rule_number     = 22302
   egress          = true
   rule_action     = "allow"
   protocol        = "tcp"  # 6

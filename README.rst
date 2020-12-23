@@ -43,35 +43,84 @@
     popd
 
 * https://learn.hashicorp.com/tutorials/terraform/automate-terraform?in=terraform/automation
+* https://github.com/fly-examples/rds-connector/blob/main/main.tf#L118-L180
 
 
-Rule Numbers (1 to 32766)
+Network ACLs
+------------
 
- 0xxx:  RFU public ingress
- 1xxx:  RFU public egress
- 2xxx:  RFU private ingress
- 3xxx:  RFU private egress
- 4xxx:  RFU secure ingress
- 5xxx:  RFU secure egress
+Allow traffic to/from our VPC CIDR to flow in/out.
 
- 6xxx:  general public ingress
- 7xxx:  general public egress
- 8xxx:  general private ingress
- 9xxx:  general private egress
-10xxx:  general secure ingress
-11xxx:  general secure egress
+Rule numbers can be assigned any values from 1 to 32766, inclusive.  This code
+reserves for "its own use" the entire rule number range from 16834 to 32766
+(2^14 to 2^15-2).  It is assumed that these rules are being added to an empty
+NACL resource.
 
-xx0Nx:  traffic within our VPC
-xx1Nx:  non-IP traffic (ICMP, IGMP)
-xx2Nx:  ephemeral ports (TCP, UDP)
-xx3Nx:  application services (HTTPS, HTTP, etc.)
-xx4Nx:  management services (SSH, VNC, RDP, etc.)
+Rule numbers 23xxx to 32xxx are RFU.
+Rule numbers xx5xx to xx9xx are RFU.
+Rule numbers xxxx3 to xxxx9 are RFU.
 
-xxxx1:  IPv4
-xxxx2:  IPv6
+ingress <-> RX = receive
+egress  <-> TX = transmit
+
+::
+
+    17xxx:  public ingress
+    18xxx:  public egress
+    19xxx:  private ingress
+    20xxx:  private egress
+    21xxx:  secure ingress
+    22xxx:  secure egress
+
+    xx0Nx:  traffic within our VPC
+    xx1Nx:  non-IP traffic (ICMP, IGMP, etc.)
+    xx2Nx:  L4 ephemeral ports (TCP, UDP, etc.)
+    xx3Nx:  application services (HTTPS, HTTP, etc.)
+    xx4Nx:  management services (SSH, VNC, RDP, etc.)
+
+    xxxx1:  IPv4
+    xxxx2:  IPv6
 
 
-Allow all outbound traffic to go anywhere from any subnets
-Allow all inbound traffic to freely pass between the "same-tier" subnets
-Allow all inbound traffic to freely pass between the "different-tier" subnets
-Allow all inbound ICMP, HTTPS, SSH traffic to freely-enter all subnets
+
+Security Groups
+---------------
+
+Allow all outbound traffic to go anywhere from any subnets.
+Allow all inbound traffic to freely pass between the "same-tier" subnets.
+Allow all inbound traffic to freely pass between the "different-tier" subnets.
+Allow all inbound ICMP, HTTPS, SSH traffic to freely-enter all subnets.
+
+
+TODO
+----
+
+https://www.terraform.io/docs/configuration/variables.html#custom-validation-rules
+^^^ for variables to make sure they are not too big or too small (e.g.:  AZ and NAT gw counts)???
+
+https://www.hashicorp.com/blog/terraform-0-12-conditional-operator-improvements#conditionally-omitted-arguments
+^^^ to select either NAT gws or NAT instances???
+
+https://registry.terraform.io/providers/hashicorp/random/latest/docs
+^^^ generate random strings for the basenames???
+
+
+Blocking Terraform Bugs
+-----------------------
+
+* https://github.com/hashicorp/terraform-provider-aws/issues/15982
+
+
+Minor Terraform Annoyances
+--------------------------
+
+* https://github.com/hashicorp/terraform-provider-aws/issues/11084  <-- CLOSED, PARTIAL-FIX
+* https://github.com/hashicorp/terraform-provider-aws/issues/11132  <-- OPEN
+* https://github.com/hashicorp/terraform-provider-aws/issues/16375  <-- OPEN, PR #16710
+* https://github.com/hashicorp/terraform-provider-aws/issues/16376  <-- OPEN
+* https://github.com/hashicorp/terraform-provider-aws/issues/16377  <-- OPEN, PR #16710
+* https://github.com/hashicorp/terraform/issues/4775  <-- CLOSED, NOT-FIXED
+* https://github.com/hashicorp/terraform/issues/8367  <-- OPEN
+* https://github.com/hashicorp/terraform/issues/13022  <-- OPEN
+* https://github.com/hashicorp/terraform/issues/14523  <-- OPEN
+* https://github.com/hashicorp/terraform/pull/13432  <-- CLOSED, NOT-MERGED

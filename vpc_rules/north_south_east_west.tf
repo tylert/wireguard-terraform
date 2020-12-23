@@ -11,7 +11,7 @@
 
 resource "aws_network_acl_rule" "pub_rx_vpc_ipv4" {
   network_acl_id = join("", data.aws_network_acls.public.ids)
-  rule_number    = 6001
+  rule_number    = 17001
   egress         = false
   rule_action    = "allow"
   protocol       = "all"  # -1
@@ -22,7 +22,7 @@ resource "aws_network_acl_rule" "pub_rx_vpc_ipv4" {
 
 resource "aws_network_acl_rule" "pub_rx_vpc_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.public.ids)
-  rule_number     = 6002
+  rule_number     = 17002
   egress          = false
   rule_action     = "allow"
   protocol        = "all"  # -1
@@ -33,7 +33,7 @@ resource "aws_network_acl_rule" "pub_rx_vpc_ipv6" {
 
 resource "aws_network_acl_rule" "pub_tx_vpc_ipv4" {
   network_acl_id = join("", data.aws_network_acls.public.ids)
-  rule_number    = 7001
+  rule_number    = 18001
   egress         = true
   rule_action    = "allow"
   protocol       = "all"  # -1
@@ -44,7 +44,7 @@ resource "aws_network_acl_rule" "pub_tx_vpc_ipv4" {
 
 resource "aws_network_acl_rule" "pub_tx_vpc_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.public.ids)
-  rule_number     = 7002
+  rule_number     = 18002
   egress          = true
   rule_action     = "allow"
   protocol        = "all"  # -1
@@ -55,7 +55,7 @@ resource "aws_network_acl_rule" "pub_tx_vpc_ipv6" {
 
 resource "aws_network_acl_rule" "priv_rx_vpc_ipv4" {
   network_acl_id = join("", data.aws_network_acls.private.ids)
-  rule_number    = 8001
+  rule_number    = 19001
   egress         = false
   rule_action    = "allow"
   protocol       = "all"  # -1
@@ -66,7 +66,7 @@ resource "aws_network_acl_rule" "priv_rx_vpc_ipv4" {
 
 resource "aws_network_acl_rule" "priv_rx_vpc_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.private.ids)
-  rule_number     = 8002
+  rule_number     = 19002
   egress          = false
   rule_action     = "allow"
   protocol        = "all"  # -1
@@ -77,7 +77,7 @@ resource "aws_network_acl_rule" "priv_rx_vpc_ipv6" {
 
 resource "aws_network_acl_rule" "priv_tx_vpc_ipv4" {
   network_acl_id = join("", data.aws_network_acls.private.ids)
-  rule_number    = 9001
+  rule_number    = 20001
   egress         = true
   rule_action    = "allow"
   protocol       = "all"  # -1
@@ -88,7 +88,7 @@ resource "aws_network_acl_rule" "priv_tx_vpc_ipv4" {
 
 resource "aws_network_acl_rule" "priv_tx_vpc_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.private.ids)
-  rule_number     = 9002
+  rule_number     = 20002
   egress          = true
   rule_action     = "allow"
   protocol        = "all"  # -1
@@ -99,7 +99,7 @@ resource "aws_network_acl_rule" "priv_tx_vpc_ipv6" {
 
 resource "aws_network_acl_rule" "sec_rx_vpc_ipv4" {
   network_acl_id = join("", data.aws_network_acls.secure.ids)
-  rule_number    = 10001
+  rule_number    = 21001
   egress         = false
   rule_action    = "allow"
   protocol       = "all"  # -1
@@ -110,7 +110,7 @@ resource "aws_network_acl_rule" "sec_rx_vpc_ipv4" {
 
 resource "aws_network_acl_rule" "sec_rx_vpc_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.secure.ids)
-  rule_number     = 10002
+  rule_number     = 21002
   egress          = false
   rule_action     = "allow"
   protocol        = "all"  # -1
@@ -121,7 +121,7 @@ resource "aws_network_acl_rule" "sec_rx_vpc_ipv6" {
 
 resource "aws_network_acl_rule" "sec_tx_vpc_ipv4" {
   network_acl_id = join("", data.aws_network_acls.secure.ids)
-  rule_number    = 11001
+  rule_number    = 22001
   egress         = true
   rule_action    = "allow"
   protocol       = "all"  # -1
@@ -132,7 +132,7 @@ resource "aws_network_acl_rule" "sec_tx_vpc_ipv4" {
 
 resource "aws_network_acl_rule" "sec_tx_vpc_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.secure.ids)
-  rule_number     = 11002
+  rule_number     = 22002
   egress          = true
   rule_action     = "allow"
   protocol        = "all"  # -1

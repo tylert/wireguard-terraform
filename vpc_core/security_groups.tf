@@ -25,6 +25,7 @@
 # We will simply ignore this resource as it is not required for our use case.
 
 resource "aws_default_security_group" "main" {
+  count  = true == var.preserve_default_rules ? 1 : 0
   vpc_id = aws_vpc.main.id
 
   ingress {
@@ -53,6 +54,15 @@ resource "aws_default_security_group" "main" {
   }
 }
 
+resource "aws_default_security_group" "main_empty" {
+  count  = false == var.preserve_default_rules ? 1 : 0
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Name = "sg-${var.basename}-default"
+  }
+}
+
 /*
                                        _     _ _
                            _ __  _   _| |__ | (_) ___
@@ -63,9 +73,10 @@ resource "aws_default_security_group" "main" {
 */
 
 resource "aws_security_group" "public" {
-  vpc_id      = aws_vpc.main.id
-  name        = "public vpc-${var.basename}"  # Group Name / supports name_prefix
-  description = "vpc-${var.basename} public security group"
+  vpc_id                 = aws_vpc.main.id
+  name                   = "public sg for vpc-${var.basename}"  # Group Name / can't update
+  description            = "vpc-${var.basename} public security group"  # Group Description / can't update
+  revoke_rules_on_delete = false
 
   tags = {
     Name = "sg-${var.basename}-public"
@@ -82,9 +93,10 @@ resource "aws_security_group" "public" {
 */
 
 resource "aws_security_group" "private" {
-  vpc_id      = aws_vpc.main.id
-  name        = "private vpc-${var.basename}"  # Group Name / supports name_prefix
-  description = "vpc-${var.basename} private security group"
+  vpc_id                 = aws_vpc.main.id
+  name                   = "private sg for vpc-${var.basename}"  # Group Name / can't update
+  description            = "vpc-${var.basename} private security group"  # Group Description / can't update
+  revoke_rules_on_delete = false
 
   tags = {
     Name = "sg-${var.basename}-private"
@@ -99,9 +111,10 @@ resource "aws_security_group" "private" {
 */
 
 resource "aws_security_group" "secure" {
-  vpc_id      = aws_vpc.main.id
-  name        = "secure vpc-${var.basename}"  # Group Name / supports name_prefix
-  description = "vpc-${var.basename} secure security group"
+  vpc_id                 = aws_vpc.main.id
+  name                   = "secure sg for vpc-${var.basename}"  # Group Name / can't update
+  description            = "vpc-${var.basename} secure security group"  # Group Description / can't update
+  revoke_rules_on_delete = false
 
   tags = {
     Name = "sg-${var.basename}-secure"
