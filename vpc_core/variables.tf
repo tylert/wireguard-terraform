@@ -26,7 +26,7 @@ variable "how_many_azs" {
 
 variable "how_many_natgws" {
   type        = number
-  description = "How many NAT gateways to create across the available AZs"
+  description = "CHANGE FOR MOAR SPENDY!!!  How many NAT gateways to create across the available AZs"
   default     = 0
 }
 
@@ -46,4 +46,15 @@ variable "vpc_cidr_block" {
   type        = string
   description = "IPv4 CIDR block to assign to the VPC (with netmask from /16 to /28)"
 # default     = "10.0.0.0/16"
+}
+
+variable "vpc_instance_tenancy" {
+  type        = string
+  description = "CHANGE FOR MOAR SPENDY!!!  How much to share resources with other cloud users"
+  default     = "default"
+
+  validation {
+    condition     = contains(["default", "dedicated", "host"], var.vpc_instance_tenancy)
+    error_message = "Value must be one of:  default, dedicated or host"
+  }
 }

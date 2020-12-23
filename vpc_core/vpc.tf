@@ -21,7 +21,7 @@ resource "aws_vpc" "main" {
 # enable_classiclink_dns_support   = false      # ???
   enable_dns_hostnames             = true
   enable_dns_support               = true
-  instance_tenancy                 = "default"  # least spendy;  "dedicated"|"host"
+  instance_tenancy                 = var.vpc_instance_tenancy
 
   tags = {
     Name = "vpc-${var.basename}"
