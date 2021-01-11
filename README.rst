@@ -49,12 +49,9 @@
 Network ACLs
 ------------
 
-Allow traffic to/from our VPC CIDR to flow in/out.
-
 Rule numbers can be assigned any values from 1 to 32766, inclusive.  This code
 reserves for "its own use" the entire rule number range from 16834 to 32766
-(2^14 to 2^15-2).  It is assumed that these rules are being added to an empty
-NACL resource.
+(2^14 to 2^15-2).
 
 Rule numbers 23xxx to 32xxx are RFU.
 Rule numbers xx5xx to xx9xx are RFU.

@@ -159,6 +159,13 @@ resource "aws_network_acl_rule" "sec_tx_icmpv6" {
                            |___/
 */
 
+# XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/15982
+
+# Don't worry if you see Error finding matching ingress Security Group Rule
+# errors for the 3 ingress ICMPv6 rules here.  Terraform thinks these resources
+# are missing, however AWS definitely has them.  Due to this bug, manual
+# cleanup of these 3 rules may be required.
+
 resource "aws_security_group_rule" "pub_rx_icmpv4" {
   security_group_id = data.aws_security_group.public.id
   type              = "ingress"
@@ -212,10 +219,3 @@ resource "aws_security_group_rule" "sec_rx_icmpv6" {
   to_port           = -1  # all
   ipv6_cidr_blocks  = ["::/0"]
 }
-
-# XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/15982
-
-# Don't worry if you see Error finding matching ingress Security Group Rule
-# errors for the 3 ingress ICMPv6 rules here.  Terraform thinks these resources
-# are missing, however AWS definitely has them.  Due to this bug, manual
-# cleanup of these 3 rules may be required.
