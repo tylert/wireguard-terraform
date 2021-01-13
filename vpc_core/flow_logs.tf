@@ -21,17 +21,17 @@ resource "aws_iam_role" "main" {
 
   assume_role_policy = <<EOF
 {
-  "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "",
+      "Action": "sts:AssumeRole",
       "Effect": "Allow",
       "Principal": {
         "Service": "vpc-flow-logs.amazonaws.com"
       },
-      "Action": "sts:AssumeRole"
+      "Sid": ""
     }
-  ]
+  ],
+  "Version": "2012-10-17"
 }
 EOF
 }
@@ -42,7 +42,6 @@ resource "aws_iam_role_policy" "main" {
 
   policy = <<EOF
 {
-  "Version": "2012-10-17",
   "Statement": [
     {
       "Action": [
@@ -55,14 +54,15 @@ resource "aws_iam_role_policy" "main" {
       "Effect": "Allow",
       "Resource": "*"
     }
-  ]
+  ],
+  "Version": "2012-10-17"
 }
 EOF
 }
 
 resource "aws_cloudwatch_log_group" "main" {
   name              = "${var.basename}-loggroup"
-  retention_in_days = 7       # default???
+  retention_in_days = 7  # default???
 
   tags = {
     Name = "${var.basename}-loggroup"

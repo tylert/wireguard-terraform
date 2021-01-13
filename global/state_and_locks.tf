@@ -51,7 +51,7 @@ resource "aws_s3_bucket" "tf_state" {
 resource "aws_s3_bucket_policy" "tf_state" {
   bucket = aws_s3_bucket.tf_state.id
 
-  policy = <<POLICYEOF
+  policy = <<EOF
 {
   "Id": "PutObjPolicy",
   "Statement": [
@@ -82,5 +82,5 @@ resource "aws_s3_bucket_policy" "tf_state" {
   ],
   "Version": "2012-10-17"
 }
-POLICYEOF
+EOF
 }
