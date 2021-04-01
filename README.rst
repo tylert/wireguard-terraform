@@ -92,6 +92,9 @@ Allow all inbound ICMP, HTTPS, SSH traffic to freely-enter all subnets.
 TODO
 ----
 
+https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs-s3.html
+^^^ provide option to use S3 for VPC flow logs instead of CloudWatch Logs
+
 https://www.terraform.io/docs/configuration/variables.html#custom-validation-rules
 ^^^ for variables to make sure they are not too big or too small (e.g.:  AZ and NAT gw counts)???
 
@@ -102,22 +105,17 @@ https://registry.terraform.io/providers/hashicorp/random/latest/docs
 ^^^ generate random strings for the basenames???
 
 
-Blocking Terraform Bugs
------------------------
+Major Terraform Annoyances
+--------------------------
 
 * https://github.com/hashicorp/terraform-provider-aws/issues/15982
+* https://github.com/hashicorp/terraform/issues/13022  <-- Open since March 2017
 
 
 Minor Terraform Annoyances
 --------------------------
 
-* https://github.com/hashicorp/terraform-provider-aws/issues/11084  <-- CLOSED, PARTIAL-FIX
-* https://github.com/hashicorp/terraform-provider-aws/issues/11132  <-- OPEN
-* https://github.com/hashicorp/terraform-provider-aws/issues/16375  <-- OPEN, PR #16710
-* https://github.com/hashicorp/terraform-provider-aws/issues/16376  <-- OPEN
-* https://github.com/hashicorp/terraform-provider-aws/issues/16377  <-- OPEN, PR #16710
-* https://github.com/hashicorp/terraform/issues/4775  <-- CLOSED, NOT-FIXED
-* https://github.com/hashicorp/terraform/issues/8367  <-- OPEN
-* https://github.com/hashicorp/terraform/issues/13022  <-- OPEN
-* https://github.com/hashicorp/terraform/issues/14523  <-- OPEN
-* https://github.com/hashicorp/terraform/pull/13432  <-- CLOSED, NOT-MERGED
+* https://github.com/hashicorp/terraform-provider-aws/issues/?q=is%3Aissue+is%3Aopen+imagebuilder+
+* https://github.com/hashicorp/terraform-provider-aws/issues?q=is%3Aissue+is%3Aopen+networkmanager+
+* https://github.com/hashicorp/terraform/issues/8367  <-- Open since August 2016
+* https://github.com/hashicorp/terraform/issues/14523  <-- Open since May 2017
