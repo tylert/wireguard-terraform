@@ -50,7 +50,7 @@ resource "aws_default_security_group" "main" {
   }
 
   tags = {
-    Name = "sg-${var.basename}-default"
+    Name = "sg-${var.basename}-def"
   }
 }
 
@@ -63,7 +63,7 @@ resource "aws_default_security_group" "main_tainted" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name = "sg-${var.basename}-default"
+    Name = "sg-${var.basename}-def"
   }
 }
 
@@ -83,7 +83,7 @@ resource "aws_security_group" "public" {
   revoke_rules_on_delete = false
 
   tags = {
-    Name = "sg-${var.basename}-public"
+    Name = "sg-${var.basename}-pub"
   }
 }
 
@@ -103,7 +103,7 @@ resource "aws_security_group" "private" {
   revoke_rules_on_delete = false
 
   tags = {
-    Name = "sg-${var.basename}-private"
+    Name = "sg-${var.basename}-priv"
   }
 }
 
@@ -121,6 +121,6 @@ resource "aws_security_group" "secure" {
   revoke_rules_on_delete = false
 
   tags = {
-    Name = "sg-${var.basename}-secure"
+    Name = "sg-${var.basename}-sec"
   }
 }

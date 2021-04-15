@@ -36,7 +36,7 @@ resource "aws_subnet" "public_az" {
   assign_ipv6_address_on_creation = true
 
   tags = {
-    Name = "subnet-${var.basename}-public-az${count.index}"
+    Name = "subnet-${var.basename}-pub-az${count.index}"
   }
 }
 
@@ -59,7 +59,7 @@ resource "aws_subnet" "private_az" {
   assign_ipv6_address_on_creation = true
 
   tags = {
-    Name = "subnet-${var.basename}-private-az${count.index}"
+    Name = "subnet-${var.basename}-priv-az${count.index}"
   }
 }
 
@@ -80,6 +80,6 @@ resource "aws_subnet" "secure_az" {
   assign_ipv6_address_on_creation = true
 
   tags = {
-    Name = "subnet-${var.basename}-secure-az${count.index}"
+    Name = "subnet-${var.basename}-sec-az${count.index}"
   }
 }

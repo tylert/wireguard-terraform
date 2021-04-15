@@ -26,7 +26,7 @@ resource "aws_default_route_table" "default" {
   default_route_table_id = aws_vpc.main.default_route_table_id
 
   tags = {
-    Name = "rtb-${var.basename}-default"
+    Name = "rtb-${var.basename}-def"
   }
 }
 
@@ -49,7 +49,7 @@ resource "aws_route_table" "public_az" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name = "rtb-${var.basename}-public-az${count.index}"
+    Name = "rtb-${var.basename}-pub-az${count.index}"
   }
 }
 
@@ -77,7 +77,7 @@ resource "aws_route_table" "private_az" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name = "rtb-${var.basename}-private-az${count.index}"
+    Name = "rtb-${var.basename}-priv-az${count.index}"
   }
 }
 
@@ -99,7 +99,7 @@ resource "aws_route_table" "secure_az" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name = "rtb-${var.basename}-secure-az${count.index}"
+    Name = "rtb-${var.basename}-sec-az${count.index}"
   }
 }
 

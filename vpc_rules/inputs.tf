@@ -21,7 +21,7 @@ data "aws_network_acls" "public" {
   vpc_id = data.aws_vpc.main.id
 
   tags = {
-    Name = "acl-${var.basename}-public"
+    Name = "acl-${var.basename}-pub"
   }
 }
 
@@ -29,7 +29,7 @@ data "aws_network_acls" "private" {
   vpc_id = data.aws_vpc.main.id
 
   tags = {
-    Name = "acl-${var.basename}-private"
+    Name = "acl-${var.basename}-priv"
   }
 }
 
@@ -37,7 +37,7 @@ data "aws_network_acls" "secure" {
   vpc_id = data.aws_vpc.main.id
 
   tags = {
-    Name = "acl-${var.basename}-secure"
+    Name = "acl-${var.basename}-sec"
   }
 }
 
@@ -45,7 +45,7 @@ data "aws_security_group" "public" {
   vpc_id = data.aws_vpc.main.id
 
   tags = {
-    Name = "sg-${var.basename}-public"
+    Name = "sg-${var.basename}-pub"
   }
 }
 
@@ -53,7 +53,7 @@ data "aws_security_group" "private" {
   vpc_id = data.aws_vpc.main.id
 
   tags = {
-    Name = "sg-${var.basename}-private"
+    Name = "sg-${var.basename}-priv"
   }
 }
 
@@ -61,6 +61,6 @@ data "aws_security_group" "secure" {
   vpc_id = data.aws_vpc.main.id
 
   tags = {
-    Name = "sg-${var.basename}-secure"
+    Name = "sg-${var.basename}-sec"
   }
 }

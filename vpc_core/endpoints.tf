@@ -24,7 +24,7 @@ resource "aws_vpc_endpoint" "pub_ec2messages" {
   subnet_ids   = aws_subnet.public[*].id
 
   tags = {
-    Name = "vpce-${var.basename}-pub-ec2messages"
+    Name = "vpce-${var.basename}-pub-ec2msgs"
   }
 }
 
@@ -44,7 +44,7 @@ resource "aws_vpc_endpoint" "pub_ssmmessages" {
   subnet_ids   = aws_subnet.public[*].id
 
   tags = {
-    Name = "vpce-${var.basename}-pub-ssmmessages"
+    Name = "vpce-${var.basename}-pub-ssmmsgs"
   }
 }
 
@@ -63,7 +63,7 @@ resource "aws_vpc_endpoint" "priv_ec2messages" {
   subnet_ids   = aws_subnet.private[*].id
 
   tags = {
-    Name = "vpce-${var.basename}-priv-ec2messages"
+    Name = "vpce-${var.basename}-priv-ec2msgs"
   }
 }
 
@@ -83,7 +83,7 @@ resource "aws_vpc_endpoint" "priv_ssmmessages" {
   subnet_ids   = aws_subnet.private[*].id
 
   tags = {
-    Name = "vpce-${var.basename}-priv-ssmmessages"
+    Name = "vpce-${var.basename}-priv-ssmmsgs"
   }
 }
 
@@ -100,7 +100,7 @@ resource "aws_vpc_endpoint" "sec_ec2messages" {
   subnet_ids   = aws_subnet.secure_az[*].id
 
   tags = {
-    Name = "vpce-${var.basename}-sec-ec2messages"
+    Name = "vpce-${var.basename}-sec-ec2msgs"
   }
 }
 
@@ -120,6 +120,6 @@ resource "aws_vpc_endpoint" "sec_ssmmessages" {
   subnet_ids   = aws_subnet.secure_az[*].id
 
   tags = {
-    Name = "vpce-${var.basename}-sec-ssmmessages"
+    Name = "vpce-${var.basename}-sec-ssmmsgs"
   }
 }
