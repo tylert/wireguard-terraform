@@ -44,9 +44,16 @@
         -var-file=../terraform.tfvars
     terraform \
         -chdir=vpc_rules \
-        destroy \
+        apply \
         -input=false \
-        -var-file=terraform.tfvars
+        ../plan3
+    # or
+    terraform \
+        -chdir=vpc_rules \
+        destroy \
+        -auto-approve \
+        -input=false \
+        -var-file=../terraform.tfvars
 
     # Destroy everything under vpc_core
     terraform \
@@ -57,10 +64,17 @@
         -out=../plan4 \
         -var-file=../terraform.tfvars
     terraform \
-        -chdir=vpc_rules \
-        destroy \
+        -chdir=vpc_core \
+        apply \
         -input=false \
-        -var-file=terraform.tfvars
+        ../plan4
+    # or
+    terraform \
+        -chdir=vpc_core \
+        destroy \
+        -auto-approve \
+        -input=false \
+        -var-file=../terraform.tfvars
 
 * https://learn.hashicorp.com/tutorials/terraform/automate-terraform?in=terraform/automation
 * https://github.com/fly-examples/rds-connector/blob/main/main.tf#L118-L180

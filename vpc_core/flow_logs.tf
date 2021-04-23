@@ -77,6 +77,6 @@ resource "aws_flow_log" "main" {
   max_aggregation_interval = 600
 
   tags = {
-    Name = "${var.basename}-flowlog"
+    Name = "fl-${var.basename}"
   }
 }

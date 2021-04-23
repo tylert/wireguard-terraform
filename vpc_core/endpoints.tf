@@ -19,9 +19,11 @@
 */
 
 resource "aws_vpc_endpoint" "pub_ec2messages" {
-  service_name = "com.amazonaws.${var.aws_region}.ec2messages"
-  vpc_id       = aws_vpc.main.id
-  subnet_ids   = aws_subnet.public_az[*].id
+  vpc_id             = aws_vpc.main.id
+  service_name       = "com.amazonaws.${var.aws_region}.ec2messages"
+  vpc_endpoint_type  = "Interface"
+  security_group_ids = [aws_security_group.public.id]
+  subnet_ids         = aws_subnet.public_az[*].id
 
   tags = {
     Name = "vpce-${var.basename}-pub-ec2msgs"
@@ -29,9 +31,11 @@ resource "aws_vpc_endpoint" "pub_ec2messages" {
 }
 
 resource "aws_vpc_endpoint" "pub_ssm" {
-  service_name = "com.amazonaws.${var.aws_region}.ssm"
-  vpc_id       = aws_vpc.main.id
-  subnet_ids   = aws_subnet.public_az[*].id
+  vpc_id             = aws_vpc.main.id
+  service_name       = "com.amazonaws.${var.aws_region}.ssm"
+  vpc_endpoint_type  = "Interface"
+  security_group_ids = [aws_security_group.public.id]
+  subnet_ids         = aws_subnet.public_az[*].id
 
   tags = {
     Name = "vpce-${var.basename}-pub-ssm"
@@ -39,9 +43,11 @@ resource "aws_vpc_endpoint" "pub_ssm" {
 }
 
 resource "aws_vpc_endpoint" "pub_ssmmessages" {
-  service_name = "com.amazonaws.${var.aws_region}.ssmmessages"
-  vpc_id       = aws_vpc.main.id
-  subnet_ids   = aws_subnet.public_az[*].id
+  vpc_id             = aws_vpc.main.id
+  service_name       = "com.amazonaws.${var.aws_region}.ssmmessages"
+  vpc_endpoint_type  = "Interface"
+  security_group_ids = [aws_security_group.public.id]
+  subnet_ids         = aws_subnet.public_az[*].id
 
   tags = {
     Name = "vpce-${var.basename}-pub-ssmmsgs"
@@ -58,9 +64,11 @@ resource "aws_vpc_endpoint" "pub_ssmmessages" {
 */
 
 resource "aws_vpc_endpoint" "priv_ec2messages" {
-  service_name = "com.amazonaws.${var.aws_region}.ec2messages"
-  vpc_id       = aws_vpc.main.id
-  subnet_ids   = aws_subnet.private_az[*].id
+  vpc_id             = aws_vpc.main.id
+  service_name       = "com.amazonaws.${var.aws_region}.ec2messages"
+  vpc_endpoint_type  = "Interface"
+  security_group_ids = [aws_security_group.private.id]
+  subnet_ids         = aws_subnet.private_az[*].id
 
   tags = {
     Name = "vpce-${var.basename}-priv-ec2msgs"
@@ -68,9 +76,11 @@ resource "aws_vpc_endpoint" "priv_ec2messages" {
 }
 
 resource "aws_vpc_endpoint" "priv_ssm" {
-  service_name = "com.amazonaws.${var.aws_region}.ssm"
-  vpc_id       = aws_vpc.main.id
-  subnet_ids   = aws_subnet.private_az[*].id
+  vpc_id             = aws_vpc.main.id
+  service_name       = "com.amazonaws.${var.aws_region}.ssm"
+  vpc_endpoint_type  = "Interface"
+  security_group_ids = [aws_security_group.private.id]
+  subnet_ids         = aws_subnet.private_az[*].id
 
   tags = {
     Name = "vpce-${var.basename}-priv-ssm"
@@ -78,9 +88,11 @@ resource "aws_vpc_endpoint" "priv_ssm" {
 }
 
 resource "aws_vpc_endpoint" "priv_ssmmessages" {
-  service_name = "com.amazonaws.${var.aws_region}.ssmmessages"
-  vpc_id       = aws_vpc.main.id
-  subnet_ids   = aws_subnet.private_az[*].id
+  vpc_id             = aws_vpc.main.id
+  service_name       = "com.amazonaws.${var.aws_region}.ssmmessages"
+  vpc_endpoint_type  = "Interface"
+  security_group_ids = [aws_security_group.private.id]
+  subnet_ids         = aws_subnet.private_az[*].id
 
   tags = {
     Name = "vpce-${var.basename}-priv-ssmmsgs"
@@ -95,9 +107,11 @@ resource "aws_vpc_endpoint" "priv_ssmmessages" {
 */
 
 resource "aws_vpc_endpoint" "sec_ec2messages" {
-  service_name = "com.amazonaws.${var.aws_region}.ec2messages"
-  vpc_id       = aws_vpc.main.id
-  subnet_ids   = aws_subnet.secure_az[*].id
+  vpc_id             = aws_vpc.main.id
+  service_name       = "com.amazonaws.${var.aws_region}.ec2messages"
+  vpc_endpoint_type  = "Interface"
+  security_group_ids = [aws_security_group.secure.id]
+  subnet_ids         = aws_subnet.secure_az[*].id
 
   tags = {
     Name = "vpce-${var.basename}-sec-ec2msgs"
@@ -105,9 +119,11 @@ resource "aws_vpc_endpoint" "sec_ec2messages" {
 }
 
 resource "aws_vpc_endpoint" "sec_ssm" {
-  service_name = "com.amazonaws.${var.aws_region}.ssm"
-  vpc_id       = aws_vpc.main.id
-  subnet_ids   = aws_subnet.secure_az[*].id
+  vpc_id             = aws_vpc.main.id
+  service_name       = "com.amazonaws.${var.aws_region}.ssm"
+  vpc_endpoint_type  = "Interface"
+  security_group_ids = [aws_security_group.secure.id]
+  subnet_ids         = aws_subnet.secure_az[*].id
 
   tags = {
     Name = "vpce-${var.basename}-sec-ssm"
@@ -115,9 +131,11 @@ resource "aws_vpc_endpoint" "sec_ssm" {
 }
 
 resource "aws_vpc_endpoint" "sec_ssmmessages" {
-  service_name = "com.amazonaws.${var.aws_region}.ssmmessages"
-  vpc_id       = aws_vpc.main.id
-  subnet_ids   = aws_subnet.secure_az[*].id
+  vpc_id             = aws_vpc.main.id
+  service_name       = "com.amazonaws.${var.aws_region}.ssmmessages"
+  vpc_endpoint_type  = "Interface"
+  security_group_ids = [aws_security_group.secure.id]
+  subnet_ids         = aws_subnet.secure_az[*].id
 
   tags = {
     Name = "vpce-${var.basename}-sec-ssmmsgs"
