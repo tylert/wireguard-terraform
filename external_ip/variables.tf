@@ -12,10 +12,10 @@ variable "aws_region" {
 # default     = "ca-central-1"
 }
 
-variable "ttl" {
-  type        = number
-  description = "The TTL to set for the A record"
-  default     = 1800
+variable "dyndns_url" {
+  type        = string
+  description = ""
+  default     = "https://icanhazip.com"
 }
 
 variable "hosted_zone_name" {
@@ -24,14 +24,14 @@ variable "hosted_zone_name" {
 # default     = "example.com"
 }
 
-variable "dyndns_url" {
-  type        = string
-  description = ""
-  default     = "https://icanhazip.com"
-}
-
 variable "record_name" {
   type        = string
   description = ""
-  default     = "m0"
+# default     = "m0"
+}
+
+variable "ttl" {
+  type        = number
+  description = "The TTL to set for the A record"
+  default     = 1800
 }

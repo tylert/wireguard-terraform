@@ -110,12 +110,3 @@ Major Terraform Annoyances
 
 * https://github.com/hashicorp/terraform-provider-aws/issues/15982
 * https://github.com/hashicorp/terraform/issues/13022  <-- Open since March 2017
-
-
-Minor Terraform Annoyances
---------------------------
-
-* https://github.com/hashicorp/terraform-provider-aws/issues/?q=is%3Aissue+is%3Aopen+imagebuilder+
-* https://github.com/hashicorp/terraform-provider-aws/issues?q=is%3Aissue+is%3Aopen+networkmanager+
-* https://github.com/hashicorp/terraform/issues/8367  <-- Open since August 2016
-* https://github.com/hashicorp/terraform/issues/14523  <-- Open since May 2017

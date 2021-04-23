@@ -21,5 +21,5 @@ variable "lock_table_name" {
 variable "state_bucket_name" {
   type        = string
   description = "Name of Terraform state bucket"
-  default     = "cace1-tf-marc-orthos"
+  default     = "froopyland_state_bucket"
 }

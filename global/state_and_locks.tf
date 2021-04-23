@@ -2,7 +2,7 @@ terraform {
   # required version set by module
   backend "s3" {
     region         = "ca-central-1"
-    bucket         = "cace1-tf-marc-orthos"
+    bucket         = "froopyland_state_bucket"
     key            = "global/terraform.tfstate"
     encrypt        = true
     acl            = "private"
