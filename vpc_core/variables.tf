@@ -53,8 +53,8 @@ variable "vpc_instance_tenancy" {
   description = "CHANGE FOR MOAR SPENDY!!!  How much to share resources with other cloud users"
   default     = "default"
 
-  validation {
-    condition     = contains(["default", "dedicated", "host"], var.vpc_instance_tenancy)
-    error_message = "Value must be one of:  default, dedicated or host"
-  }
+# validation {
+#   condition     = contains(["default", "dedicated", "host"], var.vpc_instance_tenancy)
+#   error_message = "Value must be one of:  default, dedicated or host"
+# }
 }

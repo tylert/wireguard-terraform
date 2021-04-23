@@ -1,46 +1,66 @@
 ::
 
-    # Create everything
-    pushd vpc_core
-    terraform init \
+    # Create everything under vpc_core
+    terraform \
+        -chdir=vpc_core \
+        init \
         -input=false
-    terraform plan \
+    terraform \
+        -chdir=vpc_core \
+        plan \
         -input=false \
-        -out=myplan-myenv1 \
-        -var=basename=myenv1 \
-        -var=region=ca-central-1 \
-        -var=vpc_cidr_block=10.0.0.0/16
-    terraform apply \
+        -out=../plan1 \
+        -var-file=../terraform.tfvars
+    terraform \
+        -chdir=vpc_core \
+        apply \
         -input=false \
-        myplan-myenv1
-    popd
-    pushd vpc_rules
-    terraform init \
-        -input=false
-    terraform plan \
-        -input=false \
-        -out=myplan-myenv1 \
-        -var=basename=myenv1 \
-        -var=region=ca-central-1
-    terraform apply \
-        -input=false \
-        myplan-myenv1
-    popd
+        ../plan1
 
-    # Destroy everything
-    pushd vpc_rules
-    terraform destroy \
+    # Create everything under vpc_rules
+    terraform \
+        -chdir=vpc_rules \
+        init \
+        -input=false
+    terraform \
+        -chdir=vpc_rules \
+        plan \
         -input=false \
-        -var=basename=myenv1 \
-        -var=region=ca-central-1
-    popd
-    pushd vpc_core
-    terraform destroy \
+        -out=../plan2 \
+        -var-file=../terraform.tfvars
+    terraform \
+        -chdir=vpc_rules \
+        apply \
         -input=false \
-        -var=basename=myenv1 \
-        -var=region=ca-central-1 \
-        -var=vpc_cidr_block=10.0.0.0/16
-    popd
+        ../plan2
+
+    # Destroy everything under vpc_rules
+    terraform \
+        -chdir=vpc_rules \
+        plan \
+        -destroy \
+        -input=false \
+        -out=../plan3 \
+        -var-file=../terraform.tfvars
+    terraform \
+        -chdir=vpc_rules \
+        destroy \
+        -input=false \
+        -var-file=terraform.tfvars
+
+    # Destroy everything under vpc_core
+    terraform \
+        -chdir=vpc_core \
+        plan \
+        -destroy \
+        -input=false \
+        -out=../plan4 \
+        -var-file=../terraform.tfvars
+    terraform \
+        -chdir=vpc_rules \
+        destroy \
+        -input=false \
+        -var-file=terraform.tfvars
 
 * https://learn.hashicorp.com/tutorials/terraform/automate-terraform?in=terraform/automation
 * https://github.com/fly-examples/rds-connector/blob/main/main.tf#L118-L180
