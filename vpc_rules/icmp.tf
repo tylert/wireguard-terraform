@@ -23,9 +23,9 @@ resource "aws_network_acl_rule" "pub_rx_icmpv4" {
   rule_number    = 17101
   egress         = false
   rule_action    = "allow"
-  protocol       = "icmp"  # 1
-  icmp_type      = -1      # all
-  icmp_code      = -1      # all
+  protocol       = "icmp" # 1
+  icmp_type      = -1     # all
+  icmp_code      = -1     # all
   cidr_block     = "0.0.0.0/0"
 }
 
@@ -34,9 +34,9 @@ resource "aws_network_acl_rule" "pub_rx_icmpv6" {
   rule_number     = 17102
   egress          = false
   rule_action     = "allow"
-  protocol        = 58  # icmpv6
-  icmp_type       = -1  # all
-  icmp_code       = -1  # all
+  protocol        = 58 # icmpv6
+  icmp_type       = -1 # all
+  icmp_code       = -1 # all
   ipv6_cidr_block = "::/0"
 }
 
@@ -45,9 +45,9 @@ resource "aws_network_acl_rule" "pub_tx_icmpv4" {
   rule_number    = 18101
   egress         = true
   rule_action    = "allow"
-  protocol       = "icmp"  # 1
-  icmp_type      = -1      # all
-  icmp_code      = -1      # all
+  protocol       = "icmp" # 1
+  icmp_type      = -1     # all
+  icmp_code      = -1     # all
   cidr_block     = "0.0.0.0/0"
 }
 
@@ -56,9 +56,9 @@ resource "aws_network_acl_rule" "pub_tx_icmpv6" {
   rule_number     = 18102
   egress          = true
   rule_action     = "allow"
-  protocol        = 58  # icmpv6
-  icmp_type       = -1  # all
-  icmp_code       = -1  # all
+  protocol        = 58 # icmpv6
+  icmp_type       = -1 # all
+  icmp_code       = -1 # all
   ipv6_cidr_block = "::/0"
 }
 
@@ -67,9 +67,9 @@ resource "aws_network_acl_rule" "priv_rx_icmpv4" {
   rule_number    = 19101
   egress         = false
   rule_action    = "allow"
-  protocol       = "icmp"  # 1
-  icmp_type      = -1      # all
-  icmp_code      = -1      # all
+  protocol       = "icmp" # 1
+  icmp_type      = -1     # all
+  icmp_code      = -1     # all
   cidr_block     = "0.0.0.0/0"
 }
 
@@ -78,9 +78,9 @@ resource "aws_network_acl_rule" "priv_rx_icmpv6" {
   rule_number     = 19102
   egress          = false
   rule_action     = "allow"
-  protocol        = 58  # icmpv6
-  icmp_type       = -1  # all
-  icmp_code       = -1  # all
+  protocol        = 58 # icmpv6
+  icmp_type       = -1 # all
+  icmp_code       = -1 # all
   ipv6_cidr_block = "::/0"
 }
 
@@ -89,9 +89,9 @@ resource "aws_network_acl_rule" "priv_tx_icmpv4" {
   rule_number    = 20101
   egress         = true
   rule_action    = "allow"
-  protocol       = "icmp"  # 1
-  icmp_type      = -1      # all
-  icmp_code      = -1      # all
+  protocol       = "icmp" # 1
+  icmp_type      = -1     # all
+  icmp_code      = -1     # all
   cidr_block     = "0.0.0.0/0"
 }
 
@@ -100,9 +100,9 @@ resource "aws_network_acl_rule" "priv_tx_icmpv6" {
   rule_number     = 20102
   egress          = true
   rule_action     = "allow"
-  protocol        = 58  # icmpv6
-  icmp_type       = -1  # all
-  icmp_code       = -1  # all
+  protocol        = 58 # icmpv6
+  icmp_type       = -1 # all
+  icmp_code       = -1 # all
   ipv6_cidr_block = "::/0"
 }
 
@@ -111,9 +111,9 @@ resource "aws_network_acl_rule" "sec_rx_icmpv4" {
   rule_number    = 21101
   egress         = false
   rule_action    = "allow"
-  protocol       = "icmp"  # 1
-  icmp_type      = -1      # all
-  icmp_code      = -1      # all
+  protocol       = "icmp" # 1
+  icmp_type      = -1     # all
+  icmp_code      = -1     # all
   cidr_block     = "0.0.0.0/0"
 }
 
@@ -122,9 +122,9 @@ resource "aws_network_acl_rule" "sec_rx_icmpv6" {
   rule_number     = 21102
   egress          = false
   rule_action     = "allow"
-  protocol        = 58  # icmpv6
-  icmp_type       = -1  # all
-  icmp_code       = -1  # all
+  protocol        = 58 # icmpv6
+  icmp_type       = -1 # all
+  icmp_code       = -1 # all
   ipv6_cidr_block = "::/0"
 }
 
@@ -133,9 +133,9 @@ resource "aws_network_acl_rule" "sec_tx_icmpv4" {
   rule_number    = 22101
   egress         = true
   rule_action    = "allow"
-  protocol       = "icmp"  # 1
-  icmp_type      = -1      # all
-  icmp_code      = -1      # all
+  protocol       = "icmp" # 1
+  icmp_type      = -1     # all
+  icmp_code      = -1     # all
   cidr_block     = "0.0.0.0/0"
 }
 
@@ -144,9 +144,9 @@ resource "aws_network_acl_rule" "sec_tx_icmpv6" {
   rule_number     = 22102
   egress          = true
   rule_action     = "allow"
-  protocol        = 58  # icmpv6
-  icmp_type       = -1  # all
-  icmp_code       = -1  # all
+  protocol        = 58 # icmpv6
+  icmp_type       = -1 # all
+  icmp_code       = -1 # all
   ipv6_cidr_block = "::/0"
 }
 
@@ -169,53 +169,53 @@ resource "aws_network_acl_rule" "sec_tx_icmpv6" {
 resource "aws_security_group_rule" "pub_rx_icmpv4" {
   security_group_id = data.aws_security_group.public.id
   type              = "ingress"
-  protocol          = "icmp"  # 1
-  from_port         = -1      # all
-  to_port           = -1      # all
+  protocol          = "icmp" # 1
+  from_port         = -1     # all
+  to_port           = -1     # all
   cidr_blocks       = ["0.0.0.0/0"]
 }
 
 resource "aws_security_group_rule" "pub_rx_icmpv6" {
   security_group_id = data.aws_security_group.public.id
   type              = "ingress"
-  protocol          = 58  # icmpv6
-  from_port         = -1  # all
-  to_port           = -1  # all
+  protocol          = 58 # icmpv6
+  from_port         = -1 # all
+  to_port           = -1 # all
   ipv6_cidr_blocks  = ["::/0"]
 }
 
 resource "aws_security_group_rule" "priv_rx_icmpv4" {
   security_group_id = data.aws_security_group.private.id
   type              = "ingress"
-  protocol          = "icmp"  # 1
-  from_port         = -1      # all
-  to_port           = -1      # all
+  protocol          = "icmp" # 1
+  from_port         = -1     # all
+  to_port           = -1     # all
   cidr_blocks       = ["0.0.0.0/0"]
 }
 
 resource "aws_security_group_rule" "priv_rx_icmpv6" {
   security_group_id = data.aws_security_group.private.id
   type              = "ingress"
-  protocol          = 58  # icmpv6
-  from_port         = -1  # all
-  to_port           = -1  # all
+  protocol          = 58 # icmpv6
+  from_port         = -1 # all
+  to_port           = -1 # all
   ipv6_cidr_blocks  = ["::/0"]
 }
 
 resource "aws_security_group_rule" "sec_rx_icmpv4" {
   security_group_id = data.aws_security_group.secure.id
   type              = "ingress"
-  protocol          = "icmp"  # 1
-  from_port         = -1      # all
-  to_port           = -1      # all
+  protocol          = "icmp" # 1
+  from_port         = -1     # all
+  to_port           = -1     # all
   cidr_blocks       = ["0.0.0.0/0"]
 }
 
 resource "aws_security_group_rule" "sec_rx_icmpv6" {
   security_group_id = data.aws_security_group.secure.id
   type              = "ingress"
-  protocol          = 58  # icmpv6
-  from_port         = -1  # all
-  to_port           = -1  # all
+  protocol          = 58 # icmpv6
+  from_port         = -1 # all
+  to_port           = -1 # all
   ipv6_cidr_blocks  = ["::/0"]
 }

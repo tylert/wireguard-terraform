@@ -9,7 +9,7 @@ __   ____ _ _ __(_) __ _| |__ | | ___  ___
 variable "aws_region" {
   type        = string
   description = "AWS region in which to launch all non-global resources"
-# default     = "ca-central-1"
+  # default     = "ca-central-1"
 }
 
 variable "dyndns_url" {
@@ -21,13 +21,13 @@ variable "dyndns_url" {
 variable "hosted_zone_name" {
   type        = string
   description = ""
-# default     = "example.com"
+  # default     = "example.com"
 }
 
 variable "record_name" {
   type        = string
   description = ""
-# default     = "m0"
+  # default     = "m0"
 }
 
 variable "ttl" {

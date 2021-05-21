@@ -30,36 +30,36 @@ resource "aws_default_network_acl" "main" {
   ingress {
     rule_no    = 100
     action     = "allow"
-    protocol   = -1  # all
-    from_port  = 0   # ignored
-    to_port    = 0   # ignored
+    protocol   = -1 # all
+    from_port  = 0  # ignored
+    to_port    = 0  # ignored
     cidr_block = "0.0.0.0/0"
   }
 
   ingress {
     rule_no         = 101
     action          = "allow"
-    protocol        = -1  # all
-    from_port       = 0   # ignored
-    to_port         = 0   # ignored
+    protocol        = -1 # all
+    from_port       = 0  # ignored
+    to_port         = 0  # ignored
     ipv6_cidr_block = "::/0"
   }
 
   egress {
     rule_no    = 100
     action     = "allow"
-    protocol   = -1  # all
-    from_port  = 0   # ignored
-    to_port    = 0   # ignored
+    protocol   = -1 # all
+    from_port  = 0  # ignored
+    to_port    = 0  # ignored
     cidr_block = "0.0.0.0/0"
   }
 
   egress {
     rule_no         = 101
     action          = "allow"
-    protocol        = -1  # all
-    from_port       = 0   # ignored
-    to_port         = 0   # ignored
+    protocol        = -1 # all
+    from_port       = 0  # ignored
+    to_port         = 0  # ignored
     ipv6_cidr_block = "::/0"
   }
 

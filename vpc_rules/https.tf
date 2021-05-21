@@ -23,9 +23,9 @@ resource "aws_network_acl_rule" "pub_rx_https_ipv4" {
   rule_number    = 17301
   egress         = false
   rule_action    = "allow"
-  protocol       = "tcp"  # 6
-  from_port      = 443    # https
-  to_port        = 443    # https
+  protocol       = "tcp" # 6
+  from_port      = 443   # https
+  to_port        = 443   # https
   cidr_block     = "0.0.0.0/0"
 }
 
@@ -34,9 +34,9 @@ resource "aws_network_acl_rule" "pub_rx_https_ipv6" {
   rule_number     = 17302
   egress          = false
   rule_action     = "allow"
-  protocol        = "tcp"  # 6
-  from_port       = 443    # https
-  to_port         = 443    # https
+  protocol        = "tcp" # 6
+  from_port       = 443   # https
+  to_port         = 443   # https
   ipv6_cidr_block = "::/0"
 }
 
@@ -45,9 +45,9 @@ resource "aws_network_acl_rule" "pub_tx_https_ipv4" {
   rule_number    = 18301
   egress         = true
   rule_action    = "allow"
-  protocol       = "tcp"  # 6
-  from_port      = 443    # https
-  to_port        = 443    # https
+  protocol       = "tcp" # 6
+  from_port      = 443   # https
+  to_port        = 443   # https
   cidr_block     = "0.0.0.0/0"
 }
 
@@ -56,9 +56,9 @@ resource "aws_network_acl_rule" "pub_tx_https_ipv6" {
   rule_number     = 18302
   egress          = true
   rule_action     = "allow"
-  protocol        = "tcp"  # 6
-  from_port       = 443    # https
-  to_port         = 443    # https
+  protocol        = "tcp" # 6
+  from_port       = 443   # https
+  to_port         = 443   # https
   ipv6_cidr_block = "::/0"
 }
 
@@ -67,9 +67,9 @@ resource "aws_network_acl_rule" "priv_rx_https_ipv4" {
   rule_number    = 19301
   egress         = false
   rule_action    = "allow"
-  protocol       = "tcp"  # 6
-  from_port      = 443    # https
-  to_port        = 443    # https
+  protocol       = "tcp" # 6
+  from_port      = 443   # https
+  to_port        = 443   # https
   cidr_block     = "0.0.0.0/0"
 }
 
@@ -78,9 +78,9 @@ resource "aws_network_acl_rule" "priv_rx_https_ipv6" {
   rule_number     = 19302
   egress          = false
   rule_action     = "allow"
-  protocol        = "tcp"  # 6
-  from_port       = 443    # https
-  to_port         = 443    # https
+  protocol        = "tcp" # 6
+  from_port       = 443   # https
+  to_port         = 443   # https
   ipv6_cidr_block = "::/0"
 }
 
@@ -89,9 +89,9 @@ resource "aws_network_acl_rule" "priv_tx_https_ipv4" {
   rule_number    = 20301
   egress         = true
   rule_action    = "allow"
-  protocol       = "tcp"  # 6
-  from_port      = 443    # https
-  to_port        = 443    # https
+  protocol       = "tcp" # 6
+  from_port      = 443   # https
+  to_port        = 443   # https
   cidr_block     = "0.0.0.0/0"
 }
 
@@ -100,9 +100,9 @@ resource "aws_network_acl_rule" "priv_tx_https_ipv6" {
   rule_number     = 20302
   egress          = true
   rule_action     = "allow"
-  protocol        = "tcp"  # 6
-  from_port       = 443    # https
-  to_port         = 443    # https
+  protocol        = "tcp" # 6
+  from_port       = 443   # https
+  to_port         = 443   # https
   ipv6_cidr_block = "::/0"
 }
 
@@ -111,9 +111,9 @@ resource "aws_network_acl_rule" "sec_rx_https_ipv4" {
   rule_number    = 21301
   egress         = false
   rule_action    = "allow"
-  protocol       = "tcp"  # 6
-  from_port      = 443    # https
-  to_port        = 443    # https
+  protocol       = "tcp" # 6
+  from_port      = 443   # https
+  to_port        = 443   # https
   cidr_block     = "0.0.0.0/0"
 }
 
@@ -122,9 +122,9 @@ resource "aws_network_acl_rule" "sec_rx_https_ipv6" {
   rule_number     = 21302
   egress          = false
   rule_action     = "allow"
-  protocol        = "tcp"  # 6
-  from_port       = 443    # https
-  to_port         = 443    # https
+  protocol        = "tcp" # 6
+  from_port       = 443   # https
+  to_port         = 443   # https
   ipv6_cidr_block = "::/0"
 }
 
@@ -133,9 +133,9 @@ resource "aws_network_acl_rule" "sec_tx_https_ipv4" {
   rule_number    = 22301
   egress         = true
   rule_action    = "allow"
-  protocol       = "tcp"  # 6
-  from_port      = 443    # https
-  to_port        = 443    # https
+  protocol       = "tcp" # 6
+  from_port      = 443   # https
+  to_port        = 443   # https
   cidr_block     = "0.0.0.0/0"
 }
 
@@ -144,9 +144,9 @@ resource "aws_network_acl_rule" "sec_tx_https_ipv6" {
   rule_number     = 22302
   egress          = true
   rule_action     = "allow"
-  protocol        = "tcp"  # 6
-  from_port       = 443    # https
-  to_port         = 443    # https
+  protocol        = "tcp" # 6
+  from_port       = 443   # https
+  to_port         = 443   # https
   ipv6_cidr_block = "::/0"
 }
 
@@ -162,53 +162,53 @@ resource "aws_network_acl_rule" "sec_tx_https_ipv6" {
 resource "aws_security_group_rule" "pub_rx_https_ipv4" {
   security_group_id = data.aws_security_group.public.id
   type              = "ingress"
-  protocol          = "tcp"  # 6
-  from_port         = 443    # https
-  to_port           = 443    # https
+  protocol          = "tcp" # 6
+  from_port         = 443   # https
+  to_port           = 443   # https
   cidr_blocks       = ["0.0.0.0/0"]
 }
 
 resource "aws_security_group_rule" "pub_rx_https_ipv6" {
   security_group_id = data.aws_security_group.public.id
   type              = "ingress"
-  protocol          = "tcp"  # 6
-  from_port         = 443    # https
-  to_port           = 443    # https
+  protocol          = "tcp" # 6
+  from_port         = 443   # https
+  to_port           = 443   # https
   ipv6_cidr_blocks  = ["::/0"]
 }
 
 resource "aws_security_group_rule" "priv_rx_https_ipv4" {
   security_group_id = data.aws_security_group.private.id
   type              = "ingress"
-  protocol          = "tcp"  # 6
-  from_port         = 443    # https
-  to_port           = 443    # https
+  protocol          = "tcp" # 6
+  from_port         = 443   # https
+  to_port           = 443   # https
   cidr_blocks       = ["0.0.0.0/0"]
 }
 
 resource "aws_security_group_rule" "priv_rx_https_ipv6" {
   security_group_id = data.aws_security_group.private.id
   type              = "ingress"
-  protocol          = "tcp"  # 6
-  from_port         = 443    # https
-  to_port           = 443    # https
+  protocol          = "tcp" # 6
+  from_port         = 443   # https
+  to_port           = 443   # https
   ipv6_cidr_blocks  = ["::/0"]
 }
 
 resource "aws_security_group_rule" "sec_rx_https_ipv4" {
   security_group_id = data.aws_security_group.secure.id
   type              = "ingress"
-  protocol          = "tcp"  # 6
-  from_port         = 443    # https
-  to_port           = 443    # https
+  protocol          = "tcp" # 6
+  from_port         = 443   # https
+  to_port           = 443   # https
   cidr_blocks       = ["0.0.0.0/0"]
 }
 
 resource "aws_security_group_rule" "sec_rx_https_ipv6" {
   security_group_id = data.aws_security_group.secure.id
   type              = "ingress"
-  protocol          = "tcp"  # 6
-  from_port         = 443    # https
-  to_port           = 443    # https
+  protocol          = "tcp" # 6
+  from_port         = 443   # https
+  to_port           = 443   # https
   ipv6_cidr_blocks  = ["::/0"]
 }

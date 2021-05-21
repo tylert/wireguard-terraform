@@ -29,23 +29,23 @@ resource "aws_default_security_group" "main" {
   vpc_id = aws_vpc.main.id
 
   ingress {
-    protocol  = -1  # all
-    from_port = 0   # ignored
-    to_port   = 0   # ignored
+    protocol  = -1 # all
+    from_port = 0  # ignored
+    to_port   = 0  # ignored
     self      = true
   }
 
   egress {
-    protocol    = -1  # all
-    from_port   = 0   # ignored
-    to_port     = 0   # ignored
+    protocol    = -1 # all
+    from_port   = 0  # ignored
+    to_port     = 0  # ignored
     cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
-    protocol         = -1  # all
-    from_port        = 0   # ignored
-    to_port          = 0   # ignored
+    protocol         = -1 # all
+    from_port        = 0  # ignored
+    to_port          = 0  # ignored
     ipv6_cidr_blocks = ["::/0"]
   }
 
@@ -78,8 +78,8 @@ resource "aws_default_security_group" "main_tainted" {
 
 resource "aws_security_group" "public" {
   vpc_id                 = aws_vpc.main.id
-  name                   = "public sg for vpc-${var.basename}"  # Group Name / can't update
-  description            = "vpc-${var.basename} public security group"  # Group Description / can't update
+  name                   = "public sg for vpc-${var.basename}"         # Group Name / can't update
+  description            = "vpc-${var.basename} public security group" # Group Description / can't update
   revoke_rules_on_delete = false
 
   tags = {
@@ -98,8 +98,8 @@ resource "aws_security_group" "public" {
 
 resource "aws_security_group" "private" {
   vpc_id                 = aws_vpc.main.id
-  name                   = "private sg for vpc-${var.basename}"  # Group Name / can't update
-  description            = "vpc-${var.basename} private security group"  # Group Description / can't update
+  name                   = "private sg for vpc-${var.basename}"         # Group Name / can't update
+  description            = "vpc-${var.basename} private security group" # Group Description / can't update
   revoke_rules_on_delete = false
 
   tags = {
@@ -116,8 +116,8 @@ resource "aws_security_group" "private" {
 
 resource "aws_security_group" "secure" {
   vpc_id                 = aws_vpc.main.id
-  name                   = "secure sg for vpc-${var.basename}"  # Group Name / can't update
-  description            = "vpc-${var.basename} secure security group"  # Group Description / can't update
+  name                   = "secure sg for vpc-${var.basename}"         # Group Name / can't update
+  description            = "vpc-${var.basename} secure security group" # Group Description / can't update
   revoke_rules_on_delete = false
 
   tags = {

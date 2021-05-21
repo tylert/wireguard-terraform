@@ -27,7 +27,7 @@ resource "aws_dynamodb_table" "tf_lock" {
 }
 
 resource "aws_s3_bucket" "tf_state" {
-  bucket        = var.state_bucket_name  # supports bucket_prefix
+  bucket        = var.state_bucket_name # supports bucket_prefix
   acl           = "private"
   force_destroy = false
   region        = var.aws_region

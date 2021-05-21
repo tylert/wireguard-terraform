@@ -9,13 +9,13 @@ __   ____ _ _ __(_) __ _| |__ | | ___  ___
 variable "aws_region" {
   type        = string
   description = "AWS region in which to launch all non-global resources"
-# default     = "ca-central-1"
+  # default     = "ca-central-1"
 }
 
 variable "basename" {
   type        = string
   description = "Tag prefix to use for all resources"
-# default     = "test"
+  # default     = "test"
 }
 
 variable "how_many_azs" {
@@ -45,7 +45,7 @@ variable "subnet_bits" {
 variable "vpc_cidr_block" {
   type        = string
   description = "IPv4 CIDR block to assign to the VPC (with netmask from /16 to /28)"
-# default     = "10.0.0.0/16"
+  # default     = "10.0.0.0/16"
 }
 
 variable "vpc_instance_tenancy" {
@@ -53,8 +53,8 @@ variable "vpc_instance_tenancy" {
   description = "CHANGE FOR MOAR SPENDY!!!  How much to share resources with other cloud users"
   default     = "default"
 
-# validation {
-#   condition     = contains(["default", "dedicated", "host"], var.vpc_instance_tenancy)
-#   error_message = "Value must be one of:  default, dedicated or host"
-# }
+  # validation {
+  #   condition     = contains(["default", "dedicated", "host"], var.vpc_instance_tenancy)
+  #   error_message = "Value must be one of:  default, dedicated or host"
+  # }
 }

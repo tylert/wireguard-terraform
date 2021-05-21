@@ -62,7 +62,7 @@ EOF
 
 resource "aws_cloudwatch_log_group" "main" {
   name              = "${var.basename}-loggroup"
-  retention_in_days = 7  # default???
+  retention_in_days = 7 # default???
 
   tags = {
     Name = "${var.basename}-loggroup"
