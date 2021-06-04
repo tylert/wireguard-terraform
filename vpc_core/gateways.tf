@@ -89,7 +89,7 @@ resource "aws_route" "priv_az_ipv6" {
 # AuthFailure errors.
 
 resource "aws_eip" "natgw_az" {
-  count      = var.how_many_natgws
+  count      = false == var.prefer_nat_instances ? var.how_many_nats : 0
   vpc        = true
   depends_on = [aws_internet_gateway.public]
 
@@ -99,7 +99,7 @@ resource "aws_eip" "natgw_az" {
 }
 
 resource "aws_nat_gateway" "az" {
-  count         = var.how_many_natgws
+  count         = false == var.prefer_nat_instances ? var.how_many_nats : 0
   allocation_id = element(aws_eip.natgw_az[*].id, count.index)
   subnet_id     = element(aws_subnet.public_az[*].id, count.index)
   depends_on    = [aws_internet_gateway.public]
@@ -110,7 +110,7 @@ resource "aws_nat_gateway" "az" {
 }
 
 resource "aws_route" "priv_az_ipv4" {
-  count                  = var.how_many_natgws
+  count                  = false == var.prefer_nat_instances ? var.how_many_nats : 0
   route_table_id         = element(aws_route_table.private_az[*].id, count.index)
   destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id         = element(aws_nat_gateway.az[*].id, count.index)
@@ -124,15 +124,15 @@ resource "aws_route" "priv_az_ipv4" {
                      |_| |_|\__,_|\__|    |_|_| |_|___/\__|
 */
 
-# resource "aws_eip" "natinst" {
-#   count      = var.how_many_natinsts
-#   vpc        = true
-#   depends_on = [aws_internet_gateway.public]
+resource "aws_eip" "natinst_az" {
+  count      = true == var.prefer_nat_instances ? var.how_many_nats : 0
+  vpc        = true
+  depends_on = [aws_internet_gateway.public]
 
-#   tags = {
-#     Name = "eipalloc-${var.basename}-natinst-az${count.index}"
-#   }
-# }
+  tags = {
+    Name = "eipalloc-${var.basename}-natinst-az${count.index}"
+  }
+}
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami
 

@@ -24,10 +24,16 @@ variable "how_many_azs" {
   default     = 3
 }
 
-variable "how_many_natgws" {
+variable "how_many_nats" {
   type        = number
-  description = "CHANGE FOR MOAR SPENDY!!!  How many NAT gateways to create across the available AZs"
+  description = "CHANGE FOR MOAR SPENDY!!!  How many NAT gateways/instances to create across the available AZs"
   default     = 0
+}
+
+variable "prefer_nat_instances" {
+  type        = bool
+  description = ""
+  default     = true
 }
 
 variable "preserve_default_rules" {
