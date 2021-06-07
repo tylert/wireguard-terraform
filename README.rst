@@ -1,83 +1,28 @@
 ::
 
     # Create everything under vpc_core
-    terraform \
-        -chdir=vpc_core \
-        init \
-        -input=false
-    terraform \
-        -chdir=vpc_core \
-        plan \
-        -input=false \
-        -out=../plan1 \
-        -var-file=../terraform.tfvars
-    terraform \
-        -chdir=vpc_core \
-        apply \
-        -input=false \
-        ../plan1
+    ./tf.sh init vpc_core
+    ./tf.sh plan vpc_core
+    ./tf.sh apply vpc_core
 
     # Create everything under vpc_rules
-    terraform \
-        -chdir=vpc_rules \
-        init \
-        -input=false
-    terraform \
-        -chdir=vpc_rules \
-        plan \
-        -input=false \
-        -out=../plan2 \
-        -var-file=../terraform.tfvars
-    terraform \
-        -chdir=vpc_rules \
-        apply \
-        -input=false \
-        ../plan2
+    ./tf.sh init vpc_rules
+    ./tf.sh plan vpc_rules
+    ./tf.sh apply vpc_rules
 
     # Destroy everything under vpc_rules
-    terraform \
-        -chdir=vpc_rules \
-        plan \
-        -destroy \
-        -input=false \
-        -out=../plan3 \
-        -var-file=../terraform.tfvars
-    terraform \
-        -chdir=vpc_rules \
-        apply \
-        -input=false \
-        ../plan3
-    # or
-    terraform \
-        -chdir=vpc_rules \
-        destroy \
-        -auto-approve \
-        -input=false \
-        -var-file=../terraform.tfvars
+    ./tf.sh plan_destroy vpc_rules
+    ./tf.sh destroy vpc_rules
 
     # Destroy everything under vpc_core
-    terraform \
-        -chdir=vpc_core \
-        plan \
-        -destroy \
-        -input=false \
-        -out=../plan4 \
-        -var-file=../terraform.tfvars
-    terraform \
-        -chdir=vpc_core \
-        apply \
-        -input=false \
-        ../plan4
-    # or
-    terraform \
-        -chdir=vpc_core \
-        destroy \
-        -auto-approve \
-        -input=false \
-        -var-file=../terraform.tfvars
+    ./tf.sh plan_destroy vpc_core
+    ./tf.sh destroy vpc_core
 
 * https://learn.hashicorp.com/tutorials/terraform/automate-terraform?in=terraform/automation
 * https://github.com/fly-examples/rds-connector/blob/main/main.tf#L118-L180
+* https://www.hashicorp.com/blog/terraform-0-12-conditional-operator-improvements#conditionally-omitted-arguments
+* https://www.terraform.io/docs/language/state/workspaces.html#when-to-use-multiple-workspaces
+* https://www.hashicorp.com/resources/going-multi-account-with-terraform-on-aws
 
 
 Network ACLs
@@ -131,9 +76,6 @@ https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs-s3.html
 
 https://www.terraform.io/docs/configuration/variables.html#custom-validation-rules
 ^^^ for variables to make sure they are not too big or too small (e.g.:  AZ and NAT gw counts)???
-
-https://www.hashicorp.com/blog/terraform-0-12-conditional-operator-improvements#conditionally-omitted-arguments
-^^^ to select either NAT gws or NAT instances???
 
 https://registry.terraform.io/providers/hashicorp/random/latest/docs
 ^^^ generate random strings for the basenames???
