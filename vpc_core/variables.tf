@@ -39,7 +39,7 @@ variable "prefer_nat_instances" {
 variable "preserve_default_rules" {
   type        = bool
   description = "Preserve the default NACL and SG rules when these resources get tagged"
-  default     = true
+  default     = false
 }
 
 variable "subnet_bits" {
