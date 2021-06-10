@@ -41,7 +41,7 @@ tf_plan() {
     fi
 
     if [ -z "${var_file}" ]; then
-        var_file='../terraform.tfvars'
+        var_file='terraform.tfvars'
     fi
 
     ${TERRAFORM}                \
@@ -90,7 +90,7 @@ tf_plan_destroy() {
     fi
 
     if [ -z "${var_file}" ]; then
-        var_file='../terraform.tfvars'
+        var_file='terraform.tfvars'
     fi
 
     ${TERRAFORM}                \
@@ -107,21 +107,7 @@ tf_destroy() {
     local module="${1}"
     local plan_file="${2}"
 
-    if [ -z "${module}" ]; then
-        echo 'Unspecified module.'
-        return 1
-    fi
-
-    if [ -z "${plan_file}" ]; then
-        plan_file='../plan_file'
-    fi
-
-    ${TERRAFORM}           \
-        -chdir="${module}" \
-        apply              \
-        -auto-approve      \
-        -input=false       \
-        "${plan_file}"
+    tf_apply "${module}" "${plan_file}"
 }
 
 
