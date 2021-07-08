@@ -52,6 +52,7 @@ hu_get() {
 
     if [ "${remote_hash}" != "${local_hash}" ]; then
         echo "Wrong hash!!!  '${remote_hash}' expected but got '${local_hash}'"
+        rm -fv "${target_file}"
     fi
 }
 
