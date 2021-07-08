@@ -19,7 +19,7 @@ tf_init() {
         return 1
     fi
 
-    ${TERRAFORM}           \
+    "${TERRAFORM}"         \
         -chdir="${module}" \
         init               \
         -input=false
@@ -44,7 +44,7 @@ tf_plan() {
         var_file='terraform.tfvars'
     fi
 
-    ${TERRAFORM}                \
+    "${TERRAFORM}"              \
         -chdir="${module}"      \
         plan                    \
         -input=false            \
@@ -66,7 +66,7 @@ tf_apply() {
         plan_file='../plan_file'
     fi
 
-    ${TERRAFORM}           \
+    "${TERRAFORM}"         \
         -chdir="${module}" \
         apply              \
         -auto-approve      \
@@ -93,7 +93,7 @@ tf_plan_destroy() {
         var_file='terraform.tfvars'
     fi
 
-    ${TERRAFORM}                \
+    "${TERRAFORM}"              \
         -chdir="${module}"      \
         plan                    \
         -destroy                \
@@ -111,6 +111,7 @@ tf_destroy() {
 }
 
 
+# Use the one found in ${PATH} by default
 if [ -z "${TERRAFORM}" ]; then
     TERRAFORM='terraform'
 fi
