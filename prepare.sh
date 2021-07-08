@@ -81,12 +81,10 @@ tf_get() {
 
 
 # Use the binary found in ${PATH} by default
-
 if [ -z "${HASHI_UP}" ]; then
     HASHI_UP='hashi-up'
 fi
 
 path="${1}"
-
 "hu_get" "${path}"
 "tf_get" "${path}"

@@ -112,12 +112,10 @@ tf_destroy() {
 
 
 # Use the binary found in ${PATH} by default
-
 if [ -z "${TERRAFORM}" ]; then
     TERRAFORM='terraform'
 fi
 
 action="${1}"
 module="${2}"
-
 "tf_${action}" "${module}"
