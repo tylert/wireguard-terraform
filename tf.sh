@@ -111,7 +111,8 @@ tf_destroy() {
 }
 
 
-# Use the one found in ${PATH} by default
+# Use the binary found in ${PATH} by default
+
 if [ -z "${TERRAFORM}" ]; then
     TERRAFORM='terraform'
 fi
