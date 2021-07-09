@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
 
+# A helpful wrapper script for using Terraform modules as distinct entities.
+
+
 # Enable "bash strict mode".
 # set -u is the same as set -o nounset
 # set -e is the same as set -o errexit
@@ -11,6 +14,7 @@
 # IFS=$'\n\t'
 
 
+# Call 'terraform init'
 tf_init() {
     local module="${1}"
 
@@ -26,6 +30,7 @@ tf_init() {
 }
 
 
+# Call 'terraform plan'
 tf_plan() {
     local module="${1}"
     local plan_file="${2}"
@@ -53,6 +58,7 @@ tf_plan() {
 }
 
 
+# Call 'terraform apply'
 tf_apply() {
     local module="${1}"
     local plan_file="${2}"
@@ -75,6 +81,8 @@ tf_apply() {
 }
 
 
+# Call 'terraform plan -destroy'
+#     XXX FIXME TODO  Combine tf_plan and tf_plan_destroy functions???
 tf_plan_destroy() {
     local module="${1}"
     local plan_file="${2}"
@@ -103,6 +111,7 @@ tf_plan_destroy() {
 }
 
 
+# Call 'terraform destroy'
 tf_destroy() {
     local module="${1}"
     local plan_file="${2}"
