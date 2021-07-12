@@ -38,7 +38,7 @@ hu_get() {
     local target_file="${path}/hashi-up"
 
     # Fetch release and expected hash data before downloading the main binary
-    local release=$(curl --head --silent ${repo_base}/releases/latest | grep -i location: | awk -F"/" '{ printf "%s", $NF }' | tr -d '\r')
+    local release=$(curl --head --silent ${repo_base}/releases/latest | grep location: | awk -F"/" '{ printf "%s", $NF }' | tr -d '\r')
     local bin_url="${repo_base}/releases/download/${release}/hashi-up${suffix}"
     local remote_hash=$(curl --location "${bin_url}.sha256" --silent | cut -d' ' -f1)
 
