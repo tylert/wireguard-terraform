@@ -27,10 +27,14 @@ hu_get() {
     case $(uname) in
         "Linux")
             case $(uname -m) in
+                "x86_64") echo "No suffix needed for x86_64 Linux." ;;
                 "aarch64") suffix="-arm64" ;;
                 "armv6l" | "armv7l") suffix="-armhf" ;;
+                *) echo "I don't recognize your machine." ; exit 1 ;;
             esac ;;
         "Darwin") suffix="-darwin" ;;
+        # "MINGW") suffix='.exe' ;;
+        *) echo "I don't recognize your OS."; exit 2 ;;
     esac
 
     # Where to fetch things from/to
@@ -44,7 +48,7 @@ hu_get() {
 
     # Actually download the 'hashi-up' binary
     if [ ! -e "${target_file}" ]; then
-        echo "Downloading '${bin_url}' to '${target_file}'"
+        echo "Downloading '${bin_url}' to '${target_file}'."
         curl --location "${bin_url}" --output "${target_file}" --progress-bar --show-error
         chmod +x "${target_file}"
         echo "Download complete."
@@ -55,11 +59,13 @@ hu_get() {
     case $(uname) in
         "Linux") local_hash=$(sha256sum "${target_file}" | cut -d' ' -f1) ;;
         "Darwin") local_hash=$(shasum -a 256 "${target_file}" | cut -d' ' -f1) ;;
+        # "MINGW") local_hash=remote_hash ;;
+        *) echo "I don't recognize your OS."; exit 3 ;;
     esac
 
     # Compare hashes to decide if the download was likely successful
     if [ "${remote_hash}" != "${local_hash}" ]; then
-        echo "Wrong hash!!!  '${remote_hash}' expected but got '${local_hash}'"
+        echo "Wrong hash!!!  '${remote_hash}' expected but got '${local_hash}'."
         echo "Please delete '${target_file}' and try again."
     fi
 }
@@ -93,10 +99,18 @@ tf_get() {
     case $(uname) in
         "Linux") local_hash=$(sha256sum "${target_file}" | cut -d' ' -f1) ;;
         "Darwin") local_hash=$(shasum -a 256 "${target_file}" | cut -d' ' -f1) ;;
+        # "MINGW") local_hash=remote_hash ;;
+        *) echo "I don't recognize your OS."; exit 3 ;;
     esac
 
     # XXX FIXME TODO  Actually do something with the hash and compare it to the
     # remote one fetched from https://releases.hashicorp.com.
+
+    # Compare hashes to decide if the download was likely successful
+    # if [ "${remote_hash}" != "${local_hash}" ]; then
+    #     echo "Wrong hash!!!  '${remote_hash}' expected but got '${local_hash}'."
+    #     echo "Please delete '${target_file}' and try again."
+    # fi
 }
 
 
