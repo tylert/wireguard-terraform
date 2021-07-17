@@ -124,6 +124,9 @@ resource "aws_route" "priv_az_ipv4" {
                      |_| |_|\__,_|\__|    |_|_| |_|___/\__|
 */
 
+# http://cdimage.debian.org/cdimage/cloud/
+# https://wiki.debian.org/Cloud/AmazonEC2Image
+
 resource "aws_eip" "natinst_az" {
   count      = true == var.prefer_nat_instances ? var.how_many_nats : 0
   vpc        = true

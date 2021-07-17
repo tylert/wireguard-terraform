@@ -1,5 +1,10 @@
 ::
 
+    # Install all prerequisites
+    export HASHI_UP=./hashi-up
+    export TERRAFORM=./terraform
+    ./prepare.sh
+
     # Create everything under vpc_core
     ./tf.sh init vpc_core
     ./tf.sh plan vpc_core
