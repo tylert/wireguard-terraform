@@ -3,6 +3,8 @@
 
 # A helpful wrapper script for using Terraform modules as distinct entities.
 
+# This script depends on:  bash, terraform.
+
 
 # Enable "bash strict mode".
 # set -u is the same as set -o nounset

@@ -3,6 +3,9 @@
 
 # A helpful installer script for fetching all dependencies for this project.
 
+# This script depends on:  awk, bash, curl, cut, grep, sha256sum/shasum, tr,
+# uname.
+
 
 # Enable "bash strict mode".
 # set -u is the same as set -o nounset
@@ -25,7 +28,7 @@ hu_get() {
     # Find out which binary to fetch based on the local machine
     local suffix=''
     case $(uname) in
-        "Linux")
+        'Linux')
             case $(uname -m) in
                 'x86_64') echo 'No suffix needed for x86_64 Linux.' ;;
                 'aarch64') suffix='-arm64' ;;
