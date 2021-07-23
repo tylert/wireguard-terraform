@@ -23,17 +23,17 @@ hu_get() {
     fi
 
     # Find out which binary to fetch based on the local machine
-    local suffix=""
+    local suffix=''
     case $(uname) in
         "Linux")
             case $(uname -m) in
-                "x86_64") echo "No suffix needed for x86_64 Linux." ;;
-                "aarch64") suffix="-arm64" ;;
-                "armv6l" | "armv7l") suffix="-armhf" ;;
+                'x86_64') echo 'No suffix needed for x86_64 Linux.' ;;
+                'aarch64') suffix='-arm64' ;;
+                'armv6l' | 'armv7l') suffix='-armhf' ;;
                 *) echo "I don't recognize your machine." ; exit 1 ;;
             esac ;;
-        "Darwin") suffix="-darwin" ;;
-        # "MINGW") suffix='.exe' ;;
+        'Darwin') suffix='-darwin' ;;
+        # 'MINGW') suffix='.exe' ;;
         *) echo "I don't recognize your OS."; exit 2 ;;
     esac
 
@@ -51,15 +51,15 @@ hu_get() {
         echo "Downloading '${bin_url}' to '${target_file}'."
         curl --location "${bin_url}" --output "${target_file}" --progress-bar --show-error
         chmod +x "${target_file}"
-        echo "Download complete."
+        echo 'Download complete.'
     fi
 
     # Determine hash of newly downloaded file
-    local local_hash=""
+    local local_hash=''
     case $(uname) in
-        "Linux") local_hash=$(sha256sum "${target_file}" | cut -d' ' -f1) ;;
-        "Darwin") local_hash=$(shasum -a 256 "${target_file}" | cut -d' ' -f1) ;;
-        # "MINGW") local_hash=remote_hash ;;
+        'Linux') local_hash=$(sha256sum "${target_file}" | cut -d' ' -f1) ;;
+        'Darwin') local_hash=$(shasum -a 256 "${target_file}" | cut -d' ' -f1) ;;
+        # 'MINGW') local_hash=remote_hash ;;
         *) echo "I don't recognize your OS."; exit 3 ;;
     esac
 
@@ -81,7 +81,7 @@ tf_get() {
     fi
 
     # Control which version of Terraform is desired (or else assume latest)
-    local extra_options=""
+    local extra_options=''
     if [ ! -z "${version}" ]; then
         extra_options="--version ${version}"
     fi
@@ -95,11 +95,11 @@ tf_get() {
     fi
 
     # Determine hash of newly downloaded file
-    local local_hash=""
+    local local_hash=''
     case $(uname) in
-        "Linux") local_hash=$(sha256sum "${target_file}" | cut -d' ' -f1) ;;
-        "Darwin") local_hash=$(shasum -a 256 "${target_file}" | cut -d' ' -f1) ;;
-        # "MINGW") local_hash=remote_hash ;;
+        'Linux') local_hash=$(sha256sum "${target_file}" | cut -d' ' -f1) ;;
+        'Darwin') local_hash=$(shasum -a 256 "${target_file}" | cut -d' ' -f1) ;;
+        # 'MINGW') local_hash=remote_hash ;;
         *) echo "I don't recognize your OS."; exit 3 ;;
     esac
 
