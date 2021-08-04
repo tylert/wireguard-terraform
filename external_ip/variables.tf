@@ -15,7 +15,7 @@ variable "aws_region" {
 variable "dyndns_url" {
   type        = string
   description = ""
-  default     = "https://icanhazip.com"
+  default     = "https://icanhazip.com" # https://ip.me
 }
 
 variable "hosted_zone_name" {

@@ -33,6 +33,7 @@ tf_init() {
 
 
 # Call 'terraform plan'
+#     XXX FIXME TODO  Combine tf_plan and tf_plan_destroy functions???
 tf_plan() {
     local module="${1}"
     local plan_file="${2}"
@@ -51,12 +52,20 @@ tf_plan() {
         var_file='terraform.tfvars'
     fi
 
-    "${TERRAFORM}"              \
-        -chdir="${module}"      \
-        plan                    \
-        -input=false            \
-        -out="${plan_file}"     \
-        -var-file="${var_file}"
+    if [ -e "${var_file}" ]; then
+        "${TERRAFORM}"              \
+            -chdir="${module}"      \
+            plan                    \
+            -input=false            \
+            -out="${plan_file}"     \
+            -var-file="${var_file}"
+    else
+        "${TERRAFORM}"              \
+            -chdir="${module}"      \
+            plan                    \
+            -input=false            \
+            -out="${plan_file}"
+    fi
 }
 
 
@@ -103,13 +112,22 @@ tf_plan_destroy() {
         var_file='terraform.tfvars'
     fi
 
-    "${TERRAFORM}"              \
-        -chdir="${module}"      \
-        plan                    \
-        -destroy                \
-        -input=false            \
-        -out="${plan_file}"     \
-        -var-file="${var_file}"
+    if [ -e "${var_file}" ]; then
+        "${TERRAFORM}"              \
+            -chdir="${module}"      \
+            plan                    \
+            -destroy                \
+            -input=false            \
+            -out="${plan_file}"     \
+            -var-file="${var_file}"
+    else
+        "${TERRAFORM}"              \
+            -chdir="${module}"      \
+            plan                    \
+            -destroy                \
+            -input=false            \
+            -out="${plan_file}"
+    fi
 }
 
 
