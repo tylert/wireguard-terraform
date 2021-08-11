@@ -108,6 +108,7 @@ tf_get() {
 
     # XXX FIXME TODO  Actually do something with the hash and compare it to the
     # remote one fetched from https://releases.hashicorp.com.
+    # XXX FIXME TODO  https://github.com/jsiebens/hashi-up/issues/24
 
     # Compare hashes to decide if the download was likely successful
     # if [ "${remote_hash}" != "${local_hash}" ]; then
