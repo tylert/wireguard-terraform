@@ -28,6 +28,7 @@
 * https://www.hashicorp.com/blog/terraform-0-12-conditional-operator-improvements#conditionally-omitted-arguments
 * https://www.terraform.io/docs/language/state/workspaces.html#when-to-use-multiple-workspaces
 * https://www.hashicorp.com/resources/going-multi-account-with-terraform-on-aws
+* https://aws.amazon.com/blogs/aws/building-three-tier-architectures-with-security-groups/
 
 
 Network ACLs

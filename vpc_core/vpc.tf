@@ -6,8 +6,6 @@ __   ___ __   ___
       |_|
 */
 
-# https://aws.amazon.com/blogs/aws/building-three-tier-architectures-with-security-groups/
-
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_dhcp_options
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_dhcp_options_association

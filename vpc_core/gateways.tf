@@ -158,6 +158,7 @@ resource "aws_eip" "natinst_az" {
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
 
 # resource "aws_instance" "natinst" {
+#   count     = true == var.prefer_nat_instances ? var.how_many_nats : 0
 #   user_data = <<-EOF
 #               EOF
 # }
