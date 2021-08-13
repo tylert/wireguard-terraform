@@ -1,5 +1,6 @@
 .DS_Store
 .*.sw?
+terraform.tfvars
 .terraform/
 .terraform.lock.hcl
 terraform.tfstate

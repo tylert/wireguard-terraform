@@ -1,0 +1,4 @@
+aws_region       = "ca-central-1"
+basename         = "test1"
+hosted_zone_name = "example.com"
+record_name      = "m0"

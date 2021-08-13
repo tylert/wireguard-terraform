@@ -9,11 +9,11 @@ __   ____ _ _ __(_) __ _| |__ | | ___  ___
 variable "aws_region" {
   type        = string
   description = "AWS region in which to launch all non-global resources"
-  # default     = "ca-central-1"
+  # there should be no default for this variable
 }
 
 variable "basename" {
   type        = string
-  description = "Tag prefix to use for all resources"
-  # default     = "test"
+  description = "Tag prefix to use for all related resources (e.g.:  test1)"
+  # there should be no default for this variable
 }
