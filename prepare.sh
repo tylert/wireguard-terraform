@@ -33,7 +33,7 @@ hu_get() {
                 'x86_64') echo 'No suffix needed for x86_64 Linux.' ;;
                 'aarch64') suffix='-arm64' ;;
                 'armv6l' | 'armv7l') suffix='-armhf' ;;
-                *) echo "I don't recognize your machine." ; exit 1 ;;
+                *) echo "I don't recognize your machine."; exit 1 ;;
             esac ;;
         'Darwin') suffix='-darwin' ;;
         # 'MINGW') suffix='.exe' ;;
@@ -108,7 +108,7 @@ tf_get() {
     esac
 
     # XXX FIXME TODO  Actually do something with the hash and compare it to the
-    # remote one fetched from https://releases.hashicorp.com.
+    # remote one fetched from https://releases.hashicorp.com/terraform/index.json.
 
     # Compare hashes to decide if the download was likely successful
     # if [ "${remote_hash}" != "${local_hash}" ]; then
