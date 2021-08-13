@@ -93,6 +93,7 @@ tf_get() {
     local target_file="${path}/terraform"
 
     # Actually download the 'terraform' binary
+    # XXX FIXME TODO  https://github.com/jsiebens/hashi-up/issues/24
     if [ ! -e "${target_file}" ]; then
         bash -c "${HASHI_UP} terraform get --dest ${path} ${extra_options}"
     fi
@@ -108,7 +109,6 @@ tf_get() {
 
     # XXX FIXME TODO  Actually do something with the hash and compare it to the
     # remote one fetched from https://releases.hashicorp.com.
-    # XXX FIXME TODO  https://github.com/jsiebens/hashi-up/issues/24
 
     # Compare hashes to decide if the download was likely successful
     # if [ "${remote_hash}" != "${local_hash}" ]; then
