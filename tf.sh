@@ -28,7 +28,23 @@ tf_init() {
     "${TERRAFORM}"         \
         -chdir="${module}" \
         init               \
-        -input=false
+        -input=false       \
+        -upgrade=true
+}
+
+
+# Call 'terraform validate'
+tf_validate() {
+    local module="${1}"
+
+    if [ -z "${module}" ]; then
+        echo 'Unspecified module.'
+        return 1
+    fi
+
+    "${TERRAFORM}"         \
+        -chdir="${module}" \
+        validate
 }
 
 
@@ -69,29 +85,6 @@ tf_plan() {
 }
 
 
-# Call 'terraform apply'
-tf_apply() {
-    local module="${1}"
-    local plan_file="${2}"
-
-    if [ -z "${module}" ]; then
-        echo 'Unspecified module.'
-        return 1
-    fi
-
-    if [ -z "${plan_file}" ]; then
-        plan_file='../plan_file'
-    fi
-
-    "${TERRAFORM}"         \
-        -chdir="${module}" \
-        apply              \
-        -auto-approve      \
-        -input=false       \
-        "${plan_file}"
-}
-
-
 # Call 'terraform plan -destroy'
 #     XXX FIXME TODO  Combine tf_plan and tf_plan_destroy functions???
 tf_plan_destroy() {
@@ -128,6 +121,29 @@ tf_plan_destroy() {
             -input=false            \
             -out="${plan_file}"
     fi
+}
+
+
+# Call 'terraform apply'
+tf_apply() {
+    local module="${1}"
+    local plan_file="${2}"
+
+    if [ -z "${module}" ]; then
+        echo 'Unspecified module.'
+        return 1
+    fi
+
+    if [ -z "${plan_file}" ]; then
+        plan_file='../plan_file'
+    fi
+
+    "${TERRAFORM}"         \
+        -chdir="${module}" \
+        apply              \
+        -auto-approve      \
+        -input=false       \
+        "${plan_file}"
 }
 
 
