@@ -49,7 +49,7 @@ tf_validate() {
 
 
 # Call 'tflint --init' for a module
-tf_init_lint() {
+tf_lint_init() {
     local module="${1}"
 
     if [ -z "${module}" ]; then
