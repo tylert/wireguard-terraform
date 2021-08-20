@@ -74,6 +74,22 @@ tf_lint() {
 }
 
 
+# Call 'terraform fmt' for all files in a module
+tf_fmt() {
+    local module="${1}"
+
+    if [ -z "${module}" ]; then
+        echo 'Unspecified module.'
+        return 1
+    fi
+
+    # Only .tf and .tfvars files can be processed with terraform fmt
+    for file in "${module}"/*.tf; do
+        "${TERRAFORM}" fmt "${file}"
+    done
+}
+
+
 # Call 'terraform plan' for a module
 #     XXX FIXME TODO  Combine tf_plan and tf_plan_destroy functions???
 tf_plan() {
