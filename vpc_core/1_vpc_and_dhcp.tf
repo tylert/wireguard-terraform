@@ -1,9 +1,10 @@
 /*
-__   ___ __   ___
-\ \ / / '_ \ / __|
- \ V /| |_) | (__
-  \_/ | .__/ \___|
-      |_|
+                                    _       _ _
+__   ___ __   ___    __ _ _ __   __| |   __| | |__   ___ _ __
+\ \ / / '_ \ / __|  / _` | '_ \ / _` |  / _` | '_ \ / __| '_ \
+ \ V /| |_) | (__  | (_| | | | | (_| | | (_| | | | | (__| |_) |
+  \_/ | .__/ \___|  \__,_|_| |_|\__,_|  \__,_|_| |_|\___| .__/
+      |_|                                               |_|
 */
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc
@@ -39,8 +40,4 @@ resource "aws_vpc_dhcp_options" "main" {
 resource "aws_vpc_dhcp_options_association" "main" {
   vpc_id          = aws_vpc.main.id
   dhcp_options_id = aws_vpc_dhcp_options.main.id
-}
-
-data "aws_availability_zones" "available" {
-  state = "available"
 }
