@@ -48,6 +48,30 @@ tf_validate() {
 }
 
 
+tf_init_lint() {
+    local module="${1}"
+
+    if [ -z "${module}" ]; then
+        echo 'Unspecified module.'
+        return 1
+    fi
+
+    "${TFLINT}" --init "${module}"
+}
+
+
+tf_lint() {
+    local module="${1}"
+
+    if [ -z "${module}" ]; then
+        echo 'Unspecified module.'
+        return 1
+    fi
+
+    "${TFLINT}" "${module}"
+}
+
+
 # Call 'terraform plan'
 #     XXX FIXME TODO  Combine tf_plan and tf_plan_destroy functions???
 tf_plan() {
@@ -159,6 +183,11 @@ tf_destroy() {
 # Use the binary found in ${PATH} by default
 if [ -z "${TERRAFORM}" ]; then
     TERRAFORM='terraform'
+fi
+
+# Use the binary found in ${PATH} by default
+if [ -z "${TFLINT}" ]; then
+    TFLINT='tflint'
 fi
 
 action="${1}"
