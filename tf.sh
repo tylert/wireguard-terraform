@@ -3,7 +3,7 @@
 
 # A helpful wrapper script for using Terraform modules as distinct entities.
 
-# This script depends on:  bash, terraform.
+# This script depends on:  bash, terraform, tflint.
 
 
 # Enable "bash strict mode".
@@ -16,7 +16,7 @@
 # IFS=$'\n\t'
 
 
-# Call 'terraform init'
+# Call 'terraform init' for a module
 tf_init() {
     local module="${1}"
 
@@ -33,7 +33,7 @@ tf_init() {
 }
 
 
-# Call 'terraform validate'
+# Call 'terraform validate' for a module
 tf_validate() {
     local module="${1}"
 
@@ -48,6 +48,7 @@ tf_validate() {
 }
 
 
+# Call 'tflint --init' for a module
 tf_init_lint() {
     local module="${1}"
 
@@ -60,6 +61,7 @@ tf_init_lint() {
 }
 
 
+# Call 'tflint' for a module
 tf_lint() {
     local module="${1}"
 
@@ -72,7 +74,7 @@ tf_lint() {
 }
 
 
-# Call 'terraform plan'
+# Call 'terraform plan' for a module
 #     XXX FIXME TODO  Combine tf_plan and tf_plan_destroy functions???
 tf_plan() {
     local module="${1}"
@@ -109,7 +111,7 @@ tf_plan() {
 }
 
 
-# Call 'terraform plan -destroy'
+# Call 'terraform plan -destroy' for a module
 #     XXX FIXME TODO  Combine tf_plan and tf_plan_destroy functions???
 tf_plan_destroy() {
     local module="${1}"
@@ -148,7 +150,7 @@ tf_plan_destroy() {
 }
 
 
-# Call 'terraform apply'
+# Call 'terraform apply' for a module
 tf_apply() {
     local module="${1}"
     local plan_file="${2}"
@@ -171,7 +173,7 @@ tf_apply() {
 }
 
 
-# Call 'terraform destroy'
+# Call 'terraform destroy' for a module
 tf_destroy() {
     local module="${1}"
     local plan_file="${2}"
