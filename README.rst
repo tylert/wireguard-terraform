@@ -23,6 +23,7 @@
     ./tf.sh plan_destroy vpc_core
     ./tf.sh destroy vpc_core
 
+* https://smartlogic.io/blog/how-i-organize-terraform-modules-off-the-beaten-path/
 * https://learn.hashicorp.com/tutorials/terraform/automate-terraform?in=terraform/automation
 * https://github.com/fly-examples/rds-connector/blob/main/main.tf#L118-L180
 * https://www.hashicorp.com/blog/terraform-0-12-conditional-operator-improvements#conditionally-omitted-arguments
