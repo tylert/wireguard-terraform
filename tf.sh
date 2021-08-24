@@ -19,32 +19,31 @@
 # Call 'terraform init' for a module
 tf_init() {
     local module="${1}"
+    local conf_file="${2}"
 
     if [ -z "${module}" ]; then
         echo 'Unspecified module.'
         return 1
     fi
 
-    "${TERRAFORM}"         \
-        -chdir="${module}" \
-        init               \
-        -input=false       \
-        -upgrade=true
-}
-
-
-# Call 'terraform validate' for a module
-tf_validate() {
-    local module="${1}"
-
-    if [ -z "${module}" ]; then
-        echo 'Unspecified module.'
-        return 1
+    if [ -z "${conf_file}" ]; then
+        conf_file='../backend.tfvars'
     fi
 
-    "${TERRAFORM}"         \
-        -chdir="${module}" \
-        validate
+    if [ -e "${conf_file}" ]; then
+        "${TERRAFORM}"                     \
+            -chdir="${module}"             \
+            init                           \
+            -backend-config="${conf_file}" \
+            -input=false                   \
+            -upgrade=true
+    else
+        "${TERRAFORM}"         \
+            -chdir="${module}" \
+            init               \
+            -input=false       \
+            -upgrade=true
+    fi
 }
 
 
@@ -71,6 +70,21 @@ tf_lint() {
     fi
 
     "${TFLINT}" "${module}"
+}
+
+
+# Call 'terraform validate' for a module
+tf_validate() {
+    local module="${1}"
+
+    if [ -z "${module}" ]; then
+        echo 'Unspecified module.'
+        return 1
+    fi
+
+    "${TERRAFORM}"         \
+        -chdir="${module}" \
+        validate
 }
 
 
@@ -118,10 +132,10 @@ tf_plan() {
             -out="${plan_file}"     \
             -var-file="${var_file}"
     else
-        "${TERRAFORM}"              \
-            -chdir="${module}"      \
-            plan                    \
-            -input=false            \
+        "${TERRAFORM}"          \
+            -chdir="${module}"  \
+            plan                \
+            -input=false        \
             -out="${plan_file}"
     fi
 }
@@ -156,11 +170,11 @@ tf_plan_destroy() {
             -out="${plan_file}"     \
             -var-file="${var_file}"
     else
-        "${TERRAFORM}"              \
-            -chdir="${module}"      \
-            plan                    \
-            -destroy                \
-            -input=false            \
+        "${TERRAFORM}"          \
+            -chdir="${module}"  \
+            plan                \
+            -destroy            \
+            -input=false        \
             -out="${plan_file}"
     fi
 }
