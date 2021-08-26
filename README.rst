@@ -5,31 +5,20 @@
     export TERRAFORM=./terraform
     ./prepare.sh
 
-    # Create everything under vpc_core
-    ./tf.sh init vpc_core
-    ./tf.sh plan vpc_core
-    ./tf.sh apply vpc_core
+    # Develop a single module
+    ./tf.sh fmt MODULE_NAME
+    ./tf.sh init MODULE_NAME
+    ./tf.sh validate MODULE_NAME
+    ./tf.sh lint_init MODULE_NAME
+    ./tf.sh lint MODULE_NAME
 
-    # Create everything under vpc_rules
-    ./tf.sh init vpc_rules
-    ./tf.sh plan vpc_rules
-    ./tf.sh apply vpc_rules
+    # Deploy a single module
+    ./tf.sh plan MODULE_NAME
+    ./tf.sh apply MODULE_NAME
 
-    # Destroy everything under vpc_rules
-    ./tf.sh plan_destroy vpc_rules
-    ./tf.sh destroy vpc_rules
-
-    # Destroy everything under vpc_core
-    ./tf.sh plan_destroy vpc_core
-    ./tf.sh destroy vpc_core
-
-* https://smartlogic.io/blog/how-i-organize-terraform-modules-off-the-beaten-path/
-* https://learn.hashicorp.com/tutorials/terraform/automate-terraform?in=terraform/automation
-* https://github.com/fly-examples/rds-connector/blob/main/main.tf#L118-L180
-* https://www.hashicorp.com/blog/terraform-0-12-conditional-operator-improvements#conditionally-omitted-arguments
-* https://www.terraform.io/docs/language/state/workspaces.html#when-to-use-multiple-workspaces
-* https://www.hashicorp.com/resources/going-multi-account-with-terraform-on-aws
-* https://aws.amazon.com/blogs/aws/building-three-tier-architectures-with-security-groups/
+    # Undeploy a single module
+    ./tf.sh plan_destroy MODULE_NAME
+    ./tf.sh destroy MODULE_NAME
 
 
 Network ACLs
@@ -69,10 +58,10 @@ egress  <-> TX = transmit
 Security Groups
 ---------------
 
-Allow all outbound traffic to go anywhere from any subnets.
-Allow all inbound traffic to freely pass between the "same-tier" subnets.
-Allow all inbound traffic to freely pass between the "different-tier" subnets.
-Allow all inbound ICMP, HTTPS, SSH traffic to freely-enter all subnets.
+# Allow all outbound traffic to go anywhere from any subnets.
+# Allow all inbound traffic to freely pass between the "same-tier" subnets.
+# Allow all inbound traffic to freely pass between the "different-tier" subnets.
+# Allow all inbound ICMP, HTTPS, SSH traffic to freely-enter all subnets.
 
 
 TODO
@@ -88,8 +77,25 @@ https://registry.terraform.io/providers/hashicorp/random/latest/docs
 ^^^ generate random strings for the basenames???
 
 
-Major Terraform Annoyances
---------------------------
+Terraform Annoyances
+--------------------
 
 * https://github.com/hashicorp/terraform-provider-aws/issues/15982
 * https://github.com/hashicorp/terraform/issues/13022  <-- Open since March 2017
+* https://github.com/terraform-linters/tflint/issues/1198
+
+
+References
+----------
+
+* https://aws.amazon.com/blogs/aws/building-three-tier-architectures-with-security-groups/
+* https://smartlogic.io/blog/how-i-organize-terraform-modules-off-the-beaten-path/
+* https://learn.hashicorp.com/tutorials/terraform/automate-terraform?in=terraform/automation
+* https://github.com/fly-examples/rds-connector/blob/main/main.tf#L118-L180
+* https://www.hashicorp.com/blog/terraform-0-12-conditional-operator-improvements#conditionally-omitted-arguments
+* https://www.terraform.io/docs/language/state/workspaces.html#when-to-use-multiple-workspaces
+* https://www.hashicorp.com/resources/going-multi-account-with-terraform-on-aws
+* https://blog.gruntwork.io/5-lessons-learned-from-writing-over-300-000-lines-of-infrastructure-code-36ba7fadeac1
+* https://jeffbrown.tech/terraform-dynamic-blocks/
+* https://learn.hashicorp.com/collections/terraform/modules
+* https://www.reddit.com/r/Terraform/
