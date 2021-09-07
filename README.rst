@@ -67,14 +67,11 @@ Security Groups
 TODO
 ----
 
-https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs-s3.html
-^^^ provide option to use S3 for VPC flow logs instead of CloudWatch Logs
-
-https://www.terraform.io/docs/configuration/variables.html#custom-validation-rules
-^^^ for variables to make sure they are not too big or too small (e.g.:  AZ and NAT gw counts)???
-
-https://registry.terraform.io/providers/hashicorp/random/latest/docs
-^^^ generate random strings for the basenames???
+* https://github.com/cloudposse/terraform-aws-dynamic-subnets/blob/master/nat-instance.tf
+* https://github.com/fly-examples/rds-connector/blob/main/main.tf#L118-L180
+* https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs-s3.html provide option to use S3 for VPC flow logs instead of CloudWatch Logs
+* https://www.terraform.io/docs/configuration/variables.html#custom-validation-rules for variables to make sure they are not too big or too small (e.g.:  AZ and NAT gw counts)???
+* https://registry.terraform.io/providers/hashicorp/random/latest/docs generate random strings for the basenames???
 
 
 Terraform Annoyances
@@ -91,7 +88,6 @@ References
 * https://aws.amazon.com/blogs/aws/building-three-tier-architectures-with-security-groups/
 * https://smartlogic.io/blog/how-i-organize-terraform-modules-off-the-beaten-path/
 * https://learn.hashicorp.com/tutorials/terraform/automate-terraform?in=terraform/automation
-* https://github.com/fly-examples/rds-connector/blob/main/main.tf#L118-L180
 * https://www.hashicorp.com/blog/terraform-0-12-conditional-operator-improvements#conditionally-omitted-arguments
 * https://www.terraform.io/docs/language/state/workspaces.html#when-to-use-multiple-workspaces
 * https://www.hashicorp.com/resources/going-multi-account-with-terraform-on-aws
@@ -99,3 +95,4 @@ References
 * https://jeffbrown.tech/terraform-dynamic-blocks/
 * https://learn.hashicorp.com/collections/terraform/modules
 * https://www.reddit.com/r/Terraform/
+* https://www.terraform.io/docs/language/modules/sources.html#selecting-a-revision
