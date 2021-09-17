@@ -27,6 +27,8 @@ resource "aws_vpc" "main" {
   }
 }
 
+# XXX FIXME TODO Figure out what these values should definitely be and/or make new variables
+
 resource "aws_vpc_dhcp_options" "main" {
   domain_name         = "${var.aws_region}.compute.internal" # "ec2.internal"???
   domain_name_servers = ["AmazonProvidedDNS"]
