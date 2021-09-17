@@ -88,6 +88,21 @@ tf_validate() {
 }
 
 
+# Call 'terraform version' for a module
+tf_version() {
+    local module="${1}"
+
+    if [ -z "${module}" ]; then
+        echo 'Unspecified module.'
+        return 1
+    fi
+
+    "${TERRAFORM}"         \
+        -chdir="${module}" \
+        version
+}
+
+
 # Call 'terraform fmt' for all files in a module
 tf_fmt() {
     local module="${1}"
