@@ -160,7 +160,7 @@ resource "aws_network_acl_rule" "sec_tx_vpc_ipv6" {
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
 
 resource "aws_security_group_rule" "pub_rx_self" {
-  security_group_id = aws_security_group.private.id
+  security_group_id = aws_security_group.public.id
   type              = "ingress"
   protocol          = -1 # all
   from_port         = 0  # ignored
