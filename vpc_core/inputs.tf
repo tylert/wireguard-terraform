@@ -32,14 +32,14 @@ variable "how_many_nats" {
 
 variable "prefer_nat_instances" {
   type        = bool
-  description = ""
+  description = "Create NAT instances instead of NAT gateways"
   default     = true
 }
 
 variable "preserve_default_rules" {
   type        = bool
   description = "Preserve the default NACL and SG rules when these resources get tagged"
-  default     = false
+  default     = true
 }
 
 variable "subnet_bits" {
