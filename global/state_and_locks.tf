@@ -1,17 +1,17 @@
-terraform {
-  # required version set by module
-  backend "s3" {
-    region         = "ca-central-1"
-    bucket         = "froopyland_state_bucket"
-    key            = "global/terraform.tfstate"
-    encrypt        = true
-    acl            = "private"
-    dynamodb_table = "terraform_lock"
-  }
-}
+# terraform {
+#   # required version set by module
+#   backend "s3" {
+#     region         = "ca-central-1"
+#     bucket         = "froopyland_state_bucket"
+#     key            = "global/terraform.tfstate"
+#     encrypt        = true
+#     acl            = "private"
+#     dynamodb_table = "terraform_lock"
+#   }
+# }
 
 resource "aws_dynamodb_table" "tf_lock" {
-  name           = var.lock_table_name
+  name           = var.tf_lock_table_name
   read_capacity  = 20
   write_capacity = 20
   hash_key       = "LockID"
@@ -27,7 +27,7 @@ resource "aws_dynamodb_table" "tf_lock" {
 }
 
 resource "aws_s3_bucket" "tf_state" {
-  bucket        = var.state_bucket_name # supports bucket_prefix
+  bucket        = var.tf_state_bucket_name # supports bucket_prefix
   acl           = "private"
   force_destroy = false
   region        = var.aws_region
@@ -64,7 +64,7 @@ resource "aws_s3_bucket_policy" "tf_state" {
       },
       "Effect": "Deny",
       "Principal": "*",
-      "Resource": "arn:aws:s3:::${var.state_bucket_name}/*",
+      "Resource": "arn:aws:s3:::${var.tf_state_bucket_name}/*",
       "Sid": "DenyIncorrectEncryptionHeader"
     },
     {
@@ -76,7 +76,7 @@ resource "aws_s3_bucket_policy" "tf_state" {
       },
       "Effect": "Deny",
       "Principal": "*",
-      "Resource": "arn:aws:s3:::${var.state_bucket_name}/*",
+      "Resource": "arn:aws:s3:::${var.tf_state_bucket_name}/*",
       "Sid": "DenyUnEncryptedObjectUploads"
     }
   ],
