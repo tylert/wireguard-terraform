@@ -6,6 +6,9 @@
  \__|_|  \__,_|_| |_| |_|\___| |_|   \__,_|_|\___||___/
 */
 
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_acl_rule
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
+
 /*
                          _ _   _     _
                __      _(_) |_| |__ (_)_ __   __   ___ __   ___
@@ -14,8 +17,6 @@
                  \_/\_/ |_|\__|_| |_|_|_| |_|   \_/ | .__/ \___|
                                                     |_|
 */
-
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_acl_rule
 
 resource "aws_network_acl_rule" "public_rx_vpc_ipv4" {
   network_acl_id = aws_network_acl.public.id
@@ -156,8 +157,6 @@ resource "aws_network_acl_rule" "secure_tx_vpc_ipv6" {
           | |_) |  __/ |_ \ V  V /  __/  __/ | | |  / ___ \  / /_\__ \
           |_.__/ \___|\__| \_/\_/ \___|\___|_| |_| /_/   \_\/____|___/
 */
-
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
 
 resource "aws_security_group_rule" "public_rx_self" {
   security_group_id = aws_security_group.public.id
