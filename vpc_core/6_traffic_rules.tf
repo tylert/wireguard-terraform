@@ -17,7 +17,7 @@
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_acl_rule
 
-resource "aws_network_acl_rule" "pub_rx_vpc_ipv4" {
+resource "aws_network_acl_rule" "public_rx_vpc_ipv4" {
   network_acl_id = aws_network_acl.public.id
   rule_number    = 17001
   egress         = false
@@ -28,7 +28,7 @@ resource "aws_network_acl_rule" "pub_rx_vpc_ipv4" {
   cidr_block     = aws_vpc.main.cidr_block
 }
 
-resource "aws_network_acl_rule" "pub_rx_vpc_ipv6" {
+resource "aws_network_acl_rule" "public_rx_vpc_ipv6" {
   network_acl_id  = aws_network_acl.public.id
   rule_number     = 17002
   egress          = false
@@ -39,7 +39,7 @@ resource "aws_network_acl_rule" "pub_rx_vpc_ipv6" {
   ipv6_cidr_block = aws_vpc.main.ipv6_cidr_block
 }
 
-resource "aws_network_acl_rule" "pub_tx_vpc_ipv4" {
+resource "aws_network_acl_rule" "public_tx_vpc_ipv4" {
   network_acl_id = aws_network_acl.public.id
   rule_number    = 18001
   egress         = true
@@ -50,7 +50,7 @@ resource "aws_network_acl_rule" "pub_tx_vpc_ipv4" {
   cidr_block     = aws_vpc.main.cidr_block
 }
 
-resource "aws_network_acl_rule" "pub_tx_vpc_ipv6" {
+resource "aws_network_acl_rule" "public_tx_vpc_ipv6" {
   network_acl_id  = aws_network_acl.public.id
   rule_number     = 18002
   egress          = true
@@ -61,7 +61,7 @@ resource "aws_network_acl_rule" "pub_tx_vpc_ipv6" {
   ipv6_cidr_block = aws_vpc.main.ipv6_cidr_block
 }
 
-resource "aws_network_acl_rule" "priv_rx_vpc_ipv4" {
+resource "aws_network_acl_rule" "private_rx_vpc_ipv4" {
   network_acl_id = aws_network_acl.private.id
   rule_number    = 19001
   egress         = false
@@ -72,7 +72,7 @@ resource "aws_network_acl_rule" "priv_rx_vpc_ipv4" {
   cidr_block     = aws_vpc.main.cidr_block
 }
 
-resource "aws_network_acl_rule" "priv_rx_vpc_ipv6" {
+resource "aws_network_acl_rule" "private_rx_vpc_ipv6" {
   network_acl_id  = aws_network_acl.private.id
   rule_number     = 19002
   egress          = false
@@ -83,7 +83,7 @@ resource "aws_network_acl_rule" "priv_rx_vpc_ipv6" {
   ipv6_cidr_block = aws_vpc.main.ipv6_cidr_block
 }
 
-resource "aws_network_acl_rule" "priv_tx_vpc_ipv4" {
+resource "aws_network_acl_rule" "private_tx_vpc_ipv4" {
   network_acl_id = aws_network_acl.private.id
   rule_number    = 20001
   egress         = true
@@ -94,7 +94,7 @@ resource "aws_network_acl_rule" "priv_tx_vpc_ipv4" {
   cidr_block     = aws_vpc.main.cidr_block
 }
 
-resource "aws_network_acl_rule" "priv_tx_vpc_ipv6" {
+resource "aws_network_acl_rule" "private_tx_vpc_ipv6" {
   network_acl_id  = aws_network_acl.private.id
   rule_number     = 20002
   egress          = true
@@ -105,7 +105,7 @@ resource "aws_network_acl_rule" "priv_tx_vpc_ipv6" {
   ipv6_cidr_block = aws_vpc.main.ipv6_cidr_block
 }
 
-resource "aws_network_acl_rule" "sec_rx_vpc_ipv4" {
+resource "aws_network_acl_rule" "secure_rx_vpc_ipv4" {
   network_acl_id = aws_network_acl.secure.id
   rule_number    = 21001
   egress         = false
@@ -116,7 +116,7 @@ resource "aws_network_acl_rule" "sec_rx_vpc_ipv4" {
   cidr_block     = aws_vpc.main.cidr_block
 }
 
-resource "aws_network_acl_rule" "sec_rx_vpc_ipv6" {
+resource "aws_network_acl_rule" "secure_rx_vpc_ipv6" {
   network_acl_id  = aws_network_acl.secure.id
   rule_number     = 21002
   egress          = false
@@ -127,7 +127,7 @@ resource "aws_network_acl_rule" "sec_rx_vpc_ipv6" {
   ipv6_cidr_block = aws_vpc.main.ipv6_cidr_block
 }
 
-resource "aws_network_acl_rule" "sec_tx_vpc_ipv4" {
+resource "aws_network_acl_rule" "secure_tx_vpc_ipv4" {
   network_acl_id = aws_network_acl.secure.id
   rule_number    = 22001
   egress         = true
@@ -138,7 +138,7 @@ resource "aws_network_acl_rule" "sec_tx_vpc_ipv4" {
   cidr_block     = aws_vpc.main.cidr_block
 }
 
-resource "aws_network_acl_rule" "sec_tx_vpc_ipv6" {
+resource "aws_network_acl_rule" "secure_tx_vpc_ipv6" {
   network_acl_id  = aws_network_acl.secure.id
   rule_number     = 22002
   egress          = true
@@ -159,31 +159,34 @@ resource "aws_network_acl_rule" "sec_tx_vpc_ipv6" {
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
 
-resource "aws_security_group_rule" "pub_rx_self" {
+resource "aws_security_group_rule" "public_rx_self" {
   security_group_id = aws_security_group.public.id
   type              = "ingress"
   protocol          = -1 # all
   from_port         = 0  # ignored
   to_port           = 0  # ignored
   self              = true
+  description       = ""
 }
 
-resource "aws_security_group_rule" "priv_rx_self" {
+resource "aws_security_group_rule" "private_rx_self" {
   security_group_id = aws_security_group.private.id
   type              = "ingress"
   protocol          = -1 # all
   from_port         = 0  # ignored
   to_port           = 0  # ignored
   self              = true
+  description       = ""
 }
 
-resource "aws_security_group_rule" "sec_rx_self" {
+resource "aws_security_group_rule" "secure_rx_self" {
   security_group_id = aws_security_group.secure.id
   type              = "ingress"
   protocol          = -1 # all
   from_port         = 0  # ignored
   to_port           = 0  # ignored
   self              = true
+  description       = ""
 }
 
 /*
@@ -194,40 +197,44 @@ resource "aws_security_group_rule" "sec_rx_self" {
          |_.__/ \___|\__| \_/\_/ \___|\___|_| |_|  \__|_|\___|_|  |___/
 */
 
-resource "aws_security_group_rule" "pub_rx_priv" {
+resource "aws_security_group_rule" "public_rx_private" {
   security_group_id        = aws_security_group.public.id
   type                     = "ingress"
   protocol                 = -1 # all
   from_port                = 0  # ignored
   to_port                  = 0  # ignored
   source_security_group_id = aws_security_group.private.id
+  description              = ""
 }
 
-resource "aws_security_group_rule" "priv_rx_pub" {
+resource "aws_security_group_rule" "private_rx_public" {
   security_group_id        = aws_security_group.private.id
   type                     = "ingress"
   protocol                 = -1 # all
   from_port                = 0  # ignored
   to_port                  = 0  # ignored
   source_security_group_id = aws_security_group.public.id
+  description              = ""
 }
 
-resource "aws_security_group_rule" "priv_rx_sec" {
+resource "aws_security_group_rule" "private_rx_secure" {
   security_group_id        = aws_security_group.private.id
   type                     = "ingress"
   protocol                 = -1 # all
   from_port                = 0  # ignored
   to_port                  = 0  # ignored
   source_security_group_id = aws_security_group.secure.id
+  description              = ""
 }
 
-resource "aws_security_group_rule" "sec_rx_priv" {
+resource "aws_security_group_rule" "secure_rx_private" {
   security_group_id        = aws_security_group.secure.id
   type                     = "ingress"
   protocol                 = -1 # all
   from_port                = 0  # ignored
   to_port                  = 0  # ignored
   source_security_group_id = aws_security_group.private.id
+  description              = ""
 }
 
 /*
@@ -238,56 +245,62 @@ resource "aws_security_group_rule" "sec_rx_priv" {
                                |___/
 */
 
-resource "aws_security_group_rule" "pub_tx_ipv4" {
+resource "aws_security_group_rule" "public_tx_ipv4" {
   security_group_id = aws_security_group.public.id
   type              = "egress"
   protocol          = -1 # all
   from_port         = 0  # ignored
   to_port           = 0  # ignored
   cidr_blocks       = ["0.0.0.0/0"]
+  description       = ""
 }
 
-resource "aws_security_group_rule" "pub_tx_ipv6" {
+resource "aws_security_group_rule" "public_tx_ipv6" {
   security_group_id = aws_security_group.public.id
   type              = "egress"
   protocol          = -1 # all
   from_port         = 0  # ignored
   to_port           = 0  # ignored
   ipv6_cidr_blocks  = ["::/0"]
+  description       = ""
 }
 
-resource "aws_security_group_rule" "priv_tx_ipv4" {
+resource "aws_security_group_rule" "private_tx_ipv4" {
   security_group_id = aws_security_group.private.id
   type              = "egress"
   protocol          = -1 # all
   from_port         = 0  # ignored
   to_port           = 0  # ignored
   cidr_blocks       = ["0.0.0.0/0"]
+  description       = ""
 }
 
-resource "aws_security_group_rule" "priv_tx_ipv6" {
+resource "aws_security_group_rule" "private_tx_ipv6" {
   security_group_id = aws_security_group.private.id
   type              = "egress"
   protocol          = -1 # all
   from_port         = 0  # ignored
   to_port           = 0  # ignored
   ipv6_cidr_blocks  = ["::/0"]
+  description       = ""
 }
 
-resource "aws_security_group_rule" "sec_tx_ipv4" {
+resource "aws_security_group_rule" "secure_tx_ipv4" {
   security_group_id = aws_security_group.secure.id
   type              = "egress"
   protocol          = -1 # all
   from_port         = 0  # ignored
   to_port           = 0  # ignored
   cidr_blocks       = ["0.0.0.0/0"]
+  description       = ""
 }
 
-resource "aws_security_group_rule" "sec_tx_ipv6" {
+resource "aws_security_group_rule" "secure_tx_ipv6" {
   security_group_id = aws_security_group.secure.id
   type              = "egress"
   protocol          = -1 # all
   from_port         = 0  # ignored
   to_port           = 0  # ignored
   ipv6_cidr_blocks  = ["::/0"]
+  description       = ""
 }

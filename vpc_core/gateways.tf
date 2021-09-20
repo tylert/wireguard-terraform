@@ -30,14 +30,14 @@ resource "aws_internet_gateway" "public" {
   }
 }
 
-resource "aws_route" "pub_az_ipv4" {
+resource "aws_route" "public_az_ipv4" {
   count                  = var.how_many_azs
   route_table_id         = element(aws_route_table.public_az[*].id, count.index)
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = aws_internet_gateway.public.id
 }
 
-resource "aws_route" "pub_az_ipv6" {
+resource "aws_route" "public_az_ipv6" {
   count                       = var.how_many_azs
   route_table_id              = element(aws_route_table.public_az[*].id, count.index)
   destination_ipv6_cidr_block = "::/0"
@@ -64,7 +64,7 @@ resource "aws_egress_only_internet_gateway" "private" {
   }
 }
 
-resource "aws_route" "priv_az_ipv6" {
+resource "aws_route" "private_az_ipv6" {
   count                       = var.how_many_azs
   route_table_id              = element(aws_route_table.private_az[*].id, count.index)
   destination_ipv6_cidr_block = "::/0"
@@ -109,7 +109,7 @@ resource "aws_nat_gateway" "az" {
   }
 }
 
-resource "aws_route" "priv_az_ipv4" {
+resource "aws_route" "private_az_ipv4" {
   count                  = false == var.prefer_nat_instances ? var.how_many_nats : 0
   route_table_id         = element(aws_route_table.private_az[*].id, count.index)
   destination_cidr_block = "0.0.0.0/0"

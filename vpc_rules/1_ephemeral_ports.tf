@@ -21,7 +21,7 @@
                             |_|
 */
 
-resource "aws_network_acl_rule" "pub_rx_ephem_tcp_ipv4" {
+resource "aws_network_acl_rule" "public_rx_ephem_tcp_ipv4" {
   network_acl_id = join("", data.aws_network_acls.public.ids)
   rule_number    = 17201
   egress         = false
@@ -32,7 +32,7 @@ resource "aws_network_acl_rule" "pub_rx_ephem_tcp_ipv4" {
   cidr_block     = "0.0.0.0/0"
 }
 
-resource "aws_network_acl_rule" "pub_rx_ephem_tcp_ipv6" {
+resource "aws_network_acl_rule" "public_rx_ephem_tcp_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.public.ids)
   rule_number     = 17202
   egress          = false
@@ -43,7 +43,7 @@ resource "aws_network_acl_rule" "pub_rx_ephem_tcp_ipv6" {
   ipv6_cidr_block = "::/0"
 }
 
-resource "aws_network_acl_rule" "pub_tx_ephem_tcp_ipv4" {
+resource "aws_network_acl_rule" "public_tx_ephem_tcp_ipv4" {
   network_acl_id = join("", data.aws_network_acls.public.ids)
   rule_number    = 18201
   egress         = true
@@ -54,7 +54,7 @@ resource "aws_network_acl_rule" "pub_tx_ephem_tcp_ipv4" {
   cidr_block     = "0.0.0.0/0"
 }
 
-resource "aws_network_acl_rule" "pub_tx_ephem_tcp_ipv6" {
+resource "aws_network_acl_rule" "public_tx_ephem_tcp_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.public.ids)
   rule_number     = 18202
   egress          = true
@@ -65,7 +65,7 @@ resource "aws_network_acl_rule" "pub_tx_ephem_tcp_ipv6" {
   ipv6_cidr_block = "::/0"
 }
 
-resource "aws_network_acl_rule" "priv_rx_ephem_tcp_ipv4" {
+resource "aws_network_acl_rule" "private_rx_ephem_tcp_ipv4" {
   network_acl_id = join("", data.aws_network_acls.private.ids)
   rule_number    = 19201
   egress         = false
@@ -76,7 +76,7 @@ resource "aws_network_acl_rule" "priv_rx_ephem_tcp_ipv4" {
   cidr_block     = "0.0.0.0/0"
 }
 
-resource "aws_network_acl_rule" "priv_rx_ephem_tcp_ipv6" {
+resource "aws_network_acl_rule" "private_rx_ephem_tcp_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.private.ids)
   rule_number     = 19202
   egress          = false
@@ -87,7 +87,7 @@ resource "aws_network_acl_rule" "priv_rx_ephem_tcp_ipv6" {
   ipv6_cidr_block = "::/0"
 }
 
-resource "aws_network_acl_rule" "priv_tx_ephem_tcp_ipv4" {
+resource "aws_network_acl_rule" "private_tx_ephem_tcp_ipv4" {
   network_acl_id = join("", data.aws_network_acls.private.ids)
   rule_number    = 20201
   egress         = true
@@ -98,7 +98,7 @@ resource "aws_network_acl_rule" "priv_tx_ephem_tcp_ipv4" {
   cidr_block     = "0.0.0.0/0"
 }
 
-resource "aws_network_acl_rule" "priv_tx_ephem_tcp_ipv6" {
+resource "aws_network_acl_rule" "private_tx_ephem_tcp_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.private.ids)
   rule_number     = 20202
   egress          = true
@@ -109,7 +109,7 @@ resource "aws_network_acl_rule" "priv_tx_ephem_tcp_ipv6" {
   ipv6_cidr_block = "::/0"
 }
 
-resource "aws_network_acl_rule" "sec_rx_ephem_tcp_ipv4" {
+resource "aws_network_acl_rule" "secure_rx_ephem_tcp_ipv4" {
   network_acl_id = join("", data.aws_network_acls.secure.ids)
   rule_number    = 21201
   egress         = false
@@ -120,7 +120,7 @@ resource "aws_network_acl_rule" "sec_rx_ephem_tcp_ipv4" {
   cidr_block     = "0.0.0.0/0"
 }
 
-resource "aws_network_acl_rule" "sec_rx_ephem_tcp_ipv6" {
+resource "aws_network_acl_rule" "secure_rx_ephem_tcp_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.secure.ids)
   rule_number     = 21202
   egress          = false
@@ -131,7 +131,7 @@ resource "aws_network_acl_rule" "sec_rx_ephem_tcp_ipv6" {
   ipv6_cidr_block = "::/0"
 }
 
-resource "aws_network_acl_rule" "sec_tx_ephem_tcp_ipv4" {
+resource "aws_network_acl_rule" "secure_tx_ephem_tcp_ipv4" {
   network_acl_id = join("", data.aws_network_acls.secure.ids)
   rule_number    = 22201
   egress         = true
@@ -142,7 +142,7 @@ resource "aws_network_acl_rule" "sec_tx_ephem_tcp_ipv4" {
   cidr_block     = "0.0.0.0/0"
 }
 
-resource "aws_network_acl_rule" "sec_tx_ephem_tcp_ipv6" {
+resource "aws_network_acl_rule" "secure_tx_ephem_tcp_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.secure.ids)
   rule_number     = 22202
   egress          = true
@@ -162,7 +162,7 @@ resource "aws_network_acl_rule" "sec_tx_ephem_tcp_ipv6" {
                               |_|
 */
 
-resource "aws_network_acl_rule" "pub_rx_ephem_udp_ipv4" {
+resource "aws_network_acl_rule" "public_rx_ephem_udp_ipv4" {
   network_acl_id = join("", data.aws_network_acls.public.ids)
   rule_number    = 17211
   egress         = false
@@ -173,7 +173,7 @@ resource "aws_network_acl_rule" "pub_rx_ephem_udp_ipv4" {
   cidr_block     = "0.0.0.0/0"
 }
 
-resource "aws_network_acl_rule" "pub_rx_ephem_udp_ipv6" {
+resource "aws_network_acl_rule" "public_rx_ephem_udp_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.public.ids)
   rule_number     = 17212
   egress          = false
@@ -184,7 +184,7 @@ resource "aws_network_acl_rule" "pub_rx_ephem_udp_ipv6" {
   ipv6_cidr_block = "::/0"
 }
 
-resource "aws_network_acl_rule" "pub_tx_ephem_udp_ipv4" {
+resource "aws_network_acl_rule" "public_tx_ephem_udp_ipv4" {
   network_acl_id = join("", data.aws_network_acls.public.ids)
   rule_number    = 18211
   egress         = true
@@ -195,7 +195,7 @@ resource "aws_network_acl_rule" "pub_tx_ephem_udp_ipv4" {
   cidr_block     = "0.0.0.0/0"
 }
 
-resource "aws_network_acl_rule" "pub_tx_ephem_udp_ipv6" {
+resource "aws_network_acl_rule" "public_tx_ephem_udp_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.public.ids)
   rule_number     = 18212
   egress          = true
@@ -206,7 +206,7 @@ resource "aws_network_acl_rule" "pub_tx_ephem_udp_ipv6" {
   ipv6_cidr_block = "::/0"
 }
 
-resource "aws_network_acl_rule" "priv_rx_ephem_udp_ipv4" {
+resource "aws_network_acl_rule" "private_rx_ephem_udp_ipv4" {
   network_acl_id = join("", data.aws_network_acls.private.ids)
   rule_number    = 19211
   egress         = false
@@ -217,7 +217,7 @@ resource "aws_network_acl_rule" "priv_rx_ephem_udp_ipv4" {
   cidr_block     = "0.0.0.0/0"
 }
 
-resource "aws_network_acl_rule" "priv_rx_ephem_udp_ipv6" {
+resource "aws_network_acl_rule" "private_rx_ephem_udp_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.private.ids)
   rule_number     = 19212
   egress          = false
@@ -228,7 +228,7 @@ resource "aws_network_acl_rule" "priv_rx_ephem_udp_ipv6" {
   ipv6_cidr_block = "::/0"
 }
 
-resource "aws_network_acl_rule" "priv_tx_ephem_udp_ipv4" {
+resource "aws_network_acl_rule" "private_tx_ephem_udp_ipv4" {
   network_acl_id = join("", data.aws_network_acls.private.ids)
   rule_number    = 20211
   egress         = true
@@ -239,7 +239,7 @@ resource "aws_network_acl_rule" "priv_tx_ephem_udp_ipv4" {
   cidr_block     = "0.0.0.0/0"
 }
 
-resource "aws_network_acl_rule" "priv_tx_ephem_udp_ipv6" {
+resource "aws_network_acl_rule" "private_tx_ephem_udp_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.private.ids)
   rule_number     = 20212
   egress          = true
@@ -250,7 +250,7 @@ resource "aws_network_acl_rule" "priv_tx_ephem_udp_ipv6" {
   ipv6_cidr_block = "::/0"
 }
 
-resource "aws_network_acl_rule" "sec_rx_ephem_udp_ipv4" {
+resource "aws_network_acl_rule" "secure_rx_ephem_udp_ipv4" {
   network_acl_id = join("", data.aws_network_acls.secure.ids)
   rule_number    = 21211
   egress         = false
@@ -261,7 +261,7 @@ resource "aws_network_acl_rule" "sec_rx_ephem_udp_ipv4" {
   cidr_block     = "0.0.0.0/0"
 }
 
-resource "aws_network_acl_rule" "sec_rx_ephem_udp_ipv6" {
+resource "aws_network_acl_rule" "secure_rx_ephem_udp_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.secure.ids)
   rule_number     = 21212
   egress          = false
@@ -272,7 +272,7 @@ resource "aws_network_acl_rule" "sec_rx_ephem_udp_ipv6" {
   ipv6_cidr_block = "::/0"
 }
 
-resource "aws_network_acl_rule" "sec_tx_ephem_udp_ipv4" {
+resource "aws_network_acl_rule" "secure_tx_ephem_udp_ipv4" {
   network_acl_id = join("", data.aws_network_acls.secure.ids)
   rule_number    = 22211
   egress         = true
@@ -283,7 +283,7 @@ resource "aws_network_acl_rule" "sec_tx_ephem_udp_ipv4" {
   cidr_block     = "0.0.0.0/0"
 }
 
-resource "aws_network_acl_rule" "sec_tx_ephem_udp_ipv6" {
+resource "aws_network_acl_rule" "secure_tx_ephem_udp_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.secure.ids)
   rule_number     = 22212
   egress          = true
