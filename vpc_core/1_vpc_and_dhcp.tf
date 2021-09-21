@@ -27,12 +27,12 @@ resource "aws_vpc" "main" {
   }
 }
 
-# XXX FIXME TODO Figure out what these values should definitely be and/or make new variables
+# XXX FIXME TODO Figure out what these values should definitely be and make new variables
 
 resource "aws_vpc_dhcp_options" "main" {
   domain_name         = "${var.aws_region}.compute.internal" # "ec2.internal"???
-  domain_name_servers = ["AmazonProvidedDNS"]
-  # ntp_servers         = []
+  domain_name_servers = ["AmazonProvidedDNS"]                # max 4
+  # ntp_servers         = [] # max 4
 
   tags = {
     Name = "dopt-${var.basename}"

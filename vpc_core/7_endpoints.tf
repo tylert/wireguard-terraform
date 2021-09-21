@@ -22,8 +22,9 @@
 */
 
 resource "aws_vpc_endpoint" "public_s3" {
-  vpc_id            = aws_vpc.main.id
-  service_name      = "com.amazonaws.${var.aws_region}.s3"
+  vpc_id       = aws_vpc.main.id
+  service_name = "com.amazonaws.${var.aws_region}.s3"
+
   vpc_endpoint_type = "Gateway"
   route_table_ids   = aws_route_table.public_az[*].id
 
@@ -33,8 +34,9 @@ resource "aws_vpc_endpoint" "public_s3" {
 }
 
 resource "aws_vpc_endpoint" "public_ssm" {
-  vpc_id              = aws_vpc.main.id
-  service_name        = "com.amazonaws.${var.aws_region}.ssm"
+  vpc_id       = aws_vpc.main.id
+  service_name = "com.amazonaws.${var.aws_region}.ssm"
+
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = true
   security_group_ids  = [aws_security_group.public.id]
@@ -46,8 +48,9 @@ resource "aws_vpc_endpoint" "public_ssm" {
 }
 
 resource "aws_vpc_endpoint" "public_ec2_msgs" {
-  vpc_id              = aws_vpc.main.id
-  service_name        = "com.amazonaws.${var.aws_region}.ec2messages"
+  vpc_id       = aws_vpc.main.id
+  service_name = "com.amazonaws.${var.aws_region}.ec2messages"
+
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = true
   security_group_ids  = [aws_security_group.public.id]
@@ -59,8 +62,9 @@ resource "aws_vpc_endpoint" "public_ec2_msgs" {
 }
 
 resource "aws_vpc_endpoint" "public_ssm_msgs" {
-  vpc_id              = aws_vpc.main.id
-  service_name        = "com.amazonaws.${var.aws_region}.ssmmessages"
+  vpc_id       = aws_vpc.main.id
+  service_name = "com.amazonaws.${var.aws_region}.ssmmessages"
+
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = true
   security_group_ids  = [aws_security_group.public.id]
@@ -81,8 +85,9 @@ resource "aws_vpc_endpoint" "public_ssm_msgs" {
 */
 
 resource "aws_vpc_endpoint" "private_s3" {
-  vpc_id            = aws_vpc.main.id
-  service_name      = "com.amazonaws.${var.aws_region}.s3"
+  vpc_id       = aws_vpc.main.id
+  service_name = "com.amazonaws.${var.aws_region}.s3"
+
   vpc_endpoint_type = "Gateway"
   route_table_ids   = aws_route_table.private_az[*].id
 
@@ -92,8 +97,9 @@ resource "aws_vpc_endpoint" "private_s3" {
 }
 
 resource "aws_vpc_endpoint" "private_ssm" {
-  vpc_id              = aws_vpc.main.id
-  service_name        = "com.amazonaws.${var.aws_region}.ssm"
+  vpc_id       = aws_vpc.main.id
+  service_name = "com.amazonaws.${var.aws_region}.ssm"
+
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = true
   security_group_ids  = [aws_security_group.private.id]
@@ -105,8 +111,9 @@ resource "aws_vpc_endpoint" "private_ssm" {
 }
 
 resource "aws_vpc_endpoint" "private_ec2_msgs" {
-  vpc_id              = aws_vpc.main.id
-  service_name        = "com.amazonaws.${var.aws_region}.ec2messages"
+  vpc_id       = aws_vpc.main.id
+  service_name = "com.amazonaws.${var.aws_region}.ec2messages"
+
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = true
   security_group_ids  = [aws_security_group.private.id]
@@ -118,8 +125,9 @@ resource "aws_vpc_endpoint" "private_ec2_msgs" {
 }
 
 resource "aws_vpc_endpoint" "private_ssm_msgs" {
-  vpc_id              = aws_vpc.main.id
-  service_name        = "com.amazonaws.${var.aws_region}.ssmmessages"
+  vpc_id       = aws_vpc.main.id
+  service_name = "com.amazonaws.${var.aws_region}.ssmmessages"
+
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = true
   security_group_ids  = [aws_security_group.private.id]
@@ -138,8 +146,9 @@ resource "aws_vpc_endpoint" "private_ssm_msgs" {
 */
 
 resource "aws_vpc_endpoint" "secure_s3" {
-  vpc_id            = aws_vpc.main.id
-  service_name      = "com.amazonaws.${var.aws_region}.s3"
+  vpc_id       = aws_vpc.main.id
+  service_name = "com.amazonaws.${var.aws_region}.s3"
+
   vpc_endpoint_type = "Gateway"
   route_table_ids   = aws_route_table.secure_az[*].id
 
@@ -149,8 +158,9 @@ resource "aws_vpc_endpoint" "secure_s3" {
 }
 
 resource "aws_vpc_endpoint" "secure_ssm" {
-  vpc_id              = aws_vpc.main.id
-  service_name        = "com.amazonaws.${var.aws_region}.ssm"
+  vpc_id       = aws_vpc.main.id
+  service_name = "com.amazonaws.${var.aws_region}.ssm"
+
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = true
   security_group_ids  = [aws_security_group.secure.id]
@@ -162,8 +172,9 @@ resource "aws_vpc_endpoint" "secure_ssm" {
 }
 
 resource "aws_vpc_endpoint" "secure_ec2_msgs" {
-  vpc_id              = aws_vpc.main.id
-  service_name        = "com.amazonaws.${var.aws_region}.ec2messages"
+  vpc_id       = aws_vpc.main.id
+  service_name = "com.amazonaws.${var.aws_region}.ec2messages"
+
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = true
   security_group_ids  = [aws_security_group.secure.id]
@@ -175,8 +186,9 @@ resource "aws_vpc_endpoint" "secure_ec2_msgs" {
 }
 
 resource "aws_vpc_endpoint" "secure_ssm_msgs" {
-  vpc_id              = aws_vpc.main.id
-  service_name        = "com.amazonaws.${var.aws_region}.ssmmessages"
+  vpc_id       = aws_vpc.main.id
+  service_name = "com.amazonaws.${var.aws_region}.ssmmessages"
+
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = true
   security_group_ids  = [aws_security_group.secure.id]

@@ -56,7 +56,8 @@ resource "aws_route_table" "public_az" {
 resource "aws_route_table_association" "public_az" {
   count          = var.how_many_azs
   route_table_id = element(aws_route_table.public_az[*].id, count.index)
-  subnet_id      = element(aws_subnet.public_az[*].id, count.index)
+
+  subnet_id = element(aws_subnet.public_az[*].id, count.index)
 }
 
 /*
@@ -84,7 +85,8 @@ resource "aws_route_table" "private_az" {
 resource "aws_route_table_association" "private_az" {
   count          = var.how_many_azs
   route_table_id = element(aws_route_table.private_az[*].id, count.index)
-  subnet_id      = element(aws_subnet.private_az[*].id, count.index)
+
+  subnet_id = element(aws_subnet.private_az[*].id, count.index)
 }
 
 /*
@@ -106,5 +108,6 @@ resource "aws_route_table" "secure_az" {
 resource "aws_route_table_association" "secure_az" {
   count          = var.how_many_azs
   route_table_id = element(aws_route_table.secure_az[*].id, count.index)
-  subnet_id      = element(aws_subnet.secure_az[*].id, count.index)
+
+  subnet_id = element(aws_subnet.secure_az[*].id, count.index)
 }
