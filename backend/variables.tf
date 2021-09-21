@@ -21,11 +21,11 @@ variable "basename" {
 variable "tf_lock_table_name" {
   type        = string
   description = "Name of Terraform lock table"
-  default     = "terraform_lock"
+  default     = "tf_lock"
 }
 
 variable "tf_state_bucket_name" {
   type        = string
   description = "Name of Terraform state bucket"
-  default     = "froopyland_state_bucket"
+  default     = "tf_state"
 }

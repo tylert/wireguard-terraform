@@ -1,5 +1,4 @@
 # terraform {
-#   # required version set by module
 #   backend "s3" {
 #     region         = "ca-central-1"
 #     bucket         = "froopyland_state_bucket"
@@ -10,11 +9,17 @@
 #   }
 # }
 
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy
+
 resource "aws_dynamodb_table" "tf_lock" {
-  name           = var.tf_lock_table_name
+  name     = var.tf_lock_table_name
+  hash_key = "LockID" # change forces new resource
+
+  billing_mode   = "PROVISIONED" # or "PAY_PER_REQUEST" and skip read_capacity and write_capacity
   read_capacity  = 20
   write_capacity = 20
-  hash_key       = "LockID"
 
   attribute {
     name = "LockID"
@@ -27,26 +32,25 @@ resource "aws_dynamodb_table" "tf_lock" {
 }
 
 resource "aws_s3_bucket" "tf_state" {
-  bucket        = var.tf_state_bucket_name # supports bucket_prefix
+  bucket        = var.tf_state_bucket_name # change forces new resource
   acl           = "private"
   force_destroy = false
-  region        = var.aws_region
 
   versioning {
     enabled = true
   }
 
-  lifecycle {
-    prevent_destroy = true
-  }
+  # lifecycle {
+  #   prevent_destroy = true
+  # }
 
   tags {
     Name = "s3-tf-state"
   }
 }
 
-# Make sure that we only ever store encrypted state stuff here
-# http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
+# Make sure that we only ever store encrypted state stuff in this bucket...
+#   http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
 
 resource "aws_s3_bucket_policy" "tf_state" {
   bucket = aws_s3_bucket.tf_state.id

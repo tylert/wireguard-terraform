@@ -67,6 +67,9 @@ resource "aws_default_security_group" "main_tainted" {
   }
 }
 
+# name in resource -> Group Name in web console
+# description in resource -> Group Description in web console
+
 /*
                                        _     _ _
                            _ __  _   _| |__ | (_) ___
@@ -77,9 +80,9 @@ resource "aws_default_security_group" "main_tainted" {
 */
 
 resource "aws_security_group" "public" {
-  vpc_id                 = aws_vpc.main.id                             # can't update
-  name                   = "public sg for vpc-${var.basename}"         # Group Name / can't update
-  description            = "vpc-${var.basename} public security group" # Group Description / can't update
+  vpc_id                 = aws_vpc.main.id                             # change forces new resource
+  name                   = "public sg for vpc-${var.basename}"         # change forces new resource
+  description            = "vpc-${var.basename} public security group" # change forces new resource
   revoke_rules_on_delete = false
 
   tags = {
@@ -97,9 +100,9 @@ resource "aws_security_group" "public" {
 */
 
 resource "aws_security_group" "private" {
-  vpc_id                 = aws_vpc.main.id                              # can't update
-  name                   = "private sg for vpc-${var.basename}"         # Group Name / can't update
-  description            = "vpc-${var.basename} private security group" # Group Description / can't update
+  vpc_id                 = aws_vpc.main.id                              # change forces new resource
+  name                   = "private sg for vpc-${var.basename}"         # change forces new resource
+  description            = "vpc-${var.basename} private security group" # change forces new resource
   revoke_rules_on_delete = false
 
   tags = {
@@ -115,9 +118,9 @@ resource "aws_security_group" "private" {
 */
 
 resource "aws_security_group" "secure" {
-  vpc_id                 = aws_vpc.main.id                             # can't update
-  name                   = "secure sg for vpc-${var.basename}"         # Group Name / can't update
-  description            = "vpc-${var.basename} secure security group" # Group Description / can't update
+  vpc_id                 = aws_vpc.main.id                             # change forces new resource
+  name                   = "secure sg for vpc-${var.basename}"         # change forces new resource
+  description            = "vpc-${var.basename} secure security group" # change forces new resource
   revoke_rules_on_delete = false
 
   tags = {
