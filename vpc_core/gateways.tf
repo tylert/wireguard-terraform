@@ -22,6 +22,9 @@
                                   |___/
 */
 
+# There is no additional charge for using Interet Gateways and that's what
+# makes your public subnet a public subnet.
+
 resource "aws_internet_gateway" "public" {
   vpc_id = aws_vpc.main.id
 
@@ -53,8 +56,9 @@ resource "aws_route" "public_az_ipv6" {
                                     |___/
 */
 
-# Egress-only internet gateways are only for IPv6 traffic so don't bother with
-# IPv4 stuff here.
+# Egress-Only Internet Gateways are only for IPv6 traffic so there is no IPv4
+# routing done here.  There is no additional charge for using Egress-Only
+# Internet Gateways so just shut up and use them.
 
 resource "aws_egress_only_internet_gateway" "private" {
   vpc_id = aws_vpc.main.id

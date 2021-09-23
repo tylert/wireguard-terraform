@@ -58,44 +58,14 @@ variable "preserve_default_rules" {
 # A subnet range can't be larger (or smaller) than your allowed VPC CIDR block.
 # AWS reserves 5 addresses on every subnet.  The value chosen also depends on
 # the VPC CIDR block and the number of AZs.  We can have min = 0, max = 12 but
-# some values in this range are still just plain silly...
+# some values in this range are still just plain silly or cause errors like...
 
-#   0 with a /16 VPC -> 1 /16 subnets -> 65531 hosts each (but limited to 1 AZ)
-#   0 with a /17 VPC -> 1 /17 subnets -> 32763 hosts each (but limited to 1 AZ)
-#   0 with a /18 VPC -> 1 /18 subnets -> 16379 hosts each (but limited to 1 AZ)
-#   ...
-#   0 with a /26 VPC -> 1 /26 subnets -> 59 hosts each (but limited to 1 AZ)
-#   0 with a /27 VPC -> 1 /27 subnets -> 27 hosts each (but limited to 1 AZ)
-#   0 with a /28 VPC -> 1 /28 subnets -> 11 hosts each (but limited to 1 AZ)
-#   1 with a /16 VPC -> 2 /17 subnets -> 32763 hosts each (but limited to 2 AZs)
-#   1 with a /17 VPC -> 2 /18 subnets -> 16379 hosts each (but limited to 2 AZs)
-#   1 with a /18 VPC -> 2 /19 subnets -> 8187 hosts each (but limited to 2 AZs)
-#   ...
-#   1 with a /26 VPC -> 2 /27 subnets -> 27 hosts each (but limited to 2 AZs)
-#   1 with a /27 VPC -> 2 /28 subnets -> 11 hosts each (but limited to 2 AZs)
-#   1 with a /28 VPC -> KABOOM!!! subnets smaller than /28 not allowed
-#   2 with a /16 VPC -> 4 /18 subnets -> 16379 hosts each (but limited to 4 AZs)
-#   ...
-#   6 with a /16 VPC -> 64 /22 subnets -> 1019 hosts each
-#   7 with a /16 VPC -> 128 /23 subnets -> 507 hosts each
-#   8 with a /16 VPC -> 256 /24 subnets -> 251 hosts each
-#   9 with a /16 VPC -> 512 /25 subnets -> 123 hosts each
-#   10 with a /16 VPC -> 1024 /26 subnets -> 59 hosts each
-#   11 with a /16 VPC -> 2048 /27 subnets -> 27 hosts each
-#   12 with a /16 VPC -> 4096 /28 subnets -> 11 hosts each
-#   12 with a /17 VPC -> KABOOM!!! subnets smaller than /28 not allowed
-#   11 with a /18 VPC -> KABOOM!!! subnets smaller than /28 not allowed
-#   10 with a /19 VPC -> KABOOM!!! subnets smaller than /28 not allowed
-#   ...
-#   3 with a /26 VPC -> KABOOM!!! subnets smaller than /28 not allowed
-#   2 with a /27 VPC -> KABOOM!!! subnets smaller than /28 not allowed
-#   1 with a /28 VPC -> KABOOM!!! subnets smaller than /28 not allowed
-#   ...
+# Call to function "cidrsubnet" failed: prefix extension of n does not accommodate a subnet numbered 8.
 
 variable "subnet_cidr_bits" {
   type        = number
   description = "Bits to carve off for each IPv4 subnet range from the main VPC CIDR block"
-  default     = 2
+  default     = 4
 }
 
 variable "vpc_cidr_block" {
