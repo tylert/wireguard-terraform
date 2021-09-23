@@ -21,7 +21,7 @@ variable "basename" {
 variable "create_nat_instances" {
   type        = bool
   description = "Create NAT instances instead of NAT gateways"
-  default     = false
+  default     = false # XXX FIXME TODO Set this to true when NAT instances are golden.
 }
 
 variable "create_private_endpoints" {

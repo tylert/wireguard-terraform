@@ -4,7 +4,7 @@ basename       = "test1"
 vpc_cidr_block = "10.0.0.0/16"
 
 # These values are commonly overridden.
-create_nat_instances     = false # true
+create_nat_instances     = false # XXX FIXME TODO Set this to true when NAT instances are golden.
 create_private_endpoints = true
 how_many_nats            = 1
 preserve_default_rules   = false
