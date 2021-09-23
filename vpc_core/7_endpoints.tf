@@ -20,19 +20,8 @@
                                |___/
 */
 
-resource "aws_vpc_endpoint" "public_s3" {
-  vpc_id       = aws_vpc.main.id
-  service_name = "com.amazonaws.${var.aws_region}.s3"
-
-  vpc_endpoint_type = "Gateway"
-  route_table_ids   = aws_route_table.public_az[*].id
-
-  tags = {
-    Name = "vpce-${var.basename}-pub-s3"
-  }
-}
-
 resource "aws_vpc_endpoint" "private_s3" {
+  count        = true == var.create_private_endpoints ? 1 : 0
   vpc_id       = aws_vpc.main.id
   service_name = "com.amazonaws.${var.aws_region}.s3"
 
@@ -45,6 +34,7 @@ resource "aws_vpc_endpoint" "private_s3" {
 }
 
 resource "aws_vpc_endpoint" "secure_s3" {
+  count        = true == var.create_private_endpoints ? 1 : 0
   vpc_id       = aws_vpc.main.id
   service_name = "com.amazonaws.${var.aws_region}.s3"
 
@@ -66,49 +56,8 @@ resource "aws_vpc_endpoint" "secure_s3" {
 
 # https://aws.amazon.com/premiumsupport/knowledge-center/ec2-systems-manager-vpc-endpoints/
 
-resource "aws_vpc_endpoint" "public_ssm" {
-  vpc_id       = aws_vpc.main.id
-  service_name = "com.amazonaws.${var.aws_region}.ssm"
-
-  vpc_endpoint_type   = "Interface"
-  private_dns_enabled = true
-  subnet_ids          = aws_subnet.public_az[*].id
-  security_group_ids  = [aws_security_group.public.id]
-
-  tags = {
-    Name = "vpce-${var.basename}-pub-ssm"
-  }
-}
-
-resource "aws_vpc_endpoint" "public_ec2_msgs" {
-  vpc_id       = aws_vpc.main.id
-  service_name = "com.amazonaws.${var.aws_region}.ec2messages"
-
-  vpc_endpoint_type   = "Interface"
-  private_dns_enabled = true
-  subnet_ids          = aws_subnet.public_az[*].id
-  security_group_ids  = [aws_security_group.public.id]
-
-  tags = {
-    Name = "vpce-${var.basename}-pub-ec2-msgs"
-  }
-}
-
-resource "aws_vpc_endpoint" "public_ssm_msgs" {
-  vpc_id       = aws_vpc.main.id
-  service_name = "com.amazonaws.${var.aws_region}.ssmmessages"
-
-  vpc_endpoint_type   = "Interface"
-  private_dns_enabled = true
-  subnet_ids          = aws_subnet.public_az[*].id
-  security_group_ids  = [aws_security_group.public.id]
-
-  tags = {
-    Name = "vpce-${var.basename}-pub-ssm-msgs"
-  }
-}
-
 resource "aws_vpc_endpoint" "private_ssm" {
+  count        = true == var.create_private_endpoints ? 1 : 0
   vpc_id       = aws_vpc.main.id
   service_name = "com.amazonaws.${var.aws_region}.ssm"
 
@@ -123,6 +72,7 @@ resource "aws_vpc_endpoint" "private_ssm" {
 }
 
 resource "aws_vpc_endpoint" "private_ec2_msgs" {
+  count        = true == var.create_private_endpoints ? 1 : 0
   vpc_id       = aws_vpc.main.id
   service_name = "com.amazonaws.${var.aws_region}.ec2messages"
 
@@ -137,6 +87,7 @@ resource "aws_vpc_endpoint" "private_ec2_msgs" {
 }
 
 resource "aws_vpc_endpoint" "private_ssm_msgs" {
+  count        = true == var.create_private_endpoints ? 1 : 0
   vpc_id       = aws_vpc.main.id
   service_name = "com.amazonaws.${var.aws_region}.ssmmessages"
 
@@ -151,6 +102,7 @@ resource "aws_vpc_endpoint" "private_ssm_msgs" {
 }
 
 resource "aws_vpc_endpoint" "secure_ssm" {
+  count        = true == var.create_private_endpoints ? 1 : 0
   vpc_id       = aws_vpc.main.id
   service_name = "com.amazonaws.${var.aws_region}.ssm"
 
@@ -165,6 +117,7 @@ resource "aws_vpc_endpoint" "secure_ssm" {
 }
 
 resource "aws_vpc_endpoint" "secure_ec2_msgs" {
+  count        = true == var.create_private_endpoints ? 1 : 0
   vpc_id       = aws_vpc.main.id
   service_name = "com.amazonaws.${var.aws_region}.ec2messages"
 
@@ -179,6 +132,7 @@ resource "aws_vpc_endpoint" "secure_ec2_msgs" {
 }
 
 resource "aws_vpc_endpoint" "secure_ssm_msgs" {
+  count        = true == var.create_private_endpoints ? 1 : 0
   vpc_id       = aws_vpc.main.id
   service_name = "com.amazonaws.${var.aws_region}.ssmmessages"
 
@@ -191,3 +145,41 @@ resource "aws_vpc_endpoint" "secure_ssm_msgs" {
     Name = "vpce-${var.basename}-sec-ssm-msgs"
   }
 }
+
+/*
+                                _____ ____ ____
+                               | ____/ ___|___ \
+                               |  _|| |     __) |
+                               | |__| |___ / __/
+                               |_____\____|_____|
+*/
+
+# resource "aws_vpc_endpoint" "private_ec2" {
+#   count        = true == var.create_private_endpoints ? 1 : 0
+#   vpc_id       = aws_vpc.main.id
+#   service_name = "com.amazonaws.${var.aws_region}.ec2"
+
+#   vpc_endpoint_type   = "Interface"
+#   private_dns_enabled = true
+#   subnet_ids          = aws_subnet.private_az[*].id
+#   security_group_ids  = [aws_security_group.private.id]
+
+#   tags = {
+#     Name = "vpce-${var.basename}-priv-ec2"
+#   }
+# }
+
+# resource "aws_vpc_endpoint" "secure_ec2" {
+#   count        = true == var.create_private_endpoints ? 1 : 0
+#   vpc_id       = aws_vpc.main.id
+#   service_name = "com.amazonaws.${var.aws_region}.ec2"
+
+#   vpc_endpoint_type   = "Interface"
+#   private_dns_enabled = true
+#   subnet_ids          = aws_subnet.secure_az[*].id
+#   security_group_ids  = [aws_security_group.secure.id]
+
+#   tags = {
+#     Name = "vpce-${var.basename}-sec-ec2"
+#   }
+# }

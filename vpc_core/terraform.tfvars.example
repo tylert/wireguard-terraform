@@ -1,10 +1,10 @@
-# These values must be provided to this module
+# These values must be provided to this module.
 aws_region     = "ca-central-1"
 basename       = "test1"
 vpc_cidr_block = "10.0.0.0/16"
 
-# These values are frequently overridden
-how_many_azs           = 2
-how_many_nats          = 1
-prefer_nat_instances   = false
-preserve_default_rules = false
+# These values are commonly overridden.
+create_nat_instances     = false # true
+create_private_endpoints = true
+how_many_nats            = 1
+preserve_default_rules   = false

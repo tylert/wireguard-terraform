@@ -1,4 +1,4 @@
-# These values must be provided to this module
+# These values must be provided to this module.
 aws_region       = "ca-central-1"
 basename         = "test1"
 hosted_zone_name = "example.com"

@@ -9,13 +9,13 @@ __   ____ _ _ __(_) __ _| |__ | | ___  ___
 variable "aws_region" {
   type        = string
   description = "AWS region in which to launch all non-global resources"
-  # there should be no default for this variable
+  # There should be no default for this variable.
 }
 
 variable "basename" {
   type        = string
-  description = "Tag prefix to use for all related resources (e.g.:  test1)"
-  # there should be no default for this variable
+  description = "Tag substring to use for all related resources (e.g.:  test1)"
+  # There should be no default for this variable.
 }
 
 variable "tf_lock_table_name" {
