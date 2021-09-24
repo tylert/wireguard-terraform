@@ -14,7 +14,7 @@
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy
 
 resource "aws_dynamodb_table" "tf_lock" {
-  name     = var.tf_lock_table_name
+  name     = "tflock-${var.basename}"
   hash_key = "LockID" # change forces new resource
 
   billing_mode   = "PROVISIONED" # or "PAY_PER_REQUEST" and skip read_capacity and write_capacity
@@ -32,7 +32,7 @@ resource "aws_dynamodb_table" "tf_lock" {
 }
 
 resource "aws_s3_bucket" "tf_state" {
-  bucket        = var.tf_state_bucket_name # change forces new resource
+  bucket        = "tfstate-${var.basename}" # change forces new resource
   acl           = "private"
   force_destroy = false
 
@@ -45,7 +45,7 @@ resource "aws_s3_bucket" "tf_state" {
   # }
 
   tags {
-    Name = "s3-tf-state"
+    Name = "tfstate-${var.basename}"
   }
 }
 

@@ -62,58 +62,13 @@ resource "aws_vpc_endpoint" "dynamodb" {
 # https://docs.aws.amazon.com/systems-manager/latest/userguide/setup-create-vpc.html
 # https://docs.aws.amazon.com/vpc/latest/privatelink/vpce-interface.html#vpce-interface-limitations
 
-resource "aws_vpc_endpoint" "private_ec2_msgs" {
-  count        = true == var.create_private_endpoints ? 1 : 0
-  vpc_id       = aws_vpc.main.id
-  service_name = "com.amazonaws.${var.aws_region}.ec2messages"
-
-  vpc_endpoint_type   = "Interface"
-  private_dns_enabled = true
-  subnet_ids          = aws_subnet.private_az[*].id
-  security_group_ids  = [aws_security_group.private.id]
-
-  tags = {
-    Name = "vpce-${var.basename}-priv-ec2-msgs"
-  }
-}
-
-resource "aws_vpc_endpoint" "private_ssm" {
-  count        = true == var.create_private_endpoints ? 1 : 0
-  vpc_id       = aws_vpc.main.id
-  service_name = "com.amazonaws.${var.aws_region}.ssm"
-
-  vpc_endpoint_type   = "Interface"
-  private_dns_enabled = true
-  subnet_ids          = aws_subnet.private_az[*].id
-  security_group_ids  = [aws_security_group.private.id]
-
-  tags = {
-    Name = "vpce-${var.basename}-priv-ssm"
-  }
-}
-
-resource "aws_vpc_endpoint" "private_ssm_msgs" {
-  count        = true == var.create_private_endpoints ? 1 : 0
-  vpc_id       = aws_vpc.main.id
-  service_name = "com.amazonaws.${var.aws_region}.ssmmessages"
-
-  vpc_endpoint_type   = "Interface"
-  private_dns_enabled = true
-  subnet_ids          = aws_subnet.private_az[*].id
-  security_group_ids  = [aws_security_group.private.id]
-
-  tags = {
-    Name = "vpce-${var.basename}-priv-ssm-msgs"
-  }
-}
-
 resource "aws_vpc_endpoint" "secure_ec2_msgs" {
   count        = true == var.create_private_endpoints ? 1 : 0
   vpc_id       = aws_vpc.main.id
   service_name = "com.amazonaws.${var.aws_region}.ec2messages"
 
   vpc_endpoint_type   = "Interface"
-  private_dns_enabled = true
+  private_dns_enabled = false
   subnet_ids          = aws_subnet.secure_az[*].id
   security_group_ids  = [aws_security_group.secure.id]
 
@@ -128,7 +83,7 @@ resource "aws_vpc_endpoint" "secure_ssm" {
   service_name = "com.amazonaws.${var.aws_region}.ssm"
 
   vpc_endpoint_type   = "Interface"
-  private_dns_enabled = true
+  private_dns_enabled = false
   subnet_ids          = aws_subnet.secure_az[*].id
   security_group_ids  = [aws_security_group.secure.id]
 
@@ -143,7 +98,7 @@ resource "aws_vpc_endpoint" "secure_ssm_msgs" {
   service_name = "com.amazonaws.${var.aws_region}.ssmmessages"
 
   vpc_endpoint_type   = "Interface"
-  private_dns_enabled = true
+  private_dns_enabled = false
   subnet_ids          = aws_subnet.secure_az[*].id
   security_group_ids  = [aws_security_group.secure.id]
 
@@ -163,28 +118,13 @@ resource "aws_vpc_endpoint" "secure_ssm_msgs" {
 # https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/interface-vpc-endpoints.html
 # https://docs.aws.amazon.com/systems-manager/latest/userguide/setup-create-vpc.html
 
-# resource "aws_vpc_endpoint" "private_ec2" {
-#   count        = true == var.create_private_endpoints ? 1 : 0
-#   vpc_id       = aws_vpc.main.id
-#   service_name = "com.amazonaws.${var.aws_region}.ec2"
-
-#   vpc_endpoint_type   = "Interface"
-#   private_dns_enabled = true
-#   subnet_ids          = aws_subnet.private_az[*].id
-#   security_group_ids  = [aws_security_group.private.id]
-
-#   tags = {
-#     Name = "vpce-${var.basename}-priv-ec2"
-#   }
-# }
-
 # resource "aws_vpc_endpoint" "secure_ec2" {
 #   count        = true == var.create_private_endpoints ? 1 : 0
 #   vpc_id       = aws_vpc.main.id
 #   service_name = "com.amazonaws.${var.aws_region}.ec2"
 
 #   vpc_endpoint_type   = "Interface"
-#   private_dns_enabled = true
+#   private_dns_enabled = false
 #   subnet_ids          = aws_subnet.secure_az[*].id
 #   security_group_ids  = [aws_security_group.secure.id]
 
@@ -203,28 +143,13 @@ resource "aws_vpc_endpoint" "secure_ssm_msgs" {
 
 # https://docs.aws.amazon.com/systems-manager/latest/userguide/setup-create-vpc.html
 
-# resource "aws_vpc_endpoint" "private_kms" {
-#   count        = true == var.create_private_endpoints ? 1 : 0
-#   vpc_id       = aws_vpc.main.id
-#   service_name = "com.amazonaws.${var.aws_region}.kms"
-
-#   vpc_endpoint_type   = "Interface"
-#   private_dns_enabled = true
-#   subnet_ids          = aws_subnet.private_az[*].id
-#   security_group_ids  = [aws_security_group.private.id]
-
-#   tags = {
-#     Name = "vpce-${var.basename}-priv-kms"
-#   }
-# }
-
 # resource "aws_vpc_endpoint" "secure_kms" {
 #   count        = true == var.create_private_endpoints ? 1 : 0
 #   vpc_id       = aws_vpc.main.id
 #   service_name = "com.amazonaws.${var.aws_region}.kms"
 
 #   vpc_endpoint_type   = "Interface"
-#   private_dns_enabled = true
+#   private_dns_enabled = false
 #   subnet_ids          = aws_subnet.secure_az[*].id
 #   security_group_ids  = [aws_security_group.secure.id]
 

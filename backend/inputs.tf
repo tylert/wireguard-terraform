@@ -17,15 +17,3 @@ variable "basename" {
   description = "Tag substring to use for all related resources (e.g.:  test1)"
   # There should be no default for this variable.
 }
-
-variable "tf_lock_table_name" {
-  type        = string
-  description = "Name of Terraform lock table"
-  default     = "tf_lock"
-}
-
-variable "tf_state_bucket_name" {
-  type        = string
-  description = "Name of Terraform state bucket"
-  default     = "tf_state"
-}
