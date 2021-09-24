@@ -165,7 +165,12 @@ resource "aws_security_group_rule" "public_rx_self" {
   from_port         = 0  # ignored
   to_port           = 0  # ignored
   self              = true
-  description       = ""
+  description       = "From public subnets"
+
+  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
+  # tags = {
+  #   Name = ""
+  # }
 }
 
 resource "aws_security_group_rule" "private_rx_self" {
@@ -175,7 +180,12 @@ resource "aws_security_group_rule" "private_rx_self" {
   from_port         = 0  # ignored
   to_port           = 0  # ignored
   self              = true
-  description       = ""
+  description       = "From private subnets"
+
+  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
+  # tags = {
+  #   Name = ""
+  # }
 }
 
 resource "aws_security_group_rule" "secure_rx_self" {
@@ -185,7 +195,12 @@ resource "aws_security_group_rule" "secure_rx_self" {
   from_port         = 0  # ignored
   to_port           = 0  # ignored
   self              = true
-  description       = ""
+  description       = "From secure subnets"
+
+  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
+  # tags = {
+  #   Name = ""
+  # }
 }
 
 /*
@@ -203,7 +218,12 @@ resource "aws_security_group_rule" "public_rx_private" {
   from_port                = 0  # ignored
   to_port                  = 0  # ignored
   source_security_group_id = aws_security_group.private.id
-  description              = ""
+  description              = "From private subnets"
+
+  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
+  # tags = {
+  #   Name = ""
+  # }
 }
 
 resource "aws_security_group_rule" "private_rx_public" {
@@ -213,7 +233,12 @@ resource "aws_security_group_rule" "private_rx_public" {
   from_port                = 0  # ignored
   to_port                  = 0  # ignored
   source_security_group_id = aws_security_group.public.id
-  description              = ""
+  description              = "From public subnets"
+
+  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
+  # tags = {
+  #   Name = ""
+  # }
 }
 
 resource "aws_security_group_rule" "private_rx_secure" {
@@ -223,7 +248,12 @@ resource "aws_security_group_rule" "private_rx_secure" {
   from_port                = 0  # ignored
   to_port                  = 0  # ignored
   source_security_group_id = aws_security_group.secure.id
-  description              = ""
+  description              = "From secure subnets"
+
+  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
+  # tags = {
+  #   Name = ""
+  # }
 }
 
 resource "aws_security_group_rule" "secure_rx_private" {
@@ -233,7 +263,12 @@ resource "aws_security_group_rule" "secure_rx_private" {
   from_port                = 0  # ignored
   to_port                  = 0  # ignored
   source_security_group_id = aws_security_group.private.id
-  description              = ""
+  description              = "From private subnets"
+
+  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
+  # tags = {
+  #   Name = ""
+  # }
 }
 
 /*
@@ -251,7 +286,12 @@ resource "aws_security_group_rule" "public_tx_ipv4" {
   from_port         = 0  # ignored
   to_port           = 0  # ignored
   cidr_blocks       = ["0.0.0.0/0"]
-  description       = ""
+  description       = "To anywhere"
+
+  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
+  # tags = {
+  #   Name = ""
+  # }
 }
 
 resource "aws_security_group_rule" "public_tx_ipv6" {
@@ -261,7 +301,12 @@ resource "aws_security_group_rule" "public_tx_ipv6" {
   from_port         = 0  # ignored
   to_port           = 0  # ignored
   ipv6_cidr_blocks  = ["::/0"]
-  description       = ""
+  description       = "To anywhere"
+
+  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
+  # tags = {
+  #   Name = ""
+  # }
 }
 
 resource "aws_security_group_rule" "private_tx_ipv4" {
@@ -271,7 +316,12 @@ resource "aws_security_group_rule" "private_tx_ipv4" {
   from_port         = 0  # ignored
   to_port           = 0  # ignored
   cidr_blocks       = ["0.0.0.0/0"]
-  description       = ""
+  description       = "To anywhere"
+
+  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
+  # tags = {
+  #   Name = ""
+  # }
 }
 
 resource "aws_security_group_rule" "private_tx_ipv6" {
@@ -281,7 +331,12 @@ resource "aws_security_group_rule" "private_tx_ipv6" {
   from_port         = 0  # ignored
   to_port           = 0  # ignored
   ipv6_cidr_blocks  = ["::/0"]
-  description       = ""
+  description       = "To anywhere"
+
+  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
+  # tags = {
+  #   Name = ""
+  # }
 }
 
 resource "aws_security_group_rule" "secure_tx_ipv4" {
@@ -291,7 +346,12 @@ resource "aws_security_group_rule" "secure_tx_ipv4" {
   from_port         = 0  # ignored
   to_port           = 0  # ignored
   cidr_blocks       = ["0.0.0.0/0"]
-  description       = ""
+  description       = "To anywhere"
+
+  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
+  # tags = {
+  #   Name = ""
+  # }
 }
 
 resource "aws_security_group_rule" "secure_tx_ipv6" {
@@ -301,5 +361,10 @@ resource "aws_security_group_rule" "secure_tx_ipv6" {
   from_port         = 0  # ignored
   to_port           = 0  # ignored
   ipv6_cidr_blocks  = ["::/0"]
-  description       = ""
+  description       = "To anywhere"
+
+  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
+  # tags = {
+  #   Name = ""
+  # }
 }

@@ -174,6 +174,11 @@ resource "aws_security_group_rule" "public_rx_icmpv4" {
   to_port           = -1     # all
   cidr_blocks       = ["0.0.0.0/0"]
   description       = ""
+
+  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
+  # tags = {
+  #   Name = ""
+  # }
 }
 
 resource "aws_security_group_rule" "public_rx_icmpv6" {
@@ -184,6 +189,11 @@ resource "aws_security_group_rule" "public_rx_icmpv6" {
   to_port           = -1 # all
   ipv6_cidr_blocks  = ["::/0"]
   description       = ""
+
+  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
+  # tags = {
+  #   Name = ""
+  # }
 }
 
 resource "aws_security_group_rule" "private_rx_icmpv4" {
@@ -194,6 +204,11 @@ resource "aws_security_group_rule" "private_rx_icmpv4" {
   to_port           = -1     # all
   cidr_blocks       = ["0.0.0.0/0"]
   description       = ""
+
+  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
+  # tags = {
+  #   Name = ""
+  # }
 }
 
 resource "aws_security_group_rule" "private_rx_icmpv6" {
@@ -204,6 +219,11 @@ resource "aws_security_group_rule" "private_rx_icmpv6" {
   to_port           = -1 # all
   ipv6_cidr_blocks  = ["::/0"]
   description       = ""
+
+  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
+  # tags = {
+  #   Name = ""
+  # }
 }
 
 resource "aws_security_group_rule" "secure_rx_icmpv4" {
@@ -214,6 +234,11 @@ resource "aws_security_group_rule" "secure_rx_icmpv4" {
   to_port           = -1     # all
   cidr_blocks       = ["0.0.0.0/0"]
   description       = ""
+
+  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
+  # tags = {
+  #   Name = ""
+  # }
 }
 
 resource "aws_security_group_rule" "secure_rx_icmpv6" {
@@ -224,4 +249,9 @@ resource "aws_security_group_rule" "secure_rx_icmpv6" {
   to_port           = -1 # all
   ipv6_cidr_blocks  = ["::/0"]
   description       = ""
+
+  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
+  # tags = {
+  #   Name = ""
+  # }
 }

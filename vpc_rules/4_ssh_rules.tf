@@ -166,6 +166,11 @@ resource "aws_security_group_rule" "public_rx_ssh_ipv4" {
   to_port           = 22    # ssh
   cidr_blocks       = ["0.0.0.0/0"]
   description       = ""
+
+  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
+  # tags = {
+  #   Name = ""
+  # }
 }
 
 resource "aws_security_group_rule" "public_rx_ssh_ipv6" {
@@ -176,6 +181,11 @@ resource "aws_security_group_rule" "public_rx_ssh_ipv6" {
   to_port           = 22    # ssh
   ipv6_cidr_blocks  = ["::/0"]
   description       = ""
+
+  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
+  # tags = {
+  #   Name = ""
+  # }
 }
 
 resource "aws_security_group_rule" "private_rx_ssh_ipv4" {
@@ -186,6 +196,11 @@ resource "aws_security_group_rule" "private_rx_ssh_ipv4" {
   to_port           = 22    # ssh
   cidr_blocks       = ["0.0.0.0/0"]
   description       = ""
+
+  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
+  # tags = {
+  #   Name = ""
+  # }
 }
 
 resource "aws_security_group_rule" "private_rx_ssh_ipv6" {
@@ -196,6 +211,11 @@ resource "aws_security_group_rule" "private_rx_ssh_ipv6" {
   to_port           = 22    # ssh
   ipv6_cidr_blocks  = ["::/0"]
   description       = ""
+
+  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
+  # tags = {
+  #   Name = ""
+  # }
 }
 
 resource "aws_security_group_rule" "secure_rx_ssh_ipv4" {
@@ -206,6 +226,11 @@ resource "aws_security_group_rule" "secure_rx_ssh_ipv4" {
   to_port           = 22    # ssh
   cidr_blocks       = ["0.0.0.0/0"]
   description       = ""
+
+  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
+  # tags = {
+  #   Name = ""
+  # }
 }
 
 resource "aws_security_group_rule" "secure_rx_ssh_ipv6" {
@@ -216,4 +241,9 @@ resource "aws_security_group_rule" "secure_rx_ssh_ipv6" {
   to_port           = 22    # ssh
   ipv6_cidr_blocks  = ["::/0"]
   description       = ""
+
+  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
+  # tags = {
+  #   Name = ""
+  # }
 }
