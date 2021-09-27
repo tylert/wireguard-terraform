@@ -77,9 +77,12 @@ TODO
 Terraform Annoyances
 --------------------
 
-* https://github.com/hashicorp/terraform-provider-aws/issues/15982
-* https://github.com/hashicorp/terraform/issues/13022  <-- Open since March 2017
-* https://github.com/terraform-linters/tflint/issues/1198
+* https://github.com/hashicorp/terraform-provider-aws/issues/15982  <-- open since Nov 2020;  intermittent based on IPv6 address?
+* https://github.com/hashicorp/terraform/issues/13022  <-- open since Mar 2017;  making backend config unnecessarily complicated
+* https://github.com/hashicorp/terraform/issues/19300  <-- open since Nov 2018;  making backend use unnecessarily complicated
+* https://github.com/hashicorp/terraform/issues/23340  <-- open since Nov 2019;  making testing of modules unnecessarily complicated
+* https://github.com/terraform-linters/tflint/issues/1198  <-- open since Aug 2021;  makes adding tflint config files to a project less awesome
+* https://github.com/jsiebens/hashi-up/issues/24  <-- open since Jul 2021;  makes automated fetching of Terraform less awesome
 
 
 References
