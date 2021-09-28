@@ -1,3 +1,6 @@
+# Note that EC2 Instance Connect is only supported on Amazon Linux 2 and Ubuntu.
+#   https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-connect-set-up.html
+
 # SSM requires you to use the following IAM instance profile magic...
 
 # The AWS managed role...
