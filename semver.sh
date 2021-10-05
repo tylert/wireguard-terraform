@@ -4,13 +4,15 @@
 # https://github.com/cloudflare/semver_bash
 # 0 = true, 1 = false
 
+
 semverParseInto() {
     local RE='[^0-9]*\([0-9]*\)[.]\([0-9]*\)[.]\([0-9]*\)\([\+0-9A-Za-z-]*\)'
     eval ${2}=$(echo ${1} | sed -e "s#${RE}#\1#")  # MAJOR
     eval ${3}=$(echo ${1} | sed -e "s#${RE}#\2#")  # MINOR
-    eval ${4}=$(echo ${1} | sed -e "s#${RE}#\3#")  # MINOR
+    eval ${4}=$(echo ${1} | sed -e "s#${RE}#\3#")  # PATCH
     eval ${5}=$(echo ${1} | sed -e "s#${RE}#\4#")  # SPECIAL
 }
+
 
 semverEQ() {
     local MAJOR_A=0; local MINOR_A=0; local PATCH_A=0; local SPECIAL_A=0
@@ -25,6 +27,7 @@ semverEQ() {
     if [[ "_${SPECIAL_A}" != "_${SPECIAL_B}" ]]; then return 1; fi
     return 0
 }
+
 
 semverLT() {
     local MAJOR_A=0; local MINOR_A=0; local PATCH_A=0; local SPECIAL_A=0
@@ -43,6 +46,7 @@ semverLT() {
     return 1
 }
 
+
 semverGT() {
     semverEQ ${1} ${2}
     local EQ=${?}
@@ -52,6 +56,7 @@ semverGT() {
 
     if [ ${EQ} -ne 0 ] && [ ${LT} -ne 0 ]; then return 0; else return 1; fi
 }
+
 
 # if [ '___semver.sh' == "___$(basename ${0})" ]; then
 #     MAJOR=0; MINOR=0; PATCH=0; SPECIAL=''
