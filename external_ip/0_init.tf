@@ -7,6 +7,9 @@
 |_|
 */
 
+# https://registry.terraform.io/providers/hashicorp/aws/latest
+# https://registry.terraform.io/providers/hashicorp/http/latest
+
 terraform {
   required_version = "~> 1.0.8"
 
