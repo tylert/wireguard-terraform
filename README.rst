@@ -100,3 +100,10 @@ References
 * https://www.reddit.com/r/Terraform/
 * https://www.terraform.io/docs/language/modules/sources.html#selecting-a-revision
 * https://markwarneke.me/2020-10-14-Generic-Terraform-Module-Test-Using-Terratest/
+
+
+Cleanup In Aisle Five
+---------------------
+
+* https://github.com/rebuy-de/aws-nuke
+* https://github.com/gruntwork-io/cloud-nuke
