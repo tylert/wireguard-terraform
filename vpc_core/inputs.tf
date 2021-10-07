@@ -18,10 +18,11 @@ variable "basename" {
   # There should be no default for this variable.
 }
 
+# XXX FIXME TODO Set this to true when NAT instances are golden.
 variable "create_nat_instances" {
   type        = bool
   description = "Create NAT instances instead of NAT gateways"
-  default     = false # XXX FIXME TODO Set this to true when NAT instances are golden.
+  default     = false
 }
 
 variable "create_private_endpoints" {
