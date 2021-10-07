@@ -27,7 +27,7 @@ resource "aws_dynamodb_table" "tf_lock" {
   }
 
   tags {
-    Name = "dynamodb-tf-lock"
+    Name = "tflock-${var.basename}"
   }
 }
 

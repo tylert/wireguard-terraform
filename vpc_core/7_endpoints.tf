@@ -29,7 +29,7 @@
 
 resource "aws_vpc_endpoint" "s3" {
   vpc_id       = aws_vpc.main.id
-  service_name = "com.amazonaws.${var.aws_region}.s3"
+  service_name = "com.amazonaws.${data.aws_region.current.name}.s3"
 
   vpc_endpoint_type = "Gateway"
   route_table_ids   = concat(aws_route_table.public_az[*].id, aws_route_table.private_az[*].id, aws_route_table.secure_az[*].id)
@@ -41,7 +41,7 @@ resource "aws_vpc_endpoint" "s3" {
 
 resource "aws_vpc_endpoint" "dynamodb" {
   vpc_id       = aws_vpc.main.id
-  service_name = "com.amazonaws.${var.aws_region}.dynamodb"
+  service_name = "com.amazonaws.${data.aws_region.current.name}.dynamodb"
 
   vpc_endpoint_type = "Gateway"
   route_table_ids   = concat(aws_route_table.public_az[*].id, aws_route_table.private_az[*].id, aws_route_table.secure_az[*].id)
@@ -65,7 +65,7 @@ resource "aws_vpc_endpoint" "dynamodb" {
 resource "aws_vpc_endpoint" "secure_ec2_msgs" {
   count        = true == var.create_private_endpoints ? 1 : 0
   vpc_id       = aws_vpc.main.id
-  service_name = "com.amazonaws.${var.aws_region}.ec2messages"
+  service_name = "com.amazonaws.${data.aws_region.current.name}.ec2messages"
 
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = false
@@ -80,7 +80,7 @@ resource "aws_vpc_endpoint" "secure_ec2_msgs" {
 resource "aws_vpc_endpoint" "secure_ssm" {
   count        = true == var.create_private_endpoints ? 1 : 0
   vpc_id       = aws_vpc.main.id
-  service_name = "com.amazonaws.${var.aws_region}.ssm"
+  service_name = "com.amazonaws.${data.aws_region.current.name}.ssm"
 
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = false
@@ -95,7 +95,7 @@ resource "aws_vpc_endpoint" "secure_ssm" {
 resource "aws_vpc_endpoint" "secure_ssm_msgs" {
   count        = true == var.create_private_endpoints ? 1 : 0
   vpc_id       = aws_vpc.main.id
-  service_name = "com.amazonaws.${var.aws_region}.ssmmessages"
+  service_name = "com.amazonaws.${data.aws_region.current.name}.ssmmessages"
 
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = false
@@ -121,7 +121,7 @@ resource "aws_vpc_endpoint" "secure_ssm_msgs" {
 # resource "aws_vpc_endpoint" "secure_ec2" {
 #   count        = true == var.create_private_endpoints ? 1 : 0
 #   vpc_id       = aws_vpc.main.id
-#   service_name = "com.amazonaws.${var.aws_region}.ec2"
+#   service_name = "com.amazonaws.${data.aws_region.current.name}.ec2"
 
 #   vpc_endpoint_type   = "Interface"
 #   private_dns_enabled = false
@@ -146,7 +146,7 @@ resource "aws_vpc_endpoint" "secure_ssm_msgs" {
 # resource "aws_vpc_endpoint" "secure_kms" {
 #   count        = true == var.create_private_endpoints ? 1 : 0
 #   vpc_id       = aws_vpc.main.id
-#   service_name = "com.amazonaws.${var.aws_region}.kms"
+#   service_name = "com.amazonaws.${data.aws_region.current.name}.kms"
 
 #   vpc_endpoint_type   = "Interface"
 #   private_dns_enabled = false

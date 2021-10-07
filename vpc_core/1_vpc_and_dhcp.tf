@@ -7,10 +7,20 @@ __   ___ __   ___    __ _ _ __   __| |   __| | |__   ___ _ __
       |_|                                               |_|
 */
 
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_dhcp_options
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_dhcp_options_association
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones
+
+# data "aws_caller_identity" "current" {}
+
+data "aws_region" "current" {}
+
+data "aws_availability_zones" "available" {
+  state = "available"
+}
 
 resource "aws_vpc" "main" {
   cidr_block = var.vpc_cidr_block
@@ -27,11 +37,11 @@ resource "aws_vpc" "main" {
   }
 }
 
-# XXX FIXME TODO Figure out what these values should definitely be and make new variables
+# XXX FIXME TODO Figure out what these values should definitely be!!!
 
 resource "aws_vpc_dhcp_options" "main" {
-  domain_name         = "${var.aws_region}.compute.internal" # "ec2.internal"???
-  domain_name_servers = ["AmazonProvidedDNS"]                # max 4
+  domain_name         = "${data.aws_region.current.name}.compute.internal" # "ec2.internal"???
+  domain_name_servers = ["AmazonProvidedDNS"]                              # max 4
   # ntp_servers         = [] # max 4
 
   tags = {
@@ -42,8 +52,4 @@ resource "aws_vpc_dhcp_options" "main" {
 resource "aws_vpc_dhcp_options_association" "main" {
   vpc_id          = aws_vpc.main.id
   dhcp_options_id = aws_vpc_dhcp_options.main.id
-}
-
-data "aws_availability_zones" "available" {
-  state = "available"
 }
