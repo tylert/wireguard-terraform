@@ -67,12 +67,12 @@ Security Groups
 TODO
 ----
 
+* https://registry.terraform.io/modules/hashicorp/dir/template/latest  templating backends hack to remove most Terraform annoyances???
 * https://github.com/cloudposse/terraform-aws-dynamic-subnets/blob/master/nat-instance.tf
 * https://github.com/fly-examples/rds-connector/blob/main/main.tf#L118-L180
 * https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs-s3.html  provide option to use S3 for VPC flow logs instead of CloudWatch Logs
 * https://www.terraform.io/docs/configuration/variables.html#custom-validation-rules  for variables to make sure they are not too big or too small (e.g.:  AZ and NAT gw counts)???
 * https://registry.terraform.io/providers/hashicorp/random/latest/docs  generate random strings for the basenames???
-* https://registry.terraform.io/modules/hashicorp/dir/template/latest  templating backends hack???
 * https://registry.terraform.io/providers/hashicorp/cloudinit/latest  cloud-init magic???
 
 
@@ -84,9 +84,11 @@ Terraform Annoyances
 * https://github.com/hashicorp/terraform/issues/19300  open since Nov 2018;  making backend use unnecessarily complicated
 * https://github.com/hashicorp/terraform/issues/23340  open since Nov 2019;  making testing of modules unnecessarily complicated
 * https://github.com/terraform-linters/tflint/issues/1181  open since Aug 2021;  makes adding tflint config files to a project less awesome
-* https://github.com/terraform-linters/tflint/issues/1198  open since Aug 2021;  makes adding tflint config files to a project less awesome
 * https://github.com/terraform-linters/tflint/issues/1217  open since Sep 2021;  makes adding tflint config files to a project less awesome
 * https://github.com/jsiebens/hashi-up/issues/24  open since Jul 2021;  makes automated fetching of Terraform less awesome
+
+* https://github.com/terraform-linters/tflint/issues/1198  open since Aug 2021;  makes adding tflint config files to a project less awesome
+* https://github.com/terraform-linters/tflint/pull/1235  fixes issue 1198
 
 
 References
