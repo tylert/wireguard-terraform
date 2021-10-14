@@ -87,9 +87,6 @@ Terraform Annoyances
 * https://github.com/terraform-linters/tflint/issues/1217  open since Sep 2021;  makes adding tflint config files to a project less awesome
 * https://github.com/jsiebens/hashi-up/issues/24  open since Jul 2021;  makes automated fetching of Terraform less awesome
 
-* https://github.com/terraform-linters/tflint/issues/1198  open since Aug 2021;  makes adding tflint config files to a project less awesome
-* https://github.com/terraform-linters/tflint/pull/1235  fixes issue 1198
-
 
 References
 ----------
