@@ -69,6 +69,7 @@ TODO
 
 * https://registry.terraform.io/modules/hashicorp/dir/template/latest  templating backends hack to remove most Terraform annoyances???
 * https://github.com/cloudposse/terraform-aws-dynamic-subnets/blob/master/nat-instance.tf
+* https://github.com/zmingxie/amzn2-wireguard-ami  Packer template for building the needed AMIs
 * https://github.com/fly-examples/rds-connector/blob/main/main.tf#L118-L180
 * https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs-s3.html  provide option to use S3 for VPC flow logs instead of CloudWatch Logs
 * https://www.terraform.io/docs/configuration/variables.html#custom-validation-rules  for variables to make sure they are not too big or too small (e.g.:  AZ and NAT gw counts)???
