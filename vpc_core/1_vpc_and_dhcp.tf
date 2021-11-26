@@ -14,7 +14,7 @@ __   ___ __   ___    __ _ _ __   __| |   __| | |__   ___ _ __
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_dhcp_options
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_dhcp_options_association
 
-# data "aws_caller_identity" "current" {}
+data "aws_caller_identity" "current" {}
 
 data "aws_region" "current" {}
 
@@ -23,7 +23,7 @@ data "aws_availability_zones" "available" {
 }
 
 resource "aws_vpc" "main" {
-  cidr_block = var.vpc_cidr_block
+  cidr_block = var.vpc_ipv4_cidr_block
 
   assign_generated_ipv6_cidr_block = true
   enable_classiclink               = false
