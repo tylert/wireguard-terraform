@@ -13,6 +13,9 @@
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_gateway
 
+# SPENDY:  aws_eip (if not associated), aws_nat_gateway, aws_instance (if not
+#          using nat GW)
+
 /*
                                 _
                                (_) __ ___      __

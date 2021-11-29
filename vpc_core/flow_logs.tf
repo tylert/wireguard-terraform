@@ -12,6 +12,8 @@
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/flow_log
 
+# SPENDY:  aws_cloudwatch_log_group
+
 resource "aws_iam_role" "main" {
   name = "${var.basename}-role"
 

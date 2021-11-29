@@ -14,6 +14,9 @@ __   ___ __   ___    __ _ _ __   __| |   __| | |__   ___ _ __
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_dhcp_options
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_dhcp_options_association
 
+# SPENDY:  aws_vpc (if tenancy is set to "dedicated" or "host" and free if set
+#          to "default")
+
 data "aws_caller_identity" "current" {}
 
 data "aws_region" "current" {}

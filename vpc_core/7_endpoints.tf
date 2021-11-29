@@ -12,6 +12,9 @@
 
 # https://crishantha.medium.com/handling-vpc-endpoints-ac192b0361a5
 
+# SPENDY:  aws_vpc_endpoint (if type is "interface" and free if type is
+#          "gateway")
+
 /*
    ____ _____    ___     ____                                    ____  ____
   / ___|___ /   ( _ )   |  _ \ _   _ _ __   __ _ _ __ ___   ___ |  _ \| __ )
