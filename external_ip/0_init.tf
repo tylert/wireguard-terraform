@@ -11,16 +11,16 @@
 # https://registry.terraform.io/providers/hashicorp/http/latest
 
 terraform {
-  required_version = "~> 1.0.11"
+  required_version = ">= 1.0.11, < 1.1.0"
 
   required_providers {
     aws = {
       source  = "registry.terraform.io/hashicorp/aws"
-      version = "~> 3.67.0"
+      version = ">= 3.67.0, < 4.0.0"
     }
     http = {
       source  = "registry.terraform.io/hashicorp/http"
-      version = "~> 2.1.0"
+      version = ">= 2.1.0, < 3.0.0"
     }
   }
 }
