@@ -89,6 +89,14 @@ Terraform Annoyances
 * https://github.com/jsiebens/hashi-up/issues/24  open since Jul 2021;  makes automated fetching of Terraform less awesome
 
 
+SSH Keygen
+~~~~~~~~~~
+
+* https://devops.stackexchange.com/questions/3408/how-can-i-get-terraforms-extern-to-execute-ssh-keygen-y-f-ssh-id-rsa
+* https://gist.github.com/irvingpop/968464132ded25a206ced835d50afa6b
+* https://www.terraform.io/docs/language/resources/provisioners/local-exec.html
+
+
 References
 ----------
 
