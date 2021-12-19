@@ -10,12 +10,12 @@
 # https://registry.terraform.io/providers/hashicorp/aws/latest
 
 terraform {
-  required_version = ">= 1.1.0, < 1.2.0"
+  required_version = ">= 1.1.2, < 1.2.0"
 
   required_providers {
     aws = {
       source  = "registry.terraform.io/hashicorp/aws"
-      version = ">= 3.69.0, < 4.0.0"
+      version = ">= 3.70.0, < 4.0.0"
     }
   }
 }
