@@ -25,13 +25,6 @@ variable "create_nat_instances" {
   default     = false
 }
 
-variable "create_private_endpoints" {
-  type        = bool
-  description = "CHANGE FOR MOAR SPENDY!!!  Create private VPC interface endpoints for AWS services"
-  default     = false
-  # WARNING:  Required if not using NAT gateways/instances
-}
-
 variable "how_many_azs" {
   type        = number
   description = "How many availability zones to use in the desired region"
@@ -66,7 +59,7 @@ variable "preserve_default_rules" {
 # Call to function "cidrsubnet" failed: prefix extension of n does not accommodate a subnet numbered 8.
 
 # Assigned IPv6 ranges are currently fixed at /56 for VPCs and /64 for subnets
-# (+8 bits).
+# (8 bits).
 
 variable "subnet_ipv4_cidr_bits" {
   type        = number

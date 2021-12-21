@@ -7,10 +7,6 @@
                 |_|
 */
 
-output "basename" {
-  value = var.basename
-}
-
 output "network_acl_id_public" {
   value = aws_network_acl.public.id
 }
@@ -58,18 +54,6 @@ output "subnet_ids_private" {
 output "subnet_ids_secure" {
   value = aws_subnet.secure_az[*].id
 }
-
-# output "vpc_endpoint_ids_public" {
-#   value = aws_vpc_endpoint[*].id # filter on the public ones
-# }
-
-# output "vpc_endpoint_ids_private" {
-#   value = aws_vpc_endpoint[*].id # filter on the private ones
-# }
-
-# output "vpc_endpoint_ids_secure" {
-#   value = [aws_vpc_endpoint.*.id] # filter on the secure ones
-# }
 
 output "vpc_id" {
   value = aws_vpc.main.id
