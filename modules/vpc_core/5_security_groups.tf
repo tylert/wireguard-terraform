@@ -67,9 +67,9 @@ resource "aws_default_security_group" "main_tainted" {
   }
 }
 
-# The "name" in the sg resource is "Security group name" in the web console fields.
-# The "description" in the sg resource is "Description" in the web console fields.
-# The tag "Name" in the sg resource is "Name" in the web console fields.
+# The "name" in the sg resource is "Security group name" in the web console columns.
+# The "description" in the sg resource is "Description" in the web console columns.
+# The tag "Name" in the sg resource is "Name" in the web console columns.
 
 /*
                                        _     _ _
