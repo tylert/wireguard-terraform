@@ -158,7 +158,7 @@ resource "aws_network_acl_rule" "secure_tx_vpc_ipv6" {
           |_.__/ \___|\__| \_/\_/ \___|\___|_| |_| /_/   \_\/____|___/
 */
 
-# https://github.com/hashicorp/terraform-provider-aws/issues/20104
+# XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104
 
 resource "aws_security_group_rule" "public_rx_self" {
   security_group_id = aws_security_group.public.id

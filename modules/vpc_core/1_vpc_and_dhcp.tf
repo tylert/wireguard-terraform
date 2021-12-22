@@ -14,9 +14,6 @@ __   ___ __   ___    __ _ _ __   __| |   __| | |__   ___ _ __
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_dhcp_options
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_dhcp_options_association
 
-# SPENDY:  aws_vpc (if tenancy is set to "dedicated" or "host" and free if set
-#          to "default")
-
 data "aws_caller_identity" "current" {}
 
 data "aws_region" "current" {}
@@ -30,10 +27,10 @@ resource "aws_vpc" "main" {
 
   assign_generated_ipv6_cidr_block = true
   enable_classiclink               = false
-  # enable_classiclink_dns_support   = false # ???
-  enable_dns_hostnames = true
-  enable_dns_support   = true
-  instance_tenancy     = var.vpc_instance_tenancy
+  enable_classiclink_dns_support   = false
+  enable_dns_hostnames             = true
+  enable_dns_support               = true
+  instance_tenancy                 = var.vpc_instance_tenancy
 
   tags = {
     Name = "vpc-${var.basename}"

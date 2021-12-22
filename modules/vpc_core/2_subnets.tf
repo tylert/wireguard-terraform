@@ -25,8 +25,8 @@ resource "aws_subnet" "public_az" {
 
   ipv6_cidr_block                 = cidrsubnet(aws_vpc.main.ipv6_cidr_block, var.subnet_ipv6_cidr_bits, count.index)
   availability_zone               = data.aws_availability_zones.available.names[count.index]
-  map_public_ip_on_launch         = true
   assign_ipv6_address_on_creation = true
+  map_public_ip_on_launch         = true
 
   tags = {
     Name = "subnet-${var.basename}-pub-az${count.index}"
@@ -49,8 +49,8 @@ resource "aws_subnet" "private_az" {
 
   ipv6_cidr_block                 = cidrsubnet(aws_vpc.main.ipv6_cidr_block, var.subnet_ipv6_cidr_bits, count.index + var.how_many_azs)
   availability_zone               = data.aws_availability_zones.available.names[count.index]
-  map_public_ip_on_launch         = false
   assign_ipv6_address_on_creation = true
+  map_public_ip_on_launch         = false
 
   tags = {
     Name = "subnet-${var.basename}-priv-az${count.index}"
@@ -71,8 +71,8 @@ resource "aws_subnet" "secure_az" {
 
   ipv6_cidr_block                 = cidrsubnet(aws_vpc.main.ipv6_cidr_block, var.subnet_ipv6_cidr_bits, count.index + var.how_many_azs + var.how_many_azs)
   availability_zone               = data.aws_availability_zones.available.names[count.index]
-  map_public_ip_on_launch         = false
   assign_ipv6_address_on_creation = true
+  map_public_ip_on_launch         = false
 
   tags = {
     Name = "subnet-${var.basename}-sec-az${count.index}"
