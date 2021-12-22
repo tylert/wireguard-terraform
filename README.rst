@@ -28,9 +28,10 @@ Rule numbers can be assigned any values from 1 to 32766, inclusive.  This code
 reserves for "its own use" the entire rule number range from 16834 to 32766
 (2^14 to 2^15-2).
 
-Rule numbers 23xxx to 32xxx are RFU.
-Rule numbers xx5xx to xx9xx are RFU.
-Rule numbers xxxx3 to xxxx9 are RFU.
+* Rule numbers 23xxx to 32xxx are RFU.
+* Rule numbers xx5xx to xx9xx are RFU.
+* Rule numbers xxxx3 to xxxx9 are RFU.
+* Rule numbers xxxx0 are RFU.
 
 ingress <-> RX = receive
 egress  <-> TX = transmit
@@ -58,10 +59,10 @@ egress  <-> TX = transmit
 Security Groups
 ---------------
 
-# Allow all outbound traffic to go anywhere from any subnets.
-# Allow all inbound traffic to freely pass between the "same-tier" subnets.
-# Allow all inbound traffic to freely pass between the "different-tier" subnets.
-# Allow all inbound ICMP, HTTPS, SSH traffic to freely-enter all subnets.
+#. Allow all outbound traffic to go anywhere from any subnets.
+#. Allow all inbound traffic to freely pass between the "same-tier" subnets.
+#. Allow all inbound traffic to freely pass between the "different-tier" subnets.
+#. Allow all inbound ICMP, HTTPS, SSH traffic to freely-enter all subnets.
 
 
 TODO
@@ -80,7 +81,9 @@ TODO
 Terraform Annoyances
 --------------------
 
-* https://github.com/hashicorp/terraform-provider-aws/issues/15982  open since Nov 2020;  intermittent based on IPv6 address?
+* https://github.com/hashicorp/terraform-provider-aws/issues/15982  open since Nov 2020;  intermittent pseudo-failure based on IPv6 address?
+* https://github.com/hashicorp/terraform-provider-aws/issues/20104  open since Jul 2021;  allow tagging of sgr resources (new AWS feature)
+* https://github.com/hashicorp/terraform-provider-aws/issues/21574  open since Nov 2021;  seems related to issue 15982
 * https://github.com/hashicorp/terraform/issues/13022  open since Mar 2017;  making backend config unnecessarily complicated
 * https://github.com/hashicorp/terraform/issues/19300  open since Nov 2018;  making backend use unnecessarily complicated
 * https://github.com/hashicorp/terraform/issues/23340  open since Nov 2019;  making testing of modules unnecessarily complicated

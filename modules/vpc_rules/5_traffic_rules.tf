@@ -19,7 +19,7 @@
 */
 
 resource "aws_network_acl_rule" "public_rx_vpc_ipv4" {
-  network_acl_id = aws_network_acl.public.id
+  network_acl_id = join("", data.aws_network_acls.public.ids)
   rule_number    = 17001
   egress         = false
   rule_action    = "allow"
@@ -30,7 +30,7 @@ resource "aws_network_acl_rule" "public_rx_vpc_ipv4" {
 }
 
 resource "aws_network_acl_rule" "public_rx_vpc_ipv6" {
-  network_acl_id  = aws_network_acl.public.id
+  network_acl_id  = join("", data.aws_network_acls.public.ids)
   rule_number     = 17002
   egress          = false
   rule_action     = "allow"
@@ -41,7 +41,7 @@ resource "aws_network_acl_rule" "public_rx_vpc_ipv6" {
 }
 
 resource "aws_network_acl_rule" "public_tx_vpc_ipv4" {
-  network_acl_id = aws_network_acl.public.id
+  network_acl_id = join("", data.aws_network_acls.public.ids)
   rule_number    = 18001
   egress         = true
   rule_action    = "allow"
@@ -52,7 +52,7 @@ resource "aws_network_acl_rule" "public_tx_vpc_ipv4" {
 }
 
 resource "aws_network_acl_rule" "public_tx_vpc_ipv6" {
-  network_acl_id  = aws_network_acl.public.id
+  network_acl_id  = join("", data.aws_network_acls.public.ids)
   rule_number     = 18002
   egress          = true
   rule_action     = "allow"
@@ -63,7 +63,7 @@ resource "aws_network_acl_rule" "public_tx_vpc_ipv6" {
 }
 
 resource "aws_network_acl_rule" "private_rx_vpc_ipv4" {
-  network_acl_id = aws_network_acl.private.id
+  network_acl_id = join("", data.aws_network_acls.private.ids)
   rule_number    = 19001
   egress         = false
   rule_action    = "allow"
@@ -74,7 +74,7 @@ resource "aws_network_acl_rule" "private_rx_vpc_ipv4" {
 }
 
 resource "aws_network_acl_rule" "private_rx_vpc_ipv6" {
-  network_acl_id  = aws_network_acl.private.id
+  network_acl_id  = join("", data.aws_network_acls.private.ids)
   rule_number     = 19002
   egress          = false
   rule_action     = "allow"
@@ -85,7 +85,7 @@ resource "aws_network_acl_rule" "private_rx_vpc_ipv6" {
 }
 
 resource "aws_network_acl_rule" "private_tx_vpc_ipv4" {
-  network_acl_id = aws_network_acl.private.id
+  network_acl_id = join("", data.aws_network_acls.private.ids)
   rule_number    = 20001
   egress         = true
   rule_action    = "allow"
@@ -96,7 +96,7 @@ resource "aws_network_acl_rule" "private_tx_vpc_ipv4" {
 }
 
 resource "aws_network_acl_rule" "private_tx_vpc_ipv6" {
-  network_acl_id  = aws_network_acl.private.id
+  network_acl_id  = join("", data.aws_network_acls.private.ids)
   rule_number     = 20002
   egress          = true
   rule_action     = "allow"
@@ -107,7 +107,7 @@ resource "aws_network_acl_rule" "private_tx_vpc_ipv6" {
 }
 
 resource "aws_network_acl_rule" "secure_rx_vpc_ipv4" {
-  network_acl_id = aws_network_acl.secure.id
+  network_acl_id = join("", data.aws_network_acls.secure.ids)
   rule_number    = 21001
   egress         = false
   rule_action    = "allow"
@@ -118,7 +118,7 @@ resource "aws_network_acl_rule" "secure_rx_vpc_ipv4" {
 }
 
 resource "aws_network_acl_rule" "secure_rx_vpc_ipv6" {
-  network_acl_id  = aws_network_acl.secure.id
+  network_acl_id  = join("", data.aws_network_acls.secure.ids)
   rule_number     = 21002
   egress          = false
   rule_action     = "allow"
@@ -129,7 +129,7 @@ resource "aws_network_acl_rule" "secure_rx_vpc_ipv6" {
 }
 
 resource "aws_network_acl_rule" "secure_tx_vpc_ipv4" {
-  network_acl_id = aws_network_acl.secure.id
+  network_acl_id = join("", data.aws_network_acls.secure.ids)
   rule_number    = 22001
   egress         = true
   rule_action    = "allow"
@@ -140,7 +140,7 @@ resource "aws_network_acl_rule" "secure_tx_vpc_ipv4" {
 }
 
 resource "aws_network_acl_rule" "secure_tx_vpc_ipv6" {
-  network_acl_id  = aws_network_acl.secure.id
+  network_acl_id  = join("", data.aws_network_acls.secure.ids)
   rule_number     = 22002
   egress          = true
   rule_action     = "allow"
@@ -161,7 +161,7 @@ resource "aws_network_acl_rule" "secure_tx_vpc_ipv6" {
 # XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104
 
 resource "aws_security_group_rule" "public_rx_self" {
-  security_group_id = aws_security_group.public.id
+  security_group_id = data.aws_security_group.public.id
   type              = "ingress"
   protocol          = -1 # all
   from_port         = 0  # ignored
@@ -176,7 +176,7 @@ resource "aws_security_group_rule" "public_rx_self" {
 }
 
 resource "aws_security_group_rule" "private_rx_self" {
-  security_group_id = aws_security_group.private.id
+  security_group_id = data.aws_security_group.private.id
   type              = "ingress"
   protocol          = -1 # all
   from_port         = 0  # ignored
@@ -191,7 +191,7 @@ resource "aws_security_group_rule" "private_rx_self" {
 }
 
 resource "aws_security_group_rule" "secure_rx_self" {
-  security_group_id = aws_security_group.secure.id
+  security_group_id = data.aws_security_group.secure.id
   type              = "ingress"
   protocol          = -1 # all
   from_port         = 0  # ignored
@@ -214,7 +214,7 @@ resource "aws_security_group_rule" "secure_rx_self" {
 */
 
 resource "aws_security_group_rule" "public_rx_private" {
-  security_group_id        = aws_security_group.public.id
+  security_group_id        = data.aws_security_group.public.id
   type                     = "ingress"
   protocol                 = -1 # all
   from_port                = 0  # ignored
@@ -229,7 +229,7 @@ resource "aws_security_group_rule" "public_rx_private" {
 }
 
 resource "aws_security_group_rule" "private_rx_public" {
-  security_group_id        = aws_security_group.private.id
+  security_group_id        = data.aws_security_group.private.id
   type                     = "ingress"
   protocol                 = -1 # all
   from_port                = 0  # ignored
@@ -244,7 +244,7 @@ resource "aws_security_group_rule" "private_rx_public" {
 }
 
 resource "aws_security_group_rule" "private_rx_secure" {
-  security_group_id        = aws_security_group.private.id
+  security_group_id        = data.aws_security_group.private.id
   type                     = "ingress"
   protocol                 = -1 # all
   from_port                = 0  # ignored
@@ -259,7 +259,7 @@ resource "aws_security_group_rule" "private_rx_secure" {
 }
 
 resource "aws_security_group_rule" "secure_rx_private" {
-  security_group_id        = aws_security_group.secure.id
+  security_group_id        = data.aws_security_group.secure.id
   type                     = "ingress"
   protocol                 = -1 # all
   from_port                = 0  # ignored
@@ -282,7 +282,7 @@ resource "aws_security_group_rule" "secure_rx_private" {
 */
 
 resource "aws_security_group_rule" "public_tx_ipv4" {
-  security_group_id = aws_security_group.public.id
+  security_group_id = data.aws_security_group.public.id
   type              = "egress"
   protocol          = -1 # all
   from_port         = 0  # ignored
@@ -297,7 +297,7 @@ resource "aws_security_group_rule" "public_tx_ipv4" {
 }
 
 resource "aws_security_group_rule" "public_tx_ipv6" {
-  security_group_id = aws_security_group.public.id
+  security_group_id = data.aws_security_group.public.id
   type              = "egress"
   protocol          = -1 # all
   from_port         = 0  # ignored
@@ -312,7 +312,7 @@ resource "aws_security_group_rule" "public_tx_ipv6" {
 }
 
 resource "aws_security_group_rule" "private_tx_ipv4" {
-  security_group_id = aws_security_group.private.id
+  security_group_id = data.aws_security_group.private.id
   type              = "egress"
   protocol          = -1 # all
   from_port         = 0  # ignored
@@ -327,7 +327,7 @@ resource "aws_security_group_rule" "private_tx_ipv4" {
 }
 
 resource "aws_security_group_rule" "private_tx_ipv6" {
-  security_group_id = aws_security_group.private.id
+  security_group_id = data.aws_security_group.private.id
   type              = "egress"
   protocol          = -1 # all
   from_port         = 0  # ignored
@@ -342,7 +342,7 @@ resource "aws_security_group_rule" "private_tx_ipv6" {
 }
 
 resource "aws_security_group_rule" "secure_tx_ipv4" {
-  security_group_id = aws_security_group.secure.id
+  security_group_id = data.aws_security_group.secure.id
   type              = "egress"
   protocol          = -1 # all
   from_port         = 0  # ignored
@@ -357,7 +357,7 @@ resource "aws_security_group_rule" "secure_tx_ipv4" {
 }
 
 resource "aws_security_group_rule" "secure_tx_ipv6" {
-  security_group_id = aws_security_group.secure.id
+  security_group_id = data.aws_security_group.secure.id
   type              = "egress"
   protocol          = -1 # all
   from_port         = 0  # ignored
