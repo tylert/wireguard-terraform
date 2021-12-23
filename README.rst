@@ -76,6 +76,7 @@ TODO
 * https://www.terraform.io/docs/configuration/variables.html#custom-validation-rules  for variables to make sure they are not too big or too small (e.g.:  AZ and NAT gw counts)???
 * https://registry.terraform.io/providers/hashicorp/random/latest/docs  generate random strings for the basenames???
 * https://registry.terraform.io/providers/hashicorp/cloudinit/latest  cloud-init magic???
+* https://github.com/int128/terraform-aws-nat-instance  NAT instance with ASG
 
 
 Terraform Annoyances
