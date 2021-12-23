@@ -26,7 +26,7 @@ resource "aws_network_acl_rule" "public_rx_vpc_ipv4" {
   protocol       = "all" # -1
   from_port      = 0     # ignored
   to_port        = 0     # ignored
-  cidr_block     = aws_vpc.main.cidr_block
+  cidr_block     = data.aws_vpc.main.cidr_block
 }
 
 resource "aws_network_acl_rule" "public_rx_vpc_ipv6" {
@@ -37,7 +37,7 @@ resource "aws_network_acl_rule" "public_rx_vpc_ipv6" {
   protocol        = "all" # -1
   from_port       = 0     # ignored
   to_port         = 0     # ignored
-  ipv6_cidr_block = aws_vpc.main.ipv6_cidr_block
+  ipv6_cidr_block = data.aws_vpc.main.ipv6_cidr_block
 }
 
 resource "aws_network_acl_rule" "public_tx_vpc_ipv4" {
@@ -48,7 +48,7 @@ resource "aws_network_acl_rule" "public_tx_vpc_ipv4" {
   protocol       = "all" # -1
   from_port      = 0     # ignored
   to_port        = 0     # ignored
-  cidr_block     = aws_vpc.main.cidr_block
+  cidr_block     = data.aws_vpc.main.cidr_block
 }
 
 resource "aws_network_acl_rule" "public_tx_vpc_ipv6" {
@@ -59,7 +59,7 @@ resource "aws_network_acl_rule" "public_tx_vpc_ipv6" {
   protocol        = "all" # -1
   from_port       = 0     # ignored
   to_port         = 0     # ignored
-  ipv6_cidr_block = aws_vpc.main.ipv6_cidr_block
+  ipv6_cidr_block = data.aws_vpc.main.ipv6_cidr_block
 }
 
 resource "aws_network_acl_rule" "private_rx_vpc_ipv4" {
@@ -70,7 +70,7 @@ resource "aws_network_acl_rule" "private_rx_vpc_ipv4" {
   protocol       = "all" # -1
   from_port      = 0     # ignored
   to_port        = 0     # ignored
-  cidr_block     = aws_vpc.main.cidr_block
+  cidr_block     = data.aws_vpc.main.cidr_block
 }
 
 resource "aws_network_acl_rule" "private_rx_vpc_ipv6" {
@@ -81,7 +81,7 @@ resource "aws_network_acl_rule" "private_rx_vpc_ipv6" {
   protocol        = "all" # -1
   from_port       = 0     # ignored
   to_port         = 0     # ignored
-  ipv6_cidr_block = aws_vpc.main.ipv6_cidr_block
+  ipv6_cidr_block = data.aws_vpc.main.ipv6_cidr_block
 }
 
 resource "aws_network_acl_rule" "private_tx_vpc_ipv4" {
@@ -92,7 +92,7 @@ resource "aws_network_acl_rule" "private_tx_vpc_ipv4" {
   protocol       = "all" # -1
   from_port      = 0     # ignored
   to_port        = 0     # ignored
-  cidr_block     = aws_vpc.main.cidr_block
+  cidr_block     = data.aws_vpc.main.cidr_block
 }
 
 resource "aws_network_acl_rule" "private_tx_vpc_ipv6" {
@@ -103,7 +103,7 @@ resource "aws_network_acl_rule" "private_tx_vpc_ipv6" {
   protocol        = "all" # -1
   from_port       = 0     # ignored
   to_port         = 0     # ignored
-  ipv6_cidr_block = aws_vpc.main.ipv6_cidr_block
+  ipv6_cidr_block = data.aws_vpc.main.ipv6_cidr_block
 }
 
 resource "aws_network_acl_rule" "secure_rx_vpc_ipv4" {
@@ -114,7 +114,7 @@ resource "aws_network_acl_rule" "secure_rx_vpc_ipv4" {
   protocol       = "all" # -1
   from_port      = 0     # ignored
   to_port        = 0     # ignored
-  cidr_block     = aws_vpc.main.cidr_block
+  cidr_block     = data.aws_vpc.main.cidr_block
 }
 
 resource "aws_network_acl_rule" "secure_rx_vpc_ipv6" {
@@ -125,7 +125,7 @@ resource "aws_network_acl_rule" "secure_rx_vpc_ipv6" {
   protocol        = "all" # -1
   from_port       = 0     # ignored
   to_port         = 0     # ignored
-  ipv6_cidr_block = aws_vpc.main.ipv6_cidr_block
+  ipv6_cidr_block = data.aws_vpc.main.ipv6_cidr_block
 }
 
 resource "aws_network_acl_rule" "secure_tx_vpc_ipv4" {
@@ -136,7 +136,7 @@ resource "aws_network_acl_rule" "secure_tx_vpc_ipv4" {
   protocol       = "all" # -1
   from_port      = 0     # ignored
   to_port        = 0     # ignored
-  cidr_block     = aws_vpc.main.cidr_block
+  cidr_block     = data.aws_vpc.main.cidr_block
 }
 
 resource "aws_network_acl_rule" "secure_tx_vpc_ipv6" {
@@ -147,7 +147,7 @@ resource "aws_network_acl_rule" "secure_tx_vpc_ipv6" {
   protocol        = "all" # -1
   from_port       = 0     # ignored
   to_port         = 0     # ignored
-  ipv6_cidr_block = aws_vpc.main.ipv6_cidr_block
+  ipv6_cidr_block = data.aws_vpc.main.ipv6_cidr_block
 }
 
 /*
@@ -219,7 +219,7 @@ resource "aws_security_group_rule" "public_rx_private" {
   protocol                 = -1 # all
   from_port                = 0  # ignored
   to_port                  = 0  # ignored
-  source_security_group_id = aws_security_group.private.id
+  source_security_group_id = data.aws_security_group.private.id
   description              = "From private subnets"
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
@@ -234,7 +234,7 @@ resource "aws_security_group_rule" "private_rx_public" {
   protocol                 = -1 # all
   from_port                = 0  # ignored
   to_port                  = 0  # ignored
-  source_security_group_id = aws_security_group.public.id
+  source_security_group_id = data.aws_security_group.public.id
   description              = "From public subnets"
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
@@ -249,7 +249,7 @@ resource "aws_security_group_rule" "private_rx_secure" {
   protocol                 = -1 # all
   from_port                = 0  # ignored
   to_port                  = 0  # ignored
-  source_security_group_id = aws_security_group.secure.id
+  source_security_group_id = data.aws_security_group.secure.id
   description              = "From secure subnets"
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
@@ -264,7 +264,7 @@ resource "aws_security_group_rule" "secure_rx_private" {
   protocol                 = -1 # all
   from_port                = 0  # ignored
   to_port                  = 0  # ignored
-  source_security_group_id = aws_security_group.private.id
+  source_security_group_id = data.aws_security_group.private.id
   description              = "From private subnets"
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
