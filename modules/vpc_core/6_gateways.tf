@@ -144,6 +144,7 @@ resource "aws_eip" "natinst_az" {
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami
 
 # data "aws_ami" "ubuntu" {
+#   owners      = ["099720109477"]  # Canonical
 #   most_recent = true
 
 #   filter {
@@ -155,14 +156,24 @@ resource "aws_eip" "natinst_az" {
 #     name   = "virtualization-type"
 #     values = ["hvm"]
 #   }
-
-#   owners = ["099720109477"]  # Canonical
 # }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
 
 # resource "aws_instance" "natinst" {
-#   count     = true == var.create_nat_instances ? var.how_many_nats : 0
+#   count         = true == var.create_nat_instances ? var.how_many_nats : 0
+#   availability_zone           = data.aws_availability_zones.available.names[count.index]
+#   instance_type = "t4g.nano"
+#   allocation_id = element(aws_eip.natinst_az[*].id, count.index)
+#   subnet_id     = element(aws_subnet.public_az[*].id, count.index)
+#   depends_on    = [aws_internet_gateway.public]
+#   ami           = data.aws_ami.ubuntu.id
+#   associate_public_ip_address = true
+
 #   user_data = <<-EOF
-#               EOF
+#   EOF
+
+#   tags = {
+#     Name = ""
+#   }
 # }
