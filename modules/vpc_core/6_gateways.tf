@@ -128,9 +128,6 @@ resource "aws_route" "private_az_ipv4" {
                      |_| |_|\__,_|\__|    |_|_| |_|___/\__|
 */
 
-# http://cdimage.debian.org/cdimage/cloud/
-# https://wiki.debian.org/Cloud/AmazonEC2Image
-
 resource "aws_eip" "natinst_az" {
   count      = true == var.create_nat_instances ? var.how_many_nats : 0
   vpc        = true
@@ -143,8 +140,16 @@ resource "aws_eip" "natinst_az" {
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami
 
+# http://cdimage.debian.org/cdimage/cloud/
+# https://wiki.debian.org/Cloud/AmazonEC2Image
+
+# Owners:
+#   "099720109477" for "Canonical" AMIs
+#   "136693071363" for "Debian" AMIs
+#   "093273469852" for "Uplink Labs" (ArchLinux) AMIs
+
 # data "aws_ami" "ubuntu" {
-#   owners      = ["099720109477"]  # Canonical
+#   owners      = ["099720109477"]
 #   most_recent = true
 
 #   filter {
@@ -176,4 +181,11 @@ resource "aws_eip" "natinst_az" {
 #   tags = {
 #     Name = ""
 #   }
+# }
+
+# resource "aws_route" "private_az_ipv4" {
+#   count                  = true == var.create_nat_instances ? var.how_many_nats : 0
+#   route_table_id         = element(aws_route_table.private_az[*].id, count.index)
+#   destination_cidr_block = "0.0.0.0/0"
+#   nat_gateway_id         = element(aws_nat_gateway.az[*].id, count.index)
 # }

@@ -77,6 +77,7 @@ TODO
 * https://registry.terraform.io/providers/hashicorp/random/latest/docs  generate random strings for the basenames???
 * https://registry.terraform.io/providers/hashicorp/cloudinit/latest  cloud-init magic???
 * https://github.com/int128/terraform-aws-nat-instance  NAT instance with ASG
+* https://docs.aws.amazon.com/vpc/latest/userguide/route-table-options.html  S3 endpoint PrivateLink stuff
 
 
 Terraform Annoyances
