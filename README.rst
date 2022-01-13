@@ -117,6 +117,7 @@ References
 * https://www.reddit.com/r/Terraform/
 * https://www.terraform.io/docs/language/modules/sources.html#selecting-a-revision
 * https://markwarneke.me/2020-10-14-Generic-Terraform-Module-Test-Using-Terratest/
+* https://github.com/amritb/poor-mans-vpn
 
 
 Cleanup In Aisle Five
