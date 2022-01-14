@@ -78,6 +78,7 @@ TODO
 * https://registry.terraform.io/providers/hashicorp/cloudinit/latest  cloud-init magic???
 * https://github.com/int128/terraform-aws-nat-instance  NAT instance with ASG
 * https://docs.aws.amazon.com/vpc/latest/userguide/route-table-options.html  S3 endpoint PrivateLink stuff
+* https://goteleport.com/blog/security-hardening-ssh-bastion-best-practices/  harden SSH???
 
 
 Terraform Annoyances
@@ -118,6 +119,7 @@ References
 * https://www.terraform.io/docs/language/modules/sources.html#selecting-a-revision
 * https://markwarneke.me/2020-10-14-Generic-Terraform-Module-Test-Using-Terratest/
 * https://github.com/amritb/poor-mans-vpn
+* https://www.procustodibus.com/blog/2021/04/wireguard-point-to-site-port-forwarding/
 
 
 Cleanup In Aisle Five
