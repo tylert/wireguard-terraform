@@ -18,6 +18,12 @@ variable "basename" {
   # There should be no default for this variable.
 }
 
+variable "wireguard_port" {
+  type        = number
+  description = "Port to use for wireguard tunnel"
+  default     = 51820
+}
+
 /*
      _       _
   __| | __ _| |_ __ _
