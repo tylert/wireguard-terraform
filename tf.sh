@@ -239,4 +239,5 @@ fi
 
 action="${1}"
 module="${2}"
-"tf_${action}" "${module}"
+varfile="${3}"
+"tf_${action}" "${module}" "${varfile}"

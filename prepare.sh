@@ -33,11 +33,15 @@ hu_get() {
                 'x86_64') echo 'No suffix needed for x86_64 Linux.' ;;
                 'aarch64') suffix='-arm64' ;;
                 'armv6l' | 'armv7l') suffix='-armhf' ;;
-                *) echo "I don't recognize your machine."; exit 1 ;;
+                *) echo "I don't recognize your Linux machine type."; exit 1 ;;
             esac ;;
-        'Darwin') suffix='-darwin' ;;
+        'Darwin')
+            case $(uname -m) in
+                'x86_64') suffix='-darwin' ;;
+                'arm64') echo "Hashi-up does not yet provide Darwin arm64 builds." exit 2 ;;
+                *) echo "I don't recognize your Darwin machine type."; exit 3 ;;
         # 'MINGW') suffix='.exe' ;;
-        *) echo "I don't recognize your OS."; exit 2 ;;
+        *) echo "I don't recognize your OS."; exit 4 ;;
     esac
 
     # Where to fetch things from/to
