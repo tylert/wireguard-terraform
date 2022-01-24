@@ -33,15 +33,16 @@ hu_get() {
                 'x86_64') echo 'No suffix needed for x86_64 Linux.' ;;
                 'aarch64') suffix='-arm64' ;;
                 'armv6l' | 'armv7l') suffix='-armhf' ;;
-                *) echo "I don't recognize your Linux machine type."; exit 1 ;;
+                *) echo 'I do not recognize your Linux machine type.' ; exit 1 ;;
             esac ;;
         'Darwin')
             case $(uname -m) in
                 'x86_64') suffix='-darwin' ;;
-                'arm64') echo "Hashi-up does not yet provide Darwin arm64 builds." exit 2 ;;
-                *) echo "I don't recognize your Darwin machine type."; exit 3 ;;
+                'arm64') echo 'Hashi-up does not yet provide Darwin arm64 builds.' ; exit 2 ;;
+                *) echo 'I do not recognize your Darwin machine type.' ; exit 3 ;;
+            esac ;;
         # 'MINGW') suffix='.exe' ;;
-        *) echo "I don't recognize your OS."; exit 4 ;;
+        *) echo 'I do not recognize your OS.' ; exit 4 ;;
     esac
 
     # Where to fetch things from/to
@@ -67,7 +68,7 @@ hu_get() {
         'Linux') local_hash=$(sha256sum "${target_file}" | cut -d' ' -f1) ;;
         'Darwin') local_hash=$(shasum -a 256 "${target_file}" | cut -d' ' -f1) ;;
         # 'MINGW') local_hash=remote_hash ;;
-        *) echo "I don't recognize your OS."; exit 3 ;;
+        *) echo 'I do not recognize your OS.' ; exit 3 ;;
     esac
 
     # Compare hashes to decide if the download was likely successful
@@ -108,7 +109,7 @@ tf_get() {
         'Linux') local_hash=$(sha256sum "${target_file}" | cut -d' ' -f1) ;;
         'Darwin') local_hash=$(shasum -a 256 "${target_file}" | cut -d' ' -f1) ;;
         # 'MINGW') local_hash=remote_hash ;;
-        *) echo "I don't recognize your OS."; exit 3 ;;
+        *) echo 'I do not recognize your OS.' ; exit 3 ;;
     esac
 
     # XXX FIXME TODO  Actually do something with the hash and compare it to the
