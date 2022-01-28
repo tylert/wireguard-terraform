@@ -20,28 +20,16 @@
 # https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch-logs-and-interface-VPC.html
 
 /*
-   ____ _____    ___     ____                                    ____  ____
-  / ___|___ /   ( _ )   |  _ \ _   _ _ __   __ _ _ __ ___   ___ |  _ \| __ )
-  \___ \ |_ \   / _ \/\ | | | | | | | '_ \ / _` | '_ ` _ \ / _ \| | | |  _ \
-   ___) |__) | | (_>  < | |_| | |_| | | | | (_| | | | | | | (_) | |_| | |_) |
-  |____/____/   \___/\/ |____/ \__, |_| |_|\__,_|_| |_| |_|\___/|____/|____/
-                               |___/
+     _                                       _ _        ___         _____
+  __| |_   _ _ __   __ _ _ __ ___   ___   __| | |__    ( _ )    ___|___ /
+ / _` | | | | '_ \ / _` | '_ ` _ \ / _ \ / _` | '_ \   / _ \/\ / __| |_ \
+| (_| | |_| | | | | (_| | | | | | | (_) | (_| | |_) | | (_>  < \__ \___) |
+ \__,_|\__, |_| |_|\__,_|_| |_| |_|\___/ \__,_|_.__/   \___/\/ |___/____/
+       |___/
 */
 
 # There is no additional charge for using Gateway VPC Endpoints so just shut up
 # and use them.
-
-resource "aws_vpc_endpoint" "s3" {
-  vpc_id       = aws_vpc.main.id
-  service_name = "com.amazonaws.${data.aws_region.current.name}.s3"
-
-  vpc_endpoint_type = "Gateway"
-  route_table_ids   = concat(aws_route_table.public_az[*].id, aws_route_table.private_az[*].id, aws_route_table.secure_az[*].id)
-
-  tags = {
-    Name = "vpce-${var.basename}-s3"
-  }
-}
 
 resource "aws_vpc_endpoint" "dynamodb" {
   vpc_id       = aws_vpc.main.id
@@ -52,5 +40,17 @@ resource "aws_vpc_endpoint" "dynamodb" {
 
   tags = {
     Name = "vpce-${var.basename}-dynamodb"
+  }
+}
+
+resource "aws_vpc_endpoint" "s3" {
+  vpc_id       = aws_vpc.main.id
+  service_name = "com.amazonaws.${data.aws_region.current.name}.s3"
+
+  vpc_endpoint_type = "Gateway"
+  route_table_ids   = concat(aws_route_table.public_az[*].id, aws_route_table.private_az[*].id, aws_route_table.secure_az[*].id)
+
+  tags = {
+    Name = "vpce-${var.basename}-s3"
   }
 }
