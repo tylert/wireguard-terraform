@@ -1,10 +1,9 @@
 /*
-                      _     _
- _ __  _ __ _____   _(_) __| | ___ _ __ ___
-| '_ \| '__/ _ \ \ / / |/ _` |/ _ \ '__/ __|
-| |_) | | | (_) \ V /| | (_| |  __/ |  \__ \
-| .__/|_|  \___/ \_/ |_|\__,_|\___|_|  |___/
-|_|
+ _       _ _
+(_)_ __ (_) |_
+| | '_ \| | __|
+| | | | | | |_
+|_|_| |_|_|\__|
 */
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest
@@ -16,7 +15,7 @@ terraform {
   required_providers {
     aws = {
       source  = "registry.terraform.io/hashicorp/aws"
-      version = ">= 3.73.0, < 4.0.0"
+      version = ">= 3.74.0, < 4.0.0"
     }
     http = {
       source  = "registry.terraform.io/hashicorp/http"

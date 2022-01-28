@@ -1,20 +1,21 @@
-# terraform {
-#   backend "s3" {
-#     region         = "ca-central-1"
-#     bucket         = "froopyland_state_bucket"
-#     key            = "global/terraform.tfstate"
-#     encrypt        = true
-#     acl            = "private"
-#     dynamodb_table = "terraform_lock"
-#   }
-# }
+/*
+     _                                       _ _        ___         _____
+  __| |_   _ _ __   __ _ _ __ ___   ___   __| | |__    ( _ )    ___|___ /
+ / _` | | | | '_ \ / _` | '_ ` _ \ / _ \ / _` | '_ \   / _ \/\ / __| |_ \
+| (_| | |_| | | | | (_| | | | | | | (_) | (_| | |_) | | (_>  < \__ \___) |
+ \__,_|\__, |_| |_|\__,_|_| |_| |_|\___/ \__,_|_.__/   \___/\/ |___/____/
+       |___/
+*/
 
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy
 
+data "aws_caller_identity" "current" {}
+
 resource "aws_dynamodb_table" "tf_lock" {
-  name     = "dydb-${var.basename}-tflock"
+  name     = "dydb-${var.basename}-tflock-${uuidv5(oid, data.aws_caller_identity.current.account_id)}"
   hash_key = "LockID" # change forces new resource
 
   billing_mode   = "PROVISIONED" # or "PAY_PER_REQUEST" and skip read_capacity and write_capacity
@@ -27,12 +28,12 @@ resource "aws_dynamodb_table" "tf_lock" {
   }
 
   tags {
-    Name = "dydb-${var.basename}-tflock"
+    Name = "dydb-${var.basename}-tflock-${uuidv5(oid, data.aws_caller_identity.current.account_id)}"
   }
 }
 
 resource "aws_s3_bucket" "tf_state" {
-  bucket        = "s3-${var.basename}-tfstate" # change forces new resource
+  bucket        = "s3-${var.basename}-tfstate-${uuidv5(oid, data.aws_caller_identity.current.account_id)}" # change forces new resource
   acl           = "private"
   force_destroy = false
 
@@ -45,7 +46,7 @@ resource "aws_s3_bucket" "tf_state" {
   # }
 
   tags {
-    Name = "s3-${var.basename}-tfstate"
+    Name = "s3-${var.basename}-tfstate-${uuidv5(oid, data.aws_caller_identity.current.account_id)}"
   }
 }
 
