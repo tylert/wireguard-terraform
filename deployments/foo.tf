@@ -9,6 +9,12 @@
 #   }
 # }
 
+variable "aws_region" {
+  type        = string
+  description = "AWS region in which to launch all non-global resources"
+  # There should be no default for this variable.
+}
+
 provider "aws" {
   region = var.aws_region
 }

@@ -1,16 +1,45 @@
 /*
-                 _       _     _
-__   ____ _ _ __(_) __ _| |__ | | ___  ___
-\ \ / / _` | '__| |/ _` | '_ \| |/ _ \/ __|
- \ V / (_| | |  | | (_| | |_) | |  __/\__ \
-  \_/ \__,_|_|  |_|\__,_|_.__/|_|\___||___/
+          _
+ ___  ___| |_ _   _ _ __
+/ __|/ _ \ __| | | | '_ \
+\__ \  __/ |_| |_| | |_) |
+|___/\___|\__|\__,_| .__/
+                   |_|
 */
 
-variable "aws_region" {
-  type        = string
-  description = "AWS region in which to launch all non-global resources"
-  # There should be no default for this variable.
+# https://registry.terraform.io/providers/hashicorp/aws/latest
+
+terraform {
+  required_version = ">= 1.1.5, < 1.2.0"
+
+  required_providers {
+    aws = {
+      source  = "registry.terraform.io/hashicorp/aws"
+      version = ">= 3.74.1, < 4.0.0"
+    }
+  }
 }
+
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones
+
+data "aws_caller_identity" "current" {}
+
+data "aws_region" "current" {}
+
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
+/*
+ _                   _
+(_)_ __  _ __  _   _| |_ ___
+| | '_ \| '_ \| | | | __/ __|
+| | | | | |_) | |_| | |_\__ \
+|_|_| |_| .__/ \__,_|\__|___/
+        |_|
+*/
 
 variable "basename" {
   type        = string
@@ -23,14 +52,6 @@ variable "wireguard_port" {
   description = "Port to use for wireguard tunnel"
   default     = 51820
 }
-
-/*
-     _       _
-  __| | __ _| |_ __ _
- / _` |/ _` | __/ _` |
-| (_| | (_| | || (_| |
- \__,_|\__,_|\__\__,_|
-*/
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/network_acls
@@ -89,3 +110,12 @@ data "aws_security_group" "secure" {
     Name = "sg-${var.basename}-sec"
   }
 }
+
+/*
+             _               _
+  ___  _   _| |_ _ __  _   _| |_ ___
+ / _ \| | | | __| '_ \| | | | __/ __|
+| (_) | |_| | |_| |_) | |_| | |_\__ \
+ \___/ \__,_|\__| .__/ \__,_|\__|___/
+                |_|
+*/

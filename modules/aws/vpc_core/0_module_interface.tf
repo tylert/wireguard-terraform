@@ -1,16 +1,45 @@
 /*
-                 _       _     _
-__   ____ _ _ __(_) __ _| |__ | | ___  ___
-\ \ / / _` | '__| |/ _` | '_ \| |/ _ \/ __|
- \ V / (_| | |  | | (_| | |_) | |  __/\__ \
-  \_/ \__,_|_|  |_|\__,_|_.__/|_|\___||___/
+          _
+ ___  ___| |_ _   _ _ __
+/ __|/ _ \ __| | | | '_ \
+\__ \  __/ |_| |_| | |_) |
+|___/\___|\__|\__,_| .__/
+                   |_|
 */
 
-variable "aws_region" {
-  type        = string
-  description = "AWS region in which to launch all non-global resources"
-  # There should be no default for this variable.
+# https://registry.terraform.io/providers/hashicorp/aws/latest
+
+terraform {
+  required_version = ">= 1.1.5, < 1.2.0"
+
+  required_providers {
+    aws = {
+      source  = "registry.terraform.io/hashicorp/aws"
+      version = ">= 3.74.1, < 4.0.0"
+    }
+  }
 }
+
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones
+
+data "aws_caller_identity" "current" {}
+
+data "aws_region" "current" {}
+
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
+/*
+ _                   _
+(_)_ __  _ __  _   _| |_ ___
+| | '_ \| '_ \| | | | __/ __|
+| | | | | |_) | |_| | |_\__ \
+|_|_| |_| .__/ \__,_|\__|___/
+        |_|
+*/
 
 variable "basename" {
   type        = string
@@ -88,4 +117,65 @@ variable "vpc_instance_tenancy" {
   #   condition     = contains(["default", "dedicated", "host"], var.vpc_instance_tenancy)
   #   error_message = "Value must be one of:  default, dedicated or host"
   # }
+}
+
+/*
+             _               _
+  ___  _   _| |_ _ __  _   _| |_ ___
+ / _ \| | | | __| '_ \| | | | __/ __|
+| (_) | |_| | |_| |_) | |_| | |_\__ \
+ \___/ \__,_|\__| .__/ \__,_|\__|___/
+                |_|
+*/
+
+output "network_acl_id_public" {
+  value = aws_network_acl.public.id
+}
+
+output "network_acl_id_private" {
+  value = aws_network_acl.private.id
+}
+
+output "network_acl_id_secure" {
+  value = aws_network_acl.secure.id
+}
+
+output "route_table_ids_public" {
+  value = aws_route_table.public_az[*].id
+}
+
+output "route_table_ids_private" {
+  value = aws_route_table.private_az[*].id
+}
+
+output "route_table_ids_secure" {
+  value = aws_route_table.secure_az[*].id
+}
+
+output "security_group_id_public" {
+  value = aws_security_group.public.id
+}
+
+output "security_group_id_private" {
+  value = aws_security_group.private.id
+}
+
+output "security_group_id_secure" {
+  value = aws_security_group.secure.id
+}
+
+output "subnet_ids_public" {
+  value = aws_subnet.public_az[*].id
+}
+
+output "subnet_ids_private" {
+  value = aws_subnet.private_az[*].id
+}
+
+output "subnet_ids_secure" {
+  value = aws_subnet.secure_az[*].id
+}
+
+output "vpc_id" {
+  value = aws_vpc.main.id
 }

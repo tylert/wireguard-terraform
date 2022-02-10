@@ -1,26 +1,15 @@
 /*
-                                    _       _ _
-__   ___ __   ___    __ _ _ __   __| |   __| | |__   ___ _ __
-\ \ / / '_ \ / __|  / _` | '_ \ / _` |  / _` | '_ \ / __| '_ \
- \ V /| |_) | (__  | (_| | | | | (_| | | (_| | | | | (__| |_) |
-  \_/ | .__/ \___|  \__,_|_| |_|\__,_|  \__,_|_| |_|\___| .__/
-      |_|                                               |_|
+                     ___         _ _
+__   ___ __   ___   ( _ )     __| | |__   ___ _ __
+\ \ / / '_ \ / __|  / _ \/\  / _` | '_ \ / __| '_ \
+ \ V /| |_) | (__  | (_>  < | (_| | | | | (__| |_) |
+  \_/ | .__/ \___|  \___/\/  \__,_|_| |_|\___| .__/
+      |_|                                    |_|
 */
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_dhcp_options
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_dhcp_options_association
-
-data "aws_caller_identity" "current" {}
-
-data "aws_region" "current" {}
-
-data "aws_availability_zones" "available" {
-  state = "available"
-}
 
 resource "aws_vpc" "main" {
   cidr_block = var.vpc_ipv4_cidr_block

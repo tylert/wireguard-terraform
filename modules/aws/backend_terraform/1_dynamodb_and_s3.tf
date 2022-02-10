@@ -7,12 +7,9 @@
        |___/
 */
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy
-
-data "aws_caller_identity" "current" {}
 
 resource "aws_dynamodb_table" "tf_lock" {
   name     = "dydb-${var.basename}-tflock-${uuidv5(oid, data.aws_caller_identity.current.account_id)}"
@@ -51,7 +48,7 @@ resource "aws_s3_bucket" "tf_state" {
 }
 
 # Make sure that we only ever store encrypted state stuff in this bucket...
-#   http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
+# http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
 
 resource "aws_s3_bucket_policy" "tf_state" {
   bucket = aws_s3_bucket.tf_state.id
