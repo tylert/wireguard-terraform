@@ -6,6 +6,9 @@
 # This script depends on:  awk, bash, curl, cut, grep, sha256sum/shasum, tr,
 # uname.
 
+# XXX FIXME TODO  Needs more semver like https://github.com/fsaintjacques/semver-tool.
+# XXX FIXME TODO  Alternately, replace all this horribleness with our own Go binary???
+
 
 # Enable "bash strict mode".
 # set -u is the same as set -o nounset
