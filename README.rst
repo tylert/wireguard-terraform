@@ -1,24 +1,20 @@
 ::
 
-    # Install all prerequisites
-    export HASHI_UP=./hashi-up
-    export TERRAFORM=./terraform
-    ./prepare.sh
-
     # Develop a single module
-    ./tf.sh fmt MODULE_NAME
-    ./tf.sh init MODULE_NAME
-    ./tf.sh validate MODULE_NAME
-    ./tf.sh lint_init MODULE_NAME
-    ./tf.sh lint MODULE_NAME
+    ./tf.sh fmt MODULE_LEAF_DIRECTORY
+    ./tf.sh init MODULE_LEAF_DIRECTORY
+    ./tf.sh validate MODULE_LEAF_DIRECTORY
+    ./tf.sh lint_init MODULE_LEAF_DIRECTORY
+    ./tf.sh lint MODULE_LEAF_DIRECTORY
 
-    # Deploy a single module
-    ./tf.sh plan MODULE_NAME
-    ./tf.sh apply MODULE_NAME
+    # Deploy a single deployment
+    ./tf.sh init DEPLOYMENT_LEAF_DIRECTORY
+    ./tf.sh plan DEPLOYMENT_LEAF_DIRECTORY
+    ./tf.sh apply DEPLOYMENT_LEAF_DIRECTORY
 
-    # Undeploy a single module
-    ./tf.sh plan_destroy MODULE_NAME
-    ./tf.sh destroy MODULE_NAME
+    # Undeploy a single deployment
+    ./tf.sh plan_destroy DEPLOYMENT_LEAF_DIRECTORY
+    ./tf.sh destroy DEPLOYMENT_LEAF_DIRECTORY
 
 
 Network ACLs
@@ -115,11 +111,14 @@ References
 * https://blog.gruntwork.io/5-lessons-learned-from-writing-over-300-000-lines-of-infrastructure-code-36ba7fadeac1
 * https://jeffbrown.tech/terraform-dynamic-blocks/
 * https://learn.hashicorp.com/collections/terraform/modules
-* https://www.reddit.com/r/Terraform/
 * https://www.terraform.io/docs/language/modules/sources.html#selecting-a-revision
 * https://markwarneke.me/2020-10-14-Generic-Terraform-Module-Test-Using-Terratest/
 * https://github.com/amritb/poor-mans-vpn
 * https://www.procustodibus.com/blog/2021/04/wireguard-point-to-site-port-forwarding/
+* https://blog.aleksic.dev/using-ansible-and-nomad-for-a-homelab-part-1
+* https://techoverflow.net/2022/02/01/how-to-connect-tailscale-to-headscale-server-on-linux/
+* https://developers.cloudflare.com/cloudflare-one/tutorials/ssh/
+* https://blog.tonari.no/introducing-innernet
 
 
 Cleanup In Aisle Five
