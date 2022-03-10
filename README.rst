@@ -94,6 +94,9 @@ Terraform Annoyances
 SSH Keygen
 ~~~~~~~~~~
 
+* https://github.com/terraform-aws-modules/terraform-aws-key-pair
+* https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair
+* https://stackoverflow.com/questions/49743220/how-do-i-create-an-ssh-key-in-terraform
 * https://devops.stackexchange.com/questions/3408/how-can-i-get-terraforms-extern-to-execute-ssh-keygen-y-f-ssh-id-rsa
 * https://gist.github.com/irvingpop/968464132ded25a206ced835d50afa6b
 * https://www.terraform.io/docs/language/resources/provisioners/local-exec.html
