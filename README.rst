@@ -75,6 +75,7 @@ TODO
 * https://github.com/int128/terraform-aws-nat-instance  NAT instance with ASG
 * https://docs.aws.amazon.com/vpc/latest/userguide/route-table-options.html  S3 endpoint PrivateLink stuff
 * https://goteleport.com/blog/security-hardening-ssh-bastion-best-practices/  harden SSH???
+* https://github.com/smallstep/step-ssh-example/blob/master/host-bootstrap.sh  user-data some SSH goop
 
 
 Terraform Annoyances
