@@ -123,6 +123,8 @@ References
 * https://techoverflow.net/2022/02/01/how-to-connect-tailscale-to-headscale-server-on-linux/
 * https://developers.cloudflare.com/cloudflare-one/tutorials/ssh/
 * https://blog.tonari.no/introducing-innernet
+* https://github.com/ofcoursedude/wg-manage
+* https://github.com/fasmide/remotemoe
 
 
 Cleanup In Aisle Five
