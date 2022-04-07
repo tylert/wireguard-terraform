@@ -254,6 +254,4 @@ fi
 
 action="${1}"
 directory="${2}"
-first_arg="${3}"
-second_arg="${4}"
-"tf_${action}" "${directory}" "${first_arg}" "${second_arg}"
+"tf_${action}" "${directory}" "${3}" "${4}"
