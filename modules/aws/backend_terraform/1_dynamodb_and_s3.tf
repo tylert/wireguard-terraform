@@ -12,7 +12,7 @@
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy
 
 resource "aws_dynamodb_table" "tf_lock" {
-  name     = "dydb-${var.basename}-tflock-${uuidv5(oid, data.aws_caller_identity.current.account_id)}"
+  name     = "tf-${var.basename}-${uuidv5(oid, data.aws_caller_identity.current.account_id)}"
   hash_key = "LockID" # change forces new resource
 
   billing_mode   = "PROVISIONED" # or "PAY_PER_REQUEST" and skip read_capacity and write_capacity
@@ -25,12 +25,12 @@ resource "aws_dynamodb_table" "tf_lock" {
   }
 
   tags {
-    Name = "dydb-${var.basename}-tflock-${uuidv5(oid, data.aws_caller_identity.current.account_id)}"
+    Name = "tf-${var.basename}-${uuidv5(oid, data.aws_caller_identity.current.account_id)}"
   }
 }
 
 resource "aws_s3_bucket" "tf_state" {
-  bucket        = "s3-${var.basename}-tfstate-${uuidv5(oid, data.aws_caller_identity.current.account_id)}" # change forces new resource
+  bucket        = "tf-${var.basename}-${uuidv5(oid, data.aws_caller_identity.current.account_id)}" # change forces new resource
   acl           = "private"
   force_destroy = false
 
@@ -43,7 +43,7 @@ resource "aws_s3_bucket" "tf_state" {
   # }
 
   tags {
-    Name = "s3-${var.basename}-tfstate-${uuidv5(oid, data.aws_caller_identity.current.account_id)}"
+    Name = "tf-${var.basename}-${uuidv5(oid, data.aws_caller_identity.current.account_id)}"
   }
 }
 
