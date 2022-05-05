@@ -76,6 +76,9 @@ TODO
 * https://docs.aws.amazon.com/vpc/latest/userguide/route-table-options.html  S3 endpoint PrivateLink stuff
 * https://goteleport.com/blog/security-hardening-ssh-bastion-best-practices/  harden SSH???
 * https://github.com/smallstep/step-ssh-example/blob/master/host-bootstrap.sh  user-data some SSH goop
+* https://learn.hashicorp.com/tutorials/terraform/resource-drift  resource drift, planning modes, etc.
+* https://www.terraform.io/cli/commands/plan#planning-modes  planning modes revisited
+* https://learn.hashicorp.com/tutorials/terraform/automate-terraform  environments, planning, etc.
 
 
 Terraform Annoyances
