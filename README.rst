@@ -1,20 +1,11 @@
-::
+Running Things
+--------------
 
-    # Develop a single module
-    ./tf.sh fmt MODULE_LEAF_DIRECTORY
-    ./tf.sh init MODULE_LEAF_DIRECTORY
-    ./tf.sh validate MODULE_LEAF_DIRECTORY
-    ./tf.sh lint_init MODULE_LEAF_DIRECTORY
-    ./tf.sh lint MODULE_LEAF_DIRECTORY
-
-    # Deploy a single deployment
-    ./tf.sh init DEPLOYMENT_LEAF_DIRECTORY
-    ./tf.sh plan DEPLOYMENT_LEAF_DIRECTORY
-    ./tf.sh apply DEPLOYMENT_LEAF_DIRECTORY
-
-    # Undeploy a single deployment
-    ./tf.sh plan_destroy DEPLOYMENT_LEAF_DIRECTORY
-    ./tf.sh destroy DEPLOYMENT_LEAF_DIRECTORY
+* https://www.terraform.io/cli/config/environment-variables#tf_cli_args-and-tf_cli_args_name
+* https://www.reddit.com/r/Terraform/comments/afznb2/terraform_without_wrappers_is_awesome/
+* https://www.reddit.com/r/Terraform/comments/qeovis/do_i_need_terragrunt_or_should_i_go_for_a_custom/
+* https://github.com/tfutils/tfenv
+* https://github.com/cloudposse/tfenv
 
 
 Network ACLs
@@ -49,7 +40,6 @@ egress  <-> TX = transmit
 
     xxxx1:  IPv4
     xxxx2:  IPv6
-
 
 
 Security Groups
@@ -92,11 +82,10 @@ Terraform Annoyances
 * https://github.com/hashicorp/terraform/issues/23340  open since Nov 2019;  making testing of modules unnecessarily complicated
 * https://github.com/terraform-linters/tflint/issues/1181  open since Aug 2021;  makes adding tflint config files to a project less awesome
 * https://github.com/terraform-linters/tflint/issues/1217  open since Sep 2021;  makes adding tflint config files to a project less awesome
-* https://github.com/jsiebens/hashi-up/issues/24  open since Jul 2021;  makes automated fetching of Terraform less awesome
 
 
 SSH Keygen
-~~~~~~~~~~
+----------
 
 * https://github.com/terraform-aws-modules/terraform-aws-key-pair
 * https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair
