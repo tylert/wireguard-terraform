@@ -140,15 +140,18 @@ resource "aws_eip" "natinst_az" {
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami
 
+# https://alpinelinux.org/cloud/
 # http://cdimage.debian.org/cdimage/cloud/
 # https://wiki.debian.org/Cloud/AmazonEC2Image
+# https://cloud-images.ubuntu.com/locator/
 
 # Owners:
+#   "093273469852" for "Uplink Labs" (ArchLinux) AMIs
 #   "099720109477" for "Canonical" AMIs
 #   "136693071363" for "Debian" AMIs
-#   "093273469852" for "Uplink Labs" (ArchLinux) AMIs
+#   "???" for "Alpine" AMIs
 
-# data "aws_ami" "ubuntu" {
+# data "aws_ami" "natinst" {
 #   owners      = ["099720109477"]
 #   most_recent = true
 
@@ -172,7 +175,7 @@ resource "aws_eip" "natinst_az" {
 #   allocation_id = element(aws_eip.natinst_az[*].id, count.index)
 #   subnet_id     = element(aws_subnet.public_az[*].id, count.index)
 #   depends_on    = [aws_internet_gateway.public]
-#   ami           = data.aws_ami.ubuntu.id
+#   ami           = data.aws_ami.natinst.id
 #   associate_public_ip_address = true
 
 #   user_data = <<-EOF
