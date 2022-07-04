@@ -166,7 +166,8 @@ resource "aws_eip" "natinst_az" {
 #   }
 # }
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_group
 
 # resource "aws_instance" "natinst" {
 #   count         = true == var.create_nat_instances ? var.how_many_nats : 0
