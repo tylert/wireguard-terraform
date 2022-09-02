@@ -100,6 +100,7 @@ References
 
 * https://www.jordanwhited.com/posts/wireguard-endpoint-discovery-nat-traversal/
 * https://github.com/jwhited/wgsd
+* https://www.ckn.io/blog/2017/11/14/wireguard-vpn-typical-setup/
 * https://www.perdian.de/blog/2021/12/27/setting-up-a-wireguard-vpn-at-aws-using-terraform/
 * https://github.com/costela/wesher
 * https://aws.amazon.com/blogs/aws/building-three-tier-architectures-with-security-groups/
