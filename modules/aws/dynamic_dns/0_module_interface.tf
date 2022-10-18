@@ -7,6 +7,9 @@
                    |_|
 */
 
+# https://releases.hashicorp.com/terraform/
+# https://releases.hashicorp.com/terraform-provider-aws/
+# https://releases.hashicorp.com/terraform-provider-http/
 # https://registry.terraform.io/providers/hashicorp/aws/latest
 # https://registry.terraform.io/providers/hashicorp/http/latest
 
@@ -20,7 +23,7 @@ terraform {
     }
     http = {
       source  = "registry.terraform.io/hashicorp/http"
-      version = ">= 2.0.0, < 3.0.0"
+      version = ">= 3.0.0, < 4.0.0"
     }
   }
 }

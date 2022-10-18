@@ -7,6 +7,8 @@
                    |_|
 */
 
+# https://releases.hashicorp.com/terraform/
+# https://releases.hashicorp.com/terraform-provider-aws/
 # https://registry.terraform.io/providers/hashicorp/aws/latest
 
 terraform {
