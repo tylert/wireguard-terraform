@@ -125,6 +125,14 @@ References
 * https://github.com/warp-tech/warpgate
 * https://notthebe.ee/raspi.html
 * https://gitlab.com/pyjam.as/tunnel
+* https://lwn.net/SubscriberLink/910766/7678f8c4ede60928/  Identity management for Wireguard
+* https://github.com/juanfont/headscale
+* https://tailscale.com/
+* https://www.netmaker.org/
+* https://www.firezone.dev/
+* https://netbird.io/
+* https://www.keycloak.org/
+* https://www.authelia.com/
 
 
 Cleanup In Aisle Five
