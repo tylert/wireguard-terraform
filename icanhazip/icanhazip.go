@@ -16,23 +16,23 @@ import (
 
 // Command-line arguments
 var (
-	aPort     string
-	aProtocol string
-	aVersion  bool
+	aPort    string
+	aProto   string
+	aVersion bool
 )
 
 func init() {
 	// Help for command-line arguments
 	const (
-		sPort     = "TCP port number on which to listen"
-		sProtocol = "IP Protocol on which to listen IPv6/v4"
-		sVersion  = "Display build version information (default false)"
+		sPort    = "TCP port number on which to listen"
+		sProto   = "IP version on which to listen IPv6/v4"
+		sVersion = "Display build version information (default false)"
 	)
 
+	flag.StringVar(&aProto, "ipv", FromEnvP("ICANHAZIP_PROTO", "4").(string), sProto)
+	flag.StringVar(&aProto, "i", FromEnvP("ICANHAZIP_PROTO", "4").(string), sProto)
 	flag.StringVar(&aPort, "port", FromEnvP("ICANHAZIP_PORT", "8080").(string), sPort)
 	flag.StringVar(&aPort, "p", FromEnvP("ICANHAZIP_PORT", "8080").(string), sPort)
-	flag.StringVar(&aProtocol, "protocol", FromEnvP("ICANHAZIP_PROTOCOL", "4").(string), sProtocol)
-	flag.StringVar(&aProtocol, "t", FromEnvP("ICANHAZIP_PROTOCOL", "4").(string), sProtocol)
 	flag.BoolVar(&aVersion, "version", FromEnvP("ICANHAZIP_VERSION", false).(bool), sVersion)
 	flag.BoolVar(&aVersion, "v", FromEnvP("ICANHAZIP_VERSION", false).(bool), sVersion)
 	iniflags.Parse()
@@ -86,13 +86,11 @@ func main() {
 	sm := http.NewServeMux()
 	sm.HandleFunc("/", showIp)
 
-	fmt.Println(fmt.Sprintf(":%s", aPort))
-
 	var (
 		l   net.Listener
 		err error
 	)
-	switch aProtocol {
+	switch aProto {
 	case "4":
 		l, err = net.Listen("tcp4", fmt.Sprintf(":%s", aPort))
 	case "6":
@@ -105,6 +103,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	fmt.Println(fmt.Sprintf(":%s", aPort))
 	log.Fatal(http.Serve(l, sm))
 }
 
