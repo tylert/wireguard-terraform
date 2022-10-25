@@ -24,7 +24,7 @@ var (
 func init() {
 	// Help for command-line arguments
 	const (
-		sPort    = "TCP port number on which to listen"
+		sPort    = "TCP port number on which to listen 0-65535"
 		sProto   = "IP version on which to listen IPv6/v4"
 		sVersion = "Display build version information (default false)"
 	)
@@ -63,6 +63,7 @@ func GetVersion() string {
 			case "vcs.time":
 				btime = setting.Value
 			}
+			// NO DEFAULT CASE!!!
 		}
 	}
 	// If we didn't specify a version string, use the git commit
