@@ -10,6 +10,7 @@ __   ___ __   ___   ( _ )     __| | |__   ___ _ __
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_dhcp_options
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_dhcp_options_association
+# https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/create-dhcp-options.html
 
 resource "aws_vpc" "main" {
   cidr_block = var.vpc_ipv4_cidr_block
@@ -26,12 +27,13 @@ resource "aws_vpc" "main" {
   }
 }
 
-# XXX FIXME TODO Figure out what these values should definitely be!!!
+# Unless you're doing fancy stuff in DNS:
+# if us-east-1 then "ec2.internal", if other region then "$REGION.compute.internal"
 
 resource "aws_vpc_dhcp_options" "main" {
-  domain_name         = "${data.aws_region.current.name}.compute.internal" # "ec2.internal"???
+  domain_name         = "us-east-1" == data.aws_region.current.name ? "ec2.internal" : "${data.aws_region.current.name}.compute.internal"
   domain_name_servers = ["AmazonProvidedDNS"]                              # max 4
-  # ntp_servers         = [] # max 4
+  # ntp_servers         = [] # max 4  # "time.aws.com"???  "time.nrc.ca"???
 
   tags = {
     Name = "dopt-${var.basename}"

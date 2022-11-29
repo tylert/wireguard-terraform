@@ -8,6 +8,7 @@
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_acl_rule
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ec2_tag
 
 /*
                          _ _   _     _
@@ -158,8 +159,6 @@ resource "aws_network_acl_rule" "secure_tx_vpc_ipv6" {
           |_.__/ \___|\__| \_/\_/ \___|\___|_| |_| /_/   \_\/____|___/
 */
 
-# XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104
-
 resource "aws_security_group_rule" "public_rx_self" {
   security_group_id = data.aws_security_group.public.id
   type              = "ingress"
@@ -171,8 +170,15 @@ resource "aws_security_group_rule" "public_rx_self" {
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
   # tags = {
-  #   Name = ""
+  #   Name = "sgr-${var.basename}-pub-self"
   # }
+}
+
+# XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
+resource "aws_ec2_tag" "public_rx_self" {
+  resource_id = aws_security_group_rule.public_rx_self.security_group_rule_id
+  key         = "Name"
+  value       = "sgr-${var.basename}-pub-self"
 }
 
 resource "aws_security_group_rule" "private_rx_self" {
@@ -186,8 +192,15 @@ resource "aws_security_group_rule" "private_rx_self" {
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
   # tags = {
-  #   Name = ""
+  #   Name = "sgr-${var.basename}-priv-self"
   # }
+}
+
+# XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
+resource "aws_ec2_tag" "private_rx_self" {
+  resource_id = aws_security_group_rule.private_rx_self.security_group_rule_id
+  key         = "Name"
+  value       = "sgr-${var.basename}-priv-self"
 }
 
 resource "aws_security_group_rule" "secure_rx_self" {
@@ -201,8 +214,15 @@ resource "aws_security_group_rule" "secure_rx_self" {
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
   # tags = {
-  #   Name = ""
+  #   Name = "sgr-${var.basename}-sec-self"
   # }
+}
+
+# XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
+resource "aws_ec2_tag" "secure_rx_self" {
+  resource_id = aws_security_group_rule.secure_rx_self.security_group_rule_id
+  key         = "Name"
+  value       = "sgr-${var.basename}-sec-self"
 }
 
 /*
@@ -224,8 +244,15 @@ resource "aws_security_group_rule" "public_rx_private" {
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
   # tags = {
-  #   Name = ""
+  #   Name = "sgr-${var.basename}-pub-priv"
   # }
+}
+
+# XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
+resource "aws_ec2_tag" "public_rx_private" {
+  resource_id = aws_security_group_rule.public_rx_private.security_group_rule_id
+  key         = "Name"
+  value       = "sgr-${var.basename}-pub-priv"
 }
 
 resource "aws_security_group_rule" "private_rx_public" {
@@ -239,8 +266,15 @@ resource "aws_security_group_rule" "private_rx_public" {
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
   # tags = {
-  #   Name = ""
+  #   Name = "sgr-${var.basename}-priv-pub"
   # }
+}
+
+# XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
+resource "aws_ec2_tag" "private_rx_public" {
+  resource_id = aws_security_group_rule.private_rx_public.security_group_rule_id
+  key         = "Name"
+  value       = "sgr-${var.basename}-priv-pub"
 }
 
 resource "aws_security_group_rule" "private_rx_secure" {
@@ -254,8 +288,15 @@ resource "aws_security_group_rule" "private_rx_secure" {
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
   # tags = {
-  #   Name = ""
+  #   Name = "sgr-${var.basename}-priv-sec"
   # }
+}
+
+# XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
+resource "aws_ec2_tag" "private_rx_secure" {
+  resource_id = aws_security_group_rule.private_rx_secure.security_group_rule_id
+  key         = "Name"
+  value       = "sgr-${var.basename}-priv-sec"
 }
 
 resource "aws_security_group_rule" "secure_rx_private" {
@@ -269,8 +310,15 @@ resource "aws_security_group_rule" "secure_rx_private" {
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
   # tags = {
-  #   Name = ""
+  #   Name = "sgr-${var.basename}-sec-priv"
   # }
+}
+
+# XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
+resource "aws_ec2_tag" "secure_rx_private" {
+  resource_id = aws_security_group_rule.secure_rx_private.security_group_rule_id
+  key         = "Name"
+  value       = "sgr-${var.basename}-sec-priv"
 }
 
 /*
@@ -292,8 +340,15 @@ resource "aws_security_group_rule" "public_tx_ipv4" {
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
   # tags = {
-  #   Name = ""
+  #   Name = "sgr-${var.basename}-pub-all-ipv4"
   # }
+}
+
+# XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
+resource "aws_ec2_tag" "public_tx_ipv4" {
+  resource_id = aws_security_group_rule.public_tx_ipv4.security_group_rule_id
+  key         = "Name"
+  value       = "sgr-${var.basename}-pub-all-ipv4"
 }
 
 resource "aws_security_group_rule" "public_tx_ipv6" {
@@ -307,8 +362,15 @@ resource "aws_security_group_rule" "public_tx_ipv6" {
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
   # tags = {
-  #   Name = ""
+  #   Name = "sgr-${var.basename}-pub-all-ipv6"
   # }
+}
+
+# XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
+resource "aws_ec2_tag" "public_tx_ipv6" {
+  resource_id = aws_security_group_rule.public_tx_ipv6.security_group_rule_id
+  key         = "Name"
+  value       = "sgr-${var.basename}-pub-all-ipv6"
 }
 
 resource "aws_security_group_rule" "private_tx_ipv4" {
@@ -322,8 +384,15 @@ resource "aws_security_group_rule" "private_tx_ipv4" {
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
   # tags = {
-  #   Name = ""
+  #   Name = "sgr-${var.basename}-priv-all-ipv4"
   # }
+}
+
+# XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
+resource "aws_ec2_tag" "private_tx_ipv4" {
+  resource_id = aws_security_group_rule.private_tx_ipv4.security_group_rule_id
+  key         = "Name"
+  value       = "sgr-${var.basename}-priv-all-ipv4"
 }
 
 resource "aws_security_group_rule" "private_tx_ipv6" {
@@ -337,8 +406,15 @@ resource "aws_security_group_rule" "private_tx_ipv6" {
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
   # tags = {
-  #   Name = ""
+  #   Name = "sgr-${var.basename}-priv-all-ipv6"
   # }
+}
+
+# XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
+resource "aws_ec2_tag" "private_tx_ipv6" {
+  resource_id = aws_security_group_rule.private_tx_ipv6.security_group_rule_id
+  key         = "Name"
+  value       = "sgr-${var.basename}-priv-all-ipv6"
 }
 
 resource "aws_security_group_rule" "secure_tx_ipv4" {
@@ -352,8 +428,15 @@ resource "aws_security_group_rule" "secure_tx_ipv4" {
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
   # tags = {
-  #   Name = ""
+  #   Name = "sgr-${var.basename}-sec-all-ipv4"
   # }
+}
+
+# XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
+resource "aws_ec2_tag" "secure_tx_ipv4" {
+  resource_id = aws_security_group_rule.secure_tx_ipv4.security_group_rule_id
+  key         = "Name"
+  value       = "sgr-${var.basename}-sec-all-ipv4"
 }
 
 resource "aws_security_group_rule" "secure_tx_ipv6" {
@@ -367,6 +450,13 @@ resource "aws_security_group_rule" "secure_tx_ipv6" {
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
   # tags = {
-  #   Name = ""
+  #   Name = "sgr-${var.basename}-sec-all-ipv6"
   # }
+}
+
+# XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
+resource "aws_ec2_tag" "secure_tx_ipv6" {
+  resource_id = aws_security_group_rule.secure_tx_ipv6.security_group_rule_id
+  key         = "Name"
+  value       = "sgr-${var.basename}-sec-all-ipv6"
 }

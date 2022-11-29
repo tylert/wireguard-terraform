@@ -17,10 +17,12 @@ terraform {
   required_providers {
     aws = {
       source  = "registry.terraform.io/hashicorp/aws"
-      version = ">= 4.0.0, < 5.0.0"
+      version = ">= 4.40.0, < 5.0.0"
     }
   }
 }
+
+# XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region
@@ -49,9 +51,15 @@ variable "basename" {
   # There should be no default for this variable.
 }
 
-variable "wireguard_port" {
+variable "ssh_port" {
   type        = number
-  description = "Port to use for wireguard tunnel"
+  description = "Port to use for SSH"
+  default     = 22
+}
+
+variable "wg_port" {
+  type        = number
+  description = "Port to use for Wireguard"
   default     = 51820
 }
 
