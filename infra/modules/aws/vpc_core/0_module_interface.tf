@@ -56,6 +56,12 @@ variable "create_nat_instances" {
   default     = false
 }
 
+variable "dns_servers" {
+  type        = list(string)
+  description = ""
+  default     = ["AmazonProvidedDNS"] # max 4
+}
+
 variable "how_many_azs" {
   type        = number
   description = "How many availability zones to use in the desired region"

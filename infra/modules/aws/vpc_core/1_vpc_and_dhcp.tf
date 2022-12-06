@@ -32,7 +32,7 @@ resource "aws_vpc" "main" {
 
 resource "aws_vpc_dhcp_options" "main" {
   domain_name         = "us-east-1" == data.aws_region.current.name ? "ec2.internal" : "${data.aws_region.current.name}.compute.internal"
-  domain_name_servers = ["AmazonProvidedDNS"]                              # max 4
+  domain_name_servers = var.dns_servers
   # ntp_servers         = [] # max 4  # "time.aws.com"???  "time.nrc.ca"???
 
   tags = {
