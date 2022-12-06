@@ -173,7 +173,7 @@ resource "aws_security_group_rule" "public_rx_icmpv4" {
   protocol          = "icmp" # 1
   from_port         = -1     # all
   to_port           = -1     # all
-  cidr_blocks       = ["0.0.0.0/0"]
+  cidr_blocks       = var.external_ipv4_addrs
   description       = ""
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
@@ -195,7 +195,7 @@ resource "aws_security_group_rule" "public_rx_icmpv6" {
   protocol          = 58 # icmpv6
   from_port         = -1 # all
   to_port           = -1 # all
-  ipv6_cidr_blocks  = ["::/0"]
+  ipv6_cidr_blocks  = var.external_ipv6_addrs
   description       = ""
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
@@ -217,7 +217,7 @@ resource "aws_security_group_rule" "private_rx_icmpv4" {
   protocol          = "icmp" # 1
   from_port         = -1     # all
   to_port           = -1     # all
-  cidr_blocks       = ["0.0.0.0/0"]
+  cidr_blocks       = var.external_ipv4_addrs
   description       = ""
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
@@ -239,7 +239,7 @@ resource "aws_security_group_rule" "private_rx_icmpv6" {
   protocol          = 58 # icmpv6
   from_port         = -1 # all
   to_port           = -1 # all
-  ipv6_cidr_blocks  = ["::/0"]
+  ipv6_cidr_blocks  = var.external_ipv6_addrs
   description       = ""
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
@@ -261,7 +261,7 @@ resource "aws_security_group_rule" "secure_rx_icmpv4" {
   protocol          = "icmp" # 1
   from_port         = -1     # all
   to_port           = -1     # all
-  cidr_blocks       = ["0.0.0.0/0"]
+  cidr_blocks       = var.external_ipv4_addrs
   description       = ""
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
@@ -283,7 +283,7 @@ resource "aws_security_group_rule" "secure_rx_icmpv6" {
   protocol          = 58 # icmpv6
   from_port         = -1 # all
   to_port           = -1 # all
-  ipv6_cidr_blocks  = ["::/0"]
+  ipv6_cidr_blocks  = var.external_ipv6_addrs
   description       = ""
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!

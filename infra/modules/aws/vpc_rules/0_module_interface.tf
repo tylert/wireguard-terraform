@@ -22,8 +22,6 @@ terraform {
   }
 }
 
-# XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
-
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones
@@ -49,6 +47,18 @@ variable "basename" {
   type        = string
   description = "Tag substring to use for all related resources (e.g.:  test1)"
   # There should be no default for this variable.
+}
+
+variable "external_ipv4_addrs" {
+  type        = list(string)
+  description = "List of IPv4 addresses with which to communicate"
+  default     = ["0.0.0.0/0"]
+}
+
+variable "external_ipv6_addrs" {
+  type        = list(string)
+  description = "List of IPv6 addresses with which to communicate"
+  default     = ["::/0"]
 }
 
 variable "ssh_port" {

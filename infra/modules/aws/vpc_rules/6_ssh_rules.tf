@@ -165,7 +165,7 @@ resource "aws_security_group_rule" "public_rx_ssh_ipv4" {
   protocol          = "tcp"        # 6
   from_port         = var.ssh_port # 22
   to_port           = var.ssh_port # 22
-  cidr_blocks       = ["0.0.0.0/0"]
+  cidr_blocks       = var.external_ipv4_addrs
   description       = ""
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
@@ -187,7 +187,7 @@ resource "aws_security_group_rule" "public_rx_ssh_ipv6" {
   protocol          = "tcp"        # 6
   from_port         = var.ssh_port # 22
   to_port           = var.ssh_port # 22
-  ipv6_cidr_blocks  = ["::/0"]
+  ipv6_cidr_blocks  = var.external_ipv6_addrs
   description       = ""
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
@@ -209,7 +209,7 @@ resource "aws_security_group_rule" "private_rx_ssh_ipv4" {
   protocol          = "tcp"        # 6
   from_port         = var.ssh_port # 22
   to_port           = var.ssh_port # 22
-  cidr_blocks       = ["0.0.0.0/0"]
+  cidr_blocks       = var.external_ipv4_addrs
   description       = ""
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
@@ -231,7 +231,7 @@ resource "aws_security_group_rule" "private_rx_ssh_ipv6" {
   protocol          = "tcp"        # 6
   from_port         = var.ssh_port # 22
   to_port           = var.ssh_port # 22
-  ipv6_cidr_blocks  = ["::/0"]
+  ipv6_cidr_blocks  = var.external_ipv6_addrs
   description       = ""
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
@@ -253,7 +253,7 @@ resource "aws_security_group_rule" "secure_rx_ssh_ipv4" {
   protocol          = "tcp"        # 6
   from_port         = var.ssh_port # 22
   to_port           = var.ssh_port # 22
-  cidr_blocks       = ["0.0.0.0/0"]
+  cidr_blocks       = var.external_ipv4_addrs
   description       = ""
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
@@ -275,7 +275,7 @@ resource "aws_security_group_rule" "secure_rx_ssh_ipv6" {
   protocol          = "tcp"        # 6
   from_port         = var.ssh_port # 22
   to_port           = var.ssh_port # 22
-  ipv6_cidr_blocks  = ["::/0"]
+  ipv6_cidr_blocks  = var.external_ipv6_addrs
   description       = ""
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
