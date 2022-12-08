@@ -16,8 +16,6 @@ resource "aws_vpc" "main" {
   cidr_block = var.vpc_ipv4_cidr_block
 
   assign_generated_ipv6_cidr_block     = true # conflicts with ipv6_ipam_pool_id
-  enable_classiclink                   = false
-  enable_classiclink_dns_support       = false
   enable_dns_hostnames                 = true
   enable_dns_support                   = true
   enable_network_address_usage_metrics = false
@@ -31,10 +29,15 @@ resource "aws_vpc" "main" {
 # Unless you're doing really fancy stuff in DNS, just take the defaults
 # if us-east-1 then "ec2.internal", if other region then "$AWS_REGION.compute.internal"
 
+# XXX FIXME TODO  https://github.com/hashicorp/terraform-provider-aws/issues/21708
+# Duplicate dopt gets created that requires manual cleanup after destroy
+
 resource "aws_vpc_dhcp_options" "main" {
   domain_name         = "us-east-1" == data.aws_region.current.name ? "ec2.internal" : "${data.aws_region.current.name}.compute.internal"
   domain_name_servers = var.dns_servers
   ntp_servers         = var.ntp_servers
+  # netbios_name_servers = [] # what would Linux even do with this???
+  # netbios_node_type    = 2 # what would Linux even do with this???
 
   tags = {
     Name = "dopt-${var.basename}"

@@ -11,3 +11,4 @@ terraform.tfstate.backup
 hashi-up
 terraform
 .tflint.d/
+plan_file
