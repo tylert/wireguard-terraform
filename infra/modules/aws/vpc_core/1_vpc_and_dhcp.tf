@@ -15,12 +15,13 @@ __   ___ __   ___   ( _ )     __| | |__   ___ _ __
 resource "aws_vpc" "main" {
   cidr_block = var.vpc_ipv4_cidr_block
 
-  assign_generated_ipv6_cidr_block = true
-  enable_classiclink               = false
-  enable_classiclink_dns_support   = false
-  enable_dns_hostnames             = true
-  enable_dns_support               = true
-  instance_tenancy                 = var.vpc_instance_tenancy
+  assign_generated_ipv6_cidr_block     = true # conflicts with ipv6_ipam_pool_id
+  enable_classiclink                   = false
+  enable_classiclink_dns_support       = false
+  enable_dns_hostnames                 = true
+  enable_dns_support                   = true
+  enable_network_address_usage_metrics = false
+  instance_tenancy                     = var.vpc_instance_tenancy
 
   tags = {
     Name = "vpc-${var.basename}"

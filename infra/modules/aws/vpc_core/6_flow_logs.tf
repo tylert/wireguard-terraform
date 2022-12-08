@@ -70,8 +70,8 @@ EOF
 }
 
 resource "aws_flow_log" "main" {
-  vpc_id                   = aws_vpc.main.id
-  traffic_type             = "ALL"
+  vpc_id       = aws_vpc.main.id
+  traffic_type = "ALL"
 
   log_destination_type     = "s3"
   log_destination          = aws_s3_bucket.logs.arn
