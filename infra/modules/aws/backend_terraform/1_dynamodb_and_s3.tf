@@ -47,7 +47,7 @@ resource "aws_s3_bucket" "tf_state" {
   }
 }
 
-# Make sure that we only ever store encrypted state stuff in this bucket...
+# Make sure that we only ever store encrypted stuff in this bucket...
 # http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
 
 resource "aws_s3_bucket_policy" "tf_state" {

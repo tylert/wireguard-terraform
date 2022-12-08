@@ -27,13 +27,13 @@ resource "aws_vpc" "main" {
   }
 }
 
-# Unless you're doing fancy stuff in DNS:
-# if us-east-1 then "ec2.internal", if other region then "$REGION.compute.internal"
+# Unless you're doing really fancy stuff in DNS, just take the defaults
+# if us-east-1 then "ec2.internal", if other region then "$AWS_REGION.compute.internal"
 
 resource "aws_vpc_dhcp_options" "main" {
   domain_name         = "us-east-1" == data.aws_region.current.name ? "ec2.internal" : "${data.aws_region.current.name}.compute.internal"
   domain_name_servers = var.dns_servers
-  # ntp_servers         = [] # max 4  # "time.aws.com"???  "time.nrc.ca"???
+  ntp_servers         = var.ntp_servers
 
   tags = {
     Name = "dopt-${var.basename}"

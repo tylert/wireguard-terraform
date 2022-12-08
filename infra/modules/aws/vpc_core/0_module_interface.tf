@@ -62,6 +62,12 @@ variable "dns_servers" {
   default     = ["AmazonProvidedDNS"] # max 4
 }
 
+variable "flow_log_aggregation_interval" {
+  type        = number
+  description = ""
+  default     = 600
+}
+
 variable "how_many_azs" {
   type        = number
   description = "How many availability zones to use in the desired region"
@@ -73,6 +79,13 @@ variable "how_many_nats" {
   description = "CHANGE FOR MOAR SPENDY!!!  How many NAT gateways/instances to create across the available AZs"
   default     = 0
   # WARNING:  how_many_nats <= how_many_azs
+}
+
+# time.nrc.ca, time.aws.com
+variable "ntp_servers" {
+  type        = list(string)
+  description = ""
+  default     = [] # max 4
 }
 
 variable "preserve_default_rules" {
