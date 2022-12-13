@@ -168,133 +168,145 @@ resource "aws_network_acl_rule" "secure_tx_icmpv6" {
 # operations relating to these 3 rules may be required.
 
 resource "aws_security_group_rule" "public_rx_icmpv4" {
+  count             = length(var.external_ipv4_addrs)
   security_group_id = data.aws_security_group.public.id
   type              = "ingress"
   protocol          = "icmp" # 1
   from_port         = -1     # all
   to_port           = -1     # all
-  cidr_blocks       = var.external_ipv4_addrs
+  cidr_blocks       = var.external_ipv4_addrs[count.index]
   description       = ""
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
   # tags = {
-  #   Name = "sgr-${var.basename}-pub-icmpv4"
+  #   Name = "sgr-${var.basename}-pub-icmpv4-no${count.index}"
   # }
 }
 
 # XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
-resource "aws_ec2_tag" "public_rx_icmpv4" {
-  resource_id = aws_security_group_rule.public_rx_icmpv4.security_group_rule_id
-  key         = "Name"
-  value       = "sgr-${var.basename}-pub-icmpv4"
-}
+# resource "aws_ec2_tag" "public_rx_icmpv4" {
+#   count       = length(var.external_ipv4_addrs)
+#   resource_id = aws_security_group_rule.public_rx_icmpv4.security_group_rule_id
+#   key         = "Name"
+#   value       = "sgr-${var.basename}-pub-icmpv4-no${count.index}"
+# }
 
 resource "aws_security_group_rule" "public_rx_icmpv6" {
+  count             = length(var.external_ipv6_addrs)
   security_group_id = data.aws_security_group.public.id
   type              = "ingress"
   protocol          = 58 # icmpv6
   from_port         = -1 # all
   to_port           = -1 # all
-  ipv6_cidr_blocks  = var.external_ipv6_addrs
+  ipv6_cidr_blocks  = var.external_ipv6_addrs[count.index]
   description       = ""
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
   # tags = {
-  #   Name = "sgr-${var.basename}-pub-icmpv6"
+  #   Name = "sgr-${var.basename}-pub-icmpv6-no${count.index}"
   # }
 }
 
 # XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
-resource "aws_ec2_tag" "public_rx_icmpv6" {
-  resource_id = aws_security_group_rule.public_rx_icmpv6.security_group_rule_id
-  key         = "Name"
-  value       = "sgr-${var.basename}-pub-icmpv6"
-}
+# resource "aws_ec2_tag" "public_rx_icmpv6" {
+#   count       = length(var.external_ipv6_addrs)
+#   resource_id = aws_security_group_rule.public_rx_icmpv6.security_group_rule_id
+#   key         = "Name"
+#   value       = "sgr-${var.basename}-pub-icmpv6-no${count.index}"
+# }
 
 resource "aws_security_group_rule" "private_rx_icmpv4" {
+  count             = length(var.external_ipv4_addrs)
   security_group_id = data.aws_security_group.private.id
   type              = "ingress"
   protocol          = "icmp" # 1
   from_port         = -1     # all
   to_port           = -1     # all
-  cidr_blocks       = var.external_ipv4_addrs
+  cidr_blocks       = var.external_ipv4_addrs[count.index]
   description       = ""
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
   # tags = {
-  #   Name = "sgr-${var.basename}-priv-icmpv4"
+  #   Name = "sgr-${var.basename}-priv-icmpv4-no${count.index}"
   # }
 }
 
 # XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
-resource "aws_ec2_tag" "private_rx_icmpv4" {
-  resource_id = aws_security_group_rule.private_rx_icmpv4.security_group_rule_id
-  key         = "Name"
-  value       = "sgr-${var.basename}-priv-icmpv4"
-}
+# resource "aws_ec2_tag" "private_rx_icmpv4" {
+#   count       = length(var.external_ipv4_addrs)
+#   resource_id = aws_security_group_rule.private_rx_icmpv4.security_group_rule_id
+#   key         = "Name"
+#   value       = "sgr-${var.basename}-priv-icmpv4-no${count.index}"
+# }
 
 resource "aws_security_group_rule" "private_rx_icmpv6" {
+  count             = length(var.external_ipv6_addrs)
   security_group_id = data.aws_security_group.private.id
   type              = "ingress"
   protocol          = 58 # icmpv6
   from_port         = -1 # all
   to_port           = -1 # all
-  ipv6_cidr_blocks  = var.external_ipv6_addrs
+  ipv6_cidr_blocks  = var.external_ipv6_addrs[count.index]
   description       = ""
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
   # tags = {
-  #   Name = "sgr-${var.basename}-priv-icmpv6"
+  #   Name = "sgr-${var.basename}-priv-icmpv6-no${count.index}"
   # }
 }
 
 # XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
-resource "aws_ec2_tag" "private_rx_icmpv6" {
-  resource_id = aws_security_group_rule.private_rx_icmpv6.security_group_rule_id
-  key         = "Name"
-  value       = "sgr-${var.basename}-priv-icmpv6"
-}
+# resource "aws_ec2_tag" "private_rx_icmpv6" {
+#   count       = length(var.external_ipv6_addrs)
+#   resource_id = aws_security_group_rule.private_rx_icmpv6.security_group_rule_id
+#   key         = "Name"
+#   value       = "sgr-${var.basename}-priv-icmpv6-no${count.index}"
+# }
 
 resource "aws_security_group_rule" "secure_rx_icmpv4" {
+  count             = length(var.external_ipv4_addrs)
   security_group_id = data.aws_security_group.secure.id
   type              = "ingress"
   protocol          = "icmp" # 1
   from_port         = -1     # all
   to_port           = -1     # all
-  cidr_blocks       = var.external_ipv4_addrs
+  cidr_blocks       = var.external_ipv4_addrs[count.index]
   description       = ""
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
   # tags = {
-  #   Name = "sgr-${var.basename}-sec-icmpv4"
+  #   Name = "sgr-${var.basename}-sec-icmpv4-no${count.index}"
   # }
 }
 
 # XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
-resource "aws_ec2_tag" "secure_rx_icmpv4" {
-  resource_id = aws_security_group_rule.secure_rx_icmpv4.security_group_rule_id
-  key         = "Name"
-  value       = "sgr-${var.basename}-sec-icmpv4"
-}
+# resource "aws_ec2_tag" "secure_rx_icmpv4" {
+#   count       = length(var.external_ipv4_addrs)
+#   resource_id = aws_security_group_rule.secure_rx_icmpv4.security_group_rule_id
+#   key         = "Name"
+#   value       = "sgr-${var.basename}-sec-icmpv4-no${count.index}"
+# }
 
 resource "aws_security_group_rule" "secure_rx_icmpv6" {
+  count             = length(var.external_ipv6_addrs)
   security_group_id = data.aws_security_group.secure.id
   type              = "ingress"
   protocol          = 58 # icmpv6
   from_port         = -1 # all
   to_port           = -1 # all
-  ipv6_cidr_blocks  = var.external_ipv6_addrs
+  ipv6_cidr_blocks  = var.external_ipv6_addrs[count.index]
   description       = ""
 
   # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
   # tags = {
-  #   Name = "sgr-${var.basename}-sec-icmpv6"
+  #   Name = "sgr-${var.basename}-sec-icmpv6-no${count.index}"
   # }
 }
 
 # XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
-resource "aws_ec2_tag" "secure_rx_icmpv6" {
-  resource_id = aws_security_group_rule.secure_rx_icmpv6.security_group_rule_id
-  key         = "Name"
-  value       = "sgr-${var.basename}-sec-icmpv6"
-}
+# resource "aws_ec2_tag" "secure_rx_icmpv6" {
+#   count       = length(var.external_ipv6_addrs)
+#   resource_id = aws_security_group_rule.secure_rx_icmpv6.security_group_rule_id
+#   key         = "Name"
+#   value       = "sgr-${var.basename}-sec-icmpv6-no${count.index}"
+# }
