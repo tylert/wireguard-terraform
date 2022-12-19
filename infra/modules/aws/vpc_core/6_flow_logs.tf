@@ -27,7 +27,7 @@ resource "aws_s3_bucket" "flow_logs" {
 
 resource "aws_s3_bucket_versioning" "flow_logs" {
   count  = true == var.flow_logs_enabled ? 1 : 0
-  bucket = aws_s3_bucket.flow_logs[0].id
+  bucket = aws_s3_bucket.flow_logs[0].id # change forces new resource
 
   versioning_configuration {
     status = "Disabled"
@@ -36,13 +36,13 @@ resource "aws_s3_bucket_versioning" "flow_logs" {
 
 resource "aws_s3_bucket_acl" "flow_logs" {
   count  = true == var.flow_logs_enabled ? 1 : 0
-  bucket = aws_s3_bucket.flow_logs[0].id
+  bucket = aws_s3_bucket.flow_logs[0].id # change forces new resource
   acl    = "private"
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "flow_logs" {
   count  = true == var.flow_logs_enabled ? 1 : 0
-  bucket = aws_s3_bucket.flow_logs[0].id
+  bucket = aws_s3_bucket.flow_logs[0].id # change forces new resource
 
   rule {
     apply_server_side_encryption_by_default {
@@ -56,7 +56,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "flow_logs" {
 
 resource "aws_s3_bucket_policy" "flow_logs" {
   count  = true == var.flow_logs_enabled ? 1 : 0
-  bucket = aws_s3_bucket.flow_logs[0].id
+  bucket = aws_s3_bucket.flow_logs[0].id # change forces new resource
 
   policy = <<EOF
 {

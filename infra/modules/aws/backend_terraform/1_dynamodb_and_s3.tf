@@ -43,7 +43,7 @@ resource "aws_s3_bucket" "tf_state" {
 }
 
 resource "aws_s3_bucket_versioning" "tf_state" {
-  bucket = aws_s3_bucket.tf_state.id
+  bucket = aws_s3_bucket.tf_state.id # change forces new resource
 
   versioning_configuration {
     status = "Enabled"
@@ -51,12 +51,12 @@ resource "aws_s3_bucket_versioning" "tf_state" {
 }
 
 resource "aws_s3_bucket_acl" "tf_state" {
-  bucket = aws_s3_bucket.tf_state.id
+  bucket = aws_s3_bucket.tf_state.id # change forces new resource
   acl    = "private"
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "tf_state" {
-  bucket = aws_s3_bucket.tf_state.id
+  bucket = aws_s3_bucket.tf_state.id # change forces new resource
 
   rule {
     apply_server_side_encryption_by_default {
@@ -69,7 +69,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "tf_state" {
 # http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
 
 resource "aws_s3_bucket_policy" "tf_state" {
-  bucket = aws_s3_bucket.tf_state.id
+  bucket = aws_s3_bucket.tf_state.id # change forces new resource
 
   policy = <<EOF
 {
