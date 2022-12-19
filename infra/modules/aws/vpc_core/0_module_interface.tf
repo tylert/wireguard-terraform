@@ -49,7 +49,6 @@ variable "basename" {
   # There should be no default for this variable.
 }
 
-# XXX FIXME TODO Set this to true when NAT instances are golden.
 variable "create_nat_instances" {
   type        = bool
   description = "Create NAT instances instead of NAT gateways"
@@ -62,7 +61,13 @@ variable "dns_servers" {
   default     = ["AmazonProvidedDNS"] # max 4
 }
 
-variable "flow_log_aggregation_interval" {
+variable "flow_logs_enabled" {
+  type        = bool
+  description = "CHANGE FOR MOAR SPENDY!!!  Enable VPC Flow Logs (S3)"
+  default     = false
+}
+
+variable "flow_logs_max_aggregation_interval" {
   type        = number
   description = ""
   default     = 600

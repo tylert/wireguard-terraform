@@ -9,6 +9,9 @@
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_lifecycle_configuration
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy
 
 resource "aws_dynamodb_table" "tf_lock" {
@@ -31,19 +34,22 @@ resource "aws_dynamodb_table" "tf_lock" {
 
 resource "aws_s3_bucket" "tf_state" {
   bucket        = "tf-${var.basename}-${uuidv5(oid, data.aws_caller_identity.current.account_id)}" # change forces new resource
-  acl           = "private"
   force_destroy = false
-
-  versioning {
-    enabled = true
-  }
-
-  # lifecycle {
-  #   prevent_destroy = true
-  # }
 
   tags {
     Name = "tf-${var.basename}-${uuidv5(oid, data.aws_caller_identity.current.account_id)}"
+  }
+}
+
+resource "aws_s3_bucket_acl" "tf_state" {
+  bucket = aws_s3_bucket.tf_state.id
+  acl    = "private"
+}
+
+resource "aws_s3_bucket_versioning" "tf_state" {
+  bucket = aws_s3_bucket.tf_state.id
+  versioning_configuration {
+    status = "Enabled"
   }
 }
 
@@ -55,7 +61,7 @@ resource "aws_s3_bucket_policy" "tf_state" {
 
   policy = <<EOF
 {
-  "Id": "PutObjPolicy",
+  "Id": "PutObjectPolicy",
   "Statement": [
     {
       "Action": "s3:PutObject",
@@ -66,20 +72,8 @@ resource "aws_s3_bucket_policy" "tf_state" {
       },
       "Effect": "Deny",
       "Principal": "*",
-      "Resource": "arn:aws:s3:::${var.tf_state_bucket_name}/*",
+      "Resource": "${aws_s3_bucket.tf_state.arn}/*",
       "Sid": "DenyIncorrectEncryptionHeader"
-    },
-    {
-      "Action": "s3:PutObject",
-      "Condition": {
-        "Null": {
-          "s3:x-amz-server-side-encryption": "true"
-        }
-      },
-      "Effect": "Deny",
-      "Principal": "*",
-      "Resource": "arn:aws:s3:::${var.tf_state_bucket_name}/*",
-      "Sid": "DenyUnEncryptedObjectUploads"
     }
   ],
   "Version": "2012-10-17"
