@@ -11,8 +11,9 @@
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_lifecycle_configuration
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning
 
 resource "aws_dynamodb_table" "tf_lock" {
   name     = "tf-${var.basename}-${uuidv5(oid, data.aws_caller_identity.current.account_id)}"
@@ -41,15 +42,26 @@ resource "aws_s3_bucket" "tf_state" {
   }
 }
 
+resource "aws_s3_bucket_versioning" "tf_state" {
+  bucket = aws_s3_bucket.tf_state.id
+
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
 resource "aws_s3_bucket_acl" "tf_state" {
   bucket = aws_s3_bucket.tf_state.id
   acl    = "private"
 }
 
-resource "aws_s3_bucket_versioning" "tf_state" {
+resource "aws_s3_bucket_server_side_encryption_configuration" "tf_state" {
   bucket = aws_s3_bucket.tf_state.id
-  versioning_configuration {
-    status = "Enabled"
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
   }
 }
 
