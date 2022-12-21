@@ -16,6 +16,7 @@ provider "aws" {
 module "vpc_core" {
   source                 = "../../modules/aws/vpc_core"
   basename               = "foo1"
+  flow_logs_enabled      = true
   preserve_default_rules = false
   vpc_ipv4_cidr_block    = "10.4.0.0/24"
 }

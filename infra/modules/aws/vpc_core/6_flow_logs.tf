@@ -17,11 +17,11 @@
 
 resource "aws_s3_bucket" "flow_logs" {
   count         = true == var.flow_logs_enabled ? 1 : 0
-  bucket        = "meh" # change forces new resource
+  bucket        = "fl-${var.basename}-${uuidv5("dns", data.aws_caller_identity.current.account_id)}" # change forces new resource
   force_destroy = true
 
   tags = {
-    Name = "s3-${var.basename}-fl"
+    Name = "fl-${var.basename}-${uuidv5("dns", data.aws_caller_identity.current.account_id)}"
   }
 }
 

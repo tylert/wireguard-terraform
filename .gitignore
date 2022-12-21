@@ -8,7 +8,6 @@ terraform.tfstate
 terraform.tfstate.d/
 terraform.tfstate.backup
 .terraform.tfstate.lock.info
-hashi-up
 terraform
 .tflint.d/
 plan_file
