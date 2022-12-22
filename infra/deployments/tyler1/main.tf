@@ -25,4 +25,5 @@ module "vpc_rules" {
   source              = "../../modules/aws/vpc_rules"
   basename            = "tyler1"
   external_ipv4_addrs = ["100.100.100.100/32"]
+  depends_on          = [module.vpc_core]
 }
