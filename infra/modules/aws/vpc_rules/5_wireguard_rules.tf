@@ -21,7 +21,7 @@ __      ____ _   _ __ _   _| | ___  ___
 
 resource "aws_network_acl_rule" "public_rx_wg_ipv4" {
   network_acl_id = join("", data.aws_network_acls.public.ids)
-  rule_number    = 17211
+  rule_number    = 17221
   egress         = false
   rule_action    = "allow"
   protocol       = 17          # udp
@@ -32,7 +32,7 @@ resource "aws_network_acl_rule" "public_rx_wg_ipv4" {
 
 resource "aws_network_acl_rule" "public_rx_wg_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.public.ids)
-  rule_number     = 17212
+  rule_number     = 17222
   egress          = false
   rule_action     = "allow"
   protocol        = 17          # udp
@@ -43,7 +43,7 @@ resource "aws_network_acl_rule" "public_rx_wg_ipv6" {
 
 resource "aws_network_acl_rule" "public_tx_wg_ipv4" {
   network_acl_id = join("", data.aws_network_acls.public.ids)
-  rule_number    = 18211
+  rule_number    = 18221
   egress         = true
   rule_action    = "allow"
   protocol       = 17          # udp
@@ -54,7 +54,7 @@ resource "aws_network_acl_rule" "public_tx_wg_ipv4" {
 
 resource "aws_network_acl_rule" "public_tx_wg_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.public.ids)
-  rule_number     = 18212
+  rule_number     = 18222
   egress          = true
   rule_action     = "allow"
   protocol        = 17          # udp
@@ -65,7 +65,7 @@ resource "aws_network_acl_rule" "public_tx_wg_ipv6" {
 
 resource "aws_network_acl_rule" "private_rx_wg_ipv4" {
   network_acl_id = join("", data.aws_network_acls.private.ids)
-  rule_number    = 19211
+  rule_number    = 19221
   egress         = false
   rule_action    = "allow"
   protocol       = 17          # udp
@@ -76,7 +76,7 @@ resource "aws_network_acl_rule" "private_rx_wg_ipv4" {
 
 resource "aws_network_acl_rule" "private_rx_wg_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.private.ids)
-  rule_number     = 19212
+  rule_number     = 19222
   egress          = false
   rule_action     = "allow"
   protocol        = 17          # udp
@@ -87,7 +87,7 @@ resource "aws_network_acl_rule" "private_rx_wg_ipv6" {
 
 resource "aws_network_acl_rule" "private_tx_wg_ipv4" {
   network_acl_id = join("", data.aws_network_acls.private.ids)
-  rule_number    = 20211
+  rule_number    = 20221
   egress         = true
   rule_action    = "allow"
   protocol       = 17          # udp
@@ -98,7 +98,7 @@ resource "aws_network_acl_rule" "private_tx_wg_ipv4" {
 
 resource "aws_network_acl_rule" "private_tx_wg_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.private.ids)
-  rule_number     = 20212
+  rule_number     = 20222
   egress          = true
   rule_action     = "allow"
   protocol        = 17          # udp
@@ -109,7 +109,7 @@ resource "aws_network_acl_rule" "private_tx_wg_ipv6" {
 
 resource "aws_network_acl_rule" "secure_rx_wg_ipv4" {
   network_acl_id = join("", data.aws_network_acls.secure.ids)
-  rule_number    = 21211
+  rule_number    = 21221
   egress         = false
   rule_action    = "allow"
   protocol       = 17          # udp
@@ -120,7 +120,7 @@ resource "aws_network_acl_rule" "secure_rx_wg_ipv4" {
 
 resource "aws_network_acl_rule" "secure_rx_wg_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.secure.ids)
-  rule_number     = 21212
+  rule_number     = 21222
   egress          = false
   rule_action     = "allow"
   protocol        = 17          # udp
@@ -131,7 +131,7 @@ resource "aws_network_acl_rule" "secure_rx_wg_ipv6" {
 
 resource "aws_network_acl_rule" "secure_tx_wg_ipv4" {
   network_acl_id = join("", data.aws_network_acls.secure.ids)
-  rule_number    = 22211
+  rule_number    = 22221
   egress         = true
   rule_action    = "allow"
   protocol       = 17          # udp
@@ -142,7 +142,7 @@ resource "aws_network_acl_rule" "secure_tx_wg_ipv4" {
 
 resource "aws_network_acl_rule" "secure_tx_wg_ipv6" {
   network_acl_id  = join("", data.aws_network_acls.secure.ids)
-  rule_number     = 22212
+  rule_number     = 22222
   egress          = true
   rule_action     = "allow"
   protocol        = 17          # udp

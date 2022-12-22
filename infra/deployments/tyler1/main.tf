@@ -21,8 +21,8 @@ module "vpc_core" {
   vpc_ipv4_cidr_block    = "10.4.0.0/24"
 }
 
-# module "vpc_rules" {
-#   source              = "../../modules/aws/vpc_rules"
-#   basename            = "tyler1"
-#   external_ipv4_addrs = ["100.100.100.100/32"]
-# }
+module "vpc_rules" {
+  source              = "../../modules/aws/vpc_rules"
+  basename            = "tyler1"
+  external_ipv4_addrs = ["100.100.100.100/32"]
+}
