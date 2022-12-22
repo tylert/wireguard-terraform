@@ -61,6 +61,12 @@ variable "external_ipv6_addrs" {
   default     = ["::/0"]
 }
 
+variable "https_port" {
+  type        = number
+  description = "Port to use for HTTPS"
+  default     = 443
+}
+
 variable "ssh_port" {
   type        = number
   description = "Port to use for SSH"

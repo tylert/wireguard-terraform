@@ -23,7 +23,7 @@ resource "aws_network_acl_rule" "public_rx_ssh_ipv4" {
   rule_number    = 17401
   egress         = false
   rule_action    = "allow"
-  protocol       = "tcp"        # 6
+  protocol       = 6            # tcp
   from_port      = var.ssh_port # 22
   to_port        = var.ssh_port # 22
   cidr_block     = "0.0.0.0/0"
@@ -34,7 +34,7 @@ resource "aws_network_acl_rule" "public_rx_ssh_ipv6" {
   rule_number     = 17402
   egress          = false
   rule_action     = "allow"
-  protocol        = "tcp"        # 6
+  protocol        = 6            # tcp
   from_port       = var.ssh_port # 22
   to_port         = var.ssh_port # 22
   ipv6_cidr_block = "::/0"
@@ -45,7 +45,7 @@ resource "aws_network_acl_rule" "public_tx_ssh_ipv4" {
   rule_number    = 18401
   egress         = true
   rule_action    = "allow"
-  protocol       = "tcp"        # 6
+  protocol       = 6            # tcp
   from_port      = var.ssh_port # 22
   to_port        = var.ssh_port # 22
   cidr_block     = "0.0.0.0/0"
@@ -56,7 +56,7 @@ resource "aws_network_acl_rule" "public_tx_ssh_ipv6" {
   rule_number     = 18402
   egress          = true
   rule_action     = "allow"
-  protocol        = "tcp"        # 6
+  protocol        = 6            # tcp
   from_port       = var.ssh_port # 22
   to_port         = var.ssh_port # 22
   ipv6_cidr_block = "::/0"
@@ -67,7 +67,7 @@ resource "aws_network_acl_rule" "private_rx_ssh_ipv4" {
   rule_number    = 19401
   egress         = false
   rule_action    = "allow"
-  protocol       = "tcp"        # 6
+  protocol       = 6            # tcp
   from_port      = var.ssh_port # 22
   to_port        = var.ssh_port # 22
   cidr_block     = "0.0.0.0/0"
@@ -78,7 +78,7 @@ resource "aws_network_acl_rule" "private_rx_ssh_ipv6" {
   rule_number     = 19402
   egress          = false
   rule_action     = "allow"
-  protocol        = "tcp"        # 6
+  protocol        = 6            # tcp
   from_port       = var.ssh_port # 22
   to_port         = var.ssh_port # 22
   ipv6_cidr_block = "::/0"
@@ -89,7 +89,7 @@ resource "aws_network_acl_rule" "private_tx_ssh_ipv4" {
   rule_number    = 20401
   egress         = true
   rule_action    = "allow"
-  protocol       = "tcp"        # 6
+  protocol       = 6            # tcp
   from_port      = var.ssh_port # 22
   to_port        = var.ssh_port # 22
   cidr_block     = "0.0.0.0/0"
@@ -100,7 +100,7 @@ resource "aws_network_acl_rule" "private_tx_ssh_ipv6" {
   rule_number     = 20402
   egress          = true
   rule_action     = "allow"
-  protocol        = "tcp"        # 6
+  protocol        = 6            # tcp
   from_port       = var.ssh_port # 22
   to_port         = var.ssh_port # 22
   ipv6_cidr_block = "::/0"
@@ -111,7 +111,7 @@ resource "aws_network_acl_rule" "secure_rx_ssh_ipv4" {
   rule_number    = 21401
   egress         = false
   rule_action    = "allow"
-  protocol       = "tcp"        # 6
+  protocol       = 6            # tcp
   from_port      = var.ssh_port # 22
   to_port        = var.ssh_port # 22
   cidr_block     = "0.0.0.0/0"
@@ -122,7 +122,7 @@ resource "aws_network_acl_rule" "secure_rx_ssh_ipv6" {
   rule_number     = 21402
   egress          = false
   rule_action     = "allow"
-  protocol        = "tcp"        # 6
+  protocol        = 6            # tcp
   from_port       = var.ssh_port # 22
   to_port         = var.ssh_port # 22
   ipv6_cidr_block = "::/0"
@@ -133,7 +133,7 @@ resource "aws_network_acl_rule" "secure_tx_ssh_ipv4" {
   rule_number    = 22401
   egress         = true
   rule_action    = "allow"
-  protocol       = "tcp"        # 6
+  protocol       = 6            # tcp
   from_port      = var.ssh_port # 22
   to_port        = var.ssh_port # 22
   cidr_block     = "0.0.0.0/0"
@@ -144,7 +144,7 @@ resource "aws_network_acl_rule" "secure_tx_ssh_ipv6" {
   rule_number     = 22402
   egress          = true
   rule_action     = "allow"
-  protocol        = "tcp"        # 6
+  protocol        = 6            # tcp
   from_port       = var.ssh_port # 22
   to_port         = var.ssh_port # 22
   ipv6_cidr_block = "::/0"
@@ -163,142 +163,118 @@ resource "aws_security_group_rule" "public_rx_ssh_ipv4" {
   count             = length(var.external_ipv4_addrs)
   security_group_id = data.aws_security_group.public.id
   type              = "ingress"
-  protocol          = "tcp"        # 6
+  protocol          = 6            # tcp
   from_port         = var.ssh_port # 22
   to_port           = var.ssh_port # 22
   cidr_blocks       = var.external_ipv4_addrs[count.index]
-  description       = ""
-
-  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
-  # tags = {
-  #   Name = "sgr-${var.basename}-pub-ssh-ipv4-no${count.index}"
-  # }
+  description       = "SSH"
 }
 
-# XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
-# resource "aws_ec2_tag" "public_rx_ssh_ipv4" {
-#   count       = length(var.external_ipv4_addrs)
-#   resource_id = aws_security_group_rule.public_rx_ssh_ipv4.security_group_rule_id
-#   key         = "Name"
-#   value       = "sgr-${var.basename}-pub-ssh-ipv4-no${count.index}"
-# }
+# XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
+# https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
+resource "aws_ec2_tag" "public_rx_ssh_ipv4" {
+  count       = length(var.external_ipv4_addrs)
+  resource_id = aws_security_group_rule.public_rx_ssh_ipv4[count.index].security_group_rule_id
+  key         = "Name"
+  value       = "sgr-${var.basename}-pub-ssh-ipv4-no${count.index}"
+}
 
 resource "aws_security_group_rule" "public_rx_ssh_ipv6" {
   count             = length(var.external_ipv6_addrs)
   security_group_id = data.aws_security_group.public.id
   type              = "ingress"
-  protocol          = "tcp"        # 6
+  protocol          = 6            # tcp
   from_port         = var.ssh_port # 22
   to_port           = var.ssh_port # 22
   ipv6_cidr_blocks  = var.external_ipv6_addrs[count.index]
-  description       = ""
-
-  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
-  # tags = {
-  #   Name = "sgr-${var.basename}-pub-ssh-ipv6-no${count.index}"
-  # }
+  description       = "SSH"
 }
 
-# XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
-# resource "aws_ec2_tag" "public_rx_ssh_ipv6" {
-#   count       = length(var.external_ipv6_addrs)
-#   resource_id = aws_security_group_rule.public_rx_ssh_ipv6.security_group_rule_id
-#   key         = "Name"
-#   value       = "sgr-${var.basename}-pub-ssh-ipv6-no${count.index}"
-# }
+# XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
+# https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
+resource "aws_ec2_tag" "public_rx_ssh_ipv6" {
+  count       = length(var.external_ipv6_addrs)
+  resource_id = aws_security_group_rule.public_rx_ssh_ipv6[count.index].security_group_rule_id
+  key         = "Name"
+  value       = "sgr-${var.basename}-pub-ssh-ipv6-no${count.index}"
+}
 
 resource "aws_security_group_rule" "private_rx_ssh_ipv4" {
   count             = length(var.external_ipv4_addrs)
   security_group_id = data.aws_security_group.private.id
   type              = "ingress"
-  protocol          = "tcp"        # 6
+  protocol          = 6            # tcp
   from_port         = var.ssh_port # 22
   to_port           = var.ssh_port # 22
   cidr_blocks       = var.external_ipv4_addrs[count.index]
-  description       = ""
-
-  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
-  # tags = {
-  #   Name = "sgr-${var.basename}-priv-ssh-ipv4-no${count.index}"
-  # }
+  description       = "SSH"
 }
 
-# XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
-# resource "aws_ec2_tag" "private_rx_ssh_ipv4" {
-#   count       = length(var.external_ipv4_addrs)
-#   resource_id = aws_security_group_rule.private_rx_ssh_ipv4.security_group_rule_id
-#   key         = "Name"
-#   value       = "sgr-${var.basename}-priv-ssh-ipv4-no${count.index}"
-# }
+# XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
+# https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
+resource "aws_ec2_tag" "private_rx_ssh_ipv4" {
+  count       = length(var.external_ipv4_addrs)
+  resource_id = aws_security_group_rule.private_rx_ssh_ipv4[count.index].security_group_rule_id
+  key         = "Name"
+  value       = "sgr-${var.basename}-priv-ssh-ipv4-no${count.index}"
+}
 
 resource "aws_security_group_rule" "private_rx_ssh_ipv6" {
   count             = length(var.external_ipv6_addrs)
   security_group_id = data.aws_security_group.private.id
   type              = "ingress"
-  protocol          = "tcp"        # 6
+  protocol          = 6            # tcp
   from_port         = var.ssh_port # 22
   to_port           = var.ssh_port # 22
   ipv6_cidr_blocks  = var.external_ipv6_addrs[count.index]
-  description       = ""
-
-  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
-  # tags = {
-  #   Name = "sgr-${var.basename}-priv-ssh-ipv6-no${count.index}"
-  # }
+  description       = "SSH"
 }
 
-# XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
-# resource "aws_ec2_tag" "private_rx_ssh_ipv6" {
-#   count       = length(var.external_ipv6_addrs)
-#   resource_id = aws_security_group_rule.private_rx_ssh_ipv6.security_group_rule_id
-#   key         = "Name"
-#   value       = "sgr-${var.basename}-priv-ssh-ipv6-no${count.index}"
-# }
+# XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
+# https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
+resource "aws_ec2_tag" "private_rx_ssh_ipv6" {
+  count       = length(var.external_ipv6_addrs)
+  resource_id = aws_security_group_rule.private_rx_ssh_ipv6[count.index].security_group_rule_id
+  key         = "Name"
+  value       = "sgr-${var.basename}-priv-ssh-ipv6-no${count.index}"
+}
 
 resource "aws_security_group_rule" "secure_rx_ssh_ipv4" {
   count             = length(var.external_ipv4_addrs)
   security_group_id = data.aws_security_group.secure.id
   type              = "ingress"
-  protocol          = "tcp"        # 6
+  protocol          = 6            # tcp
   from_port         = var.ssh_port # 22
   to_port           = var.ssh_port # 22
   cidr_blocks       = var.external_ipv4_addrs[count.index]
-  description       = ""
-
-  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
-  # tags = {
-  #   Name = "sgr-${var.basename}-sec-ssh-ipv4-no${count.index}"
-  # }
+  description       = "SSH"
 }
 
-# XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
-# resource "aws_ec2_tag" "secure_rx_ssh_ipv4" {
-#   count       = length(var.external_ipv4_addrs)
-#   resource_id = aws_security_group_rule.secure_rx_ssh_ipv4.security_group_rule_id
-#   key         = "Name"
-#   value       = "sgr-${var.basename}-sec-ssh-ipv4-no${count.index}"
-# }
+# XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
+# https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
+resource "aws_ec2_tag" "secure_rx_ssh_ipv4" {
+  count       = length(var.external_ipv4_addrs)
+  resource_id = aws_security_group_rule.secure_rx_ssh_ipv4[count.index].security_group_rule_id
+  key         = "Name"
+  value       = "sgr-${var.basename}-sec-ssh-ipv4-no${count.index}"
+}
 
 resource "aws_security_group_rule" "secure_rx_ssh_ipv6" {
   count             = length(var.external_ipv6_addrs)
   security_group_id = data.aws_security_group.secure.id
   type              = "ingress"
-  protocol          = "tcp"        # 6
+  protocol          = 6            # tcp
   from_port         = var.ssh_port # 22
   to_port           = var.ssh_port # 22
   ipv6_cidr_blocks  = var.external_ipv6_addrs[count.index]
-  description       = ""
-
-  # XXX FIXME TODO The sgr resource doesn't support tags yet!!!
-  # tags = {
-  #   Name = "sgr-${var.basename}-sec-ssh-ipv6-no${count.index}"
-  # }
+  description       = "SSH"
 }
 
-# XXX FIXME TODO https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
-# resource "aws_ec2_tag" "secure_rx_ssh_ipv6" {
-#   count       = length(var.external_ipv6_addrs)
-#   resource_id = aws_security_group_rule.secure_rx_ssh_ipv6.security_group_rule_id
-#   key         = "Name"
-#   value       = "sgr-${var.basename}-sec-ssh-ipv6-no${count.index}"
-# }
+# XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
+# https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
+resource "aws_ec2_tag" "secure_rx_ssh_ipv6" {
+  count       = length(var.external_ipv6_addrs)
+  resource_id = aws_security_group_rule.secure_rx_ssh_ipv6[count.index].security_group_rule_id
+  key         = "Name"
+  value       = "sgr-${var.basename}-sec-ssh-ipv6-no${count.index}"
+}
