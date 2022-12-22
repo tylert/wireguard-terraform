@@ -167,7 +167,7 @@ resource "aws_security_group_rule" "public_rx_https_ipv4" {
   protocol          = 6              # tcp
   from_port         = var.https_port # 443
   to_port           = var.https_port # 443
-  cidr_blocks       = var.external_ipv4_addrs[count.index]
+  cidr_blocks       = var.external_ipv4_addrs
   description       = "HTTPS requests"
 }
 
@@ -187,7 +187,7 @@ resource "aws_security_group_rule" "public_rx_https_ipv6" {
   protocol          = 6              # tcp
   from_port         = var.https_port # 443
   to_port           = var.https_port # 443
-  ipv6_cidr_blocks  = var.external_ipv6_addrs[count.index]
+  ipv6_cidr_blocks  = var.external_ipv6_addrs
   description       = "HTTPS requests"
 }
 
@@ -207,7 +207,7 @@ resource "aws_security_group_rule" "private_rx_https_ipv4" {
   protocol          = 6              # tcp
   from_port         = var.https_port # 443
   to_port           = var.https_port # 443
-  cidr_blocks       = var.external_ipv4_addrs[count.index]
+  cidr_blocks       = var.external_ipv4_addrs
   description       = "HTTPS requests"
 }
 
@@ -227,7 +227,7 @@ resource "aws_security_group_rule" "private_rx_https_ipv6" {
   protocol          = 6              # tcp
   from_port         = var.https_port # 443
   to_port           = var.https_port # 443
-  ipv6_cidr_blocks  = var.external_ipv6_addrs[count.index]
+  ipv6_cidr_blocks  = var.external_ipv6_addrs
   description       = "HTTPS requests"
 }
 
@@ -247,7 +247,7 @@ resource "aws_security_group_rule" "secure_rx_https_ipv4" {
   protocol          = 6              # tcp
   from_port         = var.https_port # 443
   to_port           = var.https_port # 443
-  cidr_blocks       = var.external_ipv4_addrs[count.index]
+  cidr_blocks       = var.external_ipv4_addrs
   description       = "HTTPS requests"
 }
 
@@ -267,7 +267,7 @@ resource "aws_security_group_rule" "secure_rx_https_ipv6" {
   protocol          = 6              # tcp
   from_port         = var.https_port # 443
   to_port           = var.https_port # 443
-  ipv6_cidr_blocks  = var.external_ipv6_addrs[count.index]
+  ipv6_cidr_blocks  = var.external_ipv6_addrs
   description       = "HTTPS requests"
 }
 

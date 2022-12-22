@@ -174,7 +174,7 @@ resource "aws_security_group_rule" "public_rx_icmpv4" {
   protocol          = 1  # icmpv4
   from_port         = -1 # all
   to_port           = -1 # all
-  cidr_blocks       = var.external_ipv4_addrs[count.index]
+  cidr_blocks       = var.external_ipv4_addrs
   description       = "Path MTU discovery and pings"
 }
 
@@ -194,7 +194,7 @@ resource "aws_security_group_rule" "public_rx_icmpv6" {
   protocol          = 58 # icmpv6
   from_port         = -1 # all
   to_port           = -1 # all
-  ipv6_cidr_blocks  = var.external_ipv6_addrs[count.index]
+  ipv6_cidr_blocks  = var.external_ipv6_addrs
   description       = "Path MTU discovery and pings"
 }
 
@@ -214,7 +214,7 @@ resource "aws_security_group_rule" "private_rx_icmpv4" {
   protocol          = 1  # icmpv4
   from_port         = -1 # all
   to_port           = -1 # all
-  cidr_blocks       = var.external_ipv4_addrs[count.index]
+  cidr_blocks       = var.external_ipv4_addrs
   description       = "Path MTU discovery and pings"
 }
 
@@ -234,7 +234,7 @@ resource "aws_security_group_rule" "private_rx_icmpv6" {
   protocol          = 58 # icmpv6
   from_port         = -1 # all
   to_port           = -1 # all
-  ipv6_cidr_blocks  = var.external_ipv6_addrs[count.index]
+  ipv6_cidr_blocks  = var.external_ipv6_addrs
   description       = "Path MTU discovery and pings"
 }
 
@@ -254,7 +254,7 @@ resource "aws_security_group_rule" "secure_rx_icmpv4" {
   protocol          = 1  # icmpv4
   from_port         = -1 # all
   to_port           = -1 # all
-  cidr_blocks       = var.external_ipv4_addrs[count.index]
+  cidr_blocks       = var.external_ipv4_addrs
   description       = "Path MTU discovery and pings"
 }
 
@@ -274,7 +274,7 @@ resource "aws_security_group_rule" "secure_rx_icmpv6" {
   protocol          = 58 # icmpv6
   from_port         = -1 # all
   to_port           = -1 # all
-  ipv6_cidr_blocks  = var.external_ipv6_addrs[count.index]
+  ipv6_cidr_blocks  = var.external_ipv6_addrs
   description       = "Path MTU discovery and pings"
 }
 

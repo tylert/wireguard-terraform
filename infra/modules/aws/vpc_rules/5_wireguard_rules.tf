@@ -167,7 +167,7 @@ resource "aws_security_group_rule" "public_rx_wg_ipv4" {
   protocol          = 17          # udp
   from_port         = var.wg_port # 51820
   to_port           = var.wg_port # 51820
-  cidr_blocks       = var.external_ipv4_addrs[count.index]
+  cidr_blocks       = var.external_ipv4_addrs
   description       = "Wireguard peering"
 }
 
@@ -187,7 +187,7 @@ resource "aws_security_group_rule" "public_rx_wg_ipv6" {
   protocol          = 17          # udp
   from_port         = var.wg_port # 51820
   to_port           = var.wg_port # 51820
-  ipv6_cidr_blocks  = var.external_ipv6_addrs[count.index]
+  ipv6_cidr_blocks  = var.external_ipv6_addrs
   description       = "Wireguard peering"
 }
 
@@ -207,7 +207,7 @@ resource "aws_security_group_rule" "private_rx_wg_ipv4" {
   protocol          = 17          # udp
   from_port         = var.wg_port # 51820
   to_port           = var.wg_port # 51820
-  cidr_blocks       = var.external_ipv4_addrs[count.index]
+  cidr_blocks       = var.external_ipv4_addrs
   description       = "Wireguard peering"
 }
 
@@ -227,7 +227,7 @@ resource "aws_security_group_rule" "private_rx_wg_ipv6" {
   protocol          = 17          # udp
   from_port         = var.wg_port # 51820
   to_port           = var.wg_port # 51820
-  ipv6_cidr_blocks  = var.external_ipv6_addrs[count.index]
+  ipv6_cidr_blocks  = var.external_ipv6_addrs
   description       = "Wireguard peering"
 }
 
@@ -247,7 +247,7 @@ resource "aws_security_group_rule" "secure_rx_wg_ipv4" {
   protocol          = 17          # udp
   from_port         = var.wg_port # 51820
   to_port           = var.wg_port # 51820
-  cidr_blocks       = var.external_ipv4_addrs[count.index]
+  cidr_blocks       = var.external_ipv4_addrs
   description       = "Wireguard peering"
 }
 
@@ -267,7 +267,7 @@ resource "aws_security_group_rule" "secure_rx_wg_ipv6" {
   protocol          = 17          # udp
   from_port         = var.wg_port # 51820
   to_port           = var.wg_port # 51820
-  ipv6_cidr_blocks  = var.external_ipv6_addrs[count.index]
+  ipv6_cidr_blocks  = var.external_ipv6_addrs
   description       = "Wireguard peering"
 }
 
