@@ -168,7 +168,7 @@ resource "aws_security_group_rule" "public_rx_https_ipv4" {
   from_port         = var.https_port # 443
   to_port           = var.https_port # 443
   cidr_blocks       = var.external_ipv4_addrs[count.index]
-  description       = "HTTPS"
+  description       = "HTTPS requests"
 }
 
 # XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
@@ -188,7 +188,7 @@ resource "aws_security_group_rule" "public_rx_https_ipv6" {
   from_port         = var.https_port # 443
   to_port           = var.https_port # 443
   ipv6_cidr_blocks  = var.external_ipv6_addrs[count.index]
-  description       = "HTTPS"
+  description       = "HTTPS requests"
 }
 
 # XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
@@ -208,7 +208,7 @@ resource "aws_security_group_rule" "private_rx_https_ipv4" {
   from_port         = var.https_port # 443
   to_port           = var.https_port # 443
   cidr_blocks       = var.external_ipv4_addrs[count.index]
-  description       = "HTTPS"
+  description       = "HTTPS requests"
 }
 
 # XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
@@ -228,7 +228,7 @@ resource "aws_security_group_rule" "private_rx_https_ipv6" {
   from_port         = var.https_port # 443
   to_port           = var.https_port # 443
   ipv6_cidr_blocks  = var.external_ipv6_addrs[count.index]
-  description       = "HTTPS"
+  description       = "HTTPS requests"
 }
 
 # XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
@@ -248,7 +248,7 @@ resource "aws_security_group_rule" "secure_rx_https_ipv4" {
   from_port         = var.https_port # 443
   to_port           = var.https_port # 443
   cidr_blocks       = var.external_ipv4_addrs[count.index]
-  description       = "HTTPS"
+  description       = "HTTPS requests"
 }
 
 # XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
@@ -268,7 +268,7 @@ resource "aws_security_group_rule" "secure_rx_https_ipv6" {
   from_port         = var.https_port # 443
   to_port           = var.https_port # 443
   ipv6_cidr_blocks  = var.external_ipv6_addrs[count.index]
-  description       = "HTTPS"
+  description       = "HTTPS requests"
 }
 
 # XXX FIXME TODO  The sgr resource doesn't support tags yet!!!

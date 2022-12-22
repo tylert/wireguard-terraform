@@ -168,7 +168,7 @@ resource "aws_security_group_rule" "public_rx_wg_ipv4" {
   from_port         = var.wg_port # 51820
   to_port           = var.wg_port # 51820
   cidr_blocks       = var.external_ipv4_addrs[count.index]
-  description       = "WG"
+  description       = "Wireguard peering"
 }
 
 # XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
@@ -188,7 +188,7 @@ resource "aws_security_group_rule" "public_rx_wg_ipv6" {
   from_port         = var.wg_port # 51820
   to_port           = var.wg_port # 51820
   ipv6_cidr_blocks  = var.external_ipv6_addrs[count.index]
-  description       = "WG"
+  description       = "Wireguard peering"
 }
 
 # XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
@@ -208,7 +208,7 @@ resource "aws_security_group_rule" "private_rx_wg_ipv4" {
   from_port         = var.wg_port # 51820
   to_port           = var.wg_port # 51820
   cidr_blocks       = var.external_ipv4_addrs[count.index]
-  description       = "WG"
+  description       = "Wireguard peering"
 }
 
 # XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
@@ -228,7 +228,7 @@ resource "aws_security_group_rule" "private_rx_wg_ipv6" {
   from_port         = var.wg_port # 51820
   to_port           = var.wg_port # 51820
   ipv6_cidr_blocks  = var.external_ipv6_addrs[count.index]
-  description       = "WG"
+  description       = "Wireguard peering"
 }
 
 # XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
@@ -248,7 +248,7 @@ resource "aws_security_group_rule" "secure_rx_wg_ipv4" {
   from_port         = var.wg_port # 51820
   to_port           = var.wg_port # 51820
   cidr_blocks       = var.external_ipv4_addrs[count.index]
-  description       = "WG"
+  description       = "Wireguard peering"
 }
 
 # XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
@@ -268,7 +268,7 @@ resource "aws_security_group_rule" "secure_rx_wg_ipv6" {
   from_port         = var.wg_port # 51820
   to_port           = var.wg_port # 51820
   ipv6_cidr_blocks  = var.external_ipv6_addrs[count.index]
-  description       = "WG"
+  description       = "Wireguard peering"
 }
 
 # XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
