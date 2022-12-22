@@ -184,7 +184,7 @@ resource "aws_ec2_tag" "public_rx_icmpv4" {
   count       = length(var.external_ipv4_addrs)
   resource_id = aws_security_group_rule.public_rx_icmpv4[count.index].security_group_rule_id
   key         = "Name"
-  value       = "sgr-${var.basename}-pub-icmpv4-no${count.index}"
+  value       = "sgr-${var.basename}-pub-dst${count.index}-icmpv4"
 }
 
 resource "aws_security_group_rule" "public_rx_icmpv6" {
@@ -204,7 +204,7 @@ resource "aws_ec2_tag" "public_rx_icmpv6" {
   count       = length(var.external_ipv6_addrs)
   resource_id = aws_security_group_rule.public_rx_icmpv6[count.index].security_group_rule_id
   key         = "Name"
-  value       = "sgr-${var.basename}-pub-icmpv6-no${count.index}"
+  value       = "sgr-${var.basename}-pub-dst${count.index}-icmpv6"
 }
 
 resource "aws_security_group_rule" "private_rx_icmpv4" {
@@ -224,7 +224,7 @@ resource "aws_ec2_tag" "private_rx_icmpv4" {
   count       = length(var.external_ipv4_addrs)
   resource_id = aws_security_group_rule.private_rx_icmpv4[count.index].security_group_rule_id
   key         = "Name"
-  value       = "sgr-${var.basename}-priv-icmpv4-no${count.index}"
+  value       = "sgr-${var.basename}-priv-dst${count.index}-icmpv4"
 }
 
 resource "aws_security_group_rule" "private_rx_icmpv6" {
@@ -244,7 +244,7 @@ resource "aws_ec2_tag" "private_rx_icmpv6" {
   count       = length(var.external_ipv6_addrs)
   resource_id = aws_security_group_rule.private_rx_icmpv6[count.index].security_group_rule_id
   key         = "Name"
-  value       = "sgr-${var.basename}-priv-icmpv6-no${count.index}"
+  value       = "sgr-${var.basename}-priv-dst${count.index}-icmpv6"
 }
 
 resource "aws_security_group_rule" "secure_rx_icmpv4" {
@@ -264,7 +264,7 @@ resource "aws_ec2_tag" "secure_rx_icmpv4" {
   count       = length(var.external_ipv4_addrs)
   resource_id = aws_security_group_rule.secure_rx_icmpv4[count.index].security_group_rule_id
   key         = "Name"
-  value       = "sgr-${var.basename}-sec-icmpv4-no${count.index}"
+  value       = "sgr-${var.basename}-sec-dst${count.index}-icmpv4"
 }
 
 resource "aws_security_group_rule" "secure_rx_icmpv6" {
@@ -284,5 +284,5 @@ resource "aws_ec2_tag" "secure_rx_icmpv6" {
   count       = length(var.external_ipv6_addrs)
   resource_id = aws_security_group_rule.secure_rx_icmpv6[count.index].security_group_rule_id
   key         = "Name"
-  value       = "sgr-${var.basename}-sec-icmpv6-no${count.index}"
+  value       = "sgr-${var.basename}-sec-dst${count.index}-icmpv6"
 }

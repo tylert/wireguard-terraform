@@ -174,7 +174,7 @@ resource "aws_security_group_rule" "public_rx_self" {
 resource "aws_ec2_tag" "public_rx_self" {
   resource_id = aws_security_group_rule.public_rx_self.security_group_rule_id
   key         = "Name"
-  value       = "sgr-${var.basename}-pub-self"
+  value       = "sgr-${var.basename}-pub-pub"
 }
 
 resource "aws_security_group_rule" "private_rx_self" {
@@ -192,7 +192,7 @@ resource "aws_security_group_rule" "private_rx_self" {
 resource "aws_ec2_tag" "private_rx_self" {
   resource_id = aws_security_group_rule.private_rx_self.security_group_rule_id
   key         = "Name"
-  value       = "sgr-${var.basename}-priv-self"
+  value       = "sgr-${var.basename}-priv-priv"
 }
 
 resource "aws_security_group_rule" "secure_rx_self" {
@@ -210,7 +210,7 @@ resource "aws_security_group_rule" "secure_rx_self" {
 resource "aws_ec2_tag" "secure_rx_self" {
   resource_id = aws_security_group_rule.secure_rx_self.security_group_rule_id
   key         = "Name"
-  value       = "sgr-${var.basename}-sec-self"
+  value       = "sgr-${var.basename}-sec-sec"
 }
 
 /*
