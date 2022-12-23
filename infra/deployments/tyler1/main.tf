@@ -16,14 +16,46 @@ provider "aws" {
 module "vpc_core" {
   source                 = "../../modules/aws/vpc_core"
   basename               = "tyler1"
-  flow_logs_enabled      = true
+  vpc_ipv4_cidr_block    = "10.4.0.0/16"
   preserve_default_rules = false
-  vpc_ipv4_cidr_block    = "10.4.0.0/24"
+  flow_logs_enabled      = true
+  # how_many_nats          = 1
 }
 
 module "vpc_rules" {
   source              = "../../modules/aws/vpc_rules"
   basename            = "tyler1"
   external_ipv4_addrs = ["100.100.100.100/32"]
+  external_ipv6_addrs = []
   depends_on          = [module.vpc_core]
+}
+
+provider "aws" {
+  region = "us-east-2"
+  alias  = "second"
+}
+
+module "vpc_core2" {
+  source                 = "../../modules/aws/vpc_core"
+  basename               = "tyler2"
+  vpc_ipv4_cidr_block    = "10.5.0.0/16"
+  preserve_default_rules = false
+  flow_logs_enabled      = true
+  # how_many_nats          = 1
+
+  providers = {
+    aws = aws.second
+  }
+}
+
+module "vpc_rules2" {
+  source              = "../../modules/aws/vpc_rules"
+  basename            = "tyler2"
+  external_ipv4_addrs = ["100.100.100.100/32"]
+  external_ipv6_addrs = []
+  depends_on          = [module.vpc_core2]
+
+  providers = {
+    aws = aws.second
+  }
 }
