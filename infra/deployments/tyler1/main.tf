@@ -30,6 +30,9 @@ module "vpc_rules" {
   depends_on          = [module.vpc_core]
 }
 
+# Show an example of doing something in more than a single region
+# https://developer.hashicorp.com/terraform/language/modules/develop/providers
+
 provider "aws" {
   region = "us-east-2"
   alias  = "second"
