@@ -137,6 +137,8 @@ References
 * https://www.keycloak.org/
 * https://www.authelia.com/
 * https://github.com/netbirdio/netbird
+* https://rosenpass.eu
+* https://github.com/rosenpass/rosenpass
 
 
 Cleanup In Aisle Five
