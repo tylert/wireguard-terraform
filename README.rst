@@ -146,3 +146,17 @@ Cleanup In Aisle Five
 
 * https://github.com/rebuy-de/aws-nuke
 * https://github.com/gruntwork-io/cloud-nuke
+
+
+Diagrams
+--------
+
+* https://pkg.go.dev/github.com/marccodinasegura/go-diagrams  pseudo-docs for how to use the Go diagrams stuff
+* https://github.com/marccodinasegura/go-diagrams  look under "examples" for how to structure the code and under "nodes" to see what things are available
+* https://github.com/blushft/go-diagrams  ABANDONNED FORK!!!  DO NOT USE!!!  Use the "marccodinasegura" fork above
+* https://diagrams.mingrammer.com/docs/getting-started/installation  docs for the Python flavour upon which the Go version was/is based (needs Graphviz also)
+* https://medium.com/analytics-vidhya/terraform-diagrams-provisioning-and-visualizing-a-simple-environment-on-aws-471f5d88c95d
+* https://github.com/ebarros29/terraform-diagrams  code for above in Python
+* https://pet2cattle.com/2022/07/terraform-graph
+* https://github.com/hashicorp/terraform-plugin-go  maybe a way to get Terraform and digrams to talk to each other???
+* http://blog.johandry.com/post/terranova-terraform-from-go/  maybe another possibility???
