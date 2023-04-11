@@ -14,10 +14,12 @@
 terraform {
   required_version = ">= 1.0.0, < 2.0.0"
 
+  # We expect to use sgrule tags in this module
+  #   https://github.com/hashicorp/terraform-provider-aws/pull/29484
   required_providers {
     aws = {
       source  = "registry.terraform.io/hashicorp/aws"
-      version = ">= 4.40.0, < 5.0.0"
+      version = ">= 4.56.0, < 5.0.0"
     }
   }
 }

@@ -7,8 +7,8 @@
 */
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_acl_rule
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ec2_tag
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_security_group_ingress_rule
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_security_group_egress_rule
 
 /*
                          _ _   _     _
@@ -159,58 +159,43 @@ resource "aws_network_acl_rule" "secure_tx_vpc_ipv6" {
           |_.__/ \___|\__| \_/\_/ \___|\___|_| |_| /_/   \_\/____|___/
 */
 
-resource "aws_security_group_rule" "public_rx_self" {
-  security_group_id = data.aws_security_group.public.id
-  type              = "ingress"
-  protocol          = -1 # all
-  from_port         = 0  # ignored
-  to_port           = 0  # ignored
-  self              = true
-  description       = "From public subnets"
+resource "aws_vpc_security_group_rule_ingress" "public_rx_self" {
+  security_group_id            = data.aws_security_group.public.id
+  ip_protocol                  = -1 # all
+  from_port                    = 0  # ignored
+  to_port                      = 0  # ignored
+  description                  = "From public subnets"
+  referenced_security_group_id = data.aws_security_group.public.id
+
+  tags = {
+    Name = "sgr-${var.basename}-pub-pub"
+  }
 }
 
-# XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
-# https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
-resource "aws_ec2_tag" "public_rx_self" {
-  resource_id = aws_security_group_rule.public_rx_self.security_group_rule_id
-  key         = "Name"
-  value       = "sgr-${var.basename}-pub-pub"
+resource "aws_vpc_security_group_rule_ingress" "private_rx_self" {
+  security_group_id            = data.aws_security_group.private.id
+  ip_protocol                  = -1 # all
+  from_port                    = 0  # ignored
+  to_port                      = 0  # ignored
+  description                  = "From private subnets"
+  referenced_security_group_id = data.aws_security_group.private.id
+
+  tags = {
+    Name = "sgr-${var.basename}-priv-priv"
+  }
 }
 
-resource "aws_security_group_rule" "private_rx_self" {
-  security_group_id = data.aws_security_group.private.id
-  type              = "ingress"
-  protocol          = -1 # all
-  from_port         = 0  # ignored
-  to_port           = 0  # ignored
-  self              = true
-  description       = "From private subnets"
-}
+resource "aws_vpc_security_group_rule_ingress" "secure_rx_self" {
+  security_group_id            = data.aws_security_group.secure.id
+  ip_protocol                  = -1 # all
+  from_port                    = 0  # ignored
+  to_port                      = 0  # ignored
+  description                  = "From secure subnets"
+  referenced_security_group_id = data.aws_security_group.secure.id
 
-# XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
-# https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
-resource "aws_ec2_tag" "private_rx_self" {
-  resource_id = aws_security_group_rule.private_rx_self.security_group_rule_id
-  key         = "Name"
-  value       = "sgr-${var.basename}-priv-priv"
-}
-
-resource "aws_security_group_rule" "secure_rx_self" {
-  security_group_id = data.aws_security_group.secure.id
-  type              = "ingress"
-  protocol          = -1 # all
-  from_port         = 0  # ignored
-  to_port           = 0  # ignored
-  self              = true
-  description       = "From secure subnets"
-}
-
-# XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
-# https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
-resource "aws_ec2_tag" "secure_rx_self" {
-  resource_id = aws_security_group_rule.secure_rx_self.security_group_rule_id
-  key         = "Name"
-  value       = "sgr-${var.basename}-sec-sec"
+  tag = {
+    Name = "sgr-${var.basename}-sec-sec"
+  }
 }
 
 /*
@@ -221,76 +206,56 @@ resource "aws_ec2_tag" "secure_rx_self" {
          |_.__/ \___|\__| \_/\_/ \___|\___|_| |_|  \__|_|\___|_|  |___/
 */
 
-resource "aws_security_group_rule" "public_rx_private" {
-  security_group_id        = data.aws_security_group.public.id
-  type                     = "ingress"
-  protocol                 = -1 # all
-  from_port                = 0  # ignored
-  to_port                  = 0  # ignored
-  source_security_group_id = data.aws_security_group.private.id
-  description              = "From private subnets"
+resource "aws_vpc_security_group_rule_ingress" "public_rx_private" {
+  security_group_id            = data.aws_security_group.public.id
+  ip_protocol                  = -1 # all
+  from_port                    = 0  # ignored
+  to_port                      = 0  # ignored
+  description                  = "From private subnets"
+  referenced_security_group_id = data.aws_security_group.private.id
+
+  tags = {
+    Name = "sgr-${var.basename}-pub-priv"
+  }
 }
 
-# XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
-# https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
-resource "aws_ec2_tag" "public_rx_private" {
-  resource_id = aws_security_group_rule.public_rx_private.security_group_rule_id
-  key         = "Name"
-  value       = "sgr-${var.basename}-pub-priv"
+resource "aws_vpc_security_group_rule_ingress" "private_rx_public" {
+  security_group_id            = data.aws_security_group.private.id
+  ip_protocol                  = -1 # all
+  from_port                    = 0  # ignored
+  to_port                      = 0  # ignored
+  description                  = "From public subnets"
+  referenced_security_group_id = data.aws_security_group.public.id
+
+  tags = {
+    Name = "sgr-${var.basename}-priv-pub"
+  }
 }
 
-resource "aws_security_group_rule" "private_rx_public" {
-  security_group_id        = data.aws_security_group.private.id
-  type                     = "ingress"
-  protocol                 = -1 # all
-  from_port                = 0  # ignored
-  to_port                  = 0  # ignored
-  source_security_group_id = data.aws_security_group.public.id
-  description              = "From public subnets"
+resource "aws_vpc_security_group_rule_ingress" "private_rx_secure" {
+  security_group_id            = data.aws_security_group.private.id
+  ip_protocol                  = -1 # all
+  from_port                    = 0  # ignored
+  to_port                      = 0  # ignored
+  description                  = "From secure subnets"
+  referenced_security_group_id = data.aws_security_group.secure.id
+
+  tags = {
+    Name = "sgr-${var.basename}-priv-sec"
+  }
 }
 
-# XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
-# https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
-resource "aws_ec2_tag" "private_rx_public" {
-  resource_id = aws_security_group_rule.private_rx_public.security_group_rule_id
-  key         = "Name"
-  value       = "sgr-${var.basename}-priv-pub"
-}
+resource "aws_vpc_security_group_rule_ingress" "secure_rx_private" {
+  security_group_id            = data.aws_security_group.secure.id
+  ip_protocol                  = -1 # all
+  from_port                    = 0  # ignored
+  to_port                      = 0  # ignored
+  description                  = "From private subnets"
+  referenced_security_group_id = data.aws_security_group.private.id
 
-resource "aws_security_group_rule" "private_rx_secure" {
-  security_group_id        = data.aws_security_group.private.id
-  type                     = "ingress"
-  protocol                 = -1 # all
-  from_port                = 0  # ignored
-  to_port                  = 0  # ignored
-  source_security_group_id = data.aws_security_group.secure.id
-  description              = "From secure subnets"
-}
-
-# XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
-# https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
-resource "aws_ec2_tag" "private_rx_secure" {
-  resource_id = aws_security_group_rule.private_rx_secure.security_group_rule_id
-  key         = "Name"
-  value       = "sgr-${var.basename}-priv-sec"
-}
-
-resource "aws_security_group_rule" "secure_rx_private" {
-  security_group_id        = data.aws_security_group.secure.id
-  type                     = "ingress"
-  protocol                 = -1 # all
-  from_port                = 0  # ignored
-  to_port                  = 0  # ignored
-  source_security_group_id = data.aws_security_group.private.id
-  description              = "From private subnets"
-}
-
-# XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
-# https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
-resource "aws_ec2_tag" "secure_rx_private" {
-  resource_id = aws_security_group_rule.secure_rx_private.security_group_rule_id
-  key         = "Name"
-  value       = "sgr-${var.basename}-sec-priv"
+  tags = {
+    Name = "sgr-${var.basename}-sec-priv"
+  }
 }
 
 /*
@@ -301,110 +266,80 @@ resource "aws_ec2_tag" "secure_rx_private" {
                                |___/
 */
 
-resource "aws_security_group_rule" "public_tx_ipv4" {
+resource "aws_vpc_security_group_rule_egress" "public_tx_ipv4" {
   security_group_id = data.aws_security_group.public.id
-  type              = "egress"
-  protocol          = -1 # all
+  ip_protocol       = -1 # all
   from_port         = 0  # ignored
   to_port           = 0  # ignored
-  cidr_blocks       = ["0.0.0.0/0"]
   description       = "To anywhere"
+  cidr_ipv4         = ["0.0.0.0/0"]
+
+  tags = {
+    Name = "sgr-${var.basename}-pub-all-ipv4"
+  }
 }
 
-# XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
-# https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
-resource "aws_ec2_tag" "public_tx_ipv4" {
-  resource_id = aws_security_group_rule.public_tx_ipv4.security_group_rule_id
-  key         = "Name"
-  value       = "sgr-${var.basename}-pub-all-ipv4"
-}
-
-resource "aws_security_group_rule" "public_tx_ipv6" {
+resource "aws_vpc_security_group_rule_egress" "public_tx_ipv6" {
   security_group_id = data.aws_security_group.public.id
-  type              = "egress"
-  protocol          = -1 # all
+  ip_protocol       = -1 # all
   from_port         = 0  # ignored
   to_port           = 0  # ignored
-  ipv6_cidr_blocks  = ["::/0"]
   description       = "To anywhere"
+  cidr_ipv6         = ["::/0"]
+
+  tags = {
+    Name = "sgr-${var.basename}-pub-all-ipv6"
+  }
 }
 
-# XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
-# https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
-resource "aws_ec2_tag" "public_tx_ipv6" {
-  resource_id = aws_security_group_rule.public_tx_ipv6.security_group_rule_id
-  key         = "Name"
-  value       = "sgr-${var.basename}-pub-all-ipv6"
-}
-
-resource "aws_security_group_rule" "private_tx_ipv4" {
+resource "aws_vpc_security_group_rule_egress" "private_tx_ipv4" {
   security_group_id = data.aws_security_group.private.id
-  type              = "egress"
-  protocol          = -1 # all
+  ip_protocol       = -1 # all
   from_port         = 0  # ignored
   to_port           = 0  # ignored
-  cidr_blocks       = ["0.0.0.0/0"]
   description       = "To anywhere"
+  cidr_ipv4         = ["0.0.0.0/0"]
+
+  tags = {
+    Name = "sgr-${var.basename}-priv-all-ipv4"
+  }
 }
 
-# XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
-# https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
-resource "aws_ec2_tag" "private_tx_ipv4" {
-  resource_id = aws_security_group_rule.private_tx_ipv4.security_group_rule_id
-  key         = "Name"
-  value       = "sgr-${var.basename}-priv-all-ipv4"
-}
-
-resource "aws_security_group_rule" "private_tx_ipv6" {
+resource "aws_vpc_security_group_rule_egress" "private_tx_ipv6" {
   security_group_id = data.aws_security_group.private.id
-  type              = "egress"
-  protocol          = -1 # all
+  ip_protocol       = -1 # all
   from_port         = 0  # ignored
   to_port           = 0  # ignored
-  ipv6_cidr_blocks  = ["::/0"]
   description       = "To anywhere"
+  cidr_ipv6         = ["::/0"]
+
+  tags = {
+    Name = "sgr-${var.basename}-priv-all-ipv6"
+  }
 }
 
-# XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
-# https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
-resource "aws_ec2_tag" "private_tx_ipv6" {
-  resource_id = aws_security_group_rule.private_tx_ipv6.security_group_rule_id
-  key         = "Name"
-  value       = "sgr-${var.basename}-priv-all-ipv6"
-}
-
-resource "aws_security_group_rule" "secure_tx_ipv4" {
+resource "aws_vpc_security_group_rule_egress" "secure_tx_ipv4" {
   security_group_id = data.aws_security_group.secure.id
-  type              = "egress"
-  protocol          = -1 # all
+  ip_protocol       = -1 # all
   from_port         = 0  # ignored
   to_port           = 0  # ignored
-  cidr_blocks       = ["0.0.0.0/0"]
   description       = "To anywhere"
+  cidr_ipv4         = ["0.0.0.0/0"]
+
+  tags = {
+    Name = "sgr-${var.basename}-sec-all-ipv4"
+  }
 }
 
-# XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
-# https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
-resource "aws_ec2_tag" "secure_tx_ipv4" {
-  resource_id = aws_security_group_rule.secure_tx_ipv4.security_group_rule_id
-  key         = "Name"
-  value       = "sgr-${var.basename}-sec-all-ipv4"
-}
-
-resource "aws_security_group_rule" "secure_tx_ipv6" {
+resource "aws_vpc_security_group_rule_egress" "secure_tx_ipv6" {
   security_group_id = data.aws_security_group.secure.id
-  type              = "egress"
-  protocol          = -1 # all
+  ip_protocol       = -1 # all
   from_port         = 0  # ignored
   to_port           = 0  # ignored
-  ipv6_cidr_blocks  = ["::/0"]
   description       = "To anywhere"
-}
+  cidr_ipv6         = ["::/0"]
 
-# XXX FIXME TODO  The sgr resource doesn't support tags yet!!!
-# https://github.com/hashicorp/terraform-provider-aws/issues/20104#issuecomment-1315912353
-resource "aws_ec2_tag" "secure_tx_ipv6" {
-  resource_id = aws_security_group_rule.secure_tx_ipv6.security_group_rule_id
-  key         = "Name"
-  value       = "sgr-${var.basename}-sec-all-ipv6"
+  tags = {
+    Name = "sgr-${var.basename}-sec-all-ipv6"
+  }
 }
