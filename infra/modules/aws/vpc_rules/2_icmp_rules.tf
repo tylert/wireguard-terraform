@@ -19,6 +19,10 @@
                  |_| |_|\__,_|\___|_| |_|   \__,_|_|\___||___/
 */
 
+# XXX FIXME TODO  Consider doing all these NACL rules with lists instead
+# https://github.com/terraform-aws-modules/terraform-aws-vpc/blob/master/main.tf#L183-L198
+# https://github.com/terraform-aws-modules/terraform-aws-vpc/blob/master/variables.tf#L263-L276
+
 resource "aws_network_acl_rule" "public_rx_icmpv4" {
   network_acl_id = join("", data.aws_network_acls.public.ids)
   rule_number    = 17101

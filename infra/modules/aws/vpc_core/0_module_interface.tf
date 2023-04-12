@@ -61,6 +61,12 @@ variable "dns_servers" {
   default     = ["AmazonProvidedDNS"] # max 4
 }
 
+variable "enable_ipv6" {
+  type        = bool
+  description = "Toggle the things needed to use IPv6"
+  default     = true
+}
+
 variable "flow_logs_enabled" {
   type        = bool
   description = "CHANGE FOR MOAR SPENDY!!!  Enable VPC Flow Logs (S3)"
@@ -126,6 +132,12 @@ variable "subnet_ipv6_cidr_bits" {
   type        = number
   description = "Bits to carve off for each IPv6 subnet range from the main VPC CIDR block"
   default     = 8
+}
+
+variable "use_ipam" {
+  type        = bool
+  description = "Use AWS IPAM instead of picking your own CIDR"
+  default     = false
 }
 
 variable "vpc_ipv4_cidr_block" {

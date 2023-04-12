@@ -99,6 +99,9 @@ resource "aws_network_acl" "public" {
   }
 }
 
+# XXX FIXME TODO  Consider using the aws_network_acl_association resource instead
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_acl_association
+
 /*
                                    _            _
                         _ __  _ __(_)_   ____ _| |_ ___

@@ -13,9 +13,9 @@ __   ___ __   ___   ( _ )     __| | |__   ___ _ __
 # https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/create-dhcp-options.html
 
 resource "aws_vpc" "main" {
-  cidr_block = var.vpc_ipv4_cidr_block
+  cidr_block = var.use_ipam ? null : var.vpc_ipv4_cidr_block
 
-  assign_generated_ipv6_cidr_block     = true # conflicts with ipv6_ipam_pool_id
+  assign_generated_ipv6_cidr_block     = var.enable_ipv6 && !var.use_ipam ? true : null
   enable_dns_hostnames                 = true
   enable_dns_support                   = true
   enable_network_address_usage_metrics = false
