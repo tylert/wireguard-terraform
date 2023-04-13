@@ -159,7 +159,7 @@ resource "aws_network_acl_rule" "secure_tx_ssh_ipv6" {
                            |___/
 */
 
-resource "aws_vpc_security_group_rule_ingress" "public_rx_ssh_ipv4" {
+resource "aws_vpc_security_group_ingress_rule" "public_rx_ssh_ipv4" {
   count             = length(var.external_ipv4_addrs)
   security_group_id = data.aws_security_group.public.id
   ip_protocol       = 6            # tcp
@@ -173,7 +173,7 @@ resource "aws_vpc_security_group_rule_ingress" "public_rx_ssh_ipv4" {
   }
 }
 
-resource "aws_vpc_security_group_rule_ingress" "public_rx_ssh_ipv6" {
+resource "aws_vpc_security_group_ingress_rule" "public_rx_ssh_ipv6" {
   count             = length(var.external_ipv6_addrs)
   security_group_id = data.aws_security_group.public.id
   ip_protocol       = 6            # tcp
@@ -187,7 +187,7 @@ resource "aws_vpc_security_group_rule_ingress" "public_rx_ssh_ipv6" {
   }
 }
 
-resource "aws_vpc_security_group_rule_ingress" "private_rx_ssh_ipv4" {
+resource "aws_vpc_security_group_ingress_rule" "private_rx_ssh_ipv4" {
   count             = length(var.external_ipv4_addrs)
   security_group_id = data.aws_security_group.private.id
   ip_protocol       = 6            # tcp
@@ -201,7 +201,7 @@ resource "aws_vpc_security_group_rule_ingress" "private_rx_ssh_ipv4" {
   }
 }
 
-resource "aws_vpc_security_group_rule_ingress" "private_rx_ssh_ipv6" {
+resource "aws_vpc_security_group_ingress_rule" "private_rx_ssh_ipv6" {
   count             = length(var.external_ipv6_addrs)
   security_group_id = data.aws_security_group.private.id
   ip_protocol       = 6            # tcp
@@ -215,7 +215,7 @@ resource "aws_vpc_security_group_rule_ingress" "private_rx_ssh_ipv6" {
   }
 }
 
-resource "aws_vpc_security_group_rule_ingress" "secure_rx_ssh_ipv4" {
+resource "aws_vpc_security_group_ingress_rule" "secure_rx_ssh_ipv4" {
   count             = length(var.external_ipv4_addrs)
   security_group_id = data.aws_security_group.secure.id
   ip_protocol       = 6            # tcp
@@ -229,7 +229,7 @@ resource "aws_vpc_security_group_rule_ingress" "secure_rx_ssh_ipv4" {
   }
 }
 
-resource "aws_vpc_security_group_rule_ingress" "secure_rx_ssh_ipv6" {
+resource "aws_vpc_security_group_ingress_rule" "secure_rx_ssh_ipv6" {
   count             = length(var.external_ipv6_addrs)
   security_group_id = data.aws_security_group.secure.id
   ip_protocol       = 6            # tcp

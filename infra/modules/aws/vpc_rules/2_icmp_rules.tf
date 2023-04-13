@@ -171,7 +171,7 @@ resource "aws_network_acl_rule" "secure_tx_icmpv6" {
 # are missing, however AWS definitely has them.  Due to this bug, manual
 # operations relating to these 3 rules may be required.
 
-resource "aws_vpc_security_group_rule_ingress" "public_rx_icmpv4" {
+resource "aws_vpc_security_group_ingress_rule" "public_rx_icmpv4" {
   count             = length(var.external_ipv4_addrs)
   security_group_id = data.aws_security_group.public.id
   ip_protocol       = 1  # icmpv4
@@ -185,7 +185,7 @@ resource "aws_vpc_security_group_rule_ingress" "public_rx_icmpv4" {
   }
 }
 
-resource "aws_vpc_security_group_rule_ingress" "public_rx_icmpv6" {
+resource "aws_vpc_security_group_ingress_rule" "public_rx_icmpv6" {
   count             = length(var.external_ipv6_addrs)
   security_group_id = data.aws_security_group.public.id
   ip_protocol       = 58 # icmpv6
@@ -199,7 +199,7 @@ resource "aws_vpc_security_group_rule_ingress" "public_rx_icmpv6" {
   }
 }
 
-resource "aws_vpc_security_group_rule_ingress" "private_rx_icmpv4" {
+resource "aws_vpc_security_group_ingress_rule" "private_rx_icmpv4" {
   count             = length(var.external_ipv4_addrs)
   security_group_id = data.aws_security_group.private.id
   ip_protocol       = 1  # icmpv4
@@ -213,7 +213,7 @@ resource "aws_vpc_security_group_rule_ingress" "private_rx_icmpv4" {
   }
 }
 
-resource "aws_vpc_security_group_rule_ingress" "private_rx_icmpv6" {
+resource "aws_vpc_security_group_ingress_rule" "private_rx_icmpv6" {
   count             = length(var.external_ipv6_addrs)
   security_group_id = data.aws_security_group.private.id
   ip_protocol       = 58 # icmpv6
@@ -227,7 +227,7 @@ resource "aws_vpc_security_group_rule_ingress" "private_rx_icmpv6" {
   }
 }
 
-resource "aws_vpc_security_group_rule_ingress" "secure_rx_icmpv4" {
+resource "aws_vpc_security_group_ingress_rule" "secure_rx_icmpv4" {
   count             = length(var.external_ipv4_addrs)
   security_group_id = data.aws_security_group.secure.id
   ip_protocol       = 1  # icmpv4
@@ -241,7 +241,7 @@ resource "aws_vpc_security_group_rule_ingress" "secure_rx_icmpv4" {
   }
 }
 
-resource "aws_vpc_security_group_rule_ingress" "secure_rx_icmpv6" {
+resource "aws_vpc_security_group_ingress_rule" "secure_rx_icmpv6" {
   count             = length(var.external_ipv6_addrs)
   security_group_id = data.aws_security_group.secure.id
   ip_protocol       = 58 # icmpv6

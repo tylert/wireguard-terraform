@@ -159,7 +159,7 @@ resource "aws_network_acl_rule" "secure_tx_vpc_ipv6" {
           |_.__/ \___|\__| \_/\_/ \___|\___|_| |_| /_/   \_\/____|___/
 */
 
-resource "aws_vpc_security_group_rule_ingress" "public_rx_self" {
+resource "aws_vpc_security_group_ingress_rule" "public_rx_self" {
   security_group_id            = data.aws_security_group.public.id
   ip_protocol                  = -1 # all
   from_port                    = 0  # ignored
@@ -172,7 +172,7 @@ resource "aws_vpc_security_group_rule_ingress" "public_rx_self" {
   }
 }
 
-resource "aws_vpc_security_group_rule_ingress" "private_rx_self" {
+resource "aws_vpc_security_group_ingress_rule" "private_rx_self" {
   security_group_id            = data.aws_security_group.private.id
   ip_protocol                  = -1 # all
   from_port                    = 0  # ignored
@@ -185,7 +185,7 @@ resource "aws_vpc_security_group_rule_ingress" "private_rx_self" {
   }
 }
 
-resource "aws_vpc_security_group_rule_ingress" "secure_rx_self" {
+resource "aws_vpc_security_group_ingress_rule" "secure_rx_self" {
   security_group_id            = data.aws_security_group.secure.id
   ip_protocol                  = -1 # all
   from_port                    = 0  # ignored
@@ -206,7 +206,7 @@ resource "aws_vpc_security_group_rule_ingress" "secure_rx_self" {
          |_.__/ \___|\__| \_/\_/ \___|\___|_| |_|  \__|_|\___|_|  |___/
 */
 
-resource "aws_vpc_security_group_rule_ingress" "public_rx_private" {
+resource "aws_vpc_security_group_ingress_rule" "public_rx_private" {
   security_group_id            = data.aws_security_group.public.id
   ip_protocol                  = -1 # all
   from_port                    = 0  # ignored
@@ -219,7 +219,7 @@ resource "aws_vpc_security_group_rule_ingress" "public_rx_private" {
   }
 }
 
-resource "aws_vpc_security_group_rule_ingress" "private_rx_public" {
+resource "aws_vpc_security_group_ingress_rule" "private_rx_public" {
   security_group_id            = data.aws_security_group.private.id
   ip_protocol                  = -1 # all
   from_port                    = 0  # ignored
@@ -232,7 +232,7 @@ resource "aws_vpc_security_group_rule_ingress" "private_rx_public" {
   }
 }
 
-resource "aws_vpc_security_group_rule_ingress" "private_rx_secure" {
+resource "aws_vpc_security_group_ingress_rule" "private_rx_secure" {
   security_group_id            = data.aws_security_group.private.id
   ip_protocol                  = -1 # all
   from_port                    = 0  # ignored
@@ -245,7 +245,7 @@ resource "aws_vpc_security_group_rule_ingress" "private_rx_secure" {
   }
 }
 
-resource "aws_vpc_security_group_rule_ingress" "secure_rx_private" {
+resource "aws_vpc_security_group_ingress_rule" "secure_rx_private" {
   security_group_id            = data.aws_security_group.secure.id
   ip_protocol                  = -1 # all
   from_port                    = 0  # ignored
@@ -266,7 +266,7 @@ resource "aws_vpc_security_group_rule_ingress" "secure_rx_private" {
                                |___/
 */
 
-resource "aws_vpc_security_group_rule_egress" "public_tx_ipv4" {
+resource "aws_vpc_security_group_egress_rule" "public_tx_ipv4" {
   security_group_id = data.aws_security_group.public.id
   ip_protocol       = -1 # all
   from_port         = 0  # ignored
@@ -279,7 +279,7 @@ resource "aws_vpc_security_group_rule_egress" "public_tx_ipv4" {
   }
 }
 
-resource "aws_vpc_security_group_rule_egress" "public_tx_ipv6" {
+resource "aws_vpc_security_group_egress_rule" "public_tx_ipv6" {
   security_group_id = data.aws_security_group.public.id
   ip_protocol       = -1 # all
   from_port         = 0  # ignored
@@ -292,7 +292,7 @@ resource "aws_vpc_security_group_rule_egress" "public_tx_ipv6" {
   }
 }
 
-resource "aws_vpc_security_group_rule_egress" "private_tx_ipv4" {
+resource "aws_vpc_security_group_egress_rule" "private_tx_ipv4" {
   security_group_id = data.aws_security_group.private.id
   ip_protocol       = -1 # all
   from_port         = 0  # ignored
@@ -305,7 +305,7 @@ resource "aws_vpc_security_group_rule_egress" "private_tx_ipv4" {
   }
 }
 
-resource "aws_vpc_security_group_rule_egress" "private_tx_ipv6" {
+resource "aws_vpc_security_group_egress_rule" "private_tx_ipv6" {
   security_group_id = data.aws_security_group.private.id
   ip_protocol       = -1 # all
   from_port         = 0  # ignored
@@ -318,7 +318,7 @@ resource "aws_vpc_security_group_rule_egress" "private_tx_ipv6" {
   }
 }
 
-resource "aws_vpc_security_group_rule_egress" "secure_tx_ipv4" {
+resource "aws_vpc_security_group_egress_rule" "secure_tx_ipv4" {
   security_group_id = data.aws_security_group.secure.id
   ip_protocol       = -1 # all
   from_port         = 0  # ignored
@@ -331,7 +331,7 @@ resource "aws_vpc_security_group_rule_egress" "secure_tx_ipv4" {
   }
 }
 
-resource "aws_vpc_security_group_rule_egress" "secure_tx_ipv6" {
+resource "aws_vpc_security_group_egress_rule" "secure_tx_ipv6" {
   security_group_id = data.aws_security_group.secure.id
   ip_protocol       = -1 # all
   from_port         = 0  # ignored
