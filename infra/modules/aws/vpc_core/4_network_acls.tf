@@ -100,9 +100,9 @@ resource "aws_network_acl" "public" {
 }
 
 resource "aws_network_acl_association" "public" {
-  count          = length(aws_subnet.public)
+  count          = length(aws_subnet.public_az)
   network_acl_id = aws_network_acl.public.id
-  subnet_id      = element(aws_subnet.public[*].id, count.index)
+  subnet_id      = element(aws_subnet.public_az[*].id, count.index)
 }
 
 /*
@@ -123,9 +123,9 @@ resource "aws_network_acl" "private" {
 }
 
 resource "aws_network_acl_association" "private" {
-  count          = length(aws_subnet.private)
+  count          = length(aws_subnet.private_az)
   network_acl_id = aws_network_acl.private.id
-  subnet_id      = element(aws_subnet.private[*].id, count.index)
+  subnet_id      = element(aws_subnet.private_az[*].id, count.index)
 }
 
 /*
@@ -144,7 +144,7 @@ resource "aws_network_acl" "secure" {
 }
 
 resource "aws_network_acl_association" "secure" {
-  count          = length(aws_subnet.secure)
+  count          = length(aws_subnet.secure_az)
   network_acl_id = aws_network_acl.secure.id
-  subnet_id      = element(aws_subnet.secure[*].id, count.index)
+  subnet_id      = element(aws_subnet.secure_az[*].id, count.index)
 }
