@@ -8,6 +8,7 @@
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/default_network_acl
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_acl
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_acl_association
 
 /*
                             _       __             _ _
@@ -91,16 +92,18 @@ resource "aws_default_network_acl" "main_tainted" {
 */
 
 resource "aws_network_acl" "public" {
-  vpc_id     = aws_vpc.main.id
-  subnet_ids = aws_subnet.public_az[*].id
+  vpc_id = aws_vpc.main.id
 
   tags = {
     Name = "acl-${var.basename}-pub"
   }
 }
 
-# XXX FIXME TODO  Consider using the aws_network_acl_association resource instead
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_acl_association
+resource "aws_network_acl_association" "public" {
+  count          = length(aws_subnet.public)
+  network_acl_id = aws_network_acl.public.id
+  subnet_id      = element(aws_subnet.public[*].id, count.index)
+}
 
 /*
                                    _            _
@@ -112,12 +115,17 @@ resource "aws_network_acl" "public" {
 */
 
 resource "aws_network_acl" "private" {
-  vpc_id     = aws_vpc.main.id
-  subnet_ids = aws_subnet.private_az[*].id
+  vpc_id = aws_vpc.main.id
 
   tags = {
     Name = "acl-${var.basename}-priv"
   }
+}
+
+resource "aws_network_acl_association" "private" {
+  count          = length(aws_subnet.private)
+  network_acl_id = aws_network_acl.private.id
+  subnet_id      = element(aws_subnet.private[*].id, count.index)
 }
 
 /*
@@ -128,10 +136,15 @@ resource "aws_network_acl" "private" {
 */
 
 resource "aws_network_acl" "secure" {
-  vpc_id     = aws_vpc.main.id
-  subnet_ids = aws_subnet.secure_az[*].id
+  vpc_id = aws_vpc.main.id
 
   tags = {
     Name = "acl-${var.basename}-sec"
   }
+}
+
+resource "aws_network_acl_association" "secure" {
+  count          = length(aws_subnet.secure)
+  network_acl_id = aws_network_acl.secure.id
+  subnet_id      = element(aws_subnet.secure[*].id, count.index)
 }
