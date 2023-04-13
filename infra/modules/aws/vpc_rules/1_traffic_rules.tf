@@ -193,7 +193,7 @@ resource "aws_vpc_security_group_ingress_rule" "secure_rx_self" {
   description                  = "From secure subnets"
   referenced_security_group_id = data.aws_security_group.secure.id
 
-  tag = {
+  tags = {
     Name = "sgr-${var.basename}-sec-sec"
   }
 }
@@ -272,7 +272,7 @@ resource "aws_vpc_security_group_egress_rule" "public_tx_ipv4" {
   from_port         = 0  # ignored
   to_port           = 0  # ignored
   description       = "To anywhere"
-  cidr_ipv4         = ["0.0.0.0/0"]
+  cidr_ipv4         = "0.0.0.0/0"
 
   tags = {
     Name = "sgr-${var.basename}-pub-all-ipv4"
@@ -285,7 +285,7 @@ resource "aws_vpc_security_group_egress_rule" "public_tx_ipv6" {
   from_port         = 0  # ignored
   to_port           = 0  # ignored
   description       = "To anywhere"
-  cidr_ipv6         = ["::/0"]
+  cidr_ipv6         = "::/0"
 
   tags = {
     Name = "sgr-${var.basename}-pub-all-ipv6"
@@ -298,7 +298,7 @@ resource "aws_vpc_security_group_egress_rule" "private_tx_ipv4" {
   from_port         = 0  # ignored
   to_port           = 0  # ignored
   description       = "To anywhere"
-  cidr_ipv4         = ["0.0.0.0/0"]
+  cidr_ipv4         = "0.0.0.0/0"
 
   tags = {
     Name = "sgr-${var.basename}-priv-all-ipv4"
@@ -311,7 +311,7 @@ resource "aws_vpc_security_group_egress_rule" "private_tx_ipv6" {
   from_port         = 0  # ignored
   to_port           = 0  # ignored
   description       = "To anywhere"
-  cidr_ipv6         = ["::/0"]
+  cidr_ipv6         = "::/0"
 
   tags = {
     Name = "sgr-${var.basename}-priv-all-ipv6"
@@ -324,7 +324,7 @@ resource "aws_vpc_security_group_egress_rule" "secure_tx_ipv4" {
   from_port         = 0  # ignored
   to_port           = 0  # ignored
   description       = "To anywhere"
-  cidr_ipv4         = ["0.0.0.0/0"]
+  cidr_ipv4         = "0.0.0.0/0"
 
   tags = {
     Name = "sgr-${var.basename}-sec-all-ipv4"
@@ -337,7 +337,7 @@ resource "aws_vpc_security_group_egress_rule" "secure_tx_ipv6" {
   from_port         = 0  # ignored
   to_port           = 0  # ignored
   description       = "To anywhere"
-  cidr_ipv6         = ["::/0"]
+  cidr_ipv6         = "::/0"
 
   tags = {
     Name = "sgr-${var.basename}-sec-all-ipv6"
