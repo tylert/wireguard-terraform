@@ -10,8 +10,9 @@
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_lifecycle_configuration
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_ownership_controls
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/flow_log
 
@@ -34,10 +35,21 @@ resource "aws_s3_bucket_versioning" "flow_logs" {
   }
 }
 
+resource "aws_s3_bucket_ownership_controls" "flow_logs" {
+  count  = true == var.flow_logs_enabled ? 1 : 0
+  bucket = aws_s3_bucket.example.id
+
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
 resource "aws_s3_bucket_acl" "flow_logs" {
   count  = true == var.flow_logs_enabled ? 1 : 0
   bucket = aws_s3_bucket.flow_logs[0].id # change forces new resource
   acl    = "private"
+
+  depends_on = [aws_s3_bucket_ownership_controls.flow_logs]
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "flow_logs" {
