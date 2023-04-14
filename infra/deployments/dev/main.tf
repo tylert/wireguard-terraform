@@ -9,26 +9,26 @@
 #   }
 # }
 
-provider "aws" {
-  region = "us-east-1"
-}
+# provider "aws" {
+#   region = "us-east-1"
+# }
 
-module "vpc_core1" {
-  source                 = "../../modules/aws/vpc_core"
-  basename               = "tyler1"
-  vpc_ipv4_cidr_block    = "10.4.0.0/16"
-  preserve_default_rules = false
-  flow_logs_enabled      = true
-  # how_many_nats          = 1
-}
+# module "vpc_core1" {
+#   source                 = "../../modules/aws/vpc_core"
+#   basename               = "tyler1"
+#   vpc_ipv4_cidr_block    = "10.4.0.0/16"
+#   preserve_default_rules = false
+#   flow_logs_enabled      = true
+#   # how_many_nats          = 1
+# }
 
-module "vpc_rules1" {
-  source              = "../../modules/aws/vpc_rules"
-  basename            = "tyler1"
-  external_ipv4_addrs = ["100.100.100.100/32", "200.200.200.200/32"]
-  external_ipv6_addrs = []
-  depends_on          = [module.vpc_core1]
-}
+# module "vpc_rules1" {
+#   source              = "../../modules/aws/vpc_rules"
+#   basename            = "tyler1"
+#   external_ipv4_addrs = ["100.100.100.100/32", "200.200.200.200/32"]
+#   external_ipv6_addrs = ["::/0"]
+#   depends_on          = [module.vpc_core1]
+# }
 
 # Show an example of doing something in more than a single region
 # https://developer.hashicorp.com/terraform/language/modules/develop/providers
@@ -43,7 +43,7 @@ module "vpc_core2" {
   basename               = "tyler2"
   vpc_ipv4_cidr_block    = "10.5.0.0/16"
   preserve_default_rules = false
-  flow_logs_enabled      = true
+  flow_logs_enabled      = false
   # how_many_nats          = 1
 
   providers = {
@@ -55,7 +55,7 @@ module "vpc_rules2" {
   source              = "../../modules/aws/vpc_rules"
   basename            = "tyler2"
   external_ipv4_addrs = ["100.100.100.100/32", "200.200.200.200/32"]
-  external_ipv6_addrs = []
+  external_ipv6_addrs = ["::/0"]
   depends_on          = [module.vpc_core2]
 
   providers = {
