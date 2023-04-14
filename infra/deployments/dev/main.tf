@@ -15,7 +15,7 @@ provider "aws" {
 
 module "vpc_core1" {
   source                 = "../../modules/aws/vpc_core"
-  basename               = "dev1"
+  basename               = "tyler1"
   vpc_ipv4_cidr_block    = "10.4.0.0/16"
   preserve_default_rules = false
   flow_logs_enabled      = true
@@ -24,8 +24,8 @@ module "vpc_core1" {
 
 module "vpc_rules1" {
   source              = "../../modules/aws/vpc_rules"
-  basename            = "dev1"
-  external_ipv4_addrs = ["100.100.100.100/32"] # things go :boom: if more than 1 entry in this list
+  basename            = "tyler1"
+  external_ipv4_addrs = ["100.100.100.100/32"]
   external_ipv6_addrs = []
   depends_on          = [module.vpc_core1]
 }
@@ -40,7 +40,7 @@ provider "aws" {
 
 module "vpc_core2" {
   source                 = "../../modules/aws/vpc_core"
-  basename               = "dev2"
+  basename               = "tyler2"
   vpc_ipv4_cidr_block    = "10.5.0.0/16"
   preserve_default_rules = false
   flow_logs_enabled      = true
@@ -53,8 +53,8 @@ module "vpc_core2" {
 
 module "vpc_rules2" {
   source              = "../../modules/aws/vpc_rules"
-  basename            = "dev2"
-  external_ipv4_addrs = ["100.100.100.100/32"] # things go :boom: if more than 1 entry in this list
+  basename            = "tyler2"
+  external_ipv4_addrs = ["100.100.100.100/32"]
   external_ipv6_addrs = []
   depends_on          = [module.vpc_core2]
 
