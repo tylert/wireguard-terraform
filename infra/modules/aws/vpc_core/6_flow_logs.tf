@@ -37,7 +37,7 @@ resource "aws_s3_bucket_versioning" "flow_logs" {
 
 resource "aws_s3_bucket_ownership_controls" "flow_logs" {
   count  = true == var.flow_logs_enabled ? 1 : 0
-  bucket = aws_s3_bucket.example.id
+  bucket = aws_s3_bucket.flow_logs.id
 
   rule {
     object_ownership = "BucketOwnerPreferred"
