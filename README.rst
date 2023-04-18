@@ -140,6 +140,9 @@ References
 * https://rosenpass.eu
 * https://github.com/rosenpass/rosenpass
 * https://github.com/nicksantamaria/example-terraform-aws-vpc-peering
+* https://github.com/terraform-aws-modules/terraform-aws-vpc  awesome module
+* https://github.com/0x4447/0x4447_product_s3_email  serverless email?
+* https://www.youtube.com/channel/UCGH0yYPvlCN1VjSFMGVmFgQ  Terraform tutorials
 
 
 Cleanup In Aisle Five
