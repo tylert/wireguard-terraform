@@ -144,6 +144,9 @@ References
 * https://github.com/terraform-aws-modules/terraform-aws-vpc  awesome module
 * https://github.com/0x4447/0x4447_product_s3_email  serverless email?
 * https://www.youtube.com/channel/UCGH0yYPvlCN1VjSFMGVmFgQ  Terraform tutorials
+* https://github.com/moul/quicssh  QUIC proxy for stock SSH
+* https://github.com/julienschmidt/quictun
+* https://github.com/cloudflare/boringtun
 
 
 Cleanup In Aisle Five
