@@ -100,6 +100,7 @@ References
 
 * https://www.jordanwhited.com/posts/wireguard-endpoint-discovery-nat-traversal/
 * https://github.com/jwhited/wgsd
+* https://medium.com/tangram-visions/what-they-dont-tell-you-about-setting-up-a-wireguard-vpn-46f7bd168478
 * https://www.ckn.io/blog/2017/11/14/wireguard-vpn-typical-setup/
 * https://www.reddit.com/r/WireGuard/comments/inn8sl/wireguard_mesh_network_options/
 * https://github.com/pirate/wireguard-docs
