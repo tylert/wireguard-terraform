@@ -147,6 +147,7 @@ References
 * https://github.com/moul/quicssh  QUIC proxy for stock SSH
 * https://github.com/julienschmidt/quictun
 * https://github.com/cloudflare/boringtun
+* https://www.jeffgeerling.com/blog/2023/build-your-own-private-wireguard-vpn-pivpn
 
 
 Cleanup In Aisle Five
