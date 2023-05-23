@@ -100,6 +100,7 @@ References
 
 * https://www.jordanwhited.com/posts/wireguard-endpoint-discovery-nat-traversal/
 * https://github.com/jwhited/wgsd
+* https://github.com/leomos/dwgd  container driver for Wireguard
 * https://medium.com/tangram-visions/what-they-dont-tell-you-about-setting-up-a-wireguard-vpn-46f7bd168478
 * https://www.ckn.io/blog/2017/11/14/wireguard-vpn-typical-setup/
 * https://www.reddit.com/r/WireGuard/comments/inn8sl/wireguard_mesh_network_options/
@@ -129,7 +130,7 @@ References
 * https://github.com/warp-tech/warpgate
 * https://notthebe.ee/raspi.html
 * https://gitlab.com/pyjam.as/tunnel
-* https://lwn.net/SubscriberLink/910766/7678f8c4ede60928/  Identity management for Wireguard
+* https://lwn.net/SubscriberLink/910766/7678f8c4ede60928/  identity management for Wireguard
 * https://github.com/juanfont/headscale
 * https://tailscale.com/
 * https://www.netmaker.org/
