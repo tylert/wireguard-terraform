@@ -149,6 +149,8 @@ References
 * https://github.com/julienschmidt/quictun
 * https://github.com/cloudflare/boringtun
 * https://www.jeffgeerling.com/blog/2023/build-your-own-private-wireguard-vpn-pivpn
+* https://im.salty.fish/index.php/archives/linux-networking-shallow-dive.html
+* https://github.com/patte/fly-tailscale-exit
 
 
 Cleanup In Aisle Five
