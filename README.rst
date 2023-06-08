@@ -151,6 +151,7 @@ References
 * https://www.jeffgeerling.com/blog/2023/build-your-own-private-wireguard-vpn-pivpn
 * https://im.salty.fish/index.php/archives/linux-networking-shallow-dive.html
 * https://github.com/patte/fly-tailscale-exit
+* https://mcoliver.substack.com/p/quick-vpn-setup-with-aws-lightsail
 
 
 Cleanup In Aisle Five
