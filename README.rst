@@ -100,6 +100,7 @@ References
 
 * https://www.jordanwhited.com/posts/wireguard-endpoint-discovery-nat-traversal/
 * https://github.com/jwhited/wgsd
+* https://www.procustodibus.com/blog/2021/09/wireguard-key-rotation/
 * https://github.com/leomos/dwgd  container driver for Wireguard
 * https://medium.com/tangram-visions/what-they-dont-tell-you-about-setting-up-a-wireguard-vpn-46f7bd168478
 * https://www.ckn.io/blog/2017/11/14/wireguard-vpn-typical-setup/
