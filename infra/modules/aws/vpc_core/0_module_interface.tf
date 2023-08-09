@@ -97,6 +97,7 @@ variable "ntp_servers" {
   type        = list(string)
   description = ""
   default     = [] # max 4
+  # default     = ["169.254.169.123"] # max 4
 }
 
 variable "preserve_default_rules" {
