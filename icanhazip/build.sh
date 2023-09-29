@@ -11,7 +11,7 @@ fi
 # GOOS=${os} GOARCH=${arch}
 go build \
     -a \
-    -ldflags "-X main.${variable}=${version}" \
+    -ldflags "-X main.${variable}=${version} -s -w" \
     -mod='vendor' \
     -trimpath
     # -o ${tool}
