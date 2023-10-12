@@ -44,7 +44,9 @@ func init() {
 
 	// Attempt to gracefully load things from a known config file location
 	// home, _ := os.UserHomeDir()
-	// cfg, err := ini.Load(fmt.Sprintf("%s/.config/icanhazip/defaults", home))
+	// cfg, err := ini.LooseLoad(fmt.Sprintf("%s/.config/icanhazip/defaults", home))
+	// cfg := ini.Empty()
+	// https://ini.unknwon.io/docs
 
 	flag.Parse()
 	if flag.NArg() > 0 {
