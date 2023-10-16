@@ -9,7 +9,7 @@ if [ ! -z "${version}" ]; then
 fi
 
 # GOOS=${os} GOARCH=${arch}
-go build \
+CGO_ENABLED=0 go build \
     -a \
     -ldflags "-X main.${variable}=${version} -s -w" \
     -mod='vendor' \

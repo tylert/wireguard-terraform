@@ -6,7 +6,7 @@ import (
 	"os"
 
 	. "github.com/ian-kent/envconf"
-	"gopkg.in/ini.v1"
+	//"gopkg.in/ini.v1"
 )
 
 // Command-line arguments
@@ -43,9 +43,9 @@ func init() {
 	// https://www.digitalocean.com/community/tutorials/how-to-use-the-flag-package-in-go
 
 	// Attempt to gracefully load things from a known config file location
+	// cfg := ini.Empty()
 	// home, _ := os.UserHomeDir()
 	// cfg, err := ini.LooseLoad(fmt.Sprintf("%s/.config/icanhazip/defaults", home))
-	// cfg := ini.Empty()
 	// https://ini.unknwon.io/docs
 
 	flag.Parse()
