@@ -1,13 +1,6 @@
 .DS_Store
 .*.sw?
-backend.tfvars
-terraform.tfvars
 .terraform/
 .terraform.lock.hcl
 terraform.tfstate
-terraform.tfstate.d/
-terraform.tfstate.backup
-.terraform.tfstate.lock.info
-terraform
-.tflint.d/
-plan_file
+*.zip
