@@ -2,8 +2,8 @@ Running Things
 --------------
 
 * https://www.terraform.io/cli/config/environment-variables#tf_cli_args-and-tf_cli_args_name
-* https://www.reddit.com/r/Terraform/comments/afznb2/terraform_without_wrappers_is_awesome/
-* https://www.reddit.com/r/Terraform/comments/qeovis/do_i_need_terragrunt_or_should_i_go_for_a_custom/
+* https://www.reddit.com/r/Terraform/comments/afznb2/terraform_without_wrappers_is_awesome
+* https://www.reddit.com/r/Terraform/comments/qeovis/do_i_need_terragrunt_or_should_i_go_for_a_custom
 * https://github.com/tfutils/tfenv
 * https://github.com/cloudposse/tfenv
 
@@ -98,47 +98,47 @@ SSH Keygen
 References
 ----------
 
-* https://www.jordanwhited.com/posts/wireguard-endpoint-discovery-nat-traversal/
+* https://www.jordanwhited.com/posts/wireguard-endpoint-discovery-nat-traversal
 * https://github.com/jwhited/wgsd
-* https://www.procustodibus.com/blog/2021/09/wireguard-key-rotation/
+* https://www.procustodibus.com/blog/2021/09/wireguard-key-rotation
 * https://github.com/leomos/dwgd  container driver for Wireguard
 * https://medium.com/tangram-visions/what-they-dont-tell-you-about-setting-up-a-wireguard-vpn-46f7bd168478
-* https://www.ckn.io/blog/2017/11/14/wireguard-vpn-typical-setup/
-* https://www.reddit.com/r/WireGuard/comments/inn8sl/wireguard_mesh_network_options/
+* https://www.ckn.io/blog/2017/11/14/wireguard-vpn-typical-setup
+* https://www.reddit.com/r/WireGuard/comments/inn8sl/wireguard_mesh_network_options
 * https://github.com/pirate/wireguard-docs
 * https://github.com/k4yt3x/wg-meshconf
-* https://www.perdian.de/blog/2021/12/27/setting-up-a-wireguard-vpn-at-aws-using-terraform/
+* https://www.perdian.de/blog/2021/12/27/setting-up-a-wireguard-vpn-at-aws-using-terraform
 * https://github.com/costela/wesher
-* https://aws.amazon.com/blogs/aws/building-three-tier-architectures-with-security-groups/
-* https://smartlogic.io/blog/how-i-organize-terraform-modules-off-the-beaten-path/
+* https://aws.amazon.com/blogs/aws/building-three-tier-architectures-with-security-groups
+* https://smartlogic.io/blog/how-i-organize-terraform-modules-off-the-beaten-path
 * https://learn.hashicorp.com/tutorials/terraform/automate-terraform?in=terraform/automation
 * https://www.hashicorp.com/blog/terraform-0-12-conditional-operator-improvements#conditionally-omitted-arguments
 * https://www.terraform.io/docs/language/state/workspaces.html#when-to-use-multiple-workspaces
 * https://www.hashicorp.com/resources/going-multi-account-with-terraform-on-aws
 * https://blog.gruntwork.io/5-lessons-learned-from-writing-over-300-000-lines-of-infrastructure-code-36ba7fadeac1
-* https://jeffbrown.tech/terraform-dynamic-blocks/
+* https://jeffbrown.tech/terraform-dynamic-blocks
 * https://learn.hashicorp.com/collections/terraform/modules
 * https://www.terraform.io/docs/language/modules/sources.html#selecting-a-revision
-* https://markwarneke.me/2020-10-14-Generic-Terraform-Module-Test-Using-Terratest/
+* https://markwarneke.me/2020-10-14-Generic-Terraform-Module-Test-Using-Terratest
 * https://github.com/amritb/poor-mans-vpn
-* https://www.procustodibus.com/blog/2021/04/wireguard-point-to-site-port-forwarding/
+* https://www.procustodibus.com/blog/2021/04/wireguard-point-to-site-port-forwarding
 * https://blog.aleksic.dev/using-ansible-and-nomad-for-a-homelab-part-1
-* https://techoverflow.net/2022/02/01/how-to-connect-tailscale-to-headscale-server-on-linux/
-* https://developers.cloudflare.com/cloudflare-one/tutorials/ssh/
+* https://techoverflow.net/2022/02/01/how-to-connect-tailscale-to-headscale-server-on-linux
+* https://developers.cloudflare.com/cloudflare-one/tutorials/ssh
 * https://blog.tonari.no/introducing-innernet
 * https://github.com/ofcoursedude/wg-manage
 * https://github.com/fasmide/remotemoe
 * https://github.com/warp-tech/warpgate
 * https://notthebe.ee/raspi.html
 * https://gitlab.com/pyjam.as/tunnel
-* https://lwn.net/SubscriberLink/910766/7678f8c4ede60928/  identity management for Wireguard
+* https://lwn.net/SubscriberLink/910766/7678f8c4ede60928  identity management for Wireguard
 * https://github.com/juanfont/headscale
-* https://tailscale.com/
-* https://www.netmaker.org/
-* https://www.firezone.dev/
-* https://netbird.io/
-* https://www.keycloak.org/
-* https://www.authelia.com/
+* https://tailscale.com
+* https://www.netmaker.org
+* https://www.firezone.dev
+* https://netbird.io
+* https://www.keycloak.org
+* https://www.authelia.com
 * https://github.com/netbirdio/netbird
 * https://rosenpass.eu
 * https://github.com/rosenpass/rosenpass
@@ -153,6 +153,9 @@ References
 * https://im.salty.fish/index.php/archives/linux-networking-shallow-dive.html
 * https://github.com/patte/fly-tailscale-exit
 * https://mcoliver.substack.com/p/quick-vpn-setup-with-aws-lightsail
+* https://peter.gillardmoss.me.uk/blog/2012/07/30/layering-the-cloud
+* https://www.terraform-best-practices.com/key-concepts
+* https://github.com/ergomake/layerform/blob/main/blog/breaking-terraform-into-layers.md
 
 
 Cleanup In Aisle Five
@@ -169,4 +172,4 @@ Diagrams
 * https://github.com/marccodinasegura/go-diagrams  look under "examples" for how to structure the code and under "nodes" to see what things are available
 * https://diagrams.mingrammer.com/docs/getting-started/installation  docs for the Python flavour upon which the Go version was/is based (needs Graphviz also)
 * https://github.com/hashicorp/terraform-plugin-go  maybe a way to get Terraform and digrams to talk to each other???
-* http://blog.johandry.com/post/terranova-terraform-from-go/  maybe another possibility???
+* http://blog.johandry.com/post/terranova-terraform-from-go  maybe another possibility???
