@@ -25,19 +25,19 @@ resource "aws_network_acl_rule" "public_rx_vpc_ipv4" {
   egress         = false
   rule_action    = "allow"
   protocol       = -1 # all
-# from_port      = 0  # ignored
-# to_port        = 0  # ignored
-  cidr_block     = data.aws_vpc.main.cidr_block
+  # from_port      = 0  # ignored
+  # to_port        = 0  # ignored
+  cidr_block = data.aws_vpc.main.cidr_block
 }
 
 resource "aws_network_acl_rule" "public_rx_vpc_ipv6" {
-  network_acl_id  = join("", data.aws_network_acls.public.ids)
-  rule_number     = 17002
-  egress          = false
-  rule_action     = "allow"
-  protocol        = -1 # all
-# from_port       = 0  # ignored
-# to_port         = 0  # ignored
+  network_acl_id = join("", data.aws_network_acls.public.ids)
+  rule_number    = 17002
+  egress         = false
+  rule_action    = "allow"
+  protocol       = -1 # all
+  # from_port       = 0  # ignored
+  # to_port         = 0  # ignored
   ipv6_cidr_block = data.aws_vpc.main.ipv6_cidr_block
 }
 
@@ -47,19 +47,19 @@ resource "aws_network_acl_rule" "public_tx_vpc_ipv4" {
   egress         = true
   rule_action    = "allow"
   protocol       = -1 # all
-# from_port      = 0  # ignored
-# to_port        = 0  # ignored
-  cidr_block     = data.aws_vpc.main.cidr_block
+  # from_port      = 0  # ignored
+  # to_port        = 0  # ignored
+  cidr_block = data.aws_vpc.main.cidr_block
 }
 
 resource "aws_network_acl_rule" "public_tx_vpc_ipv6" {
-  network_acl_id  = join("", data.aws_network_acls.public.ids)
-  rule_number     = 18002
-  egress          = true
-  rule_action     = "allow"
-  protocol        = -1 # all
-# from_port       = 0  # ignored
-# to_port         = 0  # ignored
+  network_acl_id = join("", data.aws_network_acls.public.ids)
+  rule_number    = 18002
+  egress         = true
+  rule_action    = "allow"
+  protocol       = -1 # all
+  # from_port       = 0  # ignored
+  # to_port         = 0  # ignored
   ipv6_cidr_block = data.aws_vpc.main.ipv6_cidr_block
 }
 
@@ -69,19 +69,19 @@ resource "aws_network_acl_rule" "private_rx_vpc_ipv4" {
   egress         = false
   rule_action    = "allow"
   protocol       = -1 # all
-# from_port      = 0  # ignored
-# to_port        = 0  # ignored
-  cidr_block     = data.aws_vpc.main.cidr_block
+  # from_port      = 0  # ignored
+  # to_port        = 0  # ignored
+  cidr_block = data.aws_vpc.main.cidr_block
 }
 
 resource "aws_network_acl_rule" "private_rx_vpc_ipv6" {
-  network_acl_id  = join("", data.aws_network_acls.private.ids)
-  rule_number     = 19002
-  egress          = false
-  rule_action     = "allow"
-  protocol        = -1 # all
-# from_port       = 0  # ignored
-# to_port         = 0  # ignored
+  network_acl_id = join("", data.aws_network_acls.private.ids)
+  rule_number    = 19002
+  egress         = false
+  rule_action    = "allow"
+  protocol       = -1 # all
+  # from_port       = 0  # ignored
+  # to_port         = 0  # ignored
   ipv6_cidr_block = data.aws_vpc.main.ipv6_cidr_block
 }
 
@@ -91,19 +91,19 @@ resource "aws_network_acl_rule" "private_tx_vpc_ipv4" {
   egress         = true
   rule_action    = "allow"
   protocol       = -1 # all
-# from_port      = 0  # ignored
-# to_port        = 0  # ignored
-  cidr_block     = data.aws_vpc.main.cidr_block
+  # from_port      = 0  # ignored
+  # to_port        = 0  # ignored
+  cidr_block = data.aws_vpc.main.cidr_block
 }
 
 resource "aws_network_acl_rule" "private_tx_vpc_ipv6" {
-  network_acl_id  = join("", data.aws_network_acls.private.ids)
-  rule_number     = 20002
-  egress          = true
-  rule_action     = "allow"
-  protocol        = -1 # all
-# from_port       = 0  # ignored
-# to_port         = 0  # ignored
+  network_acl_id = join("", data.aws_network_acls.private.ids)
+  rule_number    = 20002
+  egress         = true
+  rule_action    = "allow"
+  protocol       = -1 # all
+  # from_port       = 0  # ignored
+  # to_port         = 0  # ignored
   ipv6_cidr_block = data.aws_vpc.main.ipv6_cidr_block
 }
 
@@ -113,19 +113,19 @@ resource "aws_network_acl_rule" "secure_rx_vpc_ipv4" {
   egress         = false
   rule_action    = "allow"
   protocol       = -1 # all
-# from_port      = 0  # ignored
-# to_port        = 0  # ignored
-  cidr_block     = data.aws_vpc.main.cidr_block
+  # from_port      = 0  # ignored
+  # to_port        = 0  # ignored
+  cidr_block = data.aws_vpc.main.cidr_block
 }
 
 resource "aws_network_acl_rule" "secure_rx_vpc_ipv6" {
-  network_acl_id  = join("", data.aws_network_acls.secure.ids)
-  rule_number     = 21002
-  egress          = false
-  rule_action     = "allow"
-  protocol        = -1 # all
-# from_port       = 0  # ignored
-# to_port         = 0  # ignored
+  network_acl_id = join("", data.aws_network_acls.secure.ids)
+  rule_number    = 21002
+  egress         = false
+  rule_action    = "allow"
+  protocol       = -1 # all
+  # from_port       = 0  # ignored
+  # to_port         = 0  # ignored
   ipv6_cidr_block = data.aws_vpc.main.ipv6_cidr_block
 }
 
@@ -135,19 +135,19 @@ resource "aws_network_acl_rule" "secure_tx_vpc_ipv4" {
   egress         = true
   rule_action    = "allow"
   protocol       = -1 # all
-# from_port      = 0  # ignored
-# to_port        = 0  # ignored
-  cidr_block     = data.aws_vpc.main.cidr_block
+  # from_port      = 0  # ignored
+  # to_port        = 0  # ignored
+  cidr_block = data.aws_vpc.main.cidr_block
 }
 
 resource "aws_network_acl_rule" "secure_tx_vpc_ipv6" {
-  network_acl_id  = join("", data.aws_network_acls.secure.ids)
-  rule_number     = 22002
-  egress          = true
-  rule_action     = "allow"
-  protocol        = -1 # all
-# from_port       = 0  # ignored
-# to_port         = 0  # ignored
+  network_acl_id = join("", data.aws_network_acls.secure.ids)
+  rule_number    = 22002
+  egress         = true
+  rule_action    = "allow"
+  protocol       = -1 # all
+  # from_port       = 0  # ignored
+  # to_port         = 0  # ignored
   ipv6_cidr_block = data.aws_vpc.main.ipv6_cidr_block
 }
 
@@ -160,10 +160,10 @@ resource "aws_network_acl_rule" "secure_tx_vpc_ipv6" {
 */
 
 resource "aws_vpc_security_group_ingress_rule" "public_rx_self" {
-  security_group_id            = data.aws_security_group.public.id
-  ip_protocol                  = -1 # all
-# from_port                    = 0  # ignored
-# to_port                      = 0  # ignored
+  security_group_id = data.aws_security_group.public.id
+  ip_protocol       = -1 # all
+  # from_port                    = 0  # ignored
+  # to_port                      = 0  # ignored
   description                  = "From public subnets"
   referenced_security_group_id = data.aws_security_group.public.id
 
@@ -173,10 +173,10 @@ resource "aws_vpc_security_group_ingress_rule" "public_rx_self" {
 }
 
 resource "aws_vpc_security_group_ingress_rule" "private_rx_self" {
-  security_group_id            = data.aws_security_group.private.id
-  ip_protocol                  = -1 # all
-# from_port                    = 0  # ignored
-# to_port                      = 0  # ignored
+  security_group_id = data.aws_security_group.private.id
+  ip_protocol       = -1 # all
+  # from_port                    = 0  # ignored
+  # to_port                      = 0  # ignored
   description                  = "From private subnets"
   referenced_security_group_id = data.aws_security_group.private.id
 
@@ -186,10 +186,10 @@ resource "aws_vpc_security_group_ingress_rule" "private_rx_self" {
 }
 
 resource "aws_vpc_security_group_ingress_rule" "secure_rx_self" {
-  security_group_id            = data.aws_security_group.secure.id
-  ip_protocol                  = -1 # all
-# from_port                    = 0  # ignored
-# to_port                      = 0  # ignored
+  security_group_id = data.aws_security_group.secure.id
+  ip_protocol       = -1 # all
+  # from_port                    = 0  # ignored
+  # to_port                      = 0  # ignored
   description                  = "From secure subnets"
   referenced_security_group_id = data.aws_security_group.secure.id
 
@@ -207,10 +207,10 @@ resource "aws_vpc_security_group_ingress_rule" "secure_rx_self" {
 */
 
 resource "aws_vpc_security_group_ingress_rule" "public_rx_private" {
-  security_group_id            = data.aws_security_group.public.id
-  ip_protocol                  = -1 # all
-# from_port                    = 0  # ignored
-# to_port                      = 0  # ignored
+  security_group_id = data.aws_security_group.public.id
+  ip_protocol       = -1 # all
+  # from_port                    = 0  # ignored
+  # to_port                      = 0  # ignored
   description                  = "From private subnets"
   referenced_security_group_id = data.aws_security_group.private.id
 
@@ -220,10 +220,10 @@ resource "aws_vpc_security_group_ingress_rule" "public_rx_private" {
 }
 
 resource "aws_vpc_security_group_ingress_rule" "private_rx_public" {
-  security_group_id            = data.aws_security_group.private.id
-  ip_protocol                  = -1 # all
-# from_port                    = 0  # ignored
-# to_port                      = 0  # ignored
+  security_group_id = data.aws_security_group.private.id
+  ip_protocol       = -1 # all
+  # from_port                    = 0  # ignored
+  # to_port                      = 0  # ignored
   description                  = "From public subnets"
   referenced_security_group_id = data.aws_security_group.public.id
 
@@ -233,10 +233,10 @@ resource "aws_vpc_security_group_ingress_rule" "private_rx_public" {
 }
 
 resource "aws_vpc_security_group_ingress_rule" "private_rx_secure" {
-  security_group_id            = data.aws_security_group.private.id
-  ip_protocol                  = -1 # all
-# from_port                    = 0  # ignored
-# to_port                      = 0  # ignored
+  security_group_id = data.aws_security_group.private.id
+  ip_protocol       = -1 # all
+  # from_port                    = 0  # ignored
+  # to_port                      = 0  # ignored
   description                  = "From secure subnets"
   referenced_security_group_id = data.aws_security_group.secure.id
 
@@ -246,10 +246,10 @@ resource "aws_vpc_security_group_ingress_rule" "private_rx_secure" {
 }
 
 resource "aws_vpc_security_group_ingress_rule" "secure_rx_private" {
-  security_group_id            = data.aws_security_group.secure.id
-  ip_protocol                  = -1 # all
-# from_port                    = 0  # ignored
-# to_port                      = 0  # ignored
+  security_group_id = data.aws_security_group.secure.id
+  ip_protocol       = -1 # all
+  # from_port                    = 0  # ignored
+  # to_port                      = 0  # ignored
   description                  = "From private subnets"
   referenced_security_group_id = data.aws_security_group.private.id
 
@@ -269,10 +269,10 @@ resource "aws_vpc_security_group_ingress_rule" "secure_rx_private" {
 resource "aws_vpc_security_group_egress_rule" "public_tx_ipv4" {
   security_group_id = data.aws_security_group.public.id
   ip_protocol       = -1 # all
-# from_port         = 0  # ignored
-# to_port           = 0  # ignored
-  description       = "To anywhere"
-  cidr_ipv4         = "0.0.0.0/0"
+  # from_port         = 0  # ignored
+  # to_port           = 0  # ignored
+  description = "To anywhere"
+  cidr_ipv4   = "0.0.0.0/0"
 
   tags = {
     Name = "sgr-${var.basename}-pub-all-ipv4"
@@ -282,10 +282,10 @@ resource "aws_vpc_security_group_egress_rule" "public_tx_ipv4" {
 resource "aws_vpc_security_group_egress_rule" "public_tx_ipv6" {
   security_group_id = data.aws_security_group.public.id
   ip_protocol       = -1 # all
-# from_port         = 0  # ignored
-# to_port           = 0  # ignored
-  description       = "To anywhere"
-  cidr_ipv6         = "::/0"
+  # from_port         = 0  # ignored
+  # to_port           = 0  # ignored
+  description = "To anywhere"
+  cidr_ipv6   = "::/0"
 
   tags = {
     Name = "sgr-${var.basename}-pub-all-ipv6"
@@ -295,10 +295,10 @@ resource "aws_vpc_security_group_egress_rule" "public_tx_ipv6" {
 resource "aws_vpc_security_group_egress_rule" "private_tx_ipv4" {
   security_group_id = data.aws_security_group.private.id
   ip_protocol       = -1 # all
-# from_port         = 0  # ignored
-# to_port           = 0  # ignored
-  description       = "To anywhere"
-  cidr_ipv4         = "0.0.0.0/0"
+  # from_port         = 0  # ignored
+  # to_port           = 0  # ignored
+  description = "To anywhere"
+  cidr_ipv4   = "0.0.0.0/0"
 
   tags = {
     Name = "sgr-${var.basename}-priv-all-ipv4"
@@ -308,10 +308,10 @@ resource "aws_vpc_security_group_egress_rule" "private_tx_ipv4" {
 resource "aws_vpc_security_group_egress_rule" "private_tx_ipv6" {
   security_group_id = data.aws_security_group.private.id
   ip_protocol       = -1 # all
-# from_port         = 0  # ignored
-# to_port           = 0  # ignored
-  description       = "To anywhere"
-  cidr_ipv6         = "::/0"
+  # from_port         = 0  # ignored
+  # to_port           = 0  # ignored
+  description = "To anywhere"
+  cidr_ipv6   = "::/0"
 
   tags = {
     Name = "sgr-${var.basename}-priv-all-ipv6"
@@ -321,10 +321,10 @@ resource "aws_vpc_security_group_egress_rule" "private_tx_ipv6" {
 resource "aws_vpc_security_group_egress_rule" "secure_tx_ipv4" {
   security_group_id = data.aws_security_group.secure.id
   ip_protocol       = -1 # all
-# from_port         = 0  # ignored
-# to_port           = 0  # ignored
-  description       = "To anywhere"
-  cidr_ipv4         = "0.0.0.0/0"
+  # from_port         = 0  # ignored
+  # to_port           = 0  # ignored
+  description = "To anywhere"
+  cidr_ipv4   = "0.0.0.0/0"
 
   tags = {
     Name = "sgr-${var.basename}-sec-all-ipv4"
@@ -334,10 +334,10 @@ resource "aws_vpc_security_group_egress_rule" "secure_tx_ipv4" {
 resource "aws_vpc_security_group_egress_rule" "secure_tx_ipv6" {
   security_group_id = data.aws_security_group.secure.id
   ip_protocol       = -1 # all
-# from_port         = 0  # ignored
-# to_port           = 0  # ignored
-  description       = "To anywhere"
-  cidr_ipv6         = "::/0"
+  # from_port         = 0  # ignored
+  # to_port           = 0  # ignored
+  description = "To anywhere"
+  cidr_ipv6   = "::/0"
 
   tags = {
     Name = "sgr-${var.basename}-sec-all-ipv6"

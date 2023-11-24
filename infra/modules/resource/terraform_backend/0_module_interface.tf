@@ -7,8 +7,8 @@
                    |_|
 */
 
-# https://releases.hashicorp.com/terraform/
-# https://releases.hashicorp.com/terraform-provider-aws/
+# https://releases.hashicorp.com/terraform
+# https://releases.hashicorp.com/terraform-provider-aws
 # https://registry.terraform.io/providers/hashicorp/aws/latest
 
 terraform {
@@ -26,9 +26,9 @@ terraform {
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones
 
-data "aws_caller_identity" "current" {}
+data "aws_caller_identity" "current" {} # account_id
 
-data "aws_region" "current" {}
+data "aws_region" "current" {} # region
 
 data "aws_availability_zones" "available" {
   state = "available"

@@ -7,6 +7,7 @@
        |___/
 */
 
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_lifecycle_configuration
@@ -14,7 +15,27 @@
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table
+
+# XXX FIXME TODO  Do UUIDv5(DNS,ACCTID) stuff with BASE58(UUIDv5(DNS,ACCTID)) instead???
+# https://registry.terraform.io/providers/hashicorp/external/latest/docs
+
+resource "aws_dynamodb_table" "tf_lock" {
+  name     = "tf-${var.basename}-${uuidv5("dns", data.aws_caller_identity.current.account_id)}" # change forces new resource
+  hash_key = "LockID"                                                                           # change forces new resource
+
+  billing_mode   = "PROVISIONED" # or "PAY_PER_REQUEST" and skip read_capacity and write_capacity
+  read_capacity  = 20
+  write_capacity = 20
+
+  attribute {
+    name = "LockID"
+    type = "S"
+  }
+
+  tags {
+    Name = "tf-${var.basename}-${uuidv5("dns", data.aws_caller_identity.current.account_id)}"
+  }
+}
 
 resource "aws_s3_bucket" "tf_state" {
   bucket        = "tf-${var.basename}-${uuidv5("dns", data.aws_caller_identity.current.account_id)}" # change forces new resource
@@ -84,22 +105,4 @@ resource "aws_s3_bucket_policy" "tf_state" {
   "Version": "2012-10-17"
 }
 EOF
-}
-
-resource "aws_dynamodb_table" "tf_lock" {
-  name     = "tf-${var.basename}-${uuidv5("dns", data.aws_caller_identity.current.account_id)}" # change forces new resource
-  hash_key = "LockID" # change forces new resource
-
-  billing_mode   = "PROVISIONED" # or "PAY_PER_REQUEST" and skip read_capacity and write_capacity
-  read_capacity  = 20
-  write_capacity = 20
-
-  attribute {
-    name = "LockID"
-    type = "S"
-  }
-
-  tags {
-    Name = "tf-${var.basename}-${uuidv5("dns", data.aws_caller_identity.current.account_id)}"
-  }
 }
