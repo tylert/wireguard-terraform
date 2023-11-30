@@ -174,11 +174,11 @@ resource "aws_network_acl_rule" "secure_tx_icmpv6" {
 resource "aws_vpc_security_group_ingress_rule" "public_rx_icmpv4" {
   count             = length(var.external_ipv4_addrs)
   security_group_id = data.aws_security_group.public.id
+  cidr_ipv4         = element(var.external_ipv4_addrs[*], count.index)
   ip_protocol       = 1  # icmpv4
   from_port         = -1 # all
   to_port           = -1 # all
   description       = "Control messages"
-  cidr_ipv4         = element(var.external_ipv4_addrs[*], count.index)
 
   tags = {
     Name = "sgr-${var.basename}-pub-dst${count.index}-icmpv4"
@@ -188,11 +188,11 @@ resource "aws_vpc_security_group_ingress_rule" "public_rx_icmpv4" {
 resource "aws_vpc_security_group_ingress_rule" "public_rx_icmpv6" {
   count             = length(var.external_ipv6_addrs)
   security_group_id = data.aws_security_group.public.id
+  cidr_ipv6         = element(var.external_ipv6_addrs[*], count.index)
   ip_protocol       = 58 # icmpv6
   from_port         = -1 # all
   to_port           = -1 # all
   description       = "Control messages"
-  cidr_ipv6         = element(var.external_ipv6_addrs[*], count.index)
 
   tags = {
     Name = "sgr-${var.basename}-pub-dst${count.index}-icmpv6"
@@ -202,11 +202,11 @@ resource "aws_vpc_security_group_ingress_rule" "public_rx_icmpv6" {
 resource "aws_vpc_security_group_ingress_rule" "private_rx_icmpv4" {
   count             = length(var.external_ipv4_addrs)
   security_group_id = data.aws_security_group.private.id
+  cidr_ipv4         = element(var.external_ipv4_addrs[*], count.index)
   ip_protocol       = 1  # icmpv4
   from_port         = -1 # all
   to_port           = -1 # all
   description       = "Control messages"
-  cidr_ipv4         = element(var.external_ipv4_addrs[*], count.index)
 
   tags = {
     Name = "sgr-${var.basename}-priv-dst${count.index}-icmpv4"
@@ -216,11 +216,11 @@ resource "aws_vpc_security_group_ingress_rule" "private_rx_icmpv4" {
 resource "aws_vpc_security_group_ingress_rule" "private_rx_icmpv6" {
   count             = length(var.external_ipv6_addrs)
   security_group_id = data.aws_security_group.private.id
+  cidr_ipv6         = element(var.external_ipv6_addrs[*], count.index)
   ip_protocol       = 58 # icmpv6
   from_port         = -1 # all
   to_port           = -1 # all
   description       = "Control messages"
-  cidr_ipv6         = element(var.external_ipv6_addrs[*], count.index)
 
   tags = {
     Name = "sgr-${var.basename}-priv-dst${count.index}-icmpv6"
@@ -230,11 +230,11 @@ resource "aws_vpc_security_group_ingress_rule" "private_rx_icmpv6" {
 resource "aws_vpc_security_group_ingress_rule" "secure_rx_icmpv4" {
   count             = length(var.external_ipv4_addrs)
   security_group_id = data.aws_security_group.secure.id
+  cidr_ipv4         = element(var.external_ipv4_addrs[*], count.index)
   ip_protocol       = 1  # icmpv4
   from_port         = -1 # all
   to_port           = -1 # all
   description       = "Control messages"
-  cidr_ipv4         = element(var.external_ipv4_addrs[*], count.index)
 
   tags = {
     Name = "sgr-${var.basename}-sec-dst${count.index}-icmpv4"
@@ -244,11 +244,11 @@ resource "aws_vpc_security_group_ingress_rule" "secure_rx_icmpv4" {
 resource "aws_vpc_security_group_ingress_rule" "secure_rx_icmpv6" {
   count             = length(var.external_ipv6_addrs)
   security_group_id = data.aws_security_group.secure.id
+  cidr_ipv6         = element(var.external_ipv6_addrs[*], count.index)
   ip_protocol       = 58 # icmpv6
   from_port         = -1 # all
   to_port           = -1 # all
   description       = "Control messages"
-  cidr_ipv6         = element(var.external_ipv6_addrs[*], count.index)
 
   tags = {
     Name = "sgr-${var.basename}-sec-dst${count.index}-icmpv6"

@@ -162,11 +162,11 @@ resource "aws_network_acl_rule" "secure_tx_ssh_ipv6" {
 resource "aws_vpc_security_group_ingress_rule" "public_rx_ssh_ipv4" {
   count             = length(var.external_ipv4_addrs)
   security_group_id = data.aws_security_group.public.id
+  cidr_ipv4         = element(var.external_ipv4_addrs[*], count.index)
   ip_protocol       = 6            # tcp
   from_port         = var.ssh_port # 22
   to_port           = var.ssh_port # 22
   description       = "Remote management"
-  cidr_ipv4         = element(var.external_ipv4_addrs[*], count.index)
 
   tags = {
     Name = "sgr-${var.basename}-pub-dst${count.index}-ssh-ipv4"
@@ -176,11 +176,11 @@ resource "aws_vpc_security_group_ingress_rule" "public_rx_ssh_ipv4" {
 resource "aws_vpc_security_group_ingress_rule" "public_rx_ssh_ipv6" {
   count             = length(var.external_ipv6_addrs)
   security_group_id = data.aws_security_group.public.id
+  cidr_ipv6         = element(var.external_ipv6_addrs[*], count.index)
   ip_protocol       = 6            # tcp
   from_port         = var.ssh_port # 22
   to_port           = var.ssh_port # 22
   description       = "Remote management"
-  cidr_ipv6         = element(var.external_ipv6_addrs[*], count.index)
 
   tags = {
     Name = "sgr-${var.basename}-pub-dst${count.index}-ssh-ipv6"
@@ -190,11 +190,11 @@ resource "aws_vpc_security_group_ingress_rule" "public_rx_ssh_ipv6" {
 resource "aws_vpc_security_group_ingress_rule" "private_rx_ssh_ipv4" {
   count             = length(var.external_ipv4_addrs)
   security_group_id = data.aws_security_group.private.id
+  cidr_ipv4         = element(var.external_ipv4_addrs[*], count.index)
   ip_protocol       = 6            # tcp
   from_port         = var.ssh_port # 22
   to_port           = var.ssh_port # 22
   description       = "Remote management"
-  cidr_ipv4         = element(var.external_ipv4_addrs[*], count.index)
 
   tags = {
     Name = "sgr-${var.basename}-priv-dst${count.index}-ssh-ipv4"
@@ -204,11 +204,11 @@ resource "aws_vpc_security_group_ingress_rule" "private_rx_ssh_ipv4" {
 resource "aws_vpc_security_group_ingress_rule" "private_rx_ssh_ipv6" {
   count             = length(var.external_ipv6_addrs)
   security_group_id = data.aws_security_group.private.id
+  cidr_ipv6         = element(var.external_ipv6_addrs[*], count.index)
   ip_protocol       = 6            # tcp
   from_port         = var.ssh_port # 22
   to_port           = var.ssh_port # 22
   description       = "Remote management"
-  cidr_ipv6         = element(var.external_ipv6_addrs[*], count.index)
 
   tags = {
     Name = "sgr-${var.basename}-priv-dst${count.index}-ssh-ipv6"
@@ -218,11 +218,11 @@ resource "aws_vpc_security_group_ingress_rule" "private_rx_ssh_ipv6" {
 resource "aws_vpc_security_group_ingress_rule" "secure_rx_ssh_ipv4" {
   count             = length(var.external_ipv4_addrs)
   security_group_id = data.aws_security_group.secure.id
+  cidr_ipv4         = element(var.external_ipv4_addrs[*], count.index)
   ip_protocol       = 6            # tcp
   from_port         = var.ssh_port # 22
   to_port           = var.ssh_port # 22
   description       = "Remote management"
-  cidr_ipv4         = element(var.external_ipv4_addrs[*], count.index)
 
   tags = {
     Name = "sgr-${var.basename}-sec-dst${count.index}-ssh-ipv4"
@@ -232,11 +232,11 @@ resource "aws_vpc_security_group_ingress_rule" "secure_rx_ssh_ipv4" {
 resource "aws_vpc_security_group_ingress_rule" "secure_rx_ssh_ipv6" {
   count             = length(var.external_ipv6_addrs)
   security_group_id = data.aws_security_group.secure.id
+  cidr_ipv6         = element(var.external_ipv6_addrs[*], count.index)
   ip_protocol       = 6            # tcp
   from_port         = var.ssh_port # 22
   to_port           = var.ssh_port # 22
   description       = "Remote management"
-  cidr_ipv6         = element(var.external_ipv6_addrs[*], count.index)
 
   tags = {
     Name = "sgr-${var.basename}-sec-dst${count.index}-ssh-ipv6"
