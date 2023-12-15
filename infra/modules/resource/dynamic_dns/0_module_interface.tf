@@ -32,7 +32,7 @@ terraform {
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones
 
-data "aws_caller_identity" "current" {} # account_id
+data "aws_caller_identity" "current" {} # aws_account_id
 
 data "aws_region" "current" {}
 

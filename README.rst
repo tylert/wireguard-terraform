@@ -96,10 +96,54 @@ SSH Keygen
 * https://www.terraform.io/docs/language/resources/provisioners/local-exec.html
 
 
+NAT Instances
+-------------
+
+* https://fck-nat.dev/stable
+* https://github.com/AndrewGuenther/fck-nat
+* https://github.com/RaJiska/terraform-aws-fck-nat
+* https://www.jool.mx/en/index.html
+
+::
+
+    data "aws_ami" "fck_nat" {
+      filter {
+        name   = "name"
+        values = ["fck-nat-amzn2-*"]
+      }
+      filter {
+        name   = "architecture"
+        values = ["arm64"]
+      }
+
+      owners      = ["568608671756"]
+      most_recent = true
+    }
+
+    resource "aws_network_interface" "fck-nat-if" {
+      subnet_id         = ...
+      security_groups   = ...
+      source_dest_check = false
+    }
+
+    resource "aws_instance" "fck-nat" {
+      image_id      = data.aws_ami.fck_name.image_id
+      instance_type = "t4g.nano"
+
+      network_interface {
+        network_interface_id = aws_network_interface.fck-nat-if.id
+        device_index         = 0
+      }
+
+      tags = {
+        Name = "nat-inst-${var.basename}-meh"
+      }
+    }
+
+
 References
 ----------
 
-* https://fck-nat.dev/stable
 * https://www.jordanwhited.com/posts/wireguard-endpoint-discovery-nat-traversal
 * https://github.com/jwhited/wgsd
 * https://www.procustodibus.com/blog/2021/09/wireguard-key-rotation
