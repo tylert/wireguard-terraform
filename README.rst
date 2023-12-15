@@ -64,7 +64,7 @@ TODO
 * https://registry.terraform.io/providers/hashicorp/cloudinit/latest  cloud-init magic???
 * https://github.com/int128/terraform-aws-nat-instance  NAT instance with ASG
 * https://docs.aws.amazon.com/vpc/latest/userguide/route-table-options.html  S3 endpoint PrivateLink stuff
-* https://goteleport.com/blog/security-hardening-ssh-bastion-best-practices/  harden SSH???
+* https://goteleport.com/blog/security-hardening-ssh-bastion-best-practices  harden SSH???
 * https://github.com/smallstep/step-ssh-example/blob/master/host-bootstrap.sh  user-data some SSH goop
 * https://learn.hashicorp.com/tutorials/terraform/resource-drift  resource drift, planning modes, etc.
 * https://www.terraform.io/cli/commands/plan#planning-modes  planning modes revisited
@@ -87,6 +87,7 @@ Terraform Annoyances
 SSH Keygen
 ----------
 
+* https://tty.neveragain.de/2020/08/25/aws-ssh.html
 * https://github.com/terraform-aws-modules/terraform-aws-key-pair
 * https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair
 * https://stackoverflow.com/questions/49743220/how-do-i-create-an-ssh-key-in-terraform
@@ -98,6 +99,7 @@ SSH Keygen
 References
 ----------
 
+* https://fck-nat.dev/stable
 * https://www.jordanwhited.com/posts/wireguard-endpoint-discovery-nat-traversal
 * https://github.com/jwhited/wgsd
 * https://www.procustodibus.com/blog/2021/09/wireguard-key-rotation
