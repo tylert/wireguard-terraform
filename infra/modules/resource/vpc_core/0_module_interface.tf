@@ -113,15 +113,18 @@ variable "preserve_default_rules" {
 
 # A subnet range can't be larger or smaller than your allowed VPC CIDR block.
 # AWS reserves 5 addresses on every subnet.  We expect to create a minimum of 3
-# subnets.  The value chosen for this variable very much depends on the VPC
-# CIDR block and the number of AZs.  We can have this value be min = 0, max =
-# 12 but some values in this range are still just plain silly or cause errors
-# like...
+# subnets per AZ.  The value chosen for this variable very much depends on the
+# VPC CIDR block chosen and the number of AZs.  We can have this value be min =
+# 0, max = 12 but some values in this range are still just plain silly or cause
+# errors like...
 
 # Call to function "cidrsubnet" failed: prefix extension of n does not accommodate a subnet numbered 8.
 
-# Assigned IPv6 ranges are currently fixed at /56 for VPCs and /64 for subnets
-# (8 bits).
+# IPv6 VPC ranges may be between /44 and /60, and IPv6 subnet ranges may be
+# between /44 and /64, in increments of /4.  Assigned IPv6 ranges were once
+# fixed at /56 for VPCs and /64 for subnets (8 bits).
+
+# https://aws.amazon.com/about-aws/whats-new/2023/11/vpcs-subnets-support-more-sizes-ipv6-cidrs
 
 variable "subnet_ipv4_cidr_bits" {
   type        = number

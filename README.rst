@@ -141,6 +141,19 @@ NAT Instances
     }
 
 
+IPv6
+----
+
+* https://aws.amazon.com/blogs/aws/new-aws-public-ipv4-address-charge-public-ip-insights
+* https://d1.awsstatic.com/architecture-diagrams/ArchitectureDiagrams/IPv6-reference-architectures-for-AWS-and-hybrid-networks-ra.pdf
+* https://www.reddit.com/r/aws/comments/17rxig8/aws_wants_to_start_charging_for_all_allocated
+* https://www.lastweekinaws.com/blog/breaking-aws-begins-charging-for-public-ipv4-addresses
+* https://tty.neveragain.de/2023/09/21/aws-cannot-escape-ipv4.html
+* https://www.performancemagic.com/can_i_ipv6_graviton
+* https://awsipv6.neveragain.de
+* https://github.com/apparentorder/reweb
+
+
 References
 ----------
 
@@ -210,6 +223,9 @@ Cleanup In Aisle Five
 
 * https://github.com/rebuy-de/aws-nuke
 * https://github.com/gruntwork-io/cloud-nuke
+* https://thoughtbot.atlassian.net/wiki/spaces/APG/pages/163512339/Enroll+Existing+Legacy+Accounts
+* https://www.reddit.com/r/aws/comments/lllqof/decoupling_legacy_aws_accounts_from_amazoncom
+* https://www.lastweekinaws.com/blog/the-aws-service-i-hate-the-most
 
 
 Diagrams
