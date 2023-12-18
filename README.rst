@@ -75,7 +75,6 @@ Terraform Annoyances
 --------------------
 
 * https://github.com/hashicorp/terraform-provider-aws/issues/15982  open since Nov 2020;  intermittent pseudo-failure based on IPv6 address?
-* https://github.com/hashicorp/terraform-provider-aws/issues/20104  open since Jul 2021;  allow tagging of sgr resources (new AWS feature)
 * https://github.com/hashicorp/terraform-provider-aws/issues/21574  open since Nov 2021;  seems related to issue 15982
 * https://github.com/hashicorp/terraform/issues/13022  open since Mar 2017;  making backend config unnecessarily complicated
 * https://github.com/hashicorp/terraform/issues/19300  open since Nov 2018;  making backend use unnecessarily complicated
@@ -84,9 +83,10 @@ Terraform Annoyances
 * https://github.com/terraform-linters/tflint/issues/1217  open since Sep 2021;  makes adding tflint config files to a project less awesome
 
 
-SSH Keygen
-----------
+SSH Stuff
+---------
 
+* https://github.com/francoismichel/ssh3  QUIC TLS1.3 SSH
 * https://tty.neveragain.de/2020/08/25/aws-ssh.html
 * https://github.com/terraform-aws-modules/terraform-aws-key-pair
 * https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair

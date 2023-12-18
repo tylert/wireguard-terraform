@@ -93,7 +93,7 @@ resource "aws_route" "private_az_ipv6" {
 # AuthFailure errors.
 
 resource "aws_eip" "natgw_az" {
-  count      = false == var.create_nat_instances ? var.how_many_nats : 0
+  count      = false == var.create_nat_instances ? 0 : 0
   vpc        = true
   depends_on = [aws_internet_gateway.public]
 
@@ -103,7 +103,7 @@ resource "aws_eip" "natgw_az" {
 }
 
 resource "aws_nat_gateway" "az" {
-  count         = false == var.create_nat_instances ? var.how_many_nats : 0
+  count         = false == var.create_nat_instances ? 0 : 0
   allocation_id = element(aws_eip.natgw_az[*].id, count.index)
   subnet_id     = element(aws_subnet.public_az[*].id, count.index)
   depends_on    = [aws_internet_gateway.public]
@@ -114,7 +114,7 @@ resource "aws_nat_gateway" "az" {
 }
 
 resource "aws_route" "private_az_ipv4" {
-  count                  = false == var.create_nat_instances ? var.how_many_nats : 0
+  count                  = false == var.create_nat_instances ? 0 : 0
   route_table_id         = element(aws_route_table.private_az[*].id, count.index)
   destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id         = element(aws_nat_gateway.az[*].id, count.index)
@@ -129,7 +129,7 @@ resource "aws_route" "private_az_ipv4" {
 */
 
 resource "aws_eip" "natinst_az" {
-  count      = true == var.create_nat_instances ? var.how_many_nats : 0
+  count      = true == var.create_nat_instances ? 0 : 0
   vpc        = true
   depends_on = [aws_internet_gateway.public]
 
@@ -170,7 +170,7 @@ resource "aws_eip" "natinst_az" {
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_group
 
 # resource "aws_instance" "natinst" {
-#   count         = true == var.create_nat_instances ? var.how_many_nats : 0
+#   count         = true == var.create_nat_instances ? 0 : 0
 #   availability_zone           = data.aws_availability_zones.available.names[count.index]
 #   instance_type = "t4g.nano"
 #   allocation_id = element(aws_eip.natinst_az[*].id, count.index)
@@ -188,7 +188,7 @@ resource "aws_eip" "natinst_az" {
 # }
 
 # resource "aws_route" "private_az_ipv4" {
-#   count                  = true == var.create_nat_instances ? var.how_many_nats : 0
+#   count                  = true == var.create_nat_instances ? 0 : 0
 #   route_table_id         = element(aws_route_table.private_az[*].id, count.index)
 #   destination_cidr_block = "0.0.0.0/0"
 #   nat_gateway_id         = element(aws_nat_gateway.az[*].id, count.index)

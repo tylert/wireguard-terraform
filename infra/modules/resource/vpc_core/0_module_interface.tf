@@ -85,13 +85,6 @@ variable "how_many_azs" {
   default     = 3
 }
 
-variable "how_many_nats" {
-  type        = number
-  description = "CHANGE FOR MOAR SPENDY!!!  How many NAT gateways/instances to create across the available AZs"
-  default     = 0
-  # WARNING:  how_many_nats <= how_many_azs
-}
-
 # time.nrc.ca, time.aws.com
 variable "ntp_servers" {
   type        = list(string)
@@ -108,7 +101,7 @@ variable "preserve_default_rules" {
 
 # A NOTE ABOUT VPC AND SUBNET SIZES:
 
-# https://aws.amazon.com/vpc/faqs/
+# https://aws.amazon.com/vpc/faqs
 # https://pantz.org/software/tcpip/subnetchart.html
 
 # A subnet range can't be larger or smaller than your allowed VPC CIDR block.

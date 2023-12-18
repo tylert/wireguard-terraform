@@ -19,7 +19,6 @@ module "vpc_core1" {
   vpc_ipv4_cidr_block    = "10.4.0.0/16"
   preserve_default_rules = false
   flow_logs_enabled      = true
-  # how_many_nats          = 1
 }
 
 module "vpc_rules1" {
@@ -44,7 +43,6 @@ module "vpc_core2" {
   vpc_ipv4_cidr_block    = "10.5.0.0/16"
   preserve_default_rules = false
   flow_logs_enabled      = false
-  # how_many_nats          = 1
 
   providers = {
     aws = aws.second
