@@ -216,6 +216,8 @@ References
 * https://peter.gillardmoss.me.uk/blog/2012/07/30/layering-the-cloud
 * https://www.terraform-best-practices.com/key-concepts
 * https://github.com/ergomake/layerform/blob/main/blog/breaking-terraform-into-layers.md
+* https://git.zx2c4.com/wg-dynamic/about/docs/idea.md
+* https://github.com/HarvsG/WireGuardMeshes
 
 
 Cleanup In Aisle Five
