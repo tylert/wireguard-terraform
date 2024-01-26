@@ -1,6 +1,7 @@
 Running Things
 --------------
 
+* https://developer.hashicorp.com/terraform/tutorials/automation/automate-terraform
 * https://www.terraform.io/cli/config/environment-variables#tf_cli_args-and-tf_cli_args_name
 * https://www.reddit.com/r/Terraform/comments/afznb2/terraform_without_wrappers_is_awesome
 * https://www.reddit.com/r/Terraform/comments/qeovis/do_i_need_terragrunt_or_should_i_go_for_a_custom
