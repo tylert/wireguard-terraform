@@ -82,6 +82,8 @@ Terraform Annoyances
 * https://github.com/hashicorp/terraform/issues/23340  open since Nov 2019;  making testing of modules unnecessarily complicated
 * https://github.com/terraform-linters/tflint/issues/1181  open since Aug 2021;  makes adding tflint config files to a project less awesome
 * https://github.com/terraform-linters/tflint/issues/1217  open since Sep 2021;  makes adding tflint config files to a project less awesome
+* https://github.com/hashicorp/terraform-provider-aws/issues/12585  closed without a resolution;  actually an AWS bug
+* https://github.com/aws/aws-sdk/issues/399  closed without a resolution
 
 
 SSH Stuff
