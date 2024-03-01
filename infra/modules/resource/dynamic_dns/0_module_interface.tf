@@ -18,11 +18,11 @@ terraform {
 
   required_providers {
     aws = {
-      source  = "registry.terraform.io/hashicorp/aws"
+      source  = "registry.opentofu.org/hashicorp/aws"
       version = ">= 5.0.0, < 6.0.0"
     }
     http = {
-      source  = "registry.terraform.io/hashicorp/http"
+      source  = "registry.opentofu.org/hashicorp/http"
       version = ">= 3.0.0, < 4.0.0"
     }
   }
