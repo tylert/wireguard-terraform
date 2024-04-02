@@ -222,6 +222,7 @@ References
 * https://git.zx2c4.com/wg-dynamic/about/docs/idea.md
 * https://github.com/HarvsG/WireGuardMeshes
 * https://hoppy.network  cheap IPv6 and IPv4 VPN???
+* https://github.com/pufferffish/wireproxy
 
 
 Cleanup In Aisle Five
