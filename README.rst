@@ -223,6 +223,7 @@ References
 * https://github.com/HarvsG/WireGuardMeshes
 * https://hoppy.network  cheap IPv6 and IPv4 VPN???
 * https://github.com/pufferffish/wireproxy
+* https://www.procustodibus.com/blog/2021/05/wireguard-ufw
 
 
 Cleanup In Aisle Five
