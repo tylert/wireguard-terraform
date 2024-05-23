@@ -225,6 +225,7 @@ References
 * https://github.com/pufferffish/wireproxy
 * https://www.procustodibus.com/blog/2021/05/wireguard-ufw
 * https://github.com/kanocz/lcvpn
+* https://github.com/opentofu/terraform-provider-go  external UUID handling?
 
 
 Cleanup In Aisle Five
