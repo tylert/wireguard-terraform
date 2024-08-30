@@ -89,8 +89,8 @@ variable "how_many_azs" {
 variable "ntp_servers" {
   type        = list(string)
   description = ""
-  default     = [] # max 4
-  # default     = ["169.254.169.123"] # max 4
+  default     = [] # max 8;  4 IPv4 and 4 IPv6
+  # default     = ["169.254.169.123"] # max 8;  4 IPv4 and 4 IPv6
 }
 
 variable "preserve_default_rules" {
