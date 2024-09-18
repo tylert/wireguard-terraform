@@ -138,7 +138,7 @@ resource "aws_eip" "natinst_az" {
   }
 }
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/datasources/ami
 
 # https://alpinelinux.org/cloud/
 # http://cdimage.debian.org/cdimage/cloud/
@@ -166,8 +166,8 @@ resource "aws_eip" "natinst_az" {
 #   }
 # }
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_group
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/launch_configuration
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/autoscaling_group
 
 # resource "aws_instance" "natinst" {
 #   count         = true == var.create_nat_instances ? 0 : 0

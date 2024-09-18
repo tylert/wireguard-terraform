@@ -79,9 +79,9 @@ variable "wg_port" {
   default     = 51820
 }
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/network_acls
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/security_group
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/datasources/vpc
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/datasources/network_acls
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/datasources/security_group
 
 data "aws_vpc" "main" {
   tags = {
