@@ -22,9 +22,9 @@ terraform {
   }
 }
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/datasources/caller_identity
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/datasources/region
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/datasources/availability_zones
 
 data "aws_caller_identity" "current" {} # aws_account_id
 
