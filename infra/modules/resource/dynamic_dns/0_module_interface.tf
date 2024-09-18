@@ -7,22 +7,22 @@
                    |_|
 */
 
-# https://releases.hashicorp.com/terraform
-# https://releases.hashicorp.com/terraform-provider-aws
-# https://releases.hashicorp.com/terraform-provider-http
-# https://registry.terraform.io/providers/hashicorp/aws/latest
-# https://registry.terraform.io/providers/hashicorp/http/latest
+# https://github.com/opentofu/opentofu/releases
+# https://github.com/opentofu/terraform-provider-aws/releases
+# https://github.com/opentofu/terraform-provider-http/releases
+# https://search.opentofu.org/provider/opentofu/aws/latest
+# https://search.opentofu.org/provider/opentofu/http/latest
 
 terraform {
   required_version = ">= 1.6.0, < 2.0.0"
 
   required_providers {
     aws = {
-      source  = "registry.opentofu.org/hashicorp/aws"
+      source  = "registry.opentofu.org/opentofu/aws"
       version = ">= 5.0.0, < 6.0.0"
     }
     http = {
-      source  = "registry.opentofu.org/hashicorp/http"
+      source  = "registry.opentofu.org/opentofu/http"
       version = ">= 3.0.0, < 4.0.0"
     }
   }

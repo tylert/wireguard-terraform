@@ -7,17 +7,17 @@
        |___/
 */
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_lifecycle_configuration
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_ownership_controls
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/dynamodb_table
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/s3_bucket
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/s3_bucket_acl
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/s3_bucket_lifecycle_configuration
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/s3_bucket_ownership_controls
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/s3_bucket_policy
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/s3_bucket_versioning
 
 # XXX FIXME TODO  Do UUIDv5(DNS,ACCTID) stuff with BASE58(UUIDv5(DNS,ACCTID)) instead???
-# https://registry.terraform.io/providers/hashicorp/external/latest/docs
+# https://search.opentofu.org/provider/opentofu/external/latest
 
 resource "aws_dynamodb_table" "tf_lock" {
   name     = "tf-${var.basename}-${uuidv5("dns", data.aws_caller_identity.current.account_id)}" # change forces new resource
