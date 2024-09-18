@@ -7,9 +7,9 @@ __   ___ __   ___   ( _ )     __| | |__   ___ _ __
       |_|                                    |_|
 */
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_dhcp_options
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_dhcp_options_association
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/vpc
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/vpc_dhcp_options
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/vpc_dhcp_options_association
 # https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/create-dhcp-options.html
 
 resource "aws_vpc" "main" {

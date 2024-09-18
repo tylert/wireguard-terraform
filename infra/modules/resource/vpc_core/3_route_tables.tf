@@ -6,9 +6,9 @@
 |_|  \___/ \__,_|\__\___|  \__\__,_|_.__/|_|\___||___/
 */
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/default_route_table
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table_association
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/default_route_table
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/route_table
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/route_table_association
 
 /*
                             _       __             _ _

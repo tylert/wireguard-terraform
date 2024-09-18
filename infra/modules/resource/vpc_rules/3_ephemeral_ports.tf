@@ -7,7 +7,7 @@
      |_|                                           |_|
 */
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_acl_rule
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/network_acl_rule
 
 # https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html#nacl-ephemeral-ports
 # https://en.wikipedia.org/wiki/Ephemeral_port

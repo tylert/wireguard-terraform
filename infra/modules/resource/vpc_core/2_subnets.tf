@@ -6,7 +6,7 @@
 |___/\__,_|_.__/|_| |_|\___|\__|___/
 */
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/subnet
 # https://www.terraform.io/docs/configuration/functions/cidrsubnet.html
 
 /*

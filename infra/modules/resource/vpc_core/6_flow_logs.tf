@@ -7,14 +7,14 @@
                                |___/
 */
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_lifecycle_configuration
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_ownership_controls
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/flow_log
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/s3_bucket
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/s3_bucket_acl
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/s3_bucket_lifecycle_configuration
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/s3_bucket_ownership_controls
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/s3_bucket_policy
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/s3_bucket_versioning
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/flow_log
 
 resource "aws_s3_bucket" "flow_logs" {
   count         = true == var.flow_logs_enabled ? 1 : 0

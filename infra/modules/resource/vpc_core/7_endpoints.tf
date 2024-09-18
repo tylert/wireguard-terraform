@@ -7,7 +7,7 @@
                  |_|
 */
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_endpoint
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/vpc_endpoint
 # https://www.terraform.io/docs/language/functions/concat.html
 
 # https://crishantha.medium.com/handling-vpc-endpoints-ac192b0361a5

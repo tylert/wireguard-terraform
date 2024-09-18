@@ -7,11 +7,11 @@
  |___/                             |___/
 */
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/egress_only_internet_gateway
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_gateway
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/internet_gateway
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/egress_only_internet_gateway
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/route
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/eip
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/nat_gateway
 
 /*
                                 _

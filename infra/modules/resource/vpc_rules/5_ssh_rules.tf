@@ -6,9 +6,9 @@
 |___/___/_| |_| |_|   \__,_|_|\___||___/
 */
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_acl_rule
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_security_group_ingress_rule
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_security_group_egress_rule
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/network_acl_rule
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/vpc_security_group_ingress_rule
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/vpc_security_group_egress_rule
 
 /*
                                    _              _

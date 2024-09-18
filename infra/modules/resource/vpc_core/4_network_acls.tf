@@ -6,9 +6,9 @@
 |_| |_|\___|\__| \_/\_/ \___/|_|  |_|\_\  \__,_|\___|_|___/
 */
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/default_network_acl
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_acl
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_acl_association
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/default_network_acl
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/network_acl
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/network_acl_association
 
 /*
                             _       __             _ _

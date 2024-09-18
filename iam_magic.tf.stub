@@ -1,13 +1,13 @@
 # https://stackoverflow.com/questions/46324062/in-aws-iam-what-is-the-purpose-use-of-the-path-variable
 # https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group_membership
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_access_key
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/iam_group
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/iam_user
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/iam_group_membership
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/iam_access_key
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/iam_role
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group_policy
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/iam_group_policy
 
 resource "aws_iam_group" "administrators" {
   name = "administrators"

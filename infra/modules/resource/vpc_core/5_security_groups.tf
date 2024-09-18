@@ -7,8 +7,8 @@
                                 |___/   |___/                |_|
 */
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/default_security_group
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/default_security_group
+# https://search.opentofu.org/provider/opentofu/aws/latest/docs/resources/security_group
 
 /*
                             _       __             _ _
