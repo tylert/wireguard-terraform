@@ -72,8 +72,8 @@ TODO
 * https://learn.hashicorp.com/tutorials/terraform/automate-terraform  environments, planning, etc.
 
 
-Terraform Annoyances
---------------------
+TF Annoyances
+-------------
 
 * https://github.com/hashicorp/terraform-provider-aws/issues/15982  open since Nov 2020;  intermittent pseudo-failure based on IPv6 address?
 * https://github.com/hashicorp/terraform-provider-aws/issues/21574  open since Nov 2021;  seems related to issue 15982
@@ -81,7 +81,7 @@ Terraform Annoyances
 * https://github.com/hashicorp/terraform/issues/19300  open since Nov 2018;  making backend use unnecessarily complicated
 * https://github.com/hashicorp/terraform/issues/23340  open since Nov 2019;  making testing of modules unnecessarily complicated
 * https://github.com/terraform-linters/tflint/issues/1181  open since Aug 2021;  makes adding tflint config files to a project less awesome
-* https://github.com/terraform-linters/tflint/issues/1217  open since Sep 2021;  makes adding tflint config files to a project less awesome
+* https://github.com/terraform-linters/tflint/issues/1202  open since Aug 2021;  makes fetching private tflint rulesets less awesome
 * https://github.com/hashicorp/terraform-provider-aws/issues/12585  closed without a resolution;  actually an AWS bug
 * https://github.com/aws/aws-sdk/issues/399  closed without a resolution
 
