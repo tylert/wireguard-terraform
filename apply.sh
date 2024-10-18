@@ -6,14 +6,17 @@ if [ -z "${layer_dir}" ]; then
     exit 1
 fi
 
-tf_bin='TF_IN_AUTOMATION=1 tofu'
+if [ -z "${TF_BIN}" ]; then
+    TF_BIN='TF_IN_AUTOMATION=1 tofu'
+fi
+
 plan_file='plan_file.zip'
 
 # Do an init, followed by a validate, plan, pause, then do an apply
 # Hit ctrl-c once to abort things (before ending the pause to do it cleanly)
-"${tf_bin}" -chdir="${layer_dir}" init -input=false -upgrade=true
-"${tf_bin}" -chdir="${layer_dir}" validate
-"${tf_bin}" -chdir="${layer_dir}" plan ${EXTERMINATE_EXTERMINATE} -input=false -out="${plan_file}"
+"${TF_BIN}" -chdir="${layer_dir}" init -input=false -upgrade=true
+"${TF_BIN}" -chdir="${layer_dir}" validate
+"${TF_BIN}" -chdir="${layer_dir}" plan ${EXTERMINATE_EXTERMINATE} -input=false -out="${plan_file}"
 echo '=============================================================='
 echo '=============================================================='
 echo '=============================================================='
@@ -23,4 +26,4 @@ echo '=============================================================='
 echo '=============================================================='
 echo '=============================================================='
 read
-"${tf_bin}" -chdir="${layer_dir}" apply -auto-approve -input=false "${plan_file}"
+"${TF_BIN}" -chdir="${layer_dir}" apply -auto-approve -input=false "${plan_file}"
