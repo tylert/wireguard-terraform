@@ -106,6 +106,7 @@ NAT Instances
 * https://github.com/AndrewGuenther/fck-nat
 * https://github.com/RaJiska/terraform-aws-fck-nat
 * https://www.jool.mx/en/index.html
+* https://kenhalbert.com/posts/creating-an-ec2-nat-instance-in-aws
 
 ::
 
