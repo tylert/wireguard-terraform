@@ -229,6 +229,7 @@ References
 * https://github.com/opentofu/terraform-provider-go  external UUID handling?
 * https://github.com/angristan/wireguard-install
 * https://github.com/complexorganizations/wireguard-manager
+* https://sloonz.github.io/posts/wireguard-beyond-basic-configuration
 
 
 Cleanup In Aisle Five
