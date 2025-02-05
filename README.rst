@@ -7,6 +7,7 @@ Running Things
 * https://www.reddit.com/r/Terraform/comments/qeovis/do_i_need_terragrunt_or_should_i_go_for_a_custom
 * https://github.com/tfutils/tfenv
 * https://github.com/cloudposse/tfenv
+* https://github.com/maurobaraldi/terraform-workspaces-aws-multi-account
 
 
 Network ACLs
