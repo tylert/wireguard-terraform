@@ -231,6 +231,7 @@ References
 * https://github.com/angristan/wireguard-install
 * https://github.com/complexorganizations/wireguard-manager
 * https://sloonz.github.io/posts/wireguard-beyond-basic-configuration
+* https://wirehub.org  cloud-baesd WireGuard setup?
 
 
 Cleanup In Aisle Five
