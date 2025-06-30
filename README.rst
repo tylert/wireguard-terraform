@@ -2,12 +2,13 @@ Running Things
 --------------
 
 * https://developer.hashicorp.com/terraform/tutorials/automation/automate-terraform
-* https://www.terraform.io/cli/config/environment-variables#tf_cli_args-and-tf_cli_args_name
-* https://www.reddit.com/r/Terraform/comments/afznb2/terraform_without_wrappers_is_awesome
-* https://www.reddit.com/r/Terraform/comments/qeovis/do_i_need_terragrunt_or_should_i_go_for_a_custom
+* https://terraform.io/cli/config/environment-variables#tf_cli_args-and-tf_cli_args_name
+* https://reddit.com/r/Terraform/comments/afznb2/terraform_without_wrappers_is_awesome
+* https://reddit.com/r/Terraform/comments/qeovis/do_i_need_terragrunt_or_should_i_go_for_a_custom
 * https://github.com/tfutils/tfenv
 * https://github.com/cloudposse/tfenv
 * https://github.com/maurobaraldi/terraform-workspaces-aws-multi-account
+* https://jamesmcm.github.io/blog/no-ipv4
 
 
 Network ACLs
@@ -61,7 +62,7 @@ TODO
 * https://github.com/zmingxie/amzn2-wireguard-ami  Packer template for building the needed AMIs
 * https://github.com/fly-examples/rds-connector/blob/main/main.tf#L118-L180
 * https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs-s3.html  provide option to use S3 for VPC flow logs instead of CloudWatch Logs
-* https://www.terraform.io/docs/configuration/variables.html#custom-validation-rules  for variables to make sure they are not too big or too small (e.g.:  AZ and NAT gw counts)???
+* https://terraform.io/docs/configuration/variables.html#custom-validation-rules  for variables to make sure they are not too big or too small (e.g.:  AZ and NAT gw counts)???
 * https://registry.terraform.io/providers/hashicorp/random/latest/docs  generate random strings for the basenames???
 * https://registry.terraform.io/providers/hashicorp/cloudinit/latest  cloud-init magic???
 * https://github.com/int128/terraform-aws-nat-instance  NAT instance with ASG
@@ -69,7 +70,7 @@ TODO
 * https://goteleport.com/blog/security-hardening-ssh-bastion-best-practices  harden SSH???
 * https://github.com/smallstep/step-ssh-example/blob/master/host-bootstrap.sh  user-data some SSH goop
 * https://learn.hashicorp.com/tutorials/terraform/resource-drift  resource drift, planning modes, etc.
-* https://www.terraform.io/cli/commands/plan#planning-modes  planning modes revisited
+* https://terraform.io/cli/commands/plan#planning-modes  planning modes revisited
 * https://learn.hashicorp.com/tutorials/terraform/automate-terraform  environments, planning, etc.
 
 
@@ -97,7 +98,7 @@ SSH Stuff
 * https://stackoverflow.com/questions/49743220/how-do-i-create-an-ssh-key-in-terraform
 * https://devops.stackexchange.com/questions/3408/how-can-i-get-terraforms-extern-to-execute-ssh-keygen-y-f-ssh-id-rsa
 * https://gist.github.com/irvingpop/968464132ded25a206ced835d50afa6b
-* https://www.terraform.io/docs/language/resources/provisioners/local-exec.html
+* https://terraform.io/docs/language/resources/provisioners/local-exec.html
 
 
 NAT Instances
@@ -106,7 +107,7 @@ NAT Instances
 * https://fck-nat.dev/stable
 * https://github.com/AndrewGuenther/fck-nat
 * https://github.com/RaJiska/terraform-aws-fck-nat
-* https://www.jool.mx/en/index.html
+* https://jool.mx/en/index.html
 * https://kenhalbert.com/posts/creating-an-ec2-nat-instance-in-aws
 
 ::
@@ -151,10 +152,10 @@ IPv6
 
 * https://aws.amazon.com/blogs/aws/new-aws-public-ipv4-address-charge-public-ip-insights
 * https://d1.awsstatic.com/architecture-diagrams/ArchitectureDiagrams/IPv6-reference-architectures-for-AWS-and-hybrid-networks-ra.pdf
-* https://www.reddit.com/r/aws/comments/17rxig8/aws_wants_to_start_charging_for_all_allocated
-* https://www.lastweekinaws.com/blog/breaking-aws-begins-charging-for-public-ipv4-addresses
+* https://reddit.com/r/aws/comments/17rxig8/aws_wants_to_start_charging_for_all_allocated
+* https://lastweekinaws.com/blog/breaking-aws-begins-charging-for-public-ipv4-addresses
 * https://tty.neveragain.de/2023/09/21/aws-cannot-escape-ipv4.html
-* https://www.performancemagic.com/can_i_ipv6_graviton
+* https://performancemagic.com/can_i_ipv6_graviton
 * https://awsipv6.neveragain.de
 * https://github.com/apparentorder/reweb
 
@@ -162,30 +163,30 @@ IPv6
 References
 ----------
 
-* https://www.jordanwhited.com/posts/wireguard-endpoint-discovery-nat-traversal
+* https://jordanwhited.com/posts/wireguard-endpoint-discovery-nat-traversal
 * https://github.com/jwhited/wgsd
-* https://www.procustodibus.com/blog/2021/09/wireguard-key-rotation
+* https://procustodibus.com/blog/2021/09/wireguard-key-rotation
 * https://github.com/leomos/dwgd  container driver for Wireguard
 * https://medium.com/tangram-visions/what-they-dont-tell-you-about-setting-up-a-wireguard-vpn-46f7bd168478
-* https://www.ckn.io/blog/2017/11/14/wireguard-vpn-typical-setup
-* https://www.reddit.com/r/WireGuard/comments/inn8sl/wireguard_mesh_network_options
+* https://ckn.io/blog/2017/11/14/wireguard-vpn-typical-setup
+* https://reddit.com/r/WireGuard/comments/inn8sl/wireguard_mesh_network_options
 * https://github.com/pirate/wireguard-docs
 * https://github.com/k4yt3x/wg-meshconf
-* https://www.perdian.de/blog/2021/12/27/setting-up-a-wireguard-vpn-at-aws-using-terraform
+* https://perdian.de/blog/2021/12/27/setting-up-a-wireguard-vpn-at-aws-using-terraform
 * https://github.com/costela/wesher
 * https://aws.amazon.com/blogs/aws/building-three-tier-architectures-with-security-groups
 * https://smartlogic.io/blog/how-i-organize-terraform-modules-off-the-beaten-path
 * https://learn.hashicorp.com/tutorials/terraform/automate-terraform?in=terraform/automation
-* https://www.hashicorp.com/blog/terraform-0-12-conditional-operator-improvements#conditionally-omitted-arguments
-* https://www.terraform.io/docs/language/state/workspaces.html#when-to-use-multiple-workspaces
-* https://www.hashicorp.com/resources/going-multi-account-with-terraform-on-aws
+* https://hashicorp.com/blog/terraform-0-12-conditional-operator-improvements#conditionally-omitted-arguments
+* https://terraform.io/docs/language/state/workspaces.html#when-to-use-multiple-workspaces
+* https://hashicorp.com/resources/going-multi-account-with-terraform-on-aws
 * https://blog.gruntwork.io/5-lessons-learned-from-writing-over-300-000-lines-of-infrastructure-code-36ba7fadeac1
 * https://jeffbrown.tech/terraform-dynamic-blocks
 * https://learn.hashicorp.com/collections/terraform/modules
-* https://www.terraform.io/docs/language/modules/sources.html#selecting-a-revision
+* https://terraform.io/docs/language/modules/sources.html#selecting-a-revision
 * https://markwarneke.me/2020-10-14-Generic-Terraform-Module-Test-Using-Terratest
 * https://github.com/amritb/poor-mans-vpn
-* https://www.procustodibus.com/blog/2021/04/wireguard-point-to-site-port-forwarding
+* https://procustodibus.com/blog/2021/04/wireguard-point-to-site-port-forwarding
 * https://blog.aleksic.dev/using-ansible-and-nomad-for-a-homelab-part-1
 * https://techoverflow.net/2022/02/01/how-to-connect-tailscale-to-headscale-server-on-linux
 * https://developers.cloudflare.com/cloudflare-one/tutorials/ssh
@@ -199,33 +200,33 @@ References
 * https://lwn.net/SubscriberLink/910766/7678f8c4ede60928  identity management for Wireguard
 * https://github.com/juanfont/headscale
 * https://tailscale.com
-* https://www.netmaker.org
-* https://www.firezone.dev
+* https://netmaker.org
+* https://firezone.dev
 * https://netbird.io
-* https://www.keycloak.org
-* https://www.authelia.com
+* https://keycloak.org
+* https://authelia.com
 * https://github.com/netbirdio/netbird
 * https://rosenpass.eu
 * https://github.com/rosenpass/rosenpass
 * https://github.com/nicksantamaria/example-terraform-aws-vpc-peering
 * https://github.com/terraform-aws-modules/terraform-aws-vpc  awesome module
 * https://github.com/0x4447/0x4447_product_s3_email  serverless email?
-* https://www.youtube.com/channel/UCGH0yYPvlCN1VjSFMGVmFgQ  Terraform tutorials
+* https://youtube.com/channel/UCGH0yYPvlCN1VjSFMGVmFgQ  Terraform tutorials
 * https://github.com/moul/quicssh  QUIC proxy for stock SSH
 * https://github.com/julienschmidt/quictun
 * https://github.com/cloudflare/boringtun
-* https://www.jeffgeerling.com/blog/2023/build-your-own-private-wireguard-vpn-pivpn
+* https://jeffgeerling.com/blog/2023/build-your-own-private-wireguard-vpn-pivpn
 * https://im.salty.fish/index.php/archives/linux-networking-shallow-dive.html
 * https://github.com/patte/fly-tailscale-exit
 * https://mcoliver.substack.com/p/quick-vpn-setup-with-aws-lightsail
 * https://peter.gillardmoss.me.uk/blog/2012/07/30/layering-the-cloud
-* https://www.terraform-best-practices.com/key-concepts
+* https://terraform-best-practices.com/key-concepts
 * https://github.com/ergomake/layerform/blob/main/blog/breaking-terraform-into-layers.md
 * https://git.zx2c4.com/wg-dynamic/about/docs/idea.md
 * https://github.com/HarvsG/WireGuardMeshes
 * https://hoppy.network  cheap IPv6 and IPv4 VPN???
 * https://github.com/pufferffish/wireproxy
-* https://www.procustodibus.com/blog/2021/05/wireguard-ufw
+* https://procustodibus.com/blog/2021/05/wireguard-ufw
 * https://github.com/kanocz/lcvpn
 * https://github.com/opentofu/terraform-provider-go  external UUID handling?
 * https://github.com/angristan/wireguard-install
@@ -240,8 +241,8 @@ Cleanup In Aisle Five
 * https://github.com/rebuy-de/aws-nuke
 * https://github.com/gruntwork-io/cloud-nuke
 * https://thoughtbot.atlassian.net/wiki/spaces/APG/pages/163512339/Enroll+Existing+Legacy+Accounts
-* https://www.reddit.com/r/aws/comments/lllqof/decoupling_legacy_aws_accounts_from_amazoncom
-* https://www.lastweekinaws.com/blog/the-aws-service-i-hate-the-most
+* https://reddit.com/r/aws/comments/lllqof/decoupling_legacy_aws_accounts_from_amazoncom
+* https://lastweekinaws.com/blog/the-aws-service-i-hate-the-most
 
 
 Diagrams
