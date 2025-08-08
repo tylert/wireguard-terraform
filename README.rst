@@ -233,6 +233,7 @@ References
 * https://github.com/complexorganizations/wireguard-manager
 * https://sloonz.github.io/posts/wireguard-beyond-basic-configuration
 * https://wirehub.org  cloud-baesd WireGuard setup?
+* https://chameth.com/how-i-use-tailscale
 
 
 Cleanup In Aisle Five
