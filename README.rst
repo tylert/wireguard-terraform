@@ -234,6 +234,9 @@ References
 * https://sloonz.github.io/posts/wireguard-beyond-basic-configuration
 * https://wirehub.org  cloud-baesd WireGuard setup?
 * https://chameth.com/how-i-use-tailscale
+* https://github.com/samyk/pwnat
+* https://sa.my/pwnat
+* https://sa.my/chownat
 
 
 Cleanup In Aisle Five
