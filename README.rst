@@ -237,6 +237,11 @@ References
 * https://github.com/samyk/pwnat
 * https://sa.my/pwnat
 * https://sa.my/chownat
+* https://stanislas.blog/2019/01/how-to-setup-vpn-server-wireguard-nat-ipv6
+* https://robertlathanh.com/2025/03/setting-up-a-vpn-for-home-intranet-access-with-wireguard
+* https://rair.dev/wireguard-ssh
+* https://frank.sauerburger.io/2023/09/13/ssh-over-wireguard.html
+* https://procustodibus.com/blog/2020/12/wireguard-site-to-site-config
 
 
 Cleanup In Aisle Five

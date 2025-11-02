@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"runtime/debug"
+	"strings"
 )
 
 // go build -ldflags "-X main.Version=$(git describe --always --dirty --tags)"
@@ -36,7 +37,9 @@ func GetVersion() string {
 
 	// If the git repo wasn't clean, say so in the version string
 	if bmod == "true" {
-		suffix = "-dirty"
+		if !strings.Contains(Version, "-dirty") {
+			suffix = "-dirty"
+		}
 	}
 
 	// Or, we might be running via "go run" instead
